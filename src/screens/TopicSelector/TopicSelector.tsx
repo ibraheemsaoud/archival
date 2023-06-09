@@ -12,7 +12,7 @@ export const TopicSelector = () => {
       <ul>
         {topics?.map((topic) => (
           <li key={topic.id}>
-            <Link to={`topic/${topic.id}`}>{topic.title}</Link>
+            <Link to={`/topic/${topic.id}`}>{topic.title}</Link>
           </li>
         ))}
       </ul>

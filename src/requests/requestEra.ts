@@ -36,7 +36,7 @@ export const requestEra = (id: string) => {
 
 export const requestEras = (query: { topicIds: string[] }) => {
   const eras = list.filter((item) =>
-    checkIfArrayInAnotherArray(item.topicsIds, query.topicIds)
+    checkIfArrayInAnotherArray(query.topicIds, item.topicsIds)
   );
   return {
     data: eras,

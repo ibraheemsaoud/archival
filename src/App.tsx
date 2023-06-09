@@ -2,7 +2,8 @@ import React from "react";
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { TopicSelector, topicLoader } from "./screens/TopicSelector";
-import { EraSelector } from "./screens/EraSelector";
+import { EraSelector, eraLoader } from "./screens/EraSelector";
+import { Era } from "./screens/Era";
 
 function App() {
   const router = createBrowserRouter([
@@ -14,6 +15,11 @@ function App() {
       path: "/topic/:topicId",
       element: <EraSelector />,
       loader: topicLoader,
+    },
+    {
+      path: "/era/:eraId",
+      element: <Era />,
+      loader: eraLoader,
     },
   ]);
 

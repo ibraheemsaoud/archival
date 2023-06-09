@@ -1,9 +1,9 @@
 import React from "react";
-import { requestEra } from "../../requests/requestEra";
+import { useLoaderData } from "react-router-dom";
+import { IEra } from "../../interfaces/era.interface";
 
-export const Era = ({ id }: { id: string }) => {
-  const { data: era, isLoading } = requestEra(id);
-  if (isLoading) return <div>Loading...</div>;
+export const Era = () => {
+  const { era } = useLoaderData() as any as { era: IEra };
   if (!era) return <div>Not found</div>;
   return (
     <div>
