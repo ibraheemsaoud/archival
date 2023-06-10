@@ -5,4 +5,5 @@ export interface IEntery {
   userId: string;
   eraId: string;
   type: "Analysis" | "Coverage" | "Anticipation";
+  isEdited?: boolean;
 }

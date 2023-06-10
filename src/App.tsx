@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { TopicSelector, topicLoader } from "./screens/TopicSelector";
-import { EraSelector, eraLoader } from "./screens/EraSelector";
-import { Era } from "./screens/Era";
+import { TopicSelector } from "./screens/TopicSelector";
+import { EraSelector, eraListLoader } from "./screens/EraSelector";
+import { Era, eraLoader } from "./screens/Era";
 
 function App() {
   const router = createBrowserRouter([
@@ -14,13 +14,18 @@ function App() {
     {
       path: "/topic/:topicId",
       element: <EraSelector />,
-      loader: topicLoader,
+      loader: eraListLoader,
     },
     {
       path: "/era/:eraId",
       element: <Era />,
       loader: eraLoader,
     },
+    // {
+    //   path: "/entry/:entryId",
+    //   element: <div>Entry</div>,
+    //   loader: entryLoader,
+    // }
   ]);
 
   return (
