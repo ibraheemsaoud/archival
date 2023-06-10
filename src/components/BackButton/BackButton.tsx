@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 export const BackButton = () => {
@@ -7,5 +8,9 @@ export const BackButton = () => {
     navigate(-1);
   };
 
-  return <button onClick={onClick}>back</button>;
+  return (
+    <Button onClick={onClick} variant="contained">
+      back
+    </Button>
+  );
 };
