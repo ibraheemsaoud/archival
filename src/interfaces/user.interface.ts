@@ -3,5 +3,5 @@ export interface IUser {
   firstName: string;
   lastName: string;
   email: string;
-  userType: "admin" | "user" | "mod";
+  userType: "admin" | "user" | "curator";
 }

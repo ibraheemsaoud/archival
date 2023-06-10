@@ -4,7 +4,7 @@ export interface IEra {
   description: string;
   creationDate: Date;
   ownerId: string;
-  topicsIds: string[];
+  topicId: string;
   starDate: Date;
   endDate: Date;
   isPublic: boolean;

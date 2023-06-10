@@ -3,23 +3,29 @@ import { ITopic } from "../interfaces/topic.interface";
 const list: ITopic[] = [
   {
     id: "1",
-    title: "topic 1",
-    description: "topic 1 description",
+    title: "Houte Couture",
+    description:
+      "Check out all the new shows from the biggest brands in the fashion world.",
   },
   {
     id: "2",
-    title: "topic 2",
-    description: "topic 2 description",
+    title: "Ready to Wear",
+    description: "All the new seasons from the brands you love and adore.",
   },
   {
     id: "3",
-    title: "topic 3",
-    description: "topic 3 description",
+    title: "Music",
+    description: "Keep up to date with what your favorite arists are doing rn.",
   },
   {
     id: "4",
-    title: "topic 4",
-    description: "topic 4 description",
+    title: "TV",
+    description: "Keep updated with all the shows and their cultural empact.",
+  },
+  {
+    id: "4",
+    title: "Movies",
+    description: "Movies and their rollout, news and reviews.",
   },
 ];
 export const requestTopics = () => {
