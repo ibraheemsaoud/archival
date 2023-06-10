@@ -1,4 +1,3 @@
-import { checkIfArrayInAnotherArray } from "../helpers/arrays.helpers";
 import { IEntery } from "../interfaces/entery.interface";
 
 const list: IEntery[] = [
@@ -51,6 +50,15 @@ const list: IEntery[] = [
     type: "Analysis",
   },
 ];
+
+export const requestEntey = (entryId: string) => {
+  const entry = list.filter((entry) => entry.id === entryId)?.[0];
+  return {
+    data: entry,
+    isLoading: false,
+    error: undefined,
+  };
+};
 
 export const requestEntries = (eraId: string) => {
   const entries = list.filter((entry) => entry.eraId === eraId);

@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { TopicSelector } from "./screens/TopicSelector";
 import { EraSelector, eraListLoader } from "./screens/EraSelector";
 import { Era, eraLoader } from "./screens/Era";
+import { Entery, entryLoader } from "./screens/Entery";
 
 function App() {
   const router = createBrowserRouter([
@@ -21,11 +22,11 @@ function App() {
       element: <Era />,
       loader: eraLoader,
     },
-    // {
-    //   path: "/entry/:entryId",
-    //   element: <div>Entry</div>,
-    //   loader: entryLoader,
-    // }
+    {
+      path: "/entry/:entryId",
+      element: <Entery />,
+      loader: entryLoader,
+    },
   ]);
 
   return (
