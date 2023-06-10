@@ -1,6 +1,7 @@
 import React from "react";
 import { requestTopics } from "../../requests/requestTopics";
 import { Link } from "react-router-dom";
+import { Header } from "../../components";
 
 export const TopicSelector = () => {
   const { data: topics, isLoading } = requestTopics();
@@ -8,7 +9,7 @@ export const TopicSelector = () => {
 
   return (
     <div>
-      <h1>TopicSelector</h1>
+      <Header title="TopicSelector" />
       <ul>
         {topics?.map((topic) => (
           <li key={topic.id}>

@@ -2,7 +2,7 @@ import React from "react";
 import { useLoaderData } from "react-router-dom";
 import { IEntery } from "../../interfaces/entery.interface";
 import { IComment } from "../../interfaces/comment.interface";
-import { BackButton } from "../../components";
+import { Header } from "../../components";
 
 export const Entery = () => {
   const { entry, comments } = useLoaderData() as any as {
@@ -13,8 +13,7 @@ export const Entery = () => {
   if (!comments) return <div>Loading...</div>;
   return (
     <div>
-      <BackButton />
-      <h1>{entry.title}</h1>
+      <Header title={entry.title} />
       <p>{entry.eraId}</p>
       <ul>
         {comments.map((comment) => (
