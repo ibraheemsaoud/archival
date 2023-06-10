@@ -3,7 +3,7 @@ import { ITopic } from "../interfaces/topic.interface";
 const list: ITopic[] = [
   {
     id: "1",
-    title: "Houte Couture",
+    title: "Haute Couture",
     description:
       "Check out all the new shows from the biggest brands in the fashion world.",
   },

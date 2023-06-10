@@ -1,5 +1,4 @@
 import { MouseEvent, useState } from "react";
-import { useMatch } from "react-router-dom";
 import { BackButton } from "../BackButton";
 import {
   AppBar,
@@ -15,15 +14,13 @@ import {
 } from "@mui/material";
 import { useUser } from "../../hooks";
 
-interface IHeader {
+export interface IHeader {
   title: string;
 }
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export const Header = ({ title }: IHeader) => {
-  const match = useMatch("/");
-  const isOnTheHomePage = !!match;
   const { isLoggedIn } = useUser();
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -40,10 +37,13 @@ export const Header = ({ title }: IHeader) => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          {!isOnTheHomePage && <BackButton />}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {title}
-          </Typography>
+          <Box sx={{ flexGrow: 1 }}>
+            <BackButton variant="wrapper">
+              <Typography variant="h6" component="div">
+                {title}
+              </Typography>
+            </BackButton>
+          </Box>
           {isLoggedIn ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">

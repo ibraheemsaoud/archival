@@ -1,22 +1,20 @@
-import React from "react";
 import { useLoaderData } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { IEra } from "../../interfaces/era.interface";
-import { Header } from "../../components";
+import { Grid } from "@mui/material";
+import { EraCard, AppWrapper } from "../../components/";
 
 export const EraSelector = () => {
   const { eras } = useLoaderData() as any as { eras: IEra[] };
 
   return (
-    <div>
-      <Header title="EraSelector" />
-      <ul>
+    <AppWrapper headerProps={{ title: "EraSelector" }}>
+      <Grid container spacing={2}>
         {eras?.map((era) => (
-          <li key={era.id}>
-            <Link to={`/era/${era.id}`}>{era.title}</Link>
-          </li>
+          <Grid item xs={3} key={era.id}>
+            <EraCard key={era.id} era={era} />
+          </Grid>
         ))}
-      </ul>
-    </div>
+      </Grid>
+    </AppWrapper>
   );
 };

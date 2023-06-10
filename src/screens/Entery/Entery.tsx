@@ -1,8 +1,7 @@
-import React from "react";
 import { useLoaderData } from "react-router-dom";
 import { IEntery } from "../../interfaces/entery.interface";
 import { IComment } from "../../interfaces/comment.interface";
-import { Header } from "../../components";
+import { AppWrapper } from "../../components";
 
 export const Entery = () => {
   const { entry, comments } = useLoaderData() as any as {
@@ -12,14 +11,13 @@ export const Entery = () => {
   if (!entry) return <div>Not found</div>;
   if (!comments) return <div>Loading...</div>;
   return (
-    <div>
-      <Header title={entry.title} />
+    <AppWrapper headerProps={{ title: entry.title }}>
       <p>{entry.eraId}</p>
       <ul>
         {comments.map((comment) => (
           <li key={comment.id}>{comment.content}</li>
         ))}
       </ul>
-    </div>
+    </AppWrapper>
   );
 };

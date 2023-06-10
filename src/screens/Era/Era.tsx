@@ -2,7 +2,7 @@ import React from "react";
 import { useLoaderData, Link } from "react-router-dom";
 import { IEra } from "../../interfaces/era.interface";
 import { IEntery } from "../../interfaces/entery.interface";
-import { Header } from "../../components";
+import { AppWrapper } from "../../components";
 
 export const Era = () => {
   const { era, entries } = useLoaderData() as any as {
@@ -12,8 +12,7 @@ export const Era = () => {
   if (!era) return <div>Not found</div>;
   if (!entries) return <div>Loading...</div>;
   return (
-    <div>
-      <Header title={era.title} />
+    <AppWrapper headerProps={{ title: era.title }}>
       <p>{era.description}</p>
       <ul>
         {entries.map((entry) => (
@@ -22,6 +21,6 @@ export const Era = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </AppWrapper>
   );
 };
