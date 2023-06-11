@@ -1,5 +1,6 @@
 export interface IEra {
   id: string;
+  slug: string;
   title: string;
   description: string;
   creationDate: Date;

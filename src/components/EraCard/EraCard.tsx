@@ -7,12 +7,20 @@ import {
 } from "@mui/material";
 import { IEra } from "../../interfaces/era.interface";
 import { Link } from "react-router-dom";
+import { replaceRouteParams } from "../../helpers";
+import { ERA } from "../../consts/links.const";
+import { ITopic } from "../../interfaces/topic.interface";
 
-export const EraCard = ({ era }: { era: IEra }) => {
+export const EraCard = ({ era, topic }: { era: IEra; topic: ITopic }) => {
   const { title, description } = era;
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <Link to={`/era/${era.id}`}>
+      <Link
+        to={replaceRouteParams(ERA, {
+          eraSlug: era.slug,
+          topicSlug: topic.slug,
+        })}
+      >
         <CardActionArea>
           <CardMedia
             component="img"

@@ -1,11 +1,13 @@
 import { Params } from "react-router-dom";
 import { requestEra } from "../../requests/requestEra";
-import { requestEntries } from "../../requests";
+import { requestEntries, requestTopic } from "../../requests";
 
 export const eraLoader = async ({ params }: { params: Params<string> }) => {
-  const { data: era } = requestEra(params.eraId || "-1");
-  const { data: entries } = requestEntries(params.eraId || "-1");
+  const { data: topic } = requestTopic({ slug: params.topicSlug });
+  const { data: era } = requestEra({ slug: params.eraSlug });
+  const { data: entries } = requestEntries(era?.id);
   return {
+    topic,
     era,
     entries,
   };

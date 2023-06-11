@@ -1,5 +1,5 @@
-import { Box, Container } from "@mui/material";
-import { Header, IHeader } from "../Header";
+import { Box } from "@mui/material";
+import { Header, IHeader } from "./Header";
 
 interface IAppWrapper {
   children: React.ReactNode;
@@ -7,8 +7,7 @@ interface IAppWrapper {
 }
 export const AppWrapper = ({ children, headerProps }: IAppWrapper) => {
   return (
-    <Container
-      maxWidth="xl"
+    <Box
       sx={{
         height: "100vh",
       }}
@@ -17,6 +16,6 @@ export const AppWrapper = ({ children, headerProps }: IAppWrapper) => {
       <Box paddingX={4} paddingY={2}>
         {children}
       </Box>
-    </Container>
+    </Box>
   );
 };

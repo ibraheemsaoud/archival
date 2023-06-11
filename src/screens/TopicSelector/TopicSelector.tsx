@@ -7,7 +7,7 @@ export const TopicSelector = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <AppWrapper headerProps={{ title: "Archival" }}>
+    <AppWrapper headerProps={{}}>
       <Typography variant="h5" gutterBottom>
         Checkout one of the topics below to get started!
         <br />

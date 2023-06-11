@@ -2,11 +2,12 @@ import { PaletteColorOptions } from "@mui/material";
 
 declare module "@mui/material/styles" {
   interface CustomPalette {
-    chestnut?: PaletteColorOptions;
-    darkChestnut?: PaletteColorOptions;
-    gray?: PaletteColorOptions;
-    indigo?: PaletteColorOptions;
+    green?: PaletteColorOptions;
+    platinum?: PaletteColorOptions;
+    brown?: PaletteColorOptions;
     yellow?: PaletteColorOptions;
+    eggplant?: PaletteColorOptions;
+    gray?: PaletteColorOptions;
   }
   interface Palette extends CustomPalette {}
   interface PaletteOptions extends CustomPalette {}
@@ -14,10 +15,11 @@ declare module "@mui/material/styles" {
 
 declare module "@mui/material/Button" {
   interface ButtonPropsColorOverrides {
-    chestnut?: true;
-    darkChestnut?: true;
-    gray?: true;
-    indigo?: true;
+    green?: true;
+    platinum?: true;
+    brown?: true;
     yellow?: true;
+    eggplant?: true;
+    gray?: true;
   }
 }

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { TopicSelector } from "./screens/TopicSelector";
+import { TopicSelector, topicListLoader } from "./screens/TopicSelector";
 import { EraSelector, eraListLoader } from "./screens/EraSelector";
 import { Era, eraLoader } from "./screens/Era";
 import { Entery, entryLoader } from "./screens/Entery";
@@ -12,6 +12,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { ENTERY, ERA, HOME, TOPIC } from "./consts/links.const";
 
 function App() {
   const [mode, setMode] = useState<PaletteMode>("light");
@@ -19,21 +20,22 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: HOME,
       element: <TopicSelector />,
+      loader: topicListLoader,
     },
     {
-      path: "/topic/:topicId",
+      path: TOPIC,
       element: <EraSelector />,
       loader: eraListLoader,
     },
     {
-      path: "/era/:eraId",
+      path: ERA,
       element: <Era />,
       loader: eraLoader,
     },
     {
-      path: "/entry/:entryId",
+      path: ENTERY,
       element: <Entery />,
       loader: entryLoader,
     },
@@ -41,8 +43,8 @@ function App() {
 
   return (
     <React.StrictMode>
-      <CssBaseline enableColorScheme />
       <ThemeProvider theme={modedTheme}>
+        <CssBaseline enableColorScheme />
         <RouterProvider router={router} />
       </ThemeProvider>
     </React.StrictMode>

@@ -7,12 +7,14 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ITopic } from "../../interfaces/topic.interface";
+import { TOPIC } from "../../consts/links.const";
+import { replaceRouteParams } from "../../helpers";
 
 export const TopicCard = ({ topic }: { topic: ITopic }) => {
-  const { title, id, description } = topic;
+  const { title, slug, description } = topic;
   return (
     <Card sx={{ maxWidth: 200 }}>
-      <Link to={`/topic/${id}`}>
+      <Link to={replaceRouteParams(TOPIC, { topicSlug: slug })}>
         <CardActionArea>
           <CardMedia
             component="img"

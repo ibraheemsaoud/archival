@@ -1,21 +1,24 @@
 import { MouseEvent, useState } from "react";
-import { BackButton } from "../BackButton";
 import {
   AppBar,
   Avatar,
   Box,
   Button,
   IconButton,
+  Link,
   Menu,
   MenuItem,
   Toolbar,
   Tooltip,
   Typography,
 } from "@mui/material";
-import { useUser } from "../../hooks";
+import { useUser } from "../../../hooks";
+import { Navigation } from "./Navigation";
+import { Link as NavLink } from "react-router-dom";
+import { HOME } from "../../../consts/links.const";
 
 export interface IHeader {
-  title: string;
+  title?: string;
 }
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -37,12 +40,22 @@ export const Header = ({ title }: IHeader) => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Box sx={{ flexGrow: 1 }}>
-            <BackButton variant="wrapper">
-              <Typography variant="h6" component="div">
-                {title}
+          <Box>
+            <Link underline="hover" component={NavLink} to={HOME}>
+              <Typography
+                variant="h5"
+                paddingRight={2}
+                marginRight={2}
+                sx={(theme) => ({
+                  borderRight: `1px solid ${theme.palette.divider}`,
+                })}
+              >
+                <b>Archival</b>
               </Typography>
-            </BackButton>
+            </Link>
+          </Box>
+          <Box sx={{ flexGrow: 1 }}>
+            <Navigation />
           </Box>
           {isLoggedIn ? (
             <Box sx={{ flexGrow: 0 }}>

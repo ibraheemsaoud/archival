@@ -1,10 +1,11 @@
 import { createTheme } from "@mui/material/styles";
-import { getDesignTokens } from "./consts/pallet.const";
-import { CHESTNUT, YELLOW } from "./consts/colors.const";
+import { getDesignTokens } from "./consts/palette.const";
+import { YELLOW } from "./consts/colors.const";
 
-export const theme = (mode) =>
-  createTheme({
-    ...getDesignTokens?.(mode),
+export const theme = (mode) => {
+  const palette = getDesignTokens(mode);
+  return createTheme({
+    ...palette,
     components: {
       MuiButtonBase: {
         defaultProps: {
@@ -13,9 +14,10 @@ export const theme = (mode) =>
         styleOverrides: {
           root: ({ ownerState }) => ({
             ...(ownerState.variant === "contained" &&
-              ownerState.color === "primary" && {
-                backgroundColor: "#202020",
-                color: "#fff",
+              ownerState.color === "primary" &&
+              {
+                // backgroundColor: "#202020",
+                // color: "#fff",
               }),
           }),
         },
@@ -34,19 +36,23 @@ export const theme = (mode) =>
             textDecoration: "none",
           },
           h6: {
-            color: CHESTNUT[100],
+            color: palette.palette.platinum.light,
           },
           h5: {
-            color: CHESTNUT[700],
+            color: palette.palette.green.dark,
+          },
+          h4: {
+            color: palette.palette.green.dark,
           },
         },
       },
       MuiToolbar: {
         styleOverrides: {
           root: {
-            backgroundColor: CHESTNUT[600],
+            backgroundColor: palette.palette.platinum.main,
           },
         },
       },
     },
   });
+};

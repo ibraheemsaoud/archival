@@ -72,7 +72,15 @@ export const requestEntey = (entryId: string) => {
   };
 };
 
-export const requestEntries = (eraId: string) => {
+export const requestEntries = (eraId?: string) => {
+  if (!eraId) {
+    return {
+      data: [],
+      isLoading: false,
+      error: undefined,
+    };
+  }
+
   const entries = list.filter((entry) => entry.eraId === eraId);
   return {
     data: entries,
