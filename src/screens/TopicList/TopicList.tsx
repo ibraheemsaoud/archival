@@ -2,12 +2,12 @@ import { requestTopics } from "../../requests/requestTopics";
 import { AppWrapper, TopicCard } from "../../components";
 import { Grid, Typography } from "@mui/material";
 
-export const TopicSelector = () => {
+export const TopicList = () => {
   const { data: topics, isLoading } = requestTopics();
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <AppWrapper headerProps={{}}>
+    <AppWrapper>
       <Typography variant="h5" gutterBottom>
         Checkout one of the topics below to get started!
         <br />

@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from "react";
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { TopicSelector, topicListLoader } from "./screens/TopicSelector";
-import { EraSelector, eraListLoader } from "./screens/EraSelector";
+import { TopicList, topicListLoader } from "./screens/TopicList";
+import { EraList, eraListLoader } from "./screens/EraList";
 import { Era, eraLoader } from "./screens/Era";
 import { Entery, entryLoader } from "./screens/Entery";
 import { CssBaseline, PaletteMode, ThemeProvider } from "@mui/material";
@@ -21,12 +21,12 @@ function App() {
   const router = createBrowserRouter([
     {
       path: HOME,
-      element: <TopicSelector />,
+      element: <TopicList />,
       loader: topicListLoader,
     },
     {
       path: TOPIC,
-      element: <EraSelector />,
+      element: <EraList />,
       loader: eraListLoader,
     },
     {

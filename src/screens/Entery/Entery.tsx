@@ -11,7 +11,7 @@ export const Entery = () => {
   if (!entry) return <div>Not found</div>;
   if (!comments) return <div>Loading...</div>;
   return (
-    <AppWrapper headerProps={{ title: entry.title }}>
+    <AppWrapper>
       <p>{entry.eraId}</p>
       <ul>
         {comments.map((comment) => (

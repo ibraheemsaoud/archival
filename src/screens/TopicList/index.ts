@@ -1,2 +1,2 @@
-export * from "./TopicSelector";
+export * from "./TopicList";
 export * from "./topicList.Loader.helper";

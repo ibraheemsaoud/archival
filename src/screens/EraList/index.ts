@@ -1,2 +1,2 @@
-export * from "./EraSelector";
+export * from "./EraList";
 export * from "./eraList.Loader.helper";

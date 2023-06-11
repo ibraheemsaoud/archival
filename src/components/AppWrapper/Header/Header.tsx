@@ -17,13 +17,9 @@ import { Navigation } from "./Navigation";
 import { Link as NavLink } from "react-router-dom";
 import { HOME } from "../../../consts/links.const";
 
-export interface IHeader {
-  title?: string;
-}
-
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-export const Header = ({ title }: IHeader) => {
+export const Header = () => {
   const { isLoggedIn } = useUser();
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);

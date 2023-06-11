@@ -14,7 +14,7 @@ import { ITopic } from "../../interfaces/topic.interface";
 export const EraCard = ({ era, topic }: { era: IEra; topic: ITopic }) => {
   const { title, description } = era;
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card>
       <Link
         to={replaceRouteParams(ERA, {
           eraSlug: era.slug,
@@ -24,7 +24,7 @@ export const EraCard = ({ era, topic }: { era: IEra; topic: ITopic }) => {
         <CardActionArea>
           <CardMedia
             component="img"
-            height="140"
+            height="360"
             image="\static\images\potm2209a.jpg"
             alt="green iguana"
           />

@@ -15,7 +15,7 @@ export const Era = () => {
   if (!era) return <div>Not found</div>;
   if (!entries) return <div>Loading...</div>;
   return (
-    <AppWrapper headerProps={{ title: era.title }}>
+    <AppWrapper>
       <p>{era.description}</p>
       <ul>
         {entries.map((entry) => (

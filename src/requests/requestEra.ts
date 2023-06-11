@@ -123,6 +123,18 @@ const list: IEra[] = [
     endDate: new Date(),
     isPublic: true,
   },
+  {
+    id: "11",
+    slug: "zuhairMurad-ss23",
+    title: "Zuhair Murad - Spring Summer 2023",
+    description: "Zuhair Murad Haute Couture Spring Summer 2023",
+    creationDate: new Date(),
+    ownerId: "1",
+    topicId: "1",
+    starDate: new Date(),
+    endDate: new Date(),
+    isPublic: true,
+  },
 ];
 export const requestEra = (query: { id?: string; slug?: string }) => {
   const era = list.find(
