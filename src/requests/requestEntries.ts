@@ -4,7 +4,7 @@ const list: IEntry[] = [
   {
     id: "1",
     title: "Runway show",
-    timestamp: new Date(),
+    timestamp: new Date('2021-01-03T00:00:00.000Z'),
     userId: "1",
     eraId: "1",
     type: "Analysis",
@@ -22,7 +22,7 @@ const list: IEntry[] = [
   {
     id: "2",
     title: "Store link",
-    timestamp: new Date(),
+    timestamp: new Date('2021-01-01T00:00:00.000Z'),
     userId: "1",
     eraId: "1",
     type: "Analysis",

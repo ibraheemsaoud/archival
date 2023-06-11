@@ -1,9 +1,9 @@
 export type IEntryInteraction = {
-  shares: number;
-  likes: number;
-  comments: number;
+  shares?: number;
+  likes?: number;
+  comments?: number;
   clicks?: number;
-  reactions: number;
+  reactions?: number;
   height: number;
 };
 
@@ -49,4 +49,18 @@ export type IEntry =
       link?: undefined;
       text?: undefined;
       imageUrl: string;
+    }
+  | {
+      id: string;
+      variant: "empty";
+      interaction: IEntryInteraction;
+      title?: undefined;
+      timestamp?: undefined;
+      userId?: undefined;
+      eraId?: undefined;
+      type?: undefined;
+      isEdited?: undefined;
+      link?: undefined;
+      text?: undefined;
+      imageUrl?: undefined;
     };

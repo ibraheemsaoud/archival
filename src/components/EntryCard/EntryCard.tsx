@@ -16,12 +16,12 @@ import {
 } from "@mui/icons-material";
 
 export const EntryCard = ({ entry }: { entry: IEntry }) => {
-  const { data } = useRequestLinkPreview(entry.link);
+  const { data } = useRequestLinkPreview(entry?.link);
 
   switch (entry.variant) {
     case "link":
       return (
-        <Card>
+        <Card sx={{ textAlign: "start" }}>
           {/* <Link to={entry.link}> */}
           <CardActionArea>
             {data?.image && (
@@ -33,6 +33,9 @@ export const EntryCard = ({ entry }: { entry: IEntry }) => {
               />
             )}
             <CardContent>
+              <Typography variant="body2" textAlign="end">
+                {entry.timestamp.toLocaleString()}
+              </Typography>
               <Typography variant="h5">{entry.title}</Typography>
               {data?.description && (
                 <Typography
@@ -49,7 +52,7 @@ export const EntryCard = ({ entry }: { entry: IEntry }) => {
               )}
             </CardContent>
             <CardContent>
-              <Box display="flex" justifyContent="center">
+              <Box display="flex">
                 <Typography
                   variant="body2"
                   marginRight={2}
@@ -93,6 +96,8 @@ export const EntryCard = ({ entry }: { entry: IEntry }) => {
       break;
     case "text":
       break;
+    case "empty":
+      return <Box height={entry.interaction.height || 140}></Box>;
   }
   // backup preview link: https://github.com/dhaiwat10/react-link-preview
   // https://my.linkpreview.net/access_keys

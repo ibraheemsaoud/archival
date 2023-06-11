@@ -1,5 +1,4 @@
 import { PaletteMode, ThemeOptions, createTheme } from "@mui/material";
-import { GRAYS } from "./colors.const";
 
 const { palette } = createTheme();
 const { augmentColor } = palette;

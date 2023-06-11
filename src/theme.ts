@@ -1,7 +1,8 @@
-import { createTheme } from "@mui/material/styles";
+import type {} from "@mui/lab/themeAugmentation";
 import { getDesignTokens } from "./consts/palette.const";
+import { PaletteMode, createTheme } from "@mui/material";
 
-export const theme = (mode) => {
+export const theme = (mode: PaletteMode) => {
   const palette = getDesignTokens(mode);
   return createTheme({
     ...palette,
@@ -27,20 +28,20 @@ export const theme = (mode) => {
             textDecoration: "none",
           },
           h6: {
-            color: palette.palette.platinum.light,
+            color: (palette as any).palette.platinum.light,
           },
           h5: {
-            color: palette.palette.green.dark,
+            color: (palette as any).palette.green.dark,
           },
           h4: {
-            color: palette.palette.green.dark,
+            color: (palette as any).palette.green.dark,
           },
         },
       },
       MuiToolbar: {
         styleOverrides: {
           root: {
-            backgroundColor: palette.palette.platinum.light,
+            backgroundColor: (palette as any).palette.platinum.light,
           },
         },
       },
