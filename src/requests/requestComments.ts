@@ -6,42 +6,42 @@ const list: IComment[] = [
     content: "Comment 1",
     timestamp: new Date(),
     userId: "1",
-    enteryId: "1",
+    entryId: "1",
   },
   {
     id: "2",
     content: "Comment 2",
     timestamp: new Date(),
     userId: "1",
-    enteryId: "1",
+    entryId: "1",
   },
   {
     id: "3",
     content: "Comment 3",
     timestamp: new Date(),
     userId: "2",
-    enteryId: "2",
+    entryId: "2",
   },
   {
     id: "4",
     content: "Comment 4",
     timestamp: new Date(),
     userId: "2",
-    enteryId: "2",
+    entryId: "2",
   },
   {
     id: "5",
     content: "Comment 5",
     timestamp: new Date(),
     userId: "3",
-    enteryId: "3",
+    entryId: "3",
   },
   {
     id: "6",
     content: "Comment 6",
     timestamp: new Date(),
     userId: "3",
-    enteryId: "3",
+    entryId: "3",
   },
 ];
 
@@ -55,7 +55,7 @@ export const requestComment = (commentId: string) => {
 };
 
 export const requestComments = (entryId: string) => {
-  const comments = list.filter((comment) => comment.enteryId === entryId);
+  const comments = list.filter((comment) => comment.entryId === entryId);
   return {
     data: comments,
     isLoading: false,

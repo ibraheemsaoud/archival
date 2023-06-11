@@ -3,5 +3,5 @@ export interface IComment {
   content: string;
   timestamp: Date;
   userId: string;
-  enteryId: string;
+  entryId: string;
 }

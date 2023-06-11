@@ -4,7 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { TopicList, topicListLoader } from "./screens/TopicList";
 import { EraList, eraListLoader } from "./screens/EraList";
 import { Era, eraLoader } from "./screens/Era";
-import { Entery, entryLoader } from "./screens/Entery";
+import { Entry, entryLoader } from "./screens/Entry";
 import { CssBaseline, PaletteMode, ThemeProvider } from "@mui/material";
 import { theme } from "./theme";
 
@@ -12,7 +12,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { ENTERY, ERA, HOME, TOPIC } from "./consts/links.const";
+import { ENTRY, ERA, HOME, TOPIC } from "./consts/links.const";
 
 function App() {
   const [mode, setMode] = useState<PaletteMode>("light");
@@ -35,8 +35,8 @@ function App() {
       loader: eraLoader,
     },
     {
-      path: ENTERY,
-      element: <Entery />,
+      path: ENTRY,
+      element: <Entry />,
       loader: entryLoader,
     },
   ]);

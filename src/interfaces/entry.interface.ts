@@ -1,4 +1,4 @@
-export type IEntery =
+export type IEntry =
   | {
       id: string;
       title: string;

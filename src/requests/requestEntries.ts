@@ -1,6 +1,6 @@
-import { IEntery } from "../interfaces/entery.interface";
+import { IEntry } from "../interfaces/entry.interface";
 
-const list: IEntery[] = [
+const list: IEntry[] = [
   {
     id: "1",
     title: "Runway show",

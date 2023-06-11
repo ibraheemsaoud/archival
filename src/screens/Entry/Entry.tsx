@@ -1,11 +1,11 @@
 import { useLoaderData } from "react-router-dom";
-import { IEntery } from "../../interfaces/entery.interface";
+import { IEntry } from "../../interfaces/entry.interface";
 import { IComment } from "../../interfaces/comment.interface";
 import { AppWrapper } from "../../components";
 
-export const Entery = () => {
+export const Entry = () => {
   const { entry, comments } = useLoaderData() as any as {
-    entry: IEntery;
+    entry: IEntry;
     comments: IComment[];
   };
   if (!entry) return <div>Not found</div>;

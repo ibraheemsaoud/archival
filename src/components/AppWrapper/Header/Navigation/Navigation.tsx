@@ -1,10 +1,10 @@
 import { Breadcrumbs, Link } from "@mui/material";
 import { useLoaderData, useParams, Link as NavLink } from "react-router-dom";
 import { replaceRouteParams } from "../../../../helpers";
-import { ENTERY, ERA, TOPIC } from "../../../../consts/links.const";
+import { ENTRY, ERA, TOPIC } from "../../../../consts/links.const";
 import { ITopic } from "../../../../interfaces/topic.interface";
 import { IEra } from "../../../../interfaces/era.interface";
-import { IEntery } from "../../../../interfaces/entery.interface";
+import { IEntry } from "../../../../interfaces/entry.interface";
 
 export const Navigation = () => {
   const params = useParams();
@@ -16,7 +16,7 @@ export const Navigation = () => {
   const { topic, era, entry } = useLoaderData() as any as {
     topic: ITopic;
     era: IEra;
-    entry: IEntery;
+    entry: IEntry;
   };
 
   return (
@@ -51,7 +51,7 @@ export const Navigation = () => {
             // aria-current="page"
             color={isEntryPrimary ? "text.primary" : "inherit"}
             component={NavLink}
-            to={replaceRouteParams(ENTERY, {
+            to={replaceRouteParams(ENTRY, {
               topicSlug: params.topicSlug,
               eraSlug: params.eraSlug,
               entryId: params.entryId,
