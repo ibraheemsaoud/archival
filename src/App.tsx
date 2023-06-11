@@ -7,6 +7,7 @@ import { Era, eraLoader } from "./screens/Era";
 import { Entry, entryLoader } from "./screens/Entry";
 import { CssBaseline, PaletteMode, ThemeProvider } from "@mui/material";
 import { theme } from "./theme";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
@@ -41,11 +42,15 @@ function App() {
     },
   ]);
 
+  const queryClient = new QueryClient();
+
   return (
     <React.StrictMode>
       <ThemeProvider theme={modedTheme}>
         <CssBaseline enableColorScheme />
-        <RouterProvider router={router} />
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
       </ThemeProvider>
     </React.StrictMode>
   );

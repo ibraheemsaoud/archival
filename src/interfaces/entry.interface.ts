@@ -1,3 +1,12 @@
+export type IEntryInteraction = {
+  shares: number;
+  likes: number;
+  comments: number;
+  clicks?: number;
+  reactions: number;
+  height: number;
+};
+
 export type IEntry =
   | {
       id: string;
@@ -6,11 +15,12 @@ export type IEntry =
       userId: string;
       eraId: string;
       type: "Analysis" | "Coverage" | "Anticipation";
+      interaction: IEntryInteraction;
       isEdited?: boolean;
       variant: "link";
       link: string;
       text?: undefined;
-      pictureUrl?: undefined;
+      imageUrl?: undefined;
     }
   | {
       id: string;
@@ -19,11 +29,12 @@ export type IEntry =
       userId: string;
       eraId: string;
       type: "Analysis" | "Coverage" | "Anticipation";
+      interaction: IEntryInteraction;
       isEdited?: boolean;
       variant: "text";
       link?: undefined;
       text: string;
-      pictureUrl?: undefined;
+      imageUrl?: undefined;
     }
   | {
       id: string;
@@ -32,9 +43,10 @@ export type IEntry =
       userId: string;
       eraId: string;
       type: "Analysis" | "Coverage" | "Anticipation";
+      interaction: IEntryInteraction;
       isEdited?: boolean;
-      variant: "picture";
+      variant: "image";
       link?: undefined;
       text?: undefined;
-      pictureUrl: string;
+      imageUrl: string;
     };

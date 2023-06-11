@@ -9,4 +9,6 @@ export interface IEra {
   starDate: Date;
   endDate: Date;
   isPublic: boolean;
+  coverImageUrl?: string;
+  featuredEntries?: string[];
 }

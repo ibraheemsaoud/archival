@@ -12,6 +12,9 @@ const list: IEra[] = [
     starDate: new Date(),
     endDate: new Date(),
     isPublic: true,
+    coverImageUrl:
+      "https://cdn.shopify.com/s/files/1/0569/3554/7070/files/IM_top_brandtop_pc230501_2000x.jpg?v=1684145520",
+    featuredEntries: ["1", "2"],
   },
   {
     id: "2",
