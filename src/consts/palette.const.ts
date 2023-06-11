@@ -1,5 +1,5 @@
 import { PaletteMode, ThemeOptions, createTheme } from "@mui/material";
-import { CHESTNUT, GRAYS, INDIGO, YELLOW } from "./colors.const";
+import { GRAYS } from "./colors.const";
 
 const { palette } = createTheme();
 const { augmentColor } = palette;
@@ -29,8 +29,8 @@ export const getDesignTokens = (mode: PaletteMode): ThemeOptions => {
             primary: green,
             divider: green.dark,
             background: {
-              default: platinum.light,
-              paper: platinum.main,
+              default: '#f7fcff',
+              paper: platinum.light,
             },
             text: {
               primary: green.dark,

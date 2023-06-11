@@ -1,6 +1,5 @@
 import { createTheme } from "@mui/material/styles";
 import { getDesignTokens } from "./consts/palette.const";
-import { YELLOW } from "./consts/colors.const";
 
 export const theme = (mode) => {
   const palette = getDesignTokens(mode);
@@ -22,14 +21,6 @@ export const theme = (mode) => {
           }),
         },
       },
-      MuiContainer: {
-        styleOverrides: {
-          root: {
-            padding: "0 !important",
-            backgroundColor: YELLOW[100],
-          },
-        },
-      },
       MuiTypography: {
         styleOverrides: {
           root: {
@@ -49,7 +40,7 @@ export const theme = (mode) => {
       MuiToolbar: {
         styleOverrides: {
           root: {
-            backgroundColor: palette.palette.platinum.main,
+            backgroundColor: palette.palette.platinum.light,
           },
         },
       },
