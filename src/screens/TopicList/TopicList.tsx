@@ -1,6 +1,7 @@
 import { requestTopics } from "../../requests/requestTopics";
 import { AppWrapper, TopicCard } from "../../components";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Link, Typography } from "@mui/material";
+import { SUPPORT_EMAIL } from "../../consts/outsideLinks";
 
 export const TopicList = () => {
   const { data: topics, isLoading } = requestTopics();
@@ -22,6 +23,10 @@ export const TopicList = () => {
           </Grid>
         ))}
       </Grid>
+      <Typography variant="body1" gutterBottom marginTop={6}>
+        if you want to suggest a new topic, please contact us at{" "}
+        <Link href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</Link>
+      </Typography>
     </AppWrapper>
   );
 };
