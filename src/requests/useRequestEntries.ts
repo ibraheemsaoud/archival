@@ -1,10 +1,10 @@
-import { IEntry } from "../interfaces/entry.interface";
+import { IEntry, IEntryCreate } from "../interfaces/entry.interface";
 
 const list: IEntry[] = [
   {
     id: "1",
     title: "Runway show",
-    timestamp: new Date('2021-01-03T00:00:00.000Z'),
+    timestamp: new Date("2021-01-03T00:00:00.000Z"),
     userId: "1",
     eraId: "1",
     type: "Analysis",
@@ -22,7 +22,7 @@ const list: IEntry[] = [
   {
     id: "2",
     title: "Store link",
-    timestamp: new Date('2021-01-01T00:00:00.000Z'),
+    timestamp: new Date("2021-01-01T00:00:00.000Z"),
     userId: "1",
     eraId: "1",
     type: "Analysis",
@@ -111,7 +111,7 @@ const list: IEntry[] = [
   },
 ];
 
-export const requestEntey = (entryId: string) => {
+export const useRequestEntry = (entryId: string) => {
   const entry = list.filter((entry) => entry.id === entryId)?.[0];
   return {
     data: entry,
@@ -134,5 +134,33 @@ export const requestEntries = (eraId?: string) => {
     data: entries,
     isLoading: false,
     error: undefined,
+  };
+};
+
+export const useRequestCreateEntry = () => {
+  return {
+    data: undefined,
+    isLoading: false,
+    error: undefined,
+    mutate: (entry: IEntryCreate) => {
+      list.push({
+        id: "7",
+        title: entry.title,
+        timestamp: new Date(),
+        userId: "2",
+        eraId: "2",
+        type: "Analysis",
+        interaction: {
+          shares: 1,
+          likes: 10,
+          comments: 20,
+          clicks: 5,
+          reactions: 120,
+          height: 300,
+        },
+        variant: "link",
+        link: "https://www.luisvuitton.com/",
+      });
+    },
   };
 };

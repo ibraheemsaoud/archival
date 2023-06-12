@@ -5,7 +5,7 @@ export const useRoles = (EraId: string) => {
   const eraRole = roles?.find((role) => role.eraId === EraId);
   return {
     isLoading,
-    hasAccess:
+    hasEditAccess:
       eraRole?.role === "owner" ||
       eraRole?.role === "admin" ||
       eraRole?.role === "curator",

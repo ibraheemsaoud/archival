@@ -1,5 +1,5 @@
 export * from "./useRequestEra";
-export * from "./requestEntries";
+export * from "./useRequestEntries";
 export * from "./requestTopics";
 export * from "./requestComments";
 export * from "./useRequsetUser";

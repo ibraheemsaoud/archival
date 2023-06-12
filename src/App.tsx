@@ -8,6 +8,8 @@ import { Entry, useEntryLoader } from "./screens/Entry";
 import { CssBaseline, PaletteMode, ThemeProvider } from "@mui/material";
 import { theme } from "./theme";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
@@ -53,7 +55,9 @@ function App() {
       <ThemeProvider theme={modedTheme}>
         <CssBaseline enableColorScheme />
         <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <RouterProvider router={router} />
+          </LocalizationProvider>
         </QueryClientProvider>
       </ThemeProvider>
     </React.StrictMode>

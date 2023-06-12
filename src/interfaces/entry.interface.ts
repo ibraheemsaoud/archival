@@ -7,6 +7,38 @@ export type IEntryInteraction = {
   height: number;
 };
 
+export type IEntryCreate =
+  | {
+      title: string;
+      timestamp: Date;
+      userId: string;
+      eraId: string;
+      variant: "link";
+      link: string;
+      text?: undefined;
+      imageUrl?: undefined;
+    }
+  | {
+      title: string;
+      timestamp: Date;
+      userId: string;
+      eraId: string;
+      variant: "text";
+      link?: undefined;
+      text: string;
+      imageUrl?: undefined;
+    }
+  | {
+      title: string;
+      timestamp: Date;
+      userId: string;
+      eraId: string;
+      variant: "image";
+      link?: undefined;
+      text?: undefined;
+      imageUrl: string;
+    };
+
 export type IEntry =
   | {
       id: string;

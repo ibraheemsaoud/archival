@@ -9,6 +9,7 @@ import { EntryCard } from "../../components/EntryCard";
 import { Box, Typography, Link } from "@mui/material";
 import { Masonry } from "@mui/lab";
 import { FeaturedEntries } from "./FeaturedEntries";
+import { CreateNewEntry } from "./CreateNewEntry";
 
 export const Era = () => {
   const { topic, era, entries } = useLoaderData() as any as {
@@ -28,7 +29,10 @@ export const Era = () => {
     if (prevEntry.variant === "empty") return;
     const timeDiff = prevEntry.timestamp.getTime() - entry.timestamp.getTime();
     console.log(timeDiff);
-    const height = Math.min(Math.abs(Math.floor(timeDiff / (24 * 3600 * 1000)) * 100), 500);
+    const height = Math.min(
+      Math.abs(Math.floor(timeDiff / (24 * 3600 * 1000)) * 100),
+      500
+    );
     entries.splice(index, 0, {
       id: `empty-${index}`,
       variant: "empty",
@@ -87,6 +91,7 @@ export const Era = () => {
             )}
           </Masonry>
         </Box>
+        <CreateNewEntry eraId={era.id} />
       </Box>
     </AppWrapper>
   );

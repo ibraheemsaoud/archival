@@ -1,7 +1,7 @@
 import { Params } from "react-router-dom";
 import {
   requestComments,
-  requestEntey,
+  useRequestEntry,
   useRequestEra,
   requestTopic,
 } from "../../requests";
@@ -9,7 +9,7 @@ import {
 export const useEntryLoader = async ({ params }: { params: Params<string> }) => {
   const { data: topic } = requestTopic({ slug: params.topicSlug });
   const { data: era } = useRequestEra({ slug: params.eraSlug });
-  const { data: entry } = requestEntey(params.entryId || "-1");
+  const { data: entry } = useRequestEntry(params.entryId || "-1");
   const { data: comments } = requestComments(params.entryId || "-1");
   return {
     topic,
