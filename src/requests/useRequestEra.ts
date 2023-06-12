@@ -139,7 +139,7 @@ const list: IEra[] = [
     isPublic: true,
   },
 ];
-export const requestEra = (query: { id?: string; slug?: string }) => {
+export const useRequestEra = (query: { id?: string; slug?: string }) => {
   const era = list.find(
     (item) => item.id === query.id || item.slug === query.slug
   );
@@ -150,11 +150,30 @@ export const requestEra = (query: { id?: string; slug?: string }) => {
   };
 };
 
-export const requestEras = (query?: { topicId: string }) => {
+export const useRequestEras = (query?: { topicId: string }) => {
   const eras = list.filter((item) => item.topicId === query?.topicId);
   return {
     data: eras,
     isLoading: false,
     error: undefined,
+  };
+};
+
+export const useRequestCreateEra = () => {
+  return {
+    data: undefined,
+    isLoading: false,
+    error: undefined,
+    mutate: (data: Partial<IEra>) => {
+      list.push({
+        ...data,
+        slug: data.title?.replace(/\s/g, "-"),
+        id: Math.random().toString(),
+        creationDate: new Date(),
+        starDate: new Date(),
+        endDate: new Date(),
+        isPublic: true,
+      } as IEra);
+    },
   };
 };

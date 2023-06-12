@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import { IEra } from "../../interfaces/era.interface";
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { EraCard, AppWrapper } from "../../components";
 import { ITopic } from "../../interfaces/topic.interface";
 import { CreateNewEra } from "./CreateNewEra";
@@ -28,7 +28,7 @@ export const EraList = () => {
                 <EraCard key={era.id} era={era} topic={topic} />
               </Grid>
             ))}
-            <CreateNewEra />
+            <CreateNewEra topicId={topic.id} />
           </Grid>
         </Grid>
         <Grid item md={3}>

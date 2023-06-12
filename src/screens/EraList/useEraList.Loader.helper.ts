@@ -1,10 +1,10 @@
 import { Params } from "react-router-dom";
 import { requestTopic } from "../../requests/requestTopics";
-import { requestEras } from "../../requests";
+import { useRequestEras } from "../../requests";
 
-export const eraListLoader = async ({ params }: { params: Params<string> }) => {
+export const useEraListLoader = async ({ params }: { params: Params<string> }) => {
   const { data: topic } = requestTopic({ slug: params.topicSlug });
-  const { data: eras } = requestEras({ topicId: topic?.id || "-1" });
+  const { data: eras } = useRequestEras({ topicId: topic?.id || "-1" });
 
   return {
     topic,
