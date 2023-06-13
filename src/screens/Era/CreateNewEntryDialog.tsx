@@ -49,7 +49,6 @@ export const CreateNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
       link,
       timestamp: date,
       eraId: era.id,
-      userId: user.id,
     });
     setTitle("");
     setLink("");

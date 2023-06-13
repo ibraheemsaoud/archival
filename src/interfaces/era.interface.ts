@@ -1,4 +1,4 @@
-import { EntryType } from "./entry.interface";
+import { ITimelineEntry } from "./timelineEntry.interface";
 
 export interface IEra {
   id: string;
@@ -12,5 +12,5 @@ export interface IEra {
   endDate: Date;
   isPublic: boolean;
   coverImageUrl?: string;
-  timelineEntries: { entryId: string; entryType: EntryType }[];
+  timelineEntries: ITimelineEntry[];
 }

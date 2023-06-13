@@ -29,8 +29,6 @@ export const Entry = () => {
   if (!entry) return <div>Not found</div>;
   if (!comments) return <div>Loading...</div>;
 
-  if (entry.variant !== "normal") return null;
-
   return (
     <AppWrapper>
       <Grid container spacing={4}>
@@ -39,7 +37,7 @@ export const Entry = () => {
             {data?.image && (
               <CardMedia
                 component="img"
-                height={entry.interaction.height || 140}
+                height={300}
                 image={data.image}
                 alt={data?.title}
               />

@@ -1,5 +1,5 @@
-import { EntryType } from "../interfaces/entry.interface";
 import { IEra } from "../interfaces/era.interface";
+import { EntryType } from "../interfaces/timelineEntry.interface";
 
 export const list: IEra[] = [
   {
@@ -17,25 +17,58 @@ export const list: IEra[] = [
       "https://cdn.shopify.com/s/files/1/0569/3554/7070/files/IM_top_brandtop_pc230501_2000x.jpg?v=1684145520",
     timelineEntries: [
       {
-        entryId: "1",
-        entryType: EntryType.CoverPost,
+        id: "1",
+        eraId: "1",
+        timestamp: new Date(),
+        type: EntryType.Media,
+        title: "Issey Miyake - Spring Summer 2023",
+        description: "Issey Miyake Haute Couture Spring Summer 2023",
+        entryType: "image",
+        link: "https://cdn.shopify.com/s/files/1/0569/3554/7070/files/IM_top_brandtop_pc230501_2000x.jpg?v=1684145520",
       },
       {
-        entryId: "1",
-        entryType: EntryType.QuickLinks,
+        id: "2",
+        eraId: "1",
+        type: EntryType.QuickLinks,
+        links: [
+          {
+            title: "Runway show",
+            link: "https://www.youtube.com/watch?v=UDYtcuWJR3Q",
+            order: 1,
+          },
+          {
+            title: "Store link",
+            link: "https://eu-store.isseymiyake.com/",
+            order: 2,
+          },
+        ],
       },
       {
+        id: "3",
+        eraId: "1",
+        timestamp: new Date(),
+        type: EntryType.CoverPost,
+        title: "03/02/2023",
+        description: "Issey Miyake Haute Couture Spring Summer 2023",
         entryId: "1",
-        entryType: EntryType.CoverPost,
       },
       {
+        id: "4",
+        eraId: "1",
+        timestamp: new Date(),
+        type: EntryType.CoverPost,
+        title: "04/02/2023",
+        description: "Issey Miyake Haute Couture Spring Summer 2023",
         entryId: "2",
-        entryType: EntryType.CoverPost,
       },
       {
-        entryId: "1",
-        entryType: EntryType.Collection,
-      },
+        id: "5",
+        eraId: "1",
+        timestamp: new Date(),
+        type: EntryType.Collection,
+        title: "Various events - February 2023",
+        listOfEntryIds: ["1", "2"],
+      }
     ],
   },
   {
