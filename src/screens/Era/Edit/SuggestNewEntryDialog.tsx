@@ -1,7 +1,7 @@
 import { DatePicker } from "@mui/x-date-pickers";
 import { Box, Button, Dialog, DialogTitle, TextField } from "@mui/material";
 import { useState } from "react";
-import { useRequestCreateEntry } from "../../requests";
+import { useRequestCreateEntry } from "../../../requests";
 
 interface SimpleDialogProps {
   open: boolean;

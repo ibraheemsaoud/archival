@@ -8,40 +8,40 @@ export enum EntryType {
 }
 
 export interface IQuickLinks {
-  id: string;
+  id?: string;
   eraId: string;
   type: EntryType.QuickLinks;
   links: ILink[];
 }
 
 export interface IMedia {
-  id: string;
+  id?: string;
   eraId: string;
   type: EntryType.Media;
   title: string;
   description?: string;
-  timestamp: Date;
+  timestamp?: Date;
   entryType: "image" | "video";
   link: string;
 }
 
 export interface ICoverPost {
-  id: string;
+  id?: string;
   eraId: string;
   type: EntryType.CoverPost;
   title: string;
   description?: string;
-  timestamp: Date;
+  timestamp?: Date;
   entryId: string;
   entry?: IEntry;
 }
 
 export interface ICollection {
-  id: string;
+  id?: string;
   eraId: string;
   type: EntryType.Collection;
   title: string;
-  timestamp: Date;
+  timestamp?: Date;
   listOfEntryIds: string[];
   entries?: IEntry[];
 }
