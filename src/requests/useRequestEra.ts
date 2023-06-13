@@ -1,6 +1,6 @@
 import { IEra } from "../interfaces/era.interface";
 
-const list: IEra[] = [
+export const list: IEra[] = [
   {
     id: "1",
     slug: "isseyMiyake-ss23",

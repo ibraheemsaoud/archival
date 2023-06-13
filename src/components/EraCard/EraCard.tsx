@@ -9,16 +9,15 @@ import { IEra } from "../../interfaces/era.interface";
 import { Link } from "react-router-dom";
 import { replaceRouteParams } from "../../helpers";
 import { ERA } from "../../consts/links.const";
-import { ITopic } from "../../interfaces/topic.interface";
 
-export const EraCard = ({ era, topic }: { era: IEra; topic: ITopic }) => {
+export const EraCard = ({ era, topicSlug }: { era: IEra; topicSlug: string }) => {
   const { title, description } = era;
   return (
     <Card>
       <Link
         to={replaceRouteParams(ERA, {
           eraSlug: era.slug,
-          topicSlug: topic.slug,
+          topicSlug: topicSlug,
         })}
       >
         <CardActionArea>
