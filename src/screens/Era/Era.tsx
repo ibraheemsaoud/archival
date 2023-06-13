@@ -28,7 +28,6 @@ export const Era = () => {
     const prevEntry = entries[index - 1];
     if (prevEntry.variant === "empty") return;
     const timeDiff = prevEntry.timestamp.getTime() - entry.timestamp.getTime();
-    console.log(timeDiff);
     const height = Math.min(
       Math.abs(Math.floor(timeDiff / (24 * 3600 * 1000)) * 100),
       500

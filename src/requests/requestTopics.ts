@@ -27,7 +27,7 @@ const list: ITopic[] = [
     description: "Keep updated with all the shows and their cultural empact.",
   },
   {
-    id: "4",
+    id: "5",
     slug: "movies",
     title: "Movies",
     description: "Movies and their rollout, news and reviews.",

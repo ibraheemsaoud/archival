@@ -32,7 +32,7 @@ export const TopicList = () => {
         slideStyle={{ padding: "0 0px", maxWidth: "250px" }}
       >
         {topics?.map((topic) => (
-          <Grid item xs={6} md={4} lg={2} key={topic.id}>
+          <Grid item xs={6} md={4} lg={2} key={`TOPIC_CARD_${topic.id}`}>
             <TopicCard topic={topic} />
           </Grid>
         ))}
@@ -46,9 +46,8 @@ export const TopicList = () => {
       </Typography>
       <Grid container spacing={2}>
         {eras?.map((era) => (
-          <Grid item xs={12} lg={6} key={era.id}>
+          <Grid item xs={12} lg={6} key={`ERA_CARD_${era.id}`}>
             <EraCard
-              key={era.id}
               era={era}
               topicSlug={getTopicSlugFromId(era.topicId) || "-1"}
             />
