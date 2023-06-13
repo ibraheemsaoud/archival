@@ -1,3 +1,5 @@
+import { EntryType } from "./entry.interface";
+
 export interface IEra {
   id: string;
   slug: string;
@@ -10,5 +12,5 @@ export interface IEra {
   endDate: Date;
   isPublic: boolean;
   coverImageUrl?: string;
-  featuredEntries?: string[];
+  timelineEntries: { entryId: string; entryType: EntryType }[];
 }

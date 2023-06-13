@@ -1,3 +1,10 @@
+export enum EntryType {
+  Media = "media",
+  CoverPost = "coverPost",
+  Collection = "collection",
+  QuickLinks = "quickLinks",
+}
+
 export type IEntryInteraction = {
   shares?: number;
   likes?: number;
@@ -7,37 +14,14 @@ export type IEntryInteraction = {
   height: number;
 };
 
-export type IEntryCreate =
-  | {
-      title: string;
-      timestamp: Date;
-      userId: string;
-      eraId: string;
-      variant: "link";
-      link: string;
-      text?: undefined;
-      imageUrl?: undefined;
-    }
-  | {
-      title: string;
-      timestamp: Date;
-      userId: string;
-      eraId: string;
-      variant: "text";
-      link?: undefined;
-      text: string;
-      imageUrl?: undefined;
-    }
-  | {
-      title: string;
-      timestamp: Date;
-      userId: string;
-      eraId: string;
-      variant: "image";
-      link?: undefined;
-      text?: undefined;
-      imageUrl: string;
-    };
+export type IEntryCreate = {
+  title: string;
+  timestamp: Date;
+  userId: string;
+  eraId: string;
+  link: string;
+  text: string;
+};
 
 export type IEntry =
   | {
@@ -48,39 +32,10 @@ export type IEntry =
       eraId: string;
       type: "Analysis" | "Coverage" | "Anticipation";
       interaction: IEntryInteraction;
+      variant: "normal";
       isEdited?: boolean;
-      variant: "link";
       link: string;
-      text?: undefined;
-      imageUrl?: undefined;
-    }
-  | {
-      id: string;
-      title: string;
-      timestamp: Date;
-      userId: string;
-      eraId: string;
-      type: "Analysis" | "Coverage" | "Anticipation";
-      interaction: IEntryInteraction;
-      isEdited?: boolean;
-      variant: "text";
-      link?: undefined;
       text: string;
-      imageUrl?: undefined;
-    }
-  | {
-      id: string;
-      title: string;
-      timestamp: Date;
-      userId: string;
-      eraId: string;
-      type: "Analysis" | "Coverage" | "Anticipation";
-      interaction: IEntryInteraction;
-      isEdited?: boolean;
-      variant: "image";
-      link?: undefined;
-      text?: undefined;
-      imageUrl: string;
     }
   | {
       id: string;
@@ -94,5 +49,4 @@ export type IEntry =
       isEdited?: undefined;
       link?: undefined;
       text?: undefined;
-      imageUrl?: undefined;
     };

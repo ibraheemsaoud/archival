@@ -29,7 +29,7 @@ export const Entry = () => {
   if (!entry) return <div>Not found</div>;
   if (!comments) return <div>Loading...</div>;
 
-  if (entry.variant !== "link") return null;
+  if (entry.variant !== "normal") return null;
 
   return (
     <AppWrapper>

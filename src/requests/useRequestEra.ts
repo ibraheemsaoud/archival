@@ -1,3 +1,4 @@
+import { EntryType } from "../interfaces/entry.interface";
 import { IEra } from "../interfaces/era.interface";
 
 export const list: IEra[] = [
@@ -14,7 +15,28 @@ export const list: IEra[] = [
     isPublic: true,
     coverImageUrl:
       "https://cdn.shopify.com/s/files/1/0569/3554/7070/files/IM_top_brandtop_pc230501_2000x.jpg?v=1684145520",
-    featuredEntries: ["1", "2"],
+    timelineEntries: [
+      {
+        entryId: "1",
+        entryType: EntryType.CoverPost,
+      },
+      {
+        entryId: "1",
+        entryType: EntryType.QuickLinks,
+      },
+      {
+        entryId: "1",
+        entryType: EntryType.CoverPost,
+      },
+      {
+        entryId: "2",
+        entryType: EntryType.CoverPost,
+      },
+      {
+        entryId: "1",
+        entryType: EntryType.Collection,
+      },
+    ],
   },
   {
     id: "2",
@@ -27,6 +49,7 @@ export const list: IEra[] = [
     starDate: new Date(),
     endDate: new Date(),
     isPublic: true,
+    timelineEntries: [],
   },
   {
     id: "3",
@@ -39,6 +62,7 @@ export const list: IEra[] = [
     starDate: new Date(),
     endDate: new Date(),
     isPublic: true,
+    timelineEntries: [],
   },
   {
     id: "4",
@@ -51,6 +75,7 @@ export const list: IEra[] = [
     starDate: new Date(),
     endDate: new Date(),
     isPublic: true,
+    timelineEntries: [],
   },
   {
     id: "5",
@@ -63,6 +88,7 @@ export const list: IEra[] = [
     starDate: new Date(),
     endDate: new Date(),
     isPublic: true,
+    timelineEntries: [],
   },
   {
     id: "6",
@@ -75,6 +101,7 @@ export const list: IEra[] = [
     starDate: new Date(),
     endDate: new Date(),
     isPublic: true,
+    timelineEntries: [],
   },
   {
     id: "7",
@@ -87,6 +114,7 @@ export const list: IEra[] = [
     starDate: new Date(),
     endDate: new Date(),
     isPublic: true,
+    timelineEntries: [],
   },
   {
     id: "8",
@@ -99,6 +127,7 @@ export const list: IEra[] = [
     starDate: new Date(),
     endDate: new Date(),
     isPublic: true,
+    timelineEntries: [],
   },
   {
     id: "9",
@@ -112,6 +141,7 @@ export const list: IEra[] = [
     starDate: new Date(),
     endDate: new Date(),
     isPublic: true,
+    timelineEntries: [],
   },
   {
     id: "10",
@@ -125,6 +155,7 @@ export const list: IEra[] = [
     starDate: new Date(),
     endDate: new Date(),
     isPublic: true,
+    timelineEntries: [],
   },
   {
     id: "11",
@@ -137,6 +168,7 @@ export const list: IEra[] = [
     starDate: new Date(),
     endDate: new Date(),
     isPublic: true,
+    timelineEntries: [],
   },
 ];
 export const useRequestEra = (query: { id?: string; slug?: string }) => {

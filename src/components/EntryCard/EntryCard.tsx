@@ -19,7 +19,7 @@ export const EntryCard = ({ entry }: { entry: IEntry }) => {
   const { data } = useRequestLinkPreview(entry?.link);
 
   switch (entry.variant) {
-    case "link":
+    case "normal":
       return (
         <Card sx={{ textAlign: "start" }}>
           {/* <Link to={entry.link}> */}
@@ -92,10 +92,6 @@ export const EntryCard = ({ entry }: { entry: IEntry }) => {
           {/* </Link> */}
         </Card>
       );
-    case "image":
-      break;
-    case "text":
-      break;
     case "empty":
       return <Box height={entry.interaction.height || 140}></Box>;
   }

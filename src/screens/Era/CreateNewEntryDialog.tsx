@@ -1,13 +1,5 @@
 import { DatePicker } from "@mui/x-date-pickers";
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogTitle,
-  TextField,
-  ToggleButton,
-  ToggleButtonGroup,
-} from "@mui/material";
+import { Box, Button, Dialog, DialogTitle, TextField } from "@mui/material";
 import { useState } from "react";
 import { useRequestCreateEntry } from "../../requests";
 import { useLoaderData } from "react-router-dom";
@@ -25,8 +17,6 @@ export const CreateNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
   };
   const { user } = useUser();
 
-  const [entryType, setEntryType] = useState("Link");
-
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [text, setText] = useState("");
@@ -36,12 +26,6 @@ export const CreateNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
 
   const handleClose = () => {
     onClose();
-  };
-  const handleTypeChange = (
-    _: React.MouseEvent<HTMLElement>,
-    newAlignment: string
-  ) => {
-    setEntryType(newAlignment);
   };
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,27 +42,15 @@ export const CreateNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
   };
 
   const createEntry = () => {
-    if (!title || !date || !entryType) return;
-    if (entryType === "Link") {
-      mutate({
-        title,
-        link,
-        timestamp: date,
-        eraId: era.id,
-        variant: "link",
-        userId: user.id,
-      });
-    } else if (entryType === "Image") {
-    } else if (entryType === "Text") {
-      mutate({
-        title,
-        text,
-        timestamp: date,
-        eraId: era.id,
-        variant: "text",
-        userId: user.id,
-      });
-    }
+    if (!title || !date) return;
+    mutate({
+      title,
+      text,
+      link,
+      timestamp: date,
+      eraId: era.id,
+      userId: user.id,
+    });
     setTitle("");
     setLink("");
     setText("");
@@ -111,41 +83,23 @@ export const CreateNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
           onChange={onChangeDate}
           value={date}
         />
-        <ToggleButtonGroup
-          color="primary"
-          value={entryType}
-          exclusive
-          onChange={handleTypeChange}
-          aria-label="Platform"
+        <TextField
+          id="standard-basic"
+          label="Link"
+          variant="standard"
+          value={link}
+          onChange={onChangeLink}
           fullWidth
-          size="small"
           sx={{ marginBottom: 2 }}
-        >
-          <ToggleButton value="Link">Link</ToggleButton>
-          <ToggleButton value="Image">Image</ToggleButton>
-          <ToggleButton value="Text">Text</ToggleButton>
-        </ToggleButtonGroup>
-        {entryType === "Link" && (
-          <TextField
-            id="standard-basic"
-            label="Link"
-            variant="standard"
-            value={link}
-            onChange={onChangeLink}
-            fullWidth
-            sx={{ marginBottom: 2 }}
-          />
-        )}
-        {entryType === "Text" && (
-          <TextField
-            id="standard-basic"
-            label="Text"
-            variant="standard"
-            value={text}
-            onChange={onChangeText}
-            sx={{ marginBottom: 2 }}
-          />
-        )}
+        />
+        <TextField
+          id="standard-basic"
+          label="Text"
+          variant="standard"
+          value={text}
+          onChange={onChangeText}
+          sx={{ marginBottom: 2 }}
+        />
         <Button variant="contained" onClick={createEntry} fullWidth>
           Create
         </Button>

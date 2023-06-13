@@ -16,8 +16,9 @@ const list: IEntry[] = [
       reactions: 120,
       height: 300,
     },
-    variant: "link",
+    variant: "normal",
     link: "https://www.youtube.com/watch?v=UDYtcuWJR3Q",
+    text: "",
   },
   {
     id: "2",
@@ -34,8 +35,9 @@ const list: IEntry[] = [
       reactions: 60,
       height: 120,
     },
-    variant: "link",
+    variant: "normal",
     link: "https://eu-store.isseymiyake.com/",
+    text: "",
   },
   {
     id: "3",
@@ -52,8 +54,9 @@ const list: IEntry[] = [
       reactions: 120,
       height: 300,
     },
-    variant: "link",
+    variant: "normal",
     link: "https://www.youtube.com/watch?v=sLkDxqI37TM",
+    text: "",
   },
   {
     id: "4",
@@ -70,8 +73,9 @@ const list: IEntry[] = [
       reactions: 120,
       height: 300,
     },
-    variant: "link",
+    variant: "normal",
     link: "https://www.irisvanherpen.com/",
+    text: "",
   },
   {
     id: "5",
@@ -88,8 +92,9 @@ const list: IEntry[] = [
       reactions: 120,
       height: 300,
     },
-    variant: "link",
+    variant: "normal",
     link: "https://www.youtube.com/watch?v=6SX50BOmArI",
+    text: "",
   },
   {
     id: "6",
@@ -106,8 +111,9 @@ const list: IEntry[] = [
       reactions: 120,
       height: 300,
     },
-    variant: "link",
+    variant: "normal",
     link: "https://www.luisvuitton.com/",
+    text: "",
   },
 ];
 
@@ -158,8 +164,9 @@ export const useRequestCreateEntry = () => {
           reactions: 120,
           height: 300,
         },
-        variant: "link",
+        variant: "normal",
         link: "https://www.luisvuitton.com/",
+        text: "",
       });
     },
   };
