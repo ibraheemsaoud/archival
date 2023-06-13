@@ -10,7 +10,13 @@ import { Link } from "react-router-dom";
 import { replaceRouteParams } from "../../helpers";
 import { ERA } from "../../consts/links.const";
 
-export const EraCard = ({ era, topicSlug }: { era: IEra; topicSlug: string }) => {
+export const EraCard = ({
+  era,
+  topicSlug,
+}: {
+  era: IEra;
+  topicSlug: string;
+}) => {
   const { title, description } = era;
   return (
     <Card>
@@ -24,7 +30,7 @@ export const EraCard = ({ era, topicSlug }: { era: IEra; topicSlug: string }) =>
           <CardMedia
             component="img"
             height="360"
-            image="\static\images\potm2209a.jpg"
+            image={era.coverImageUrl || "staticimagespotm2209a.jpg"}
             alt="green iguana"
           />
           <CardContent>

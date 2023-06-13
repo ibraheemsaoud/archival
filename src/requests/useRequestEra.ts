@@ -13,6 +13,7 @@ export const list: IEra[] = [
     starDate: new Date(),
     endDate: new Date(),
     isPublic: true,
+    allowSuggestions: true,
     coverImageUrl:
       "https://cdn.shopify.com/s/files/1/0569/3554/7070/files/IM_top_brandtop_pc230501_2000x.jpg?v=1684145520",
     timelineEntries: [
@@ -68,7 +69,7 @@ export const list: IEra[] = [
         type: EntryType.Collection,
         title: "Various events - February 2023",
         listOfEntryIds: ["1", "2"],
-      }
+      },
     ],
   },
   {
@@ -83,6 +84,7 @@ export const list: IEra[] = [
     endDate: new Date(),
     isPublic: true,
     timelineEntries: [],
+    allowSuggestions: false,
   },
   {
     id: "3",
@@ -96,6 +98,7 @@ export const list: IEra[] = [
     endDate: new Date(),
     isPublic: true,
     timelineEntries: [],
+    allowSuggestions: false,
   },
   {
     id: "4",
@@ -109,6 +112,7 @@ export const list: IEra[] = [
     endDate: new Date(),
     isPublic: true,
     timelineEntries: [],
+    allowSuggestions: false,
   },
   {
     id: "5",
@@ -122,6 +126,7 @@ export const list: IEra[] = [
     endDate: new Date(),
     isPublic: true,
     timelineEntries: [],
+    allowSuggestions: false,
   },
   {
     id: "6",
@@ -135,6 +140,7 @@ export const list: IEra[] = [
     endDate: new Date(),
     isPublic: true,
     timelineEntries: [],
+    allowSuggestions: false,
   },
   {
     id: "7",
@@ -148,6 +154,7 @@ export const list: IEra[] = [
     endDate: new Date(),
     isPublic: true,
     timelineEntries: [],
+    allowSuggestions: false,
   },
   {
     id: "8",
@@ -161,6 +168,7 @@ export const list: IEra[] = [
     endDate: new Date(),
     isPublic: true,
     timelineEntries: [],
+    allowSuggestions: false,
   },
   {
     id: "9",
@@ -175,6 +183,7 @@ export const list: IEra[] = [
     endDate: new Date(),
     isPublic: true,
     timelineEntries: [],
+    allowSuggestions: false,
   },
   {
     id: "10",
@@ -189,6 +198,7 @@ export const list: IEra[] = [
     endDate: new Date(),
     isPublic: true,
     timelineEntries: [],
+    allowSuggestions: false,
   },
   {
     id: "11",
@@ -202,6 +212,7 @@ export const list: IEra[] = [
     endDate: new Date(),
     isPublic: true,
     timelineEntries: [],
+    allowSuggestions: false,
   },
 ];
 export const useRequestEra = (query: { id?: string; slug?: string }) => {

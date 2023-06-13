@@ -2,21 +2,18 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { Box, Button, Dialog, DialogTitle, TextField } from "@mui/material";
 import { useState } from "react";
 import { useRequestCreateEntry } from "../../requests";
-import { useLoaderData } from "react-router-dom";
-import { IEra } from "../../interfaces/era.interface";
-import { useUser } from "../../hooks";
 
 interface SimpleDialogProps {
   open: boolean;
   onClose: () => void;
+  eraId: string;
 }
 
-export const CreateNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
-  const { era } = useLoaderData() as any as {
-    era: IEra;
-  };
-  const { user } = useUser();
-
+export const SuggestNewEntryDialog = ({
+  onClose,
+  open,
+  eraId,
+}: SimpleDialogProps) => {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [text, setText] = useState("");
@@ -48,7 +45,7 @@ export const CreateNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
       text,
       link,
       timestamp: date,
-      eraId: era.id,
+      eraId,
     });
     setTitle("");
     setLink("");
@@ -59,7 +56,7 @@ export const CreateNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
 
   return (
     <Dialog onClose={handleClose} open={open}>
-      <DialogTitle variant="h5">Create New Entry</DialogTitle>
+      <DialogTitle variant="h5">Suggest New Entry</DialogTitle>
       <Box
         display="flex"
         flexDirection="column"
@@ -98,9 +95,10 @@ export const CreateNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
           value={text}
           onChange={onChangeText}
           sx={{ marginBottom: 2 }}
+          fullWidth
         />
         <Button variant="contained" onClick={createEntry} fullWidth>
-          Create
+          Submit
         </Button>
       </Box>
     </Dialog>

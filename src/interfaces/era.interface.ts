@@ -13,4 +13,5 @@ export interface IEra {
   isPublic: boolean;
   coverImageUrl?: string;
   timelineEntries: ITimelineEntry[];
+  allowSuggestions: boolean;
 }
