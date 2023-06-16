@@ -10,12 +10,15 @@ import { theme } from "./theme";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { ENTRY, ERA, HOME, TOPIC } from "./consts/links.const";
+import { firebaseConfig } from "./firebase.config";
 
 function App() {
   const [mode] = useState<PaletteMode>("light");
@@ -47,6 +50,9 @@ function App() {
       loader: entryLoader,
     },
   ]);
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
 
   const queryClient = new QueryClient();
 
