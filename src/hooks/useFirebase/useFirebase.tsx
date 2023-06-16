@@ -132,7 +132,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           console.error(error, email, firebaseAuth.currentUser);
         });
     }
-  }, [firebaseAuth.currentUser, isLoading]);
+  }, [isLoading, firebaseAuth, getEmail, removeEmail]);
 
   const signOut = async () => {
     removeEmail();
