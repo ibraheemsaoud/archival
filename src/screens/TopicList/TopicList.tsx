@@ -2,7 +2,6 @@ import { requestTopics } from "../../requests/requestTopics";
 import { AppWrapper, EraCard, TopicCard } from "../../components";
 import { Grid, Link, Typography } from "@mui/material";
 import { SUPPORT_EMAIL } from "../../consts/outsideLinks";
-import SwipeableViews from "react-swipeable-views";
 import { uesRequestDashboardEras } from "../../requests";
 
 export const TopicList = () => {
@@ -25,18 +24,13 @@ export const TopicList = () => {
       </Typography>
       <br />
 
-      <SwipeableViews
-        threshold={1}
-        enableMouseEvents
-        style={{ padding: "0 0px" }}
-        slideStyle={{ padding: "0 0px", maxWidth: "250px" }}
-      >
+      <Grid container spacing={2}>
         {topics?.map((topic) => (
           <Grid item xs={6} md={4} lg={2} key={`TOPIC_CARD_${topic.id}`}>
             <TopicCard topic={topic} />
           </Grid>
         ))}
-      </SwipeableViews>
+      </Grid>
       <Typography variant="body1" gutterBottom marginTop={6}>
         if you want to suggest a new topic, please contact us at{" "}
         <Link href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</Link>
