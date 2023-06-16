@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { sendSignInLinkToEmail, signInWithRedirect } from "firebase/auth";
-import { useFirebase, useLocalStorage, GoogleProvider } from "../../../../hooks";
+import {
+  useFirebase,
+  useLocalStorage,
+  GoogleProvider,
+} from "../../../../hooks";
+import jsonPackage from "../../../../../package.json";
 
 export const useSignin = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +15,7 @@ export const useSignin = () => {
   const signInWithEmail = (email: string) => {
     if (!firebaseAuth) return undefined;
     return sendSignInLinkToEmail(firebaseAuth, email, {
-      url: "http://localhost:3000",
+      url: jsonPackage.homepage,
       handleCodeInApp: true,
     });
   };
