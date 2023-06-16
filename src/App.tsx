@@ -18,7 +18,7 @@ import "@fontsource/roboto/700.css";
 import { ENTRY, ERA, HOME, TOPIC } from "./consts/links.const";
 
 function App() {
-  const [mode, setMode] = useState<PaletteMode>("light");
+  const [mode] = useState<PaletteMode>("light");
   const modedTheme = useMemo(() => theme(mode), [mode]);
 
   const entryLoader = useEntryLoader;

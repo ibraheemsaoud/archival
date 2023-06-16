@@ -7,7 +7,6 @@ import { IEra } from "../../interfaces/era.interface";
 import {
   Box,
   Card,
-  CardActionArea,
   CardContent,
   CardMedia,
   Grid,
@@ -17,7 +16,7 @@ import { useRequestLinkPreview } from "../../requests/external";
 import { Comment } from "./Comment";
 
 export const Entry = () => {
-  const { topic, era, entry, comments } = useLoaderData() as any as {
+  const { entry, comments } = useLoaderData() as any as {
     topic: ITopic;
     era: IEra;
     entry: IEntry;

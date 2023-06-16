@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { ICoverPost } from "../../../interfaces/timelineEntry.interface";
 import { useRequestLinkPreview } from "../../../requests/external";
 
