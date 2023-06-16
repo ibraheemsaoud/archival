@@ -1,16 +1,16 @@
 import { Box, Button, TextField } from "@mui/material";
-import { useUser } from "../../../hooks";
+import { useFirebase } from "../../../hooks";
 import { useState } from "react";
 import { useRequestCreateEra } from "../../../requests";
 
 export const CreateNewEra = ({ topicId }: { topicId: string }) => {
-  const { user } = useUser();
+  const { user } = useFirebase();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const { mutate: createEra } = useRequestCreateEra();
 
   const onClick = () => {
-    createEra({ title, description, topicId, ownerId: user.id });
+    createEra({ title, description, topicId, ownerId: user?.uid });
     setTitle("");
     setDescription("");
   };
@@ -23,9 +23,10 @@ export const CreateNewEra = ({ topicId }: { topicId: string }) => {
     setDescription(event.target.value);
   };
 
-  if (user.userType !== "admin") {
-    return null;
-  }
+  // TODO add roles
+  // if (user.userType !== "admin") {
+  //   return null;
+  // }
 
   return (
     <Box
