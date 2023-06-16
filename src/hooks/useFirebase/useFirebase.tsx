@@ -102,8 +102,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
   }, [firebaseAuth]);
 
-  let email = getEmail();
-
   useEffect(() => {
     console.log(isLoading, firebaseAuth.currentUser);
     if (
@@ -111,6 +109,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       !firebaseAuth.currentUser &&
       isSignInWithEmailLink(firebaseAuth, window.location.href)
     ) {
+      let email = getEmail();
       if (!email) {
         // User opened the link on a different device. To prevent session fixation
         // attacks, ask the user to provide the associated email again. For example:
