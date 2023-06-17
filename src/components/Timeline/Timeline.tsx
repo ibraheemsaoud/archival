@@ -11,13 +11,13 @@ export const Timeline = ({ era }: { era: IEra }) => {
       {data.map((entry) => {
         switch (entry.type) {
           case EntryType.CoverPost:
-            return <CoverPost coverPost={entry} />;
+            return <CoverPost coverPost={entry} key={entry.id} />;
           case EntryType.Collection:
-            return <Collection collection={entry} />;
+            return <Collection collection={entry} key={entry.id} />;
           case EntryType.Media:
-            return <Media media={entry} />;
+            return <Media media={entry} key={entry.id} />;
           case EntryType.QuickLinks:
-            return <QuickLinks quickLinks={entry} />;
+            return <QuickLinks quickLinks={entry} key={entry.id} />;
           default:
             return <></>;
         }
