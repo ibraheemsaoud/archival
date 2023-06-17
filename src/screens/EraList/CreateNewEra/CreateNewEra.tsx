@@ -10,7 +10,7 @@ export const CreateNewEra = ({ topicId }: { topicId: string }) => {
   const { mutate: createEra } = useRequestCreateEra();
 
   const onClick = () => {
-    createEra({ title, description, topicId, ownerId: user?.uid });
+    createEra({ title, description, ownerId: user?.uid });
     setTitle("");
     setDescription("");
   };

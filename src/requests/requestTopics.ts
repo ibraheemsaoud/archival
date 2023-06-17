@@ -1,54 +1,61 @@
+import {
+  doc,
+  collection,
+  getDocs,
+  getDoc,
+  Firestore,
+} from "firebase/firestore";
 import { ITopic } from "../interfaces/topic.interface";
 
-const list: ITopic[] = [
-  {
-    id: "1",
-    slug: "hauteCouture",
-    title: "Haute Couture",
-    description:
-      "Check out all the new shows from the biggest brands in the fashion world.",
-  },
-  {
-    id: "2",
-    slug: "readyToWear",
-    title: "Ready to Wear",
-    description: "All the new seasons from the brands you love and adore.",
-  },
-  {
-    id: "3",
-    slug: "music",
-    title: "Music",
-    description: "Keep up to date with what your favorite arists are doing rn.",
-  },
-  {
-    id: "4",
-    slug: "tv",
-    title: "TV",
-    description: "Keep updated with all the shows and their cultural empact.",
-  },
-  {
-    id: "5",
-    slug: "movies",
-    title: "Movies",
-    description: "Movies and their rollout, news and reviews.",
-  },
-];
-
-export const requestTopics = () => {
+export const requestTopics = async (db: Firestore | null) => {
+  if (!db)
+    return {
+      data: [],
+      error: "no db provided",
+    };
+  const topicsSnapshot = await getDocs(collection(db, "Topics"));
+  if (topicsSnapshot?.docs?.length > 0) {
+    let topics: ITopic[] = [];
+    topicsSnapshot.docs.forEach((doc) => {
+      const docData = doc.data();
+      topics.push({
+        id: doc.id,
+        title: docData.title,
+        description: docData.description,
+      });
+    });
+    return {
+      data: topics,
+      error: undefined,
+    };
+  }
   return {
-    data: list,
-    isLoading: false,
-    error: undefined,
+    data: [],
+    error: "failed to load topics, server might be down",
   };
 };
 
-export const requestTopic = (query: { id?: string; slug?: string }) => {
-  const topic = list.find(
-    (topic) => topic.id === query.id || topic.slug === query.slug
-  );
-  return {
-    data: topic,
-    isLoading: false,
-    error: undefined,
-  };
+export const requestTopic = async (db: Firestore | null, id?: string) => {
+  if (!id || !db)
+    return {
+      data: undefined,
+      error: "no id provided",
+    };
+  const topicSnapshot = await getDoc(doc(db, "Topics", id));
+  if (topicSnapshot.exists()) {
+    return {
+      data: {
+        id: topicSnapshot.id,
+        title: topicSnapshot.data().title,
+        description: topicSnapshot.data().description,
+      },
+      error: undefined,
+    };
+  } else {
+    return {
+      data: undefined,
+      error:
+        "failed to load topic, server might be down or you loaded the incorrect topic",
+    };
+  }
 };

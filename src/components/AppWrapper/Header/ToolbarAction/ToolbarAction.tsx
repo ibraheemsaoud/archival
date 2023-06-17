@@ -41,8 +41,6 @@ export const ToolbarAction = () => {
     setOpen(false);
   };
 
-  console.log(user);
-
   if (isLoading) return <>Loading...</>;
   if (!isLoggedIn) {
     return (

@@ -1,14 +1,13 @@
-import { IEra } from "../../interfaces/era.interface";
-import { EntryType } from "../../interfaces/timelineEntry.interface";
-import { useRequestTimelineEntries } from "../../requests";
+import {
+  EntryType,
+  ITimelineEntry,
+} from "../../interfaces/timelineEntry.interface";
 import { Collection, CoverPost, Media, QuickLinks } from "./components";
 
-export const Timeline = ({ era }: { era: IEra }) => {
-  const { timelineEntries } = era;
-  const { data } = useRequestTimelineEntries(timelineEntries);
+export const Timeline = ({ timeline }: { timeline: ITimelineEntry[] }) => {
   return (
     <>
-      {data.map((entry) => {
+      {timeline.map((entry) => {
         switch (entry.type) {
           case EntryType.CoverPost:
             return <CoverPost coverPost={entry} key={entry.id} />;

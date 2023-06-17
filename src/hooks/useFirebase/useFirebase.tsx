@@ -9,7 +9,7 @@ import {
 } from "firebase/auth";
 import { firebaseConfig } from "./firebase.config";
 import { useLocalStorage } from "../useLocalStorage";
-// import { getFirestore } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 // import { getAnalytics } from "firebase/analytics";
 
 type User = {
@@ -20,15 +20,19 @@ type User = {
 };
 
 type AuthContextValue = {
+  db: ReturnType<typeof getFirestore> | null;
   user: User | null;
   isLoading: boolean;
+  isFirebaseReady: boolean;
   signOut: () => Promise<void>;
   firebaseAuth: ReturnType<typeof getAuth> | null;
 };
 
 export const AuthContext = createContext<AuthContextValue>({
+  db: null,
   user: null,
   isLoading: true,
+  isFirebaseReady: false,
   signOut: async () => {},
   firebaseAuth: null,
 });
@@ -37,7 +41,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const app = initializeApp(firebaseConfig);
 
   const firebaseAuth = getAuth(app);
-  // const firebaseFirestore = getFirestore(app);
+  const db = getFirestore(app);
   // const analytics = getAnalytics(app);
 
   const { getEmail, removeEmail } = useLocalStorage();
@@ -103,7 +107,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [firebaseAuth]);
 
   useEffect(() => {
-    console.log(isLoading, firebaseAuth.currentUser);
     if (
       !isLoading &&
       !firebaseAuth.currentUser &&
@@ -141,7 +144,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Return the provider component with the auth context value
   return (
-    <AuthContext.Provider value={{ user, isLoading, signOut, firebaseAuth }}>
+    <AuthContext.Provider
+      value={{
+        db,
+        user,
+        isLoading,
+        isFirebaseReady: !isLoading,
+        signOut,
+        firebaseAuth,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

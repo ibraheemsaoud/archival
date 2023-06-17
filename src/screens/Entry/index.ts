@@ -1,2 +1,2 @@
 export * from "./Entry";
-export * from "./useEntry.Loader.helper";
+export * from "./entry.Loader.helper";

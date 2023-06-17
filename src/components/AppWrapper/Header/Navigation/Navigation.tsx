@@ -9,8 +9,8 @@ import { IEntry } from "../../../../interfaces/entry.interface";
 export const Navigation = () => {
   const params = useParams();
 
-  const isTopicPrimary = !params.eraSlug && !params.earSlug;
-  const isEraPrimary = params.eraSlug && !params.entryId;
+  const isTopicPrimary = !params.eraId && !params.earSlug;
+  const isEraPrimary = params.eraId && !params.entryId;
   const isEntryPrimary = params.entryId;
 
   const { topic, era, entry } = useLoaderData() as any as {
@@ -22,38 +22,38 @@ export const Navigation = () => {
   return (
     <div role="presentation">
       <Breadcrumbs aria-label="breadcrumb">
-        {params.topicSlug && (
+        {params.topicId && (
           <Link
             underline="hover"
             color={isTopicPrimary ? "text.primary" : "inherit"}
             component={NavLink}
-            to={replaceRouteParams(TOPIC, { topicSlug: params.topicSlug })}
+            to={replaceRouteParams(TOPIC, { topicId: params.topicId })}
           >
             {topic?.title}
           </Link>
         )}
-        {params.topicSlug && params.eraSlug && (
+        {params.topicId && params.eraId && (
           <Link
             underline="hover"
             color={isEraPrimary ? "text.primary" : "inherit"}
             component={NavLink}
             to={replaceRouteParams(ERA, {
-              topicSlug: params.topicSlug,
-              eraSlug: params.eraSlug,
+              topicId: params.topicId,
+              eraId: params.eraId,
             })}
           >
             {era.title}
           </Link>
         )}
-        {params.topicSlug && params.eraSlug && params.entryId && (
+        {params.topicId && params.eraId && params.entryId && (
           <Link
             underline="hover"
             // aria-current="page"
             color={isEntryPrimary ? "text.primary" : "inherit"}
             component={NavLink}
             to={replaceRouteParams(ENTRY, {
-              topicSlug: params.topicSlug,
-              eraSlug: params.eraSlug,
+              topicId: params.topicId,
+              eraId: params.eraId,
               entryId: params.entryId,
             })}
           >

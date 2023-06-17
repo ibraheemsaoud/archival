@@ -11,10 +11,10 @@ import { TOPIC } from "../../consts/links.const";
 import { replaceRouteParams } from "../../helpers";
 
 export const TopicCard = ({ topic }: { topic: ITopic }) => {
-  const { title, slug, description } = topic;
+  const { title, id, description } = topic;
   return (
     <Card sx={{ maxWidth: 200 }}>
-      <Link to={replaceRouteParams(TOPIC, { topicSlug: slug })}>
+      <Link to={replaceRouteParams(TOPIC, { topicId: id })}>
         <CardActionArea>
           <CardMedia
             component="img"

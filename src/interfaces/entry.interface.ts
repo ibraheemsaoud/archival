@@ -18,10 +18,6 @@ export interface IEntry {
   id: string;
   title: string;
   timestamp: Date;
-  eraId: string;
-  type: "Analysis" | "Coverage" | "Anticipation";
-  interaction: IEntryInteraction;
-  isEdited?: boolean;
-  link: string;
-  text: string;
+  link?: string;
+  text?: string;
 }

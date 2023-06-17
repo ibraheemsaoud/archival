@@ -1,7 +1,6 @@
 import { DatePicker } from "@mui/x-date-pickers";
 import { Box, Button, Dialog, DialogTitle, TextField } from "@mui/material";
 import { useState } from "react";
-import { useRequestCreateEntry } from "../../../requests";
 
 interface SimpleDialogProps {
   open: boolean;
@@ -19,7 +18,7 @@ export const SuggestNewEntryDialog = ({
   const [text, setText] = useState("");
   const [date, setDate] = useState<Date | null>(new Date());
 
-  const { mutate } = useRequestCreateEntry();
+  // const { mutate } = useRequestCreateEntry();
 
   const handleClose = () => {
     onClose();
@@ -40,13 +39,13 @@ export const SuggestNewEntryDialog = ({
 
   const createEntry = () => {
     if (!title || !date) return;
-    mutate({
-      title,
-      text,
-      link,
-      timestamp: date,
-      eraId,
-    });
+    // mutate({
+    //   title,
+    //   text,
+    //   link,
+    //   timestamp: date,
+    //   eraId,
+    // });
     setTitle("");
     setLink("");
     setText("");

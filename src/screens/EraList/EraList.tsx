@@ -8,8 +8,10 @@ import { CreateNewEra } from "./CreateNewEra";
 export const EraList = () => {
   const { eras, topic } = useLoaderData() as any as {
     eras: IEra[];
-    topic: ITopic;
+    topic?: ITopic;
   };
+
+  if (!topic) return null;
 
   return (
     <AppWrapper>
@@ -25,7 +27,7 @@ export const EraList = () => {
           <Grid container spacing={2}>
             {eras?.map((era) => (
               <Grid item xs={12} lg={6} key={era.id}>
-                <EraCard era={era} topicSlug={topic.slug} />
+                <EraCard era={era} topicId={topic.id} />
               </Grid>
             ))}
             <CreateNewEra topicId={topic.id} />

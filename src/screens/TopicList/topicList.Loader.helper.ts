@@ -1,7 +1,8 @@
-import { requestTopics } from "../../requests";
+import { requestTopics } from "../../requests/requestTopics";
+import { Firestore } from "firebase/firestore";
 
-export const topicListLoader = async () => {
-  const { data: topics } = requestTopics();
+export const topicListLoader = (db: Firestore | null) => async () => {
+  const { data: topics } = await requestTopics(db);
 
   return {
     topics,

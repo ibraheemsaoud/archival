@@ -1,18 +1,16 @@
-import { requestTopics } from "../../requests/requestTopics";
-import { AppWrapper, EraCard, TopicCard } from "../../components";
+import { AppWrapper, TopicCard } from "../../components";
 import { Grid, Link, Typography } from "@mui/material";
 import { SUPPORT_EMAIL } from "../../consts/outsideLinks";
-import { uesRequestDashboardEras } from "../../requests";
+import { useLoaderData } from "react-router-dom";
+import { ITopic } from "../../interfaces/topic.interface";
 
 export const TopicList = () => {
-  const { data: topics, isLoading } = requestTopics();
-  const { data: eras } = uesRequestDashboardEras();
-
-  const getTopicSlugFromId = (topicId: string) => {
-    const topic = topics?.find((topic) => topic.id === topicId);
-    return topic?.slug;
+  const { topics } = useLoaderData() as any as {
+    topics?: ITopic[];
   };
-  if (isLoading) return <div>Loading...</div>;
+  // const { data: eras } = uesRequestDashboardEras();
+
+  if (!topics) return <div>Loading...</div>;
 
   return (
     <AppWrapper>
@@ -38,16 +36,13 @@ export const TopicList = () => {
       <Typography variant="h5" gutterBottom marginTop={6}>
         Current Eras
       </Typography>
-      <Grid container spacing={2}>
+      {/* <Grid container spacing={2}>
         {eras?.map((era) => (
           <Grid item xs={12} lg={6} key={`ERA_CARD_${era.id}`}>
-            <EraCard
-              era={era}
-              topicSlug={getTopicSlugFromId(era.topicId) || "-1"}
-            />
+            <EraCard era={era} topicId={"-1"} />
           </Grid>
         ))}
-      </Grid>
+      </Grid> */}
     </AppWrapper>
   );
 };

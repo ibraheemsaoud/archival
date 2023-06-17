@@ -26,23 +26,19 @@ export interface IMedia {
 }
 
 export interface ICoverPost {
-  id?: string;
-  eraId: string;
+  id: string;
   type: EntryType.CoverPost;
   title: string;
   description?: string;
-  timestamp?: Date;
   entryId: string;
   entry?: IEntry;
 }
 
 export interface ICollection {
-  id?: string;
-  eraId: string;
+  id: string;
   type: EntryType.Collection;
   title: string;
-  timestamp?: Date;
-  listOfEntryIds: string[];
+  entryIds: string[];
   entries?: IEntry[];
 }
 

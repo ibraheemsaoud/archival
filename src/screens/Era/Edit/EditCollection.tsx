@@ -15,7 +15,7 @@ export const EditCollection = ({
 }: IEditCollection) => {
   const [title, setTitle] = useState(entry.title || "");
   const [listOfEntryIds, setListOfEntryIds] = useState(
-    entry.listOfEntryIds.join(",") || ""
+    entry.entryIds.join(",") || ""
   );
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +29,7 @@ export const EditCollection = ({
     onChange({
       ...entry,
       title,
-      listOfEntryIds: listOfEntryIds
+      entryIds: listOfEntryIds
         .split(",")
         .map((id) => id.trim())
         .filter((id) => id !== ""),
