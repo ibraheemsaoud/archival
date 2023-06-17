@@ -1,3 +1,11 @@
+export interface IEraCreate {
+  title: string;
+  id: string;
+  ownerId: string;
+  description: string;
+  coverImageUrl?: string;
+}
+
 export interface IEra {
   id: string;
   title: string;
@@ -7,6 +15,6 @@ export interface IEra {
   startDate: Date;
   endDate?: Date;
   isPublic: boolean;
-  coverImageUrl?: string;
+  coverImageUrl: string;
   allowSuggestions: boolean;
 }

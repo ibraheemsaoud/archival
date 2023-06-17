@@ -4,8 +4,9 @@ import {
   doc,
   getDoc,
   getDocs,
+  setDoc,
 } from "firebase/firestore";
-import { IEra } from "../interfaces/era.interface";
+import { IEra, IEraCreate } from "../interfaces/era.interface";
 
 export const requestEra = async (
   db: Firestore | null,
@@ -75,21 +76,21 @@ export const requestEras = async (db: Firestore | null, topicId?: string) => {
   };
 };
 
-export const useRequestCreateEra = () => {
-  return {
-    data: undefined,
-    isLoading: false,
-    error: undefined,
-    mutate: (data: Partial<IEra>) => {
-      // list.push({
-      //   ...data,
-      //   slug: data.title?.replace(/\s/g, "-"),
-      //   id: Math.random().toString(),
-      //   creationDate: new Date(),
-      //   starDate: new Date(),
-      //   endDate: new Date(),
-      //   isPublic: true,
-      // } as IEra);
-    },
-  };
+export const requestCreateEra = async (
+  db: Firestore | null,
+  topicId: string,
+  era: IEraCreate
+) => {
+  if (!db || !topicId || !era) return false;
+  await setDoc(doc(db, "Topics", topicId, "Era", era.id), {
+    title: era.title,
+    ownerId: era.ownerId,
+    description: era.description,
+    creationDate: new Date(),
+    isPublic: false,
+    allowSuggestions: false,
+    startDate: new Date(),
+    coverImageUrl: era.coverImageUrl,
+  } as IEra);
+  return true;
 };

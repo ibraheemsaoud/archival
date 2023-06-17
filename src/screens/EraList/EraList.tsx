@@ -3,7 +3,7 @@ import { IEra } from "../../interfaces/era.interface";
 import { Grid, Typography } from "@mui/material";
 import { EraCard, AppWrapper } from "../../components";
 import { ITopic } from "../../interfaces/topic.interface";
-import { CreateNewEra } from "./CreateNewEra";
+import { EraCreator } from "./EraCreator";
 
 export const EraList = () => {
   const { eras, topic } = useLoaderData() as any as {
@@ -30,7 +30,7 @@ export const EraList = () => {
                 <EraCard era={era} topicId={topic.id} />
               </Grid>
             ))}
-            <CreateNewEra topicId={topic.id} />
+            <EraCreator topicId={topic.id} />
           </Grid>
         </Grid>
         <Grid item md={3}>

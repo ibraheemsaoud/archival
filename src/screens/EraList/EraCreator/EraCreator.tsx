@@ -1,32 +1,44 @@
 import { Box, Button, TextField } from "@mui/material";
 import { useFirebase } from "../../../hooks";
 import { useState } from "react";
-import { useRequestCreateEra } from "../../../requests";
+import { requestCreateEra } from "../../../requests";
 
-export const CreateNewEra = ({ topicId }: { topicId: string }) => {
-  const { user } = useFirebase();
+export const EraCreator = ({ topicId }: { topicId: string }) => {
+  const { db, user } = useFirebase();
   const [title, setTitle] = useState("");
+  const [id, setId] = useState("");
+  const [coverImageUrl, setCoverImageUrl] = useState("");
   const [description, setDescription] = useState("");
-  const { mutate: createEra } = useRequestCreateEra();
 
-  const onClick = () => {
-    createEra({ title, description, ownerId: user?.uid });
-    setTitle("");
-    setDescription("");
+  const onClick = async () => {
+    await requestCreateEra(db, topicId, {
+      title,
+      description,
+      coverImageUrl,
+      id,
+      ownerId: user!.uid,
+    });
+    window.location.reload();
   };
 
   const onChangeName = (event: any) => {
     setTitle(event.target.value);
+    setId(event.target.value.toLowerCase().replace(/ /g, "-"));
+  };
+
+  const onChangeId = (event: any) => {
+    setId(event.target.value);
+  };
+
+  const onChangeCoverImageUrl = (event: any) => {
+    setCoverImageUrl(event.target.value);
   };
 
   const onChangeDescription = (event: any) => {
     setDescription(event.target.value);
   };
 
-  // TODO add roles
-  // if (user.userType !== "admin") {
-  //   return null;
-  // }
+  // TODO - add validation
 
   return (
     <Box
@@ -47,6 +59,20 @@ export const CreateNewEra = ({ topicId }: { topicId: string }) => {
         variant="standard"
         value={title}
         onChange={onChangeName}
+      />
+      <TextField
+        id="standard-basic"
+        label="Id"
+        variant="standard"
+        value={id}
+        onChange={onChangeId}
+      />
+      <TextField
+        id="standard-basic"
+        label="Image URL"
+        variant="standard"
+        value={coverImageUrl}
+        onChange={onChangeCoverImageUrl}
       />
       <TextField
         id="standard-multiline-static"
