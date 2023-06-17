@@ -7,7 +7,6 @@ import { EntryType } from "../../interfaces/timelineEntry.interface";
 export const eraLoader =
   (db: Firestore | null) =>
   async ({ params }: { params: Params<string> }) => {
-    
     const [topic, era, timeline, entries] = await Promise.all([
       requestTopic(db, params.topicId),
       requestEra(db, params.topicId, params.eraId),
@@ -16,16 +15,19 @@ export const eraLoader =
     ]);
     timeline.data.map((entry) => {
       if (entry.type === EntryType.Collection) {
-        entry.entries = entries.data.filter((e) => entry.entryIds.includes(e.id));
+        entry.entries = entries.data.filter((e) =>
+          entry.entryIds.includes(e.id)
+        );
       }
       if (entry.type === EntryType.CoverPost) {
         entry.entry = entries.data.find((e) => entry.entryId === e.id);
       }
       return entry;
     });
+    const sortedTimeline = timeline.data.sort((a, b) => a.order - b.order);
     return {
       topic: topic.data,
       era: era.data,
-      timeline: timeline.data,
+      timeline: sortedTimeline,
     };
   };

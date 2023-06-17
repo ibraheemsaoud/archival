@@ -13,15 +13,15 @@ export const QuickLinks = ({ quickLinks }: { quickLinks: IQuickLinks }) => {
       flexDirection={{ xs: "column", sm: "row" }}
       sx={{ marginBottom: 6 }}
     >
-      {quickLinks.links.map((link) => {
+      {quickLinks.links.map((link, index) => {
         return (
           <Link
-            key={link.order}
+            key={`${link.title}-${index}`}
             component={NavLink}
             to={link.link}
             sx={{
               marginBottom: { xs: 1, sm: 0 },
-              marginLeft: { xs: 0, sm: link.order !== 1 ? 2 : 0 },
+              marginLeft: { xs: 0, sm: index !== 0 ? 2 : 0 },
               width: { xs: "100%", sm: "auto" },
             }}
             target="_blank"

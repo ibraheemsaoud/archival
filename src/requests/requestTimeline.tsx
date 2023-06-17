@@ -30,6 +30,7 @@ export const requestTimeline = async (
         description: data.description,
         title: data.title,
         entryId: data.entry,
+        order: data.order,
       });
     } else if (data.type === EntryType.Collection) {
       timeline.push({
@@ -37,6 +38,25 @@ export const requestTimeline = async (
         type: EntryType.Collection,
         title: data.title,
         entryIds: data.entries,
+        order: data.order,
+      });
+    } else if (data.type === EntryType.QuickLinks) {
+      timeline.push({
+        id: doc.id,
+        type: EntryType.QuickLinks,
+        links: data.links,
+        order: data.order,
+      });
+    } else if (data.type === EntryType.Media) {
+      timeline.push({
+        id: doc.id,
+        type: EntryType.Media,
+        title: data.title,
+        description: data.description,
+        timestamp: new Date(data.timestamp.seconds * 1000),
+        entryType: data.entryType,
+        link: data.link,
+        order: data.order,
       });
     }
   });

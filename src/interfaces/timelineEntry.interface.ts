@@ -8,21 +8,21 @@ export enum EntryType {
 }
 
 export interface IQuickLinks {
-  id?: string;
-  eraId: string;
+  id: string;
   type: EntryType.QuickLinks;
   links: ILink[];
+  order: number;
 }
 
 export interface IMedia {
-  id?: string;
-  eraId: string;
+  id: string;
   type: EntryType.Media;
   title: string;
   description?: string;
-  timestamp?: Date;
+  timestamp: Date;
   entryType: "image" | "video";
   link: string;
+  order: number;
 }
 
 export interface ICoverPost {
@@ -32,6 +32,7 @@ export interface ICoverPost {
   description?: string;
   entryId: string;
   entry?: IEntry;
+  order: number;
 }
 
 export interface ICollection {
@@ -40,6 +41,7 @@ export interface ICollection {
   title: string;
   entryIds: string[];
   entries?: IEntry[];
+  order: number;
 }
 
 export type ITimelineEntry = IQuickLinks | IMedia | ICoverPost | ICollection;
@@ -47,5 +49,4 @@ export type ITimelineEntry = IQuickLinks | IMedia | ICoverPost | ICollection;
 interface ILink {
   title: string;
   link: string;
-  order?: number;
 }
