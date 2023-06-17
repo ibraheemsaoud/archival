@@ -4,13 +4,11 @@ import { AppWrapper, Timeline } from "../../components";
 import { Box } from "@mui/material";
 import { EditEra, SuggestNewEntry } from "./Edit";
 import { useRoles } from "../../hooks";
-import { ITopic } from "../../interfaces/topic.interface";
 import { ITimelineEntry } from "../../interfaces/timelineEntry.interface";
 
 export const Era = () => {
-  const { topic, era, timeline } = useLoaderData() as any as {
+  const { era, timeline } = useLoaderData() as any as {
     era: IEra;
-    topic: ITopic;
     timeline: ITimelineEntry[];
   };
   const { hasEditAccess } = useRoles(era?.id);

@@ -26,6 +26,7 @@ export const eraLoader =
       if (entry.type === EntryType.CoverPost) {
         entry.entry = entries.find((e) => entry.entryId === e.id);
       }
+      return entry;
     });
     return {
       topic,

@@ -1,6 +1,6 @@
 import { Params } from "react-router-dom";
 import {
-  requestComments,
+  // requestComments,
   requestTopic,
   // useRequestEntry,
   requestEra,
