@@ -12,6 +12,7 @@ export const EditEra = ({ era }: { era: IEra }) => {
   };
   const [open, setOpen] = useState(false);
 
+  if (!entries) return <div>Not found</div>;
   const handleClickOpen = () => {
     setOpen(true);
   };
