@@ -24,10 +24,13 @@ export const eraLoader =
       }
       return entry;
     });
-    const sortedTimeline = timeline.data.sort((a, b) => a.order - b.order);
+    const sortedTimeline = timeline.data.sort(
+      (a, b) => (a.order || 0) - (b.order || 0)
+    );
     return {
       topic: topic.data,
       era: era.data,
       timeline: sortedTimeline,
+      entries: entries.data,
     };
   };

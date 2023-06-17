@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { Button, Dialog, DialogTitle, Grid, Typography } from "@mui/material";
-import { IEra } from "../../../interfaces/era.interface";
 import { useLoaderData } from "react-router-dom";
 import { IEntry } from "../../../interfaces/entry.interface";
 import { EntryCard } from "../../../components/Timeline/components/EntryCard";
 import { TimelineEditor } from "./TimelineEditor";
+import { ITimelineEntry } from "../../../interfaces/timelineEntry.interface";
 
-export const EditEra = ({ era }: { era: IEra }) => {
-  const { entries } = useLoaderData() as any as {
+export const EditEra = () => {
+  const { timeline, entries } = useLoaderData() as any as {
     entries: IEntry[];
+    timeline: ITimelineEntry[];
   };
   const [open, setOpen] = useState(false);
 
-  if (!entries) return <div>Not found</div>;
+  if (!timeline || !entries) return <div>Not found</div>;
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -38,7 +39,7 @@ export const EditEra = ({ era }: { era: IEra }) => {
         <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
             <Typography variant="h5">Timeline</Typography>
-            <TimelineEditor era={era} onClose={handleClose} />
+            <TimelineEditor timeline={timeline} onClose={handleClose} />
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="h5">Entries</Typography>
