@@ -78,6 +78,7 @@ export const EditEra = () => {
         sx={{
           float: "right",
         }}
+        color="brown"
       >
         Era Settings
       </Button>
