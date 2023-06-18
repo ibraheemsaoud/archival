@@ -1,11 +1,4 @@
-import {
-  Firestore,
-  addDoc,
-  collection,
-  doc,
-  getDocs,
-  setDoc,
-} from "firebase/firestore";
+import { Firestore, addDoc, collection, getDocs } from "firebase/firestore";
 import { IEntry, IEntryCreate } from "../interfaces/entry.interface";
 
 export const requestEntries = async (
