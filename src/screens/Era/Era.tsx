@@ -19,7 +19,7 @@ export const Era = () => {
     <AppWrapper>
       <Box textAlign="center" marginTop={6}>
         <Timeline timeline={timeline} />
-        {era.allowSuggestions && <SuggestNewEntry eraId={era.id} />}
+        {era.allowSuggestions && <SuggestNewEntry />}
         {hasEditAccess && <EditEra />}
       </Box>
     </AppWrapper>

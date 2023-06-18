@@ -6,6 +6,7 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  Typography,
 } from "@mui/material";
 import { EntryType } from "../../../interfaces/timelineEntry.interface";
 import { EditMedia } from "./EditMedia";
@@ -83,6 +84,34 @@ export const TimelineEditor = ({
   };
   return (
     <Box>
+      <Box display="flex" justifyContent="flex-end">
+        <Button onClick={onClose}>Close</Button>
+        <Button onClick={onClose} variant="contained">
+          Save
+        </Button>
+      </Box>
+      <Box
+        sx={(theme) => ({
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          margin: theme.spacing(1),
+          padding: theme.spacing(2),
+          border: `1px solid ${theme.palette.divider}`,
+          borderRadius: "4px",
+        })}
+      >
+        <Typography variant="h5">Create New Entry</Typography>
+        <Select onChange={handleChangeType} value={type}>
+          <MenuItem value={EntryType.Collection}>Collection</MenuItem>
+          <MenuItem value={EntryType.CoverPost}>Cover Post</MenuItem>
+          <MenuItem value={EntryType.Media}>Media</MenuItem>
+          <MenuItem value={EntryType.QuickLinks}>Quick Links</MenuItem>
+        </Select>
+        <Button onClick={onClick} variant="contained">
+          Create
+        </Button>
+      </Box>
       {entries.map((entry, index) => {
         if (entry.type === EntryType.Media) {
           return (
@@ -126,15 +155,6 @@ export const TimelineEditor = ({
         }
         return null;
       })}
-      <Select label="Create New Entry" onChange={handleChangeType} value={type}>
-        <MenuItem value={EntryType.Collection}>Collection</MenuItem>
-        <MenuItem value={EntryType.CoverPost}>Cover Post</MenuItem>
-        <MenuItem value={EntryType.Media}>Media</MenuItem>
-        <MenuItem value={EntryType.QuickLinks}>Quick Links</MenuItem>
-      </Select>
-      <Button onClick={onClick}>Create</Button>
-      <Button onClick={onClose}>Close</Button>
-      <Button onClick={onClose}>Save</Button>
     </Box>
   );
 };

@@ -9,7 +9,6 @@ export type IEntryInteraction = {
 export type IEntryCreate = {
   title: string;
   timestamp: Date;
-  eraId: string;
   link: string;
   text: string;
 };

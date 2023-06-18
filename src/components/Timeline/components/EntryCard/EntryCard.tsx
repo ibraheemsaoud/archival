@@ -42,6 +42,9 @@ export const EntryCard = ({ entry }: { entry: IEntry }) => {
             />
           )}
           <CardContent>
+            <Typography textAlign="end" variant="body2" color="text.secondary">
+              {entry.timestamp?.toLocaleDateString()}
+            </Typography>
             <Typography variant="h5">{entry.title}</Typography>
             {data?.description && (
               <Typography
@@ -56,6 +59,9 @@ export const EntryCard = ({ entry }: { entry: IEntry }) => {
                 {data.description}
               </Typography>
             )}
+            <Typography variant="body2" color="text.secondary">
+              {entry.text}
+            </Typography>
           </CardContent>
         </CardActionArea>
       </Card>

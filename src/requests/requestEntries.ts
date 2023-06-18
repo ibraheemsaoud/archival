@@ -1,5 +1,12 @@
-import { Firestore, collection, getDocs } from "firebase/firestore";
-import { IEntry } from "../interfaces/entry.interface";
+import {
+  Firestore,
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
+import { IEntry, IEntryCreate } from "../interfaces/entry.interface";
 
 export const requestEntries = async (
   db: Firestore | null,
@@ -33,4 +40,21 @@ export const requestEntries = async (
     data: entries,
     error: null,
   };
+};
+
+export const requestCreateEntry = async (
+  db: Firestore | null,
+  topicId: string,
+  eraId: string,
+  entry: IEntryCreate
+) => {
+  if (!db || !topicId || !eraId || !entry) return false;
+
+  await addDoc(collection(db, "Topics", topicId, "Era", eraId, "Entry"), {
+    link: entry.link,
+    text: entry.text,
+    timestamp: entry.timestamp,
+    title: entry.title,
+  } as IEntryCreate);
+  return true;
 };

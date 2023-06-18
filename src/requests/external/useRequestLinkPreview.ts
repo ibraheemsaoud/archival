@@ -11,11 +11,12 @@ interface ILinkPreview {
 }
 
 export const useRequestLinkPreview = (link?: string) => {
+  const isLink = link?.startsWith("http://") || link?.startsWith("https://");
   return useQuery<ILinkPreview>(
     ["linkPreview", link],
     () => fetch(`${LinkPreviewLink}${link}`).then((res) => res.json()),
     {
-      enabled: !!link,
+      enabled: !!link && isLink,
       refetchOnReconnect: false,
       refetchOnMount: false,
       refetchOnWindowFocus: false,

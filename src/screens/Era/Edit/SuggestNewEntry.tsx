@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import { SuggestNewEntryDialog } from "./SuggestNewEntryDialog";
 
-export const SuggestNewEntry = ({ eraId }: { eraId: string }) => {
+export const SuggestNewEntry = () => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -21,7 +21,7 @@ export const SuggestNewEntry = ({ eraId }: { eraId: string }) => {
       >
         Suggest New Entry
       </Button>
-      <SuggestNewEntryDialog open={open} onClose={handleClose} eraId={eraId} />
+      <SuggestNewEntryDialog open={open} onClose={handleClose} />
     </>
   );
 };
