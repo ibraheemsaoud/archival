@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ICollection } from "../../../interfaces/timelineEntry.interface";
+import { ICollection } from "../../../../interfaces/timelineEntry.interface";
 import { Box, Button, TextField } from "@mui/material";
 
 interface IEditCollection {

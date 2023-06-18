@@ -1,10 +1,11 @@
 import { Box, Button, TextField } from "@mui/material";
-import { useFirebase } from "../../../hooks";
+import { useFirebase, useRoles } from "../../../hooks";
 import { useState } from "react";
 import { requestCreateEra } from "../../../requests";
 
 export const EraCreator = ({ topicId }: { topicId: string }) => {
   const { db, user } = useFirebase();
+  const { isAdmin } = useRoles();
   const [title, setTitle] = useState("");
   const [id, setId] = useState("");
   const [coverImageUrl, setCoverImageUrl] = useState("");
@@ -38,7 +39,9 @@ export const EraCreator = ({ topicId }: { topicId: string }) => {
     setDescription(event.target.value);
   };
 
-  // TODO - add validation
+  if (!isAdmin) {
+    return null;
+  }
 
   return (
     <Box

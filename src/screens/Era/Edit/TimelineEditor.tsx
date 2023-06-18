@@ -11,10 +11,10 @@ import {
   EntryType,
   ITimelineEntry,
 } from "../../../interfaces/timelineEntry.interface";
-import { EditMedia } from "./EditMedia";
-import { EditCoverPost } from "./EditCoverPost";
-import { EditCollection } from "./EditCollection";
-import { EditQuickLinks } from "./EditQuickLinks";
+import { EditMedia } from "./TimelineEntry/EditMedia";
+import { EditCoverPost } from "./TimelineEntry/EditCoverPost";
+import { EditCollection } from "./TimelineEntry/EditCollection";
+import { EditQuickLinks } from "./TimelineEntry/EditQuickLinks";
 import { useTimelineEditor } from "./useTimelineEditor";
 
 export const TimelineEditor = ({

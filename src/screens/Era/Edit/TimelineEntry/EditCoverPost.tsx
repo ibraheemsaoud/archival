@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ICoverPost } from "../../../interfaces/timelineEntry.interface";
+import { ICoverPost } from "../../../../interfaces/timelineEntry.interface";
 import { Box, Button, TextField } from "@mui/material";
 
 interface IEditCoverPost {

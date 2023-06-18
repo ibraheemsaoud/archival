@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IQuickLinks } from "../../../interfaces/timelineEntry.interface";
+import { IQuickLinks } from "../../../../interfaces/timelineEntry.interface";
 import { Box, Button, TextField } from "@mui/material";
 
 interface IEditQuickLinks {

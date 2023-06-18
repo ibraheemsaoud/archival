@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IMedia } from "../../../interfaces/timelineEntry.interface";
+import { IMedia } from "../../../../interfaces/timelineEntry.interface";
 import { Box, Button, TextField } from "@mui/material";
 
 interface IEditMedia {

@@ -2,20 +2,22 @@ import { useState } from "react";
 import {
   Box,
   Button,
-  Dialog,
-  DialogTitle,
+  Checkbox,
+  FormControlLabel,
   Grid,
-  Typography,
+  TextField,
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import { IEntry } from "../../../interfaces/entry.interface";
-import { EntryCard } from "../../../components/Timeline/components/EntryCard";
-import { TimelineEditor } from "./TimelineEditor";
 import { ITimelineEntry } from "../../../interfaces/timelineEntry.interface";
 import { ITopic } from "../../../interfaces/topic.interface";
 import { IEra } from "../../../interfaces/era.interface";
+import { DatePicker } from "@mui/x-date-pickers";
+import { requestCreateEra } from "../../../requests";
+import { useFirebase } from "../../../hooks";
 
 export const EditEra = () => {
+  const { db } = useFirebase();
   const { timeline, entries, topic, era } = useLoaderData() as any as {
     entries: IEntry[];
     timeline: ITimelineEntry[];
@@ -23,6 +25,7 @@ export const EditEra = () => {
     era: IEra;
   };
   const [open, setOpen] = useState(false);
+  const [editableEra, setEditableEra] = useState(era);
 
   if (!timeline || !entries) return <div>Not found</div>;
   const handleClickOpen = () => {
@@ -32,44 +35,134 @@ export const EditEra = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  return (
-    <>
+
+  const handleSave = async () => {
+    await requestCreateEra(db, topic.id, editableEra);
+    window.location.reload();
+    handleClose();
+  };
+
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditableEra({ ...editableEra, title: e.target.value });
+  };
+
+  const onChangeDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditableEra({ ...editableEra, description: e.target.value });
+  };
+
+  const onChangeCoverImageUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditableEra({ ...editableEra, coverImageUrl: e.target.value });
+  };
+
+  const onChangeStartDate = (date: Date | null) => {
+    setEditableEra({ ...editableEra, startDate: date || new Date() });
+  };
+
+  const onChangeEndDate = (date: Date | null) => {
+    setEditableEra({ ...editableEra, endDate: date || undefined });
+  };
+
+  const onChangeIsPublic = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditableEra({ ...editableEra, isPublic: !!e.target.value });
+  };
+
+  const onChangeAllowSuggestions = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditableEra({ ...editableEra, allowSuggestions: !!e.target.value });
+  };
+
+  if (!open)
+    return (
       <Button
-        sx={{ position: "fixed", bottom: 42, right: 2 }}
         variant="contained"
         onClick={handleClickOpen}
+        sx={{
+          float: "right",
+        }}
       >
-        Edit Era
+        Era Settings
       </Button>
+    );
 
-      <Dialog onClose={handleClose} open={open} fullScreen>
-        <Box display="flex" justifyContent="space-between">
-          <DialogTitle variant="h5">
-            Era Editor
-            <br /> Sorry for this mess, I'm working to fix it
-          </DialogTitle>
-          <Button onClick={handleClose} sx={{ marginRight: 2 }}>
-            Close
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={12} md={4} />
+      <Grid item xs={12} md={4}>
+        <TextField
+          id="title"
+          label="Title"
+          variant="standard"
+          fullWidth
+          value={editableEra.title}
+          onChange={onChangeTitle}
+          sx={{ marginBottom: 2 }}
+        />
+        <TextField
+          id="coverImageUrl"
+          label="Cover Image URL"
+          variant="standard"
+          fullWidth
+          value={editableEra.coverImageUrl}
+          onChange={onChangeCoverImageUrl}
+          sx={{ marginBottom: 2 }}
+        />
+        <TextField
+          id="description"
+          label="Description"
+          variant="standard"
+          fullWidth
+          value={editableEra.description}
+          onChange={onChangeDescription}
+          sx={{ marginBottom: 2 }}
+          multiline
+          minRows={2}
+          maxRows={8}
+        />
+        <DatePicker
+          label="Start Date"
+          value={editableEra.startDate}
+          onChange={onChangeStartDate}
+          sx={{ marginBottom: 2 }}
+        />
+        <DatePicker
+          label="End Date"
+          value={editableEra.endDate}
+          onChange={onChangeEndDate}
+          sx={{ marginBottom: 2 }}
+        />
+        <Box sx={{ marginBottom: 2 }}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                id="isPublic"
+                value={editableEra.isPublic}
+                onChange={onChangeIsPublic}
+              />
+            }
+            label="public"
+          />
+        </Box>
+        <Box sx={{ marginBottom: 2 }}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                id="allowSuggestions"
+                value={editableEra.allowSuggestions}
+                onChange={onChangeAllowSuggestions}
+              />
+            }
+            label="allow suggestions"
+          />
+        </Box>
+        <Box textAlign="end">
+          <Button onClick={handleClose} sx={{ marginRight: 1 }}>
+            Cancel
+          </Button>
+          <Button variant="contained" onClick={handleSave}>
+            Save
           </Button>
         </Box>
-        <Grid container spacing={2} paddingX={2}>
-          <Grid item xs={12} md={10}>
-            <Typography variant="h5">Timeline</Typography>
-            <TimelineEditor eraId={era.id} topicId={topic.id} />
-          </Grid>
-          <Grid item xs={12} md={2}>
-            <Typography variant="h5">Entries</Typography>
-            <Grid container>
-              {entries.map((entry) => (
-                <Grid item xs={12} key={entry.id}>
-                  <Typography variant="h5">id: {entry.id}</Typography>
-                  <EntryCard entry={entry} />
-                </Grid>
-              ))}
-            </Grid>
-          </Grid>
-        </Grid>
-      </Dialog>
-    </>
+      </Grid>
+      <Grid item xs={12} md={4} />
+    </Grid>
   );
 };
