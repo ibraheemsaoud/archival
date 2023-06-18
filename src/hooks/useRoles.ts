@@ -29,6 +29,7 @@ export const useRoles = (eraId?: string) => {
   const eraRole = roles?.find((role) => role.eraId === eraId);
   return {
     error,
+    extendedUser,
     hasEditAccess:
       !!extendedUser?.admin ||
       eraRole?.role === "owner" ||

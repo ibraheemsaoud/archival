@@ -73,9 +73,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     getRedirectResult(firebaseAuth)
       .then((result) => {
         if (!result) return;
-        // This gives you a Google Access Token. You can use it to access Google APIs.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential?.accessToken;
 
         // The signed-in user info.
         const user = result.user;
@@ -86,8 +83,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           photoURL: user.photoURL!,
         });
         // IdP data available using getAdditionalUserInfo(result)
-        console.log(token, user);
-        // ...
       })
       .catch((error: any) => {
         // Handle Errors here.
@@ -120,19 +115,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
       // The client SDK will parse the code from the link for you.
       signInWithEmailLink(firebaseAuth, email || "", window.location.href)
-        .then((result) => {
+        .then(() => {
           removeEmail();
-          console.log(result.user);
-          console.log(result);
+          window.history.replaceState({}, document.title, window.location.href.split("?")[0]);
         })
         .catch((error) => {
           if (error.code === "auth/invalid-email") {
             removeEmail();
             window.location.reload();
+          } else if (error.code === "auth/expired-action-code") {
           }
           console.error(error.code);
-          console.error(email);
-          console.error(error, email, firebaseAuth.currentUser);
         });
     }
   }, [isLoading, firebaseAuth, getEmail, removeEmail]);

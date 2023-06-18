@@ -3,9 +3,6 @@ import { useFirebase } from "../../../../hooks";
 import {
   Avatar,
   Box,
-  Button,
-  Dialog,
-  DialogTitle,
   IconButton,
   Menu,
   MenuItem,
@@ -14,14 +11,10 @@ import {
 } from "@mui/material";
 import { Signin } from "./Signin";
 
-const settings = ["Logout"];
-
 export const ToolbarAction = () => {
   const { user, isLoading, signOut } = useFirebase();
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const [open, setOpen] = useState(false);
-
   const isLoggedIn = !!user;
 
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
@@ -34,26 +27,10 @@ export const ToolbarAction = () => {
     signOut();
     handleCloseUserMenu();
   };
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   if (isLoading) return <>Loading...</>;
   if (!isLoggedIn) {
-    return (
-      <>
-        <Dialog onClose={handleClose} open={open}>
-          <DialogTitle variant="h5">Sign in</DialogTitle>
-          <Signin />
-        </Dialog>
-        <Button onClick={handleClickOpen} variant="contained">
-          Login
-        </Button>
-      </>
-    );
+    return <Signin />;
   }
   return (
     <Box sx={{ flexGrow: 0 }}>
@@ -78,11 +55,9 @@ export const ToolbarAction = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleLogout}>
-            <Typography textAlign="center">{setting}</Typography>
-          </MenuItem>
-        ))}
+        <MenuItem onClick={handleLogout}>
+          <Typography textAlign="center">Logout</Typography>
+        </MenuItem>
       </Menu>
     </Box>
   );

@@ -8,6 +8,7 @@ import {
 import jsonPackage from "../../../../../package.json";
 
 export const useSignin = () => {
+  const [emailSent, setEmailSent] = useState(false);
   const [email, setEmail] = useState("");
   const { firebaseAuth } = useFirebase();
   const { setEmail: setLSEmail } = useLocalStorage();
@@ -32,12 +33,18 @@ export const useSignin = () => {
   const handleSignInWithEmail = async () => {
     try {
       setLSEmail(email);
-      const responose = await signInWithEmail(email);
-      console.log(responose);
+      await signInWithEmail(email);
+      setEmailSent(true);
     } catch (error) {
       console.error(error);
     }
   };
 
-  return { email, handleEmailChange, handleSignInWithEmail, signInWithGoogle };
+  return {
+    email,
+    handleEmailChange,
+    handleSignInWithEmail,
+    signInWithGoogle,
+    emailSent,
+  };
 };
