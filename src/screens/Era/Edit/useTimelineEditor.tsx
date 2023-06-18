@@ -15,6 +15,7 @@ import {
 export const useTimelineEditor = (topicId?: string, eraId?: string) => {
   const { db } = useFirebase();
   const [entries, setEntries] = useState<ITimelineEntry[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState<string | null>("");
   const [increment, setIncrement] = useState<number>(0);
 
