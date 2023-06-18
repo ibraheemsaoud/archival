@@ -13,7 +13,6 @@ export interface IEra {
   creationDate: Date;
   ownerId: string;
   startDate: Date;
-  endDate?: Date;
   isPublic: boolean;
   coverImageUrl: string;
   allowSuggestions: boolean;

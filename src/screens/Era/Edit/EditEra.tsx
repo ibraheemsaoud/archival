@@ -13,7 +13,7 @@ import { ITimelineEntry } from "../../../interfaces/timelineEntry.interface";
 import { ITopic } from "../../../interfaces/topic.interface";
 import { IEra } from "../../../interfaces/era.interface";
 import { DatePicker } from "@mui/x-date-pickers";
-import { requestCreateEra } from "../../../requests";
+import { requestUodateEra } from "../../../requests";
 import { useFirebase } from "../../../hooks";
 
 export const EditEra = () => {
@@ -37,7 +37,7 @@ export const EditEra = () => {
   };
 
   const handleSave = async () => {
-    await requestCreateEra(db, topic.id, editableEra);
+    await requestUodateEra(db, topic.id, editableEra);
     window.location.reload();
     handleClose();
   };
@@ -56,10 +56,6 @@ export const EditEra = () => {
 
   const onChangeStartDate = (date: Date | null) => {
     setEditableEra({ ...editableEra, startDate: date || new Date() });
-  };
-
-  const onChangeEndDate = (date: Date | null) => {
-    setEditableEra({ ...editableEra, endDate: date || undefined });
   };
 
   const onChangeIsPublic = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -124,18 +120,12 @@ export const EditEra = () => {
           onChange={onChangeStartDate}
           sx={{ marginBottom: 2 }}
         />
-        <DatePicker
-          label="End Date"
-          value={editableEra.endDate}
-          onChange={onChangeEndDate}
-          sx={{ marginBottom: 2 }}
-        />
         <Box sx={{ marginBottom: 2 }}>
           <FormControlLabel
             control={
               <Checkbox
                 id="isPublic"
-                value={editableEra.isPublic}
+                checked={editableEra.isPublic}
                 onChange={onChangeIsPublic}
               />
             }
@@ -147,7 +137,7 @@ export const EditEra = () => {
             control={
               <Checkbox
                 id="allowSuggestions"
-                value={editableEra.allowSuggestions}
+                checked={editableEra.allowSuggestions}
                 onChange={onChangeAllowSuggestions}
               />
             }
