@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ITimelineEntry } from "../../../interfaces/timelineEntry.interface";
 import {
   Box,
   Button,
@@ -8,88 +7,76 @@ import {
   SelectChangeEvent,
   Typography,
 } from "@mui/material";
-import { EntryType } from "../../../interfaces/timelineEntry.interface";
+import {
+  EntryType,
+  ITimelineEntry,
+} from "../../../interfaces/timelineEntry.interface";
 import { EditMedia } from "./EditMedia";
 import { EditCoverPost } from "./EditCoverPost";
 import { EditCollection } from "./EditCollection";
 import { EditQuickLinks } from "./EditQuickLinks";
+import { useTimelineEditor } from "./useTimelineEditor";
 
 export const TimelineEditor = ({
-  timeline,
-  onClose,
+  eraId,
+  topicId,
 }: {
-  timeline: ITimelineEntry[];
-  onClose: () => void;
+  eraId?: string;
+  topicId?: string;
 }) => {
+  const { entries, createNewEntry, updateEntry, deleteEntry } =
+    useTimelineEditor(topicId, eraId);
   // allow editing the timeline depending on the element type
-  const [entries, setEntries] = useState(timeline);
   const [type, setType] = useState<EntryType>(EntryType.Media);
-  const onChange = (index: number) => (entry: any) => {
-    const newEntries = [...entries];
-    newEntries[index] = entry;
-    setEntries(newEntries);
+  const onChange = (entry: ITimelineEntry) => {
+    updateEntry(entry);
   };
-  const onDelete = (index: number) => () => {
-    const newEntries = [...entries];
-    newEntries.splice(index, 1);
-    setEntries(newEntries);
+  const onDelete = (entry: ITimelineEntry) => {
+    deleteEntry(entry);
   };
   const handleChangeType = (e: SelectChangeEvent<EntryType>) => {
     setType(e.target.value as EntryType);
   };
-  const onClick = () => {
+  const onCreate = () => {
+    const order = entries.length > 0 ? entries[0].order / 2 : 1;
     if (type === EntryType.Media) {
-      setEntries([
-        ...entries,
-        {
-          type,
-          title: "",
-          description: "",
-          entryType: "image",
-          link: "",
-          timestamp: new Date(),
-        },
-      ]);
+      createNewEntry({
+        order,
+        type,
+        title: "",
+        description: "",
+        entryType: "image",
+        link: "",
+        timestamp: new Date(),
+      });
     }
     if (type === EntryType.CoverPost) {
-      setEntries([
-        ...entries,
-        {
-          type,
-          title: "",
-          description: "",
-          entryId: "",
-        },
-      ]);
+      createNewEntry({
+        order,
+        type,
+        title: "",
+        description: "",
+        entryId: "",
+      });
     }
     if (type === EntryType.Collection) {
-      setEntries([
-        ...entries,
-        {
-          type,
-          title: "",
-          entryIds: [],
-        },
-      ]);
+      createNewEntry({
+        order,
+        type,
+        title: "",
+        entryIds: [],
+      });
     }
     if (type === EntryType.QuickLinks) {
-      setEntries([
-        ...entries,
-        {
-          type,
-          links: [],
-        },
-      ]);
+      createNewEntry({
+        order,
+        type,
+        links: [],
+      });
     }
   };
   return (
     <Box>
-      <Box display="flex" justifyContent="flex-end">
-        <Button onClick={onClose}>Close</Button>
-        <Button onClick={onClose} variant="contained">
-          Save
-        </Button>
-      </Box>
       <Box
         sx={(theme) => ({
           display: "flex",
@@ -108,7 +95,7 @@ export const TimelineEditor = ({
           <MenuItem value={EntryType.Media}>Media</MenuItem>
           <MenuItem value={EntryType.QuickLinks}>Quick Links</MenuItem>
         </Select>
-        <Button onClick={onClick} variant="contained">
+        <Button onClick={onCreate} variant="contained">
           Create
         </Button>
       </Box>
@@ -118,8 +105,8 @@ export const TimelineEditor = ({
             <EditMedia
               key={index}
               entry={entry}
-              onChange={onChange(index)}
-              onDelete={onDelete(index)}
+              onChange={onChange}
+              onDelete={onDelete}
             />
           );
         }
@@ -128,8 +115,8 @@ export const TimelineEditor = ({
             <EditCoverPost
               key={index}
               entry={entry}
-              onChange={onChange(index)}
-              onDelete={onDelete(index)}
+              onChange={onChange}
+              onDelete={onDelete}
             />
           );
         }
@@ -138,8 +125,8 @@ export const TimelineEditor = ({
             <EditCollection
               key={index}
               entry={entry}
-              onChange={onChange(index)}
-              onDelete={onDelete(index)}
+              onChange={onChange}
+              onDelete={onDelete}
             />
           );
         }
@@ -148,8 +135,8 @@ export const TimelineEditor = ({
             <EditQuickLinks
               key={index}
               entry={entry}
-              onChange={onChange(index)}
-              onDelete={onDelete(index)}
+              onChange={onChange}
+              onDelete={onDelete}
             />
           );
         }

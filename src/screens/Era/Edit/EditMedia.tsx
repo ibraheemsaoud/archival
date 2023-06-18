@@ -5,7 +5,7 @@ import { Box, Button, TextField } from "@mui/material";
 interface IEditMedia {
   entry: IMedia;
   onChange: (entry: IMedia) => void;
-  onDelete: () => void;
+  onDelete: (entry: IMedia) => void;
 }
 
 export const EditMedia = ({ entry, onChange, onDelete }: IEditMedia) => {
@@ -22,7 +22,7 @@ export const EditMedia = ({ entry, onChange, onDelete }: IEditMedia) => {
   const onChangeLink = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLink(e.target.value);
   };
-  const onClick = () => {
+  const onHandleChange = () => {
     onChange({
       ...entry,
       title,
@@ -30,6 +30,10 @@ export const EditMedia = ({ entry, onChange, onDelete }: IEditMedia) => {
       link,
       entryType: "image",
     });
+  };
+
+  const onHandleDelete = () => {
+    onDelete(entry);
   };
 
   return (
@@ -60,6 +64,8 @@ export const EditMedia = ({ entry, onChange, onDelete }: IEditMedia) => {
         value={description}
         onChange={onChangeDescription}
         sx={{ marginBottom: 2 }}
+        multiline
+        maxRows={4}
       />
       <TextField
         id="standard-basic"
@@ -70,8 +76,8 @@ export const EditMedia = ({ entry, onChange, onDelete }: IEditMedia) => {
         onChange={onChangeLink}
         sx={{ marginBottom: 2 }}
       />
-      <Button onClick={onClick}>Update</Button>
-      <Button onClick={onDelete}>Delete</Button>
+      <Button onClick={onHandleChange}>Update</Button>
+      <Button onClick={onHandleDelete}>Delete</Button>
     </Box>
   );
 };

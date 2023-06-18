@@ -5,7 +5,7 @@ import { Box, Button, TextField } from "@mui/material";
 interface IEditQuickLinks {
   entry: IQuickLinks;
   onChange: (entry: IQuickLinks) => void;
-  onDelete: () => void;
+  onDelete: (entry: IQuickLinks) => void;
 }
 
 export const EditQuickLinks = ({
@@ -22,7 +22,7 @@ export const EditQuickLinks = ({
     setLinks(e.target.value);
   };
 
-  const onClick = () => {
+  const onHandleChange = () => {
     onChange({
       ...entry,
       links: links
@@ -39,6 +39,10 @@ export const EditQuickLinks = ({
         })
         .filter((link) => link.title !== ""),
     });
+  };
+
+  const onHandleDelete = () => {
+    onDelete(entry);
   };
 
   return (
@@ -63,9 +67,11 @@ export const EditQuickLinks = ({
         fullWidth
         value={links}
         onChange={onChangeLinks}
+        multiline
+        maxRows={10}
       />
-      <Button onClick={onClick}>Update</Button>
-      <Button onClick={onDelete}>Delete</Button>
+      <Button onClick={onHandleChange}>Update</Button>
+      <Button onClick={onHandleDelete}>Delete</Button>
     </Box>
   );
 };

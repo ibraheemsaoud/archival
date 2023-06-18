@@ -5,7 +5,7 @@ import { Box, Button, TextField } from "@mui/material";
 interface IEditCollection {
   entry: ICollection;
   onChange: (entry: ICollection) => void;
-  onDelete: () => void;
+  onDelete: (entry: ICollection) => void;
 }
 
 export const EditCollection = ({
@@ -25,7 +25,7 @@ export const EditCollection = ({
     setListOfEntryIds(e.target.value);
   };
 
-  const onClick = () => {
+  const onHandleChange = () => {
     onChange({
       ...entry,
       title,
@@ -34,6 +34,10 @@ export const EditCollection = ({
         .map((id) => id.trim())
         .filter((id) => id !== ""),
     });
+  };
+
+  const onHandleDelete = () => {
+    onDelete(entry);
   };
 
   return (
@@ -65,8 +69,8 @@ export const EditCollection = ({
         onChange={onChangeListOfEntryIds}
         sx={{ marginBottom: 2 }}
       />
-      <Button onClick={onClick}>Update</Button>
-      <Button onClick={onDelete}>Delete</Button>
+      <Button onClick={onHandleChange}>Update</Button>
+      <Button onClick={onHandleDelete}>Delete</Button>
     </Box>
   );
 };

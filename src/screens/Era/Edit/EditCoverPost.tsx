@@ -5,7 +5,7 @@ import { Box, Button, TextField } from "@mui/material";
 interface IEditCoverPost {
   entry: ICoverPost;
   onChange: (entry: ICoverPost) => void;
-  onDelete: () => void;
+  onDelete: (entry: ICoverPost) => void;
 }
 
 export const EditCoverPost = ({
@@ -26,13 +26,17 @@ export const EditCoverPost = ({
   const onChangeLinkedEntryId = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLinkedEntryId(e.target.value);
   };
-  const onClick = () => {
+  const onHandleChange = () => {
     onChange({
       ...entry,
       title,
       description,
       entryId: linkedEntryId,
     });
+  };
+
+  const onHandleDelete = () => {
+    onDelete(entry);
   };
 
   return (
@@ -63,6 +67,8 @@ export const EditCoverPost = ({
         value={description}
         onChange={onChangeDescription}
         sx={{ marginBottom: 2 }}
+        multiline
+        maxRows={4}
       />
       <TextField
         id="standard-basic"
@@ -73,8 +79,8 @@ export const EditCoverPost = ({
         onChange={onChangeLinkedEntryId}
         sx={{ marginBottom: 2 }}
       />
-      <Button onClick={onClick}>Update</Button>
-      <Button onClick={onDelete}>Delete</Button>
+      <Button onClick={onHandleChange}>Update</Button>
+      <Button onClick={onHandleDelete}>Delete</Button>
     </Box>
   );
 };

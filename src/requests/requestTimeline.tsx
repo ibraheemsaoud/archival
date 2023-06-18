@@ -1,7 +1,18 @@
-import { Firestore, collection, getDocs } from "firebase/firestore";
+import {
+  Firestore,
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+  setDoc,
+} from "firebase/firestore";
 import {
   EntryType,
   ITimelineEntry,
+  ITimelineEntryCreate,
 } from "../interfaces/timelineEntry.interface";
 
 export const requestTimeline = async (
@@ -17,7 +28,10 @@ export const requestTimeline = async (
   }
 
   const timelineSnashot = await getDocs(
-    collection(db, "Topics", topicId, "Era", eraId, "timeline")
+    query(
+      collection(db, "Topics", topicId, "Era", eraId, "timeline"),
+      orderBy("order")
+    )
   );
 
   const timeline: ITimelineEntry[] = [];
@@ -65,4 +79,46 @@ export const requestTimeline = async (
     data: timeline,
     error: null,
   };
+};
+
+export const requestCreateTimelineEntry = async (
+  db: Firestore | null,
+  topicId: string,
+  eraId: string,
+  entry: ITimelineEntryCreate
+) => {
+  if (!db || !topicId || !eraId || !entry) return false;
+
+  await addDoc(collection(db, "Topics", topicId, "Era", eraId, "timeline"), {
+    ...entry,
+  });
+  return true;
+};
+
+export const requestUpdateTimelineEntry = async (
+  db: Firestore | null,
+  topicId: string,
+  eraId: string,
+  entry: ITimelineEntry
+) => {
+  if (!db || !topicId || !eraId || !entry) return false;
+
+  await setDoc(doc(db, "Topics", topicId, "Era", eraId, "timeline", entry.id), {
+    ...entry,
+  });
+  return true;
+};
+
+export const requestDeleteTimelineEntry = async (
+  db: Firestore | null,
+  topicId: string,
+  eraId: string,
+  entry: ITimelineEntry
+) => {
+  if (!db || !topicId || !eraId || !entry) return false;
+
+  await deleteDoc(
+    doc(db, "Topics", topicId, "Era", eraId, "timeline", entry.id)
+  );
+  return true;
 };
