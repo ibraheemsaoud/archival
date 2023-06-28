@@ -14,7 +14,8 @@ export type IEntryCreate = {
 };
 
 export interface IEntry {
-  id: string;
+  $id: string;
+  eraId: string;
   title: string;
   timestamp: Date;
   link?: string;

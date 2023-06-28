@@ -61,8 +61,8 @@ export const EditTimeline = () => {
             <Typography variant="h5">Entries</Typography>
             <Grid container>
               {entries.map((entry) => (
-                <Grid item xs={12} key={entry.id}>
-                  <Typography variant="h5">id: {entry.id}</Typography>
+                <Grid item xs={12} key={entry.$id}>
+                  <Typography variant="h5">id: {entry.$id}</Typography>
                   <EntryCard entry={entry} />
                 </Grid>
               ))}

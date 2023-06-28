@@ -1,6 +1,7 @@
 import { Params } from "react-router-dom";
 import { requestEra } from "../../requests/requestEra";
 import { requestEntries, requestTimeline, requestTopic } from "../../requests";
+import { EntryType } from "../../interfaces/timelineEntry.interface";
 
 export const eraLoader =
   () =>
@@ -11,17 +12,19 @@ export const eraLoader =
       requestTimeline(params.eraId),
       requestEntries(params.eraId),
     ]);
-    // timeline.data.map((entry) => {
-    //   if (entry.type === EntryType.Collection) {
-    //     entry.entries = entries.data.filter((e) =>
-    //       entry.entryIds.includes(e.id)
-    //     );
-    //   }
-    //   if (entry.type === EntryType.CoverPost) {
-    //     entry.entry = entries.data.find((e) => entry.entryId === e.id);
-    //   }
-    //   return entry;
-    // });
+    timeline.data = timeline.data.map((entry) => {
+      if (entry.type === EntryType.Collection) {
+        entry.entries = entries.data.filter((e) =>
+          entry.entryIds?.includes(e.$id)
+        );
+      }
+      if (entry.type === EntryType.CoverPost) {
+        entry.entry = entries.data.find((e) => entry.entryId === e.$id);
+      }
+      return entry;
+    });
+    console.log(entries.data);
+    console.log(timeline.data);
     return {
       topic: topic.data,
       era: era.data,

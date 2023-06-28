@@ -28,7 +28,7 @@ export const EntryCard = ({ entry }: { entry: IEntry }) => {
       to={replaceRouteParams(ENTRY, {
         eraId: era.id,
         topicId: topic.id,
-        entryId: entry.id,
+        entryId: entry.$id,
       })}
     >
       <Card sx={{ textAlign: "start" }}>

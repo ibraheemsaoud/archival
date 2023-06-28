@@ -83,8 +83,11 @@ export interface ITimelineEntry {
   timestamp?: Date;
   link?: string;
   entryId?: string;
+  entry?: IEntry;
   entryIds?: string[];
+  entries?: IEntry[];
   links?: string[];
+  linksData?: ILink[];
 }
 export type ITimelineEntryCreate =
   | IQuickLinksCreate

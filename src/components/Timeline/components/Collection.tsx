@@ -12,7 +12,7 @@ export const Collection = ({ collection }: { collection: ICollection }) => {
       {collection.entries && (
         <Grid container spacing={2} justifyContent="center">
           {collection.entries.map((entry) => (
-            <Grid item xs={6} md={3} lg={2} key={entry.id}>
+            <Grid item xs={6} md={3} lg={2} key={entry.$id}>
               <EntryCard entry={entry} />
             </Grid>
           ))}
