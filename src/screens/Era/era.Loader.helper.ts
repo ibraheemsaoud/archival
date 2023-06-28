@@ -8,7 +8,7 @@ export const eraLoader =
   (db: Firestore | null) =>
   async ({ params }: { params: Params<string> }) => {
     const [topic, era, timeline, entries] = await Promise.all([
-      requestTopic(db, params.topicId),
+      requestTopic(params.topicId),
       requestEra(db, params.topicId, params.eraId),
       requestTimeline(db, params.topicId, params.eraId),
       requestEntries(db, params.topicId, params.eraId),

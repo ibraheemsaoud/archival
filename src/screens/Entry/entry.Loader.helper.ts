@@ -11,7 +11,7 @@ export const entryLoader =
   (db: Firestore | null) =>
   async ({ params }: { params: Params<string> }) => {
     const [topic, era] = await Promise.all([
-      requestTopic(db, params.topicId),
+      requestTopic(params.topicId),
       requestEra(db, params.topicId, params.eraId),
     ]);
     return {

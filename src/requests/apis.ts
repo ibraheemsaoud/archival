@@ -1,7 +1,45 @@
-import { Client as Appwrite, Databases, Account } from "appwrite";
+import { Client as Appwrite, Databases, Account, Models } from "appwrite";
 import { Server } from "../config/server";
 
-let api = {
+interface SDK {
+  database: Databases;
+  account: Account;
+}
+
+const api: {
+  sdk: SDK | null;
+  provider: () => SDK;
+  createAccount: (
+    email: string,
+    password: string,
+    name: string
+  ) => Promise<Models.User<any>>;
+  getAccount: () => Promise<Models.User<any>>;
+  createSession: (email: string, password: string) => Promise<Models.Session>;
+  deleteCurrentSession: () => Promise<{}>;
+  createDocument: (
+    databaseId: string,
+    collectionId: string,
+    data: any,
+    permissions: any
+  ) => Promise<Models.Document>;
+  listDocuments: (
+    databaseId: string,
+    collectionId: string,
+    queries?: string[]
+  ) => Promise<Models.DocumentList<any>>;
+  updateDocument: (
+    databaseId: string,
+    collectionId: string,
+    documentId: string,
+    data: any
+  ) => Promise<Models.Document>;
+  deleteDocument: (
+    databaseId: string,
+    collectionId: string,
+    documentId: string
+  ) => Promise<{}>;
+} = {
   sdk: null,
 
   provider: () => {
@@ -46,8 +84,10 @@ let api = {
       );
   },
 
-  listDocuments: (databaseId, collectionId) => {
-    return api.provider().database.listDocuments(databaseId, collectionId);
+  listDocuments: (databaseId, collectionId, queries) => {
+    return api
+      .provider()
+      .database.listDocuments(databaseId, collectionId, queries);
   },
 
   updateDocument: (databaseId, collectionId, documentId, data) => {

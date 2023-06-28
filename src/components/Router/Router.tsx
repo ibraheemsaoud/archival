@@ -18,7 +18,7 @@ export const Router = () => {
     {
       path: TOPIC,
       element: <EraList />,
-      loader: eraListLoader(db),
+      loader: eraListLoader(),
     },
     {
       path: ERA,

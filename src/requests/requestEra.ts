@@ -2,6 +2,7 @@ import { Firestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { IEra, IEraCreate } from "../interfaces/era.interface";
 import api from "./apis";
 import { Server } from "../config/server";
+import { Query } from "appwrite";
 
 export const requestEra = async (
   db: Firestore | null,
@@ -46,8 +47,10 @@ export const requestEras = async (topicId?: string) => {
     };
   const data = await await api.listDocuments(
     Server.databaseID,
-    Server.eraCollectionId
+    Server.eraCollectionId,
+    [Query.equal("topicId", [topicId])]
   );
+  console.log(data, topicId);
   if (data.documents) {
     return {
       data: data.documents,

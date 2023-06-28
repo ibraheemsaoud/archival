@@ -1,6 +1,6 @@
-import { doc, getDoc, Firestore } from "firebase/firestore";
 import api from "./apis";
 import { Server } from "../config/server";
+import { Query } from "appwrite";
 
 export const requestTopics = async () => {
   const data = await api.listDocuments(
@@ -19,27 +19,26 @@ export const requestTopics = async () => {
   };
 };
 
-export const requestTopic = async (db: Firestore | null, id?: string) => {
-  if (!id || !db)
+export const requestTopic = async (id?: string) => {
+  if (!id)
     return {
       data: undefined,
       error: "no id provided",
     };
-  const topicSnapshot = await getDoc(doc(db, "Topics", id));
-  if (topicSnapshot.exists()) {
+  const data = await api.listDocuments(
+    Server.databaseID,
+    Server.topicCollectionId,
+    [Query.equal("id", [id])]
+  );
+  if (data.documents?.length > 0) {
     return {
-      data: {
-        id: topicSnapshot.id,
-        title: topicSnapshot.data().title,
-        description: topicSnapshot.data().description,
-      },
+      data: data.documents[0],
       error: undefined,
     };
-  } else {
-    return {
-      data: undefined,
-      error:
-        "failed to load topic, server might be down or you loaded the incorrect topic",
-    };
   }
+  return {
+    data: undefined,
+    error:
+      "failed to load topic, server might be down or you loaded the incorrect topic",
+  };
 };
