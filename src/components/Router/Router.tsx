@@ -28,7 +28,7 @@ export const Router = () => {
     {
       path: ENTRY,
       element: <Entry />,
-      loader: entryLoader(db),
+      loader: entryLoader(),
     },
   ]);
 

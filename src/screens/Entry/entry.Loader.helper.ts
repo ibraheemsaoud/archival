@@ -5,14 +5,13 @@ import {
   // useRequestEntry,
   requestEra,
 } from "../../requests";
-import { Firestore } from "firebase/firestore";
 
 export const entryLoader =
-  (db: Firestore | null) =>
+  () =>
   async ({ params }: { params: Params<string> }) => {
     const [topic, era] = await Promise.all([
       requestTopic(params.topicId),
-      requestEra(db, params.topicId, params.eraId),
+      requestEra(params.eraId),
     ]);
     return {
       topic: topic.data,

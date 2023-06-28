@@ -9,7 +9,7 @@ export const eraLoader =
   async ({ params }: { params: Params<string> }) => {
     const [topic, era, timeline, entries] = await Promise.all([
       requestTopic(params.topicId),
-      requestEra(db, params.topicId, params.eraId),
+      requestEra(params.eraId),
       requestTimeline(db, params.topicId, params.eraId),
       requestEntries(db, params.topicId, params.eraId),
     ]);

@@ -1,35 +1,23 @@
-import { Firestore, doc, getDoc, setDoc } from "firebase/firestore";
+import { Firestore, doc, setDoc } from "firebase/firestore";
 import { IEra, IEraCreate } from "../interfaces/era.interface";
 import api from "./apis";
 import { Server } from "../config/server";
 import { Query } from "appwrite";
 
-export const requestEra = async (
-  db: Firestore | null,
-  topicId?: string,
-  eraId?: string
-) => {
-  if (!topicId || !db || !eraId)
+export const requestEra = async (eraId?: string) => {
+  if (!eraId)
     return {
       data: undefined,
       error: "no topic id provided",
     };
-
-  const eraRef = doc(db, "Topics", topicId, "Era", eraId);
-  const eraSnapshot = await getDoc(eraRef);
-  if (eraSnapshot.exists()) {
+  const data = await api.listDocuments(
+    Server.databaseID,
+    Server.eraCollectionId,
+    [Query.equal("id", [eraId])]
+  );
+  if (data.documents) {
     return {
-      data: {
-        id: eraSnapshot.id,
-        title: eraSnapshot.data().title,
-        description: eraSnapshot.data().description,
-        creationDate: new Date(eraSnapshot.data().creationDate.seconds * 1000),
-        ownerId: eraSnapshot.data().ownerId,
-        startDate: new Date(eraSnapshot.data().startDate.seconds * 1000),
-        isPublic: eraSnapshot.data().isPublic,
-        disableSuggestions: eraSnapshot.data().disableSuggestions,
-        coverImageUrl: eraSnapshot.data().coverImageUrl,
-      },
+      data: data.documents,
       error: undefined,
     };
   }
@@ -45,12 +33,11 @@ export const requestEras = async (topicId?: string) => {
       data: undefined,
       error: "no topic id provided",
     };
-  const data = await await api.listDocuments(
+  const data = await api.listDocuments(
     Server.databaseID,
     Server.eraCollectionId,
     [Query.equal("topicId", [topicId])]
   );
-  console.log(data, topicId);
   if (data.documents) {
     return {
       data: data.documents,
@@ -59,7 +46,7 @@ export const requestEras = async (topicId?: string) => {
   }
   return {
     data: [],
-    error: undefined,
+    error: "no era found",
   };
 };
 
