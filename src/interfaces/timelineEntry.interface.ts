@@ -16,7 +16,7 @@ export interface IQuickLinksCreate {
 export interface IQuickLinks {
   $id: string;
   order: number;
-  links: string[];
+  links: ILink[];
 }
 
 export interface IMediaCreate {
@@ -95,7 +95,9 @@ export type ITimelineEntryCreate =
   | ICoverPostCreate
   | ICollectionCreate;
 
-interface ILink {
+export interface ILink {
+  $id: string;
   title: string;
   link: string;
+  eraId: string;
 }
