@@ -8,6 +8,7 @@ export const TopicList = () => {
   const { topics } = useLoaderData() as any as {
     topics?: ITopic[];
   };
+  console.log(topics);
   // const { data: eras } = uesRequestDashboardEras();
 
   if (!topics) return <div>Loading...</div>;

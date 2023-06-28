@@ -13,7 +13,7 @@ export const Router = () => {
     {
       path: HOME,
       element: <TopicList />,
-      loader: topicListLoader(db),
+      loader: topicListLoader(),
     },
     {
       path: TOPIC,

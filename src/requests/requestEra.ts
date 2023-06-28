@@ -1,12 +1,7 @@
-import {
-  Firestore,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  setDoc,
-} from "firebase/firestore";
+import { Firestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { IEra, IEraCreate } from "../interfaces/era.interface";
+import api from "./apis";
+import { Server } from "../config/server";
 
 export const requestEra = async (
   db: Firestore | null,
@@ -31,7 +26,7 @@ export const requestEra = async (
         ownerId: eraSnapshot.data().ownerId,
         startDate: new Date(eraSnapshot.data().startDate.seconds * 1000),
         isPublic: eraSnapshot.data().isPublic,
-        allowSuggestions: eraSnapshot.data().allowSuggestions,
+        disableSuggestions: eraSnapshot.data().disableSuggestions,
         coverImageUrl: eraSnapshot.data().coverImageUrl,
       },
       error: undefined,
@@ -43,29 +38,24 @@ export const requestEra = async (
   };
 };
 
-export const requestEras = async (db: Firestore | null, topicId?: string) => {
-  if (!topicId || !db)
+export const requestEras = async (topicId?: string) => {
+  if (!topicId)
     return {
       data: undefined,
       error: "no topic id provided",
     };
-  const erasSnashot = await getDocs(collection(db, "Topics", topicId, "Era"));
-  const eras: IEra[] = [];
-  erasSnashot.forEach((doc) => {
-    eras.push({
-      id: doc.id,
-      title: doc.data().title,
-      description: doc.data().description,
-      creationDate: new Date(doc.data().creationDate?.seconds * 1000),
-      ownerId: doc.data().ownerId,
-      startDate: new Date(doc.data().startDate?.seconds * 1000),
-      isPublic: doc.data().isPublic,
-      allowSuggestions: doc.data().allowSuggestions,
-      coverImageUrl: doc.data().coverImageUrl,
-    });
-  });
+  const data = await await api.listDocuments(
+    Server.databaseID,
+    Server.eraCollectionId
+  );
+  if (data.documents) {
+    return {
+      data: data.documents,
+      error: undefined,
+    };
+  }
   return {
-    data: eras,
+    data: [],
     error: undefined,
   };
 };
@@ -82,7 +72,7 @@ export const requestCreateEra = async (
     description: era.description,
     creationDate: new Date(),
     isPublic: false,
-    allowSuggestions: false,
+    disableSuggestions: false,
     startDate: new Date(),
     coverImageUrl: era.coverImageUrl,
   } as IEra);

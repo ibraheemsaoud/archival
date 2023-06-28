@@ -1,31 +1,15 @@
-import {
-  doc,
-  collection,
-  getDocs,
-  getDoc,
-  Firestore,
-} from "firebase/firestore";
-import { ITopic } from "../interfaces/topic.interface";
+import { doc, getDoc, Firestore } from "firebase/firestore";
+import api from "./apis";
+import { Server } from "../config/server";
 
-export const requestTopics = async (db: Firestore | null) => {
-  if (!db)
+export const requestTopics = async () => {
+  const data = await api.listDocuments(
+    Server.databaseID,
+    Server.topicCollectionId
+  );
+  if (data.documents) {
     return {
-      data: [],
-      error: "no db provided",
-    };
-  const topicsSnapshot = await getDocs(collection(db, "Topics"));
-  if (topicsSnapshot?.docs?.length > 0) {
-    let topics: ITopic[] = [];
-    topicsSnapshot.docs.forEach((doc) => {
-      const docData = doc.data();
-      topics.push({
-        id: doc.id,
-        title: docData.title,
-        description: docData.description,
-      });
-    });
-    return {
-      data: topics,
+      data: data.documents,
       error: undefined,
     };
   }

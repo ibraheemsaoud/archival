@@ -21,7 +21,7 @@ export const Era = () => {
       {hasEditAccess && <EditEra />}
       <Box textAlign="center" marginTop={6}>
         <Timeline timeline={timeline} />
-        {era.allowSuggestions && <SuggestNewEntry />}
+        {!era.disableSuggestions && <SuggestNewEntry />}
         {hasEditAccess && <EditTimeline />}
       </Box>
     </AppWrapper>

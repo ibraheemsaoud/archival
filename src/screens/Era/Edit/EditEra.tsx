@@ -62,8 +62,8 @@ export const EditEra = () => {
     setEditableEra({ ...editableEra, isPublic: !!e.target.value });
   };
 
-  const onChangeAllowSuggestions = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditableEra({ ...editableEra, allowSuggestions: !!e.target.value });
+  const onChangeDisableSuggestions = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditableEra({ ...editableEra, disableSuggestions: !!e.target.value });
   };
 
   if (!open)
@@ -136,12 +136,12 @@ export const EditEra = () => {
           <FormControlLabel
             control={
               <Checkbox
-                id="allowSuggestions"
-                checked={editableEra.allowSuggestions}
-                onChange={onChangeAllowSuggestions}
+                id="disableSuggestions"
+                checked={editableEra.disableSuggestions}
+                onChange={onChangeDisableSuggestions}
               />
             }
-            label="allow suggestions"
+            label="disable suggestions"
           />
         </Box>
         <Box textAlign="end">

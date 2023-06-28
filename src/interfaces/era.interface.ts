@@ -10,10 +10,10 @@ export interface IEra {
   id: string;
   title: string;
   description: string;
-  creationDate: Date;
-  ownerId: string;
-  startDate: Date;
-  isPublic: boolean;
+  creationDate: Date; // deprecated
+  ownerId: string; // deprecated?
+  startDate: Date; // deprecated?
+  isPublic: boolean; 
   coverImageUrl: string;
-  allowSuggestions: boolean;
+  disableSuggestions: boolean;
 }
