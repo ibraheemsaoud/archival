@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { IQuickLinks } from "../../../../interfaces/timelineEntry.interface";
+import { ITimelineEntry } from "../../../../interfaces/timelineEntry.interface";
 import { Box, Button, TextField } from "@mui/material";
 
 interface IEditQuickLinks {
-  entry: IQuickLinks;
-  onChange: (entry: IQuickLinks) => void;
-  onDelete: (entry: IQuickLinks) => void;
+  entry: ITimelineEntry;
+  onChange: (entry: ITimelineEntry) => void;
+  onDelete: (entry: ITimelineEntry) => void;
 }
 
 export const EditQuickLinks = ({
@@ -13,8 +13,8 @@ export const EditQuickLinks = ({
   onChange,
   onDelete,
 }: IEditQuickLinks) => {
-  const linksAsString = entry.links.reduce((acc, link) => {
-    return `${acc}[${link.title}|${link.link}],`;
+  const linksAsString = entry.links?.reduce((acc, link) => {
+    return `${acc}[${link}|${link.link}],`;
   }, "");
   const [links, setLinks] = useState(linksAsString || "");
 
@@ -25,19 +25,19 @@ export const EditQuickLinks = ({
   const onHandleChange = () => {
     onChange({
       ...entry,
-      links: links
-        .split(",")
-        .map((link) => {
-          const [title, linkUrl] = link
-            .replace("[", "")
-            .replace("]", "")
-            .split("|");
-          return {
-            title,
-            link: linkUrl,
-          };
-        })
-        .filter((link) => link.title !== ""),
+      // links: links
+      //   .split(",")
+      //   .map((link) => {
+      //     const [title, linkUrl] = link
+      //       .replace("[", "")
+      //       .replace("]", "")
+      //       .split("|");
+      //     return {
+      //       title,
+      //       link: linkUrl,
+      //     };
+      //   })
+      //   .filter((link) => link.title !== ""),
     });
   };
 

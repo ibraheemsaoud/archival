@@ -4,7 +4,7 @@ import { useState } from "react";
 import { requestCreateEra } from "../../../requests";
 
 export const EraCreator = ({ topicId }: { topicId: string }) => {
-  const { db, user } = useFirebase();
+  const { user } = useFirebase();
   const { isAdmin } = useRoles();
   const [title, setTitle] = useState("");
   const [id, setId] = useState("");
@@ -12,7 +12,7 @@ export const EraCreator = ({ topicId }: { topicId: string }) => {
   const [description, setDescription] = useState("");
 
   const onClick = async () => {
-    await requestCreateEra(db, topicId, {
+    await requestCreateEra(topicId, {
       title,
       description,
       coverImageUrl,

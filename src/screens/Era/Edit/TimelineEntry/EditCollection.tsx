@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { ICollection } from "../../../../interfaces/timelineEntry.interface";
+import { ITimelineEntry } from "../../../../interfaces/timelineEntry.interface";
 import { Box, Button, TextField } from "@mui/material";
 
 interface IEditCollection {
-  entry: ICollection;
-  onChange: (entry: ICollection) => void;
-  onDelete: (entry: ICollection) => void;
+  entry: ITimelineEntry;
+  onChange: (entry: ITimelineEntry) => void;
+  onDelete: (entry: ITimelineEntry) => void;
 }
 
 export const EditCollection = ({
@@ -15,7 +15,7 @@ export const EditCollection = ({
 }: IEditCollection) => {
   const [title, setTitle] = useState(entry.title || "");
   const [listOfEntryIds, setListOfEntryIds] = useState(
-    entry.entryIds.join(",") || ""
+    entry.entryIds?.join(",") || ""
   );
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {

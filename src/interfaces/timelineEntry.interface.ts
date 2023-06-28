@@ -14,10 +14,9 @@ export interface IQuickLinksCreate {
 }
 
 export interface IQuickLinks {
-  id: string;
+  $id: string;
   order: number;
-  type: EntryType.QuickLinks;
-  links: ILink[];
+  links: string[];
 }
 
 export interface IMediaCreate {
@@ -31,13 +30,12 @@ export interface IMediaCreate {
 }
 
 export interface IMedia {
-  id: string;
+  $id: string;
   order: number;
   type: EntryType.Media;
   title: string;
   description?: string;
   timestamp: Date;
-  entryType: "image" | "video";
   link: string;
 }
 
@@ -50,7 +48,7 @@ export interface ICoverPostCreate {
 }
 
 export interface ICoverPost {
-  id: string;
+  $id: string;
   order: number;
   type: EntryType.CoverPost;
   title: string;
@@ -67,7 +65,7 @@ export interface ICollectionCreate {
 }
 
 export interface ICollection {
-  id: string;
+  $id: string;
   order: number;
   type: EntryType.Collection;
   title: string;
@@ -76,6 +74,7 @@ export interface ICollection {
 }
 
 export interface ITimelineEntry {
+  $id: string;
   EraId: string;
   order: number;
   type: EntryType;

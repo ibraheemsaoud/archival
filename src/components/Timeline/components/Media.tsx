@@ -3,7 +3,6 @@ import { IMedia } from "../../../interfaces/timelineEntry.interface";
 
 export const Media = ({ media }: { media: IMedia }) => {
   if (!media.link) return null;
-  if (media.entryType !== "image") return null;
   return (
     <Box>
       <Typography variant="h5" gutterBottom>

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { IMedia } from "../../../../interfaces/timelineEntry.interface";
+import { ITimelineEntry } from "../../../../interfaces/timelineEntry.interface";
 import { Box, Button, TextField } from "@mui/material";
 
 interface IEditMedia {
-  entry: IMedia;
-  onChange: (entry: IMedia) => void;
-  onDelete: (entry: IMedia) => void;
+  entry: ITimelineEntry;
+  onChange: (entry: ITimelineEntry) => void;
+  onDelete: (entry: ITimelineEntry) => void;
 }
 
 export const EditMedia = ({ entry, onChange, onDelete }: IEditMedia) => {
@@ -28,7 +28,6 @@ export const EditMedia = ({ entry, onChange, onDelete }: IEditMedia) => {
       title,
       description,
       link,
-      entryType: "image",
     });
   };
 

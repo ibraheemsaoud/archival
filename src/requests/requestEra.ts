@@ -1,4 +1,3 @@
-import { Firestore, doc, setDoc } from "firebase/firestore";
 import { IEra, IEraCreate } from "../interfaces/era.interface";
 import api from "./apis";
 import { Server } from "../config/server";
@@ -51,32 +50,30 @@ export const requestEras = async (topicId?: string) => {
 };
 
 export const requestCreateEra = async (
-  db: Firestore | null,
   topicId: string,
   era: IEraCreate
 ) => {
-  if (!db || !topicId || !era) return false;
-  await setDoc(doc(db, "Topics", topicId, "Era", era.id), {
-    title: era.title,
-    ownerId: era.ownerId,
-    description: era.description,
-    creationDate: new Date(),
-    isPublic: false,
-    disableSuggestions: false,
-    startDate: new Date(),
-    coverImageUrl: era.coverImageUrl,
-  } as IEra);
+  if (!topicId || !era) return false;
+  // await setDoc(doc(db, "Topics", topicId, "Era", era.id), {
+  //   title: era.title,
+  //   ownerId: era.ownerId,
+  //   description: era.description,
+  //   creationDate: new Date(),
+  //   isPublic: false,
+  //   disableSuggestions: false,
+  //   startDate: new Date(),
+  //   coverImageUrl: era.coverImageUrl,
+  // } as IEra);
   return true;
 };
 
-export const requestUodateEra = async (
-  db: Firestore | null,
+export const requestUpdateEra = async (
   topicId: string,
   era: IEra
 ) => {
-  if (!db || !topicId || !era) return false;
-  await setDoc(doc(db, "Topics", topicId, "Era", era.id), {
-    ...era,
-  });
+  if (!topicId || !era) return false;
+  // await setDoc(doc(db, "Topics", topicId, "Era", era.id), {
+  //   ...era,
+  // });
   return true;
 };

@@ -1,8 +1,12 @@
 import { Box, Button, Link } from "@mui/material";
 import { Link as NavLink } from "react-router-dom";
-import { IQuickLinks } from "../../../interfaces/timelineEntry.interface";
+import { IQuickLinks, ITimelineEntry } from "../../../interfaces/timelineEntry.interface";
 
-export const QuickLinks = ({ quickLinks }: { quickLinks: IQuickLinks }) => {
+export const QuickLinks = ({ entry }: { entry: ITimelineEntry }) => {
+  const quickLinks: IQuickLinks = {
+    ...entry,
+    links: entry.links || [] as string[],
+  }
   if (!quickLinks.links.length) return null;
 
   return (
@@ -13,7 +17,7 @@ export const QuickLinks = ({ quickLinks }: { quickLinks: IQuickLinks }) => {
       flexDirection={{ xs: "column", sm: "row" }}
       sx={{ marginBottom: 6 }}
     >
-      {quickLinks.links.map((link, index) => {
+      {/* {quickLinks.links.map((link, index) => {
         return (
           <Link
             key={`${link.title}-${index}`}
@@ -41,7 +45,7 @@ export const QuickLinks = ({ quickLinks }: { quickLinks: IQuickLinks }) => {
             </Button>
           </Link>
         );
-      })}
+      })} */}
     </Box>
   );
 };

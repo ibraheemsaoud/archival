@@ -13,11 +13,9 @@ import { ITimelineEntry } from "../../../interfaces/timelineEntry.interface";
 import { ITopic } from "../../../interfaces/topic.interface";
 import { IEra } from "../../../interfaces/era.interface";
 import { DatePicker } from "@mui/x-date-pickers";
-import { requestUodateEra } from "../../../requests";
-import { useFirebase } from "../../../hooks";
+import { requestUpdateEra } from "../../../requests";
 
 export const EditEra = () => {
-  const { db } = useFirebase();
   const { timeline, entries, topic, era } = useLoaderData() as any as {
     entries: IEntry[];
     timeline: ITimelineEntry[];
@@ -37,7 +35,7 @@ export const EditEra = () => {
   };
 
   const handleSave = async () => {
-    await requestUodateEra(db, topic.id, editableEra);
+    await requestUpdateEra(topic.id, editableEra);
     window.location.reload();
     handleClose();
   };
