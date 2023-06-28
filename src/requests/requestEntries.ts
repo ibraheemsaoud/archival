@@ -1,53 +1,45 @@
-import { Firestore, addDoc, collection, getDocs } from "firebase/firestore";
 import { IEntry, IEntryCreate } from "../interfaces/entry.interface";
+import { Server } from "../config/server";
+import { Query } from "appwrite";
+import api from "./apis";
 
 export const requestEntries = async (
-  db: Firestore | null,
-  topicId?: string,
   eraId?: string
 ) => {
-  if (!db || !topicId || !eraId) {
+  if (!eraId) {
     return {
-      data: [],
-      error: "No db or topicId or eraId",
+      data: [] as IEntry[],
+      error: "No eraId",
     };
   }
-
-  const entriesSnashot = await getDocs(
-    collection(db, "Topics", topicId, "Era", eraId, "Entry")
+  const data = await api.listDocuments(
+    Server.databaseID,
+    Server.entryCollectionId,
+    [Query.equal("eraId", [eraId])]
   );
-
-  const entries: IEntry[] = [];
-  entriesSnashot.forEach((doc) => {
-    const data = doc.data();
-    entries.push({
-      id: doc.id,
-      link: data.link,
-      title: data.title,
-      text: data.text,
-      timestamp: new Date(data.timestamp.seconds * 1000),
-    });
-  });
-
+  if (data.documents) {
+    return {
+      data: data.documents as IEntry[],
+      error: undefined,
+    };
+  }
   return {
-    data: entries,
-    error: null,
+    data: [] as IEntry[],
+    error: "No data",
   };
 };
 
 export const requestCreateEntry = async (
-  db: Firestore | null,
-  topicId: string,
   eraId: string,
   entry: IEntryCreate
 ) => {
-  if (!db || !topicId || !eraId || !entry) return false;
+  if (!eraId || !entry) return false;
 
-  await addDoc(collection(db, "Topics", topicId, "Era", eraId, "Entry"), {
-    link: entry.link,
-    text: entry.text,
-    timestamp: entry.timestamp,
-    title: entry.title,
-  } as IEntryCreate);
+  // await addDoc(collection(db, "Topics", topicId, "Era", eraId, "Entry"), {
+  //   link: entry.link,
+  //   text: entry.text,
+  //   timestamp: entry.timestamp,
+  //   title: entry.title,
+  // } as IEntryCreate);
   return true;
 };

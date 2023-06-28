@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { useFirebase } from "../../../hooks";
 import {
   ITimelineEntry,
   ITimelineEntryCreate,
 } from "../../../interfaces/timelineEntry.interface";
-import { Firestore } from "firebase/firestore";
 import {
   requestCreateTimelineEntry,
   requestDeleteTimelineEntry,
@@ -13,32 +11,29 @@ import {
 } from "../../../requests";
 
 export const useTimelineEditor = (topicId?: string, eraId?: string) => {
-  const { db } = useFirebase();
   const [entries, setEntries] = useState<ITimelineEntry[]>([]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [error, setError] = useState<string | null>("");
+  const [error, setError] = useState<string | undefined>("");
   const [increment, setIncrement] = useState<number>(0);
 
   useEffect(() => {
     const getEntries = async (
-      db: Firestore,
-      topicId: string,
       eraId: string
     ) => {
-      const resp = await requestTimeline(db, topicId, eraId);
+      const resp = await requestTimeline(eraId);
       setEntries(resp.data);
       setError(resp.error);
     };
-    if (db && topicId && eraId) {
-      getEntries(db, topicId, eraId);
+    if (eraId) {
+      getEntries(eraId);
     }
-  }, [db, topicId, eraId, increment]);
+  }, [eraId, increment]);
 
   const createNewEntry = async (entry: ITimelineEntryCreate) => {
-    if (!db || !topicId || !eraId) {
+    if (!topicId || !eraId) {
       return;
     }
-    const resp = await requestCreateTimelineEntry(db, topicId, eraId, entry);
+    const resp = await requestCreateTimelineEntry(topicId, eraId, entry);
     // TODO handle error
     // if (resp.error) {
     //   setError(resp.error);
@@ -49,20 +44,20 @@ export const useTimelineEditor = (topicId?: string, eraId?: string) => {
   };
 
   const updateEntry = async (entry: ITimelineEntry) => {
-    if (!db || !topicId || !eraId) {
+    if (!topicId || !eraId) {
       return;
     }
-    const resp = await requestUpdateTimelineEntry(db, topicId, eraId, entry);
+    const resp = await requestUpdateTimelineEntry(topicId, eraId, entry);
     if (resp) {
       setIncrement(increment + 1);
     }
   };
 
   const deleteEntry = async (entry: ITimelineEntry) => {
-    if (!db || !topicId || !eraId) {
+    if (!topicId || !eraId) {
       return;
     }
-    const resp = await requestDeleteTimelineEntry(db, topicId, eraId, entry);
+    const resp = await requestDeleteTimelineEntry(topicId, eraId, entry);
     if (resp) {
       setIncrement(increment + 1);
     }

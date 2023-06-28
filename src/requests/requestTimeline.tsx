@@ -1,124 +1,70 @@
 import {
-  Firestore,
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  orderBy,
-  query,
-  setDoc,
-} from "firebase/firestore";
-import {
-  EntryType,
   ITimelineEntry,
   ITimelineEntryCreate,
 } from "../interfaces/timelineEntry.interface";
+import api from "./apis";
+import { Server } from "../config/server";
+import { Query } from "appwrite";
 
-export const requestTimeline = async (
-  db: Firestore | null,
-  topicId?: string,
-  eraId?: string
-) => {
-  if (!db || !topicId || !eraId) {
+export const requestTimeline = async (eraId?: string) => {
+  if (!eraId) {
     return {
-      data: [],
-      error: "No db or topicId or eraId",
+      data: [] as ITimelineEntry[],
+      error: "No eraId",
     };
   }
-
-  const timelineSnashot = await getDocs(
-    query(
-      collection(db, "Topics", topicId, "Era", eraId, "timeline"),
-      orderBy("order")
-    )
+  const data = await api.listDocuments(
+    Server.databaseID,
+    Server.timelineEntryCollectionId,
+    [Query.equal("EraId", [eraId])]
   );
-
-  const timeline: ITimelineEntry[] = [];
-  timelineSnashot.forEach((doc) => {
-    const data = doc.data();
-    if (data.type === EntryType.CoverPost) {
-      timeline.push({
-        id: doc.id,
-        type: EntryType.CoverPost,
-        description: data.description,
-        title: data.title,
-        entryId: data.entry,
-        order: data.order,
-      });
-    } else if (data.type === EntryType.Collection) {
-      timeline.push({
-        id: doc.id,
-        type: EntryType.Collection,
-        title: data.title,
-        entryIds: data.entries,
-        order: data.order,
-      });
-    } else if (data.type === EntryType.QuickLinks) {
-      timeline.push({
-        id: doc.id,
-        type: EntryType.QuickLinks,
-        links: data.links,
-        order: data.order,
-      });
-    } else if (data.type === EntryType.Media) {
-      timeline.push({
-        id: doc.id,
-        type: EntryType.Media,
-        title: data.title,
-        description: data.description,
-        timestamp: new Date(data.timestamp.seconds * 1000),
-        entryType: data.entryType,
-        link: data.link,
-        order: data.order,
-      });
-    }
-  });
-
+  if (data.documents) {
+    return {
+      data: data.documents as ITimelineEntry[],
+      error: undefined,
+    };
+  }
   return {
-    data: timeline,
-    error: null,
+    data: [] as ITimelineEntry[],
+    error: "No data",
   };
 };
 
 export const requestCreateTimelineEntry = async (
-  db: Firestore | null,
   topicId: string,
   eraId: string,
   entry: ITimelineEntryCreate
 ) => {
-  if (!db || !topicId || !eraId || !entry) return false;
+  if (!topicId || !eraId || !entry) return false;
 
-  await addDoc(collection(db, "Topics", topicId, "Era", eraId, "timeline"), {
-    ...entry,
-  });
+  // await addDoc(collection(db, "Topics", topicId, "Era", eraId, "timeline"), {
+  //   ...entry,
+  // });
   return true;
 };
 
 export const requestUpdateTimelineEntry = async (
-  db: Firestore | null,
   topicId: string,
   eraId: string,
   entry: ITimelineEntry
 ) => {
-  if (!db || !topicId || !eraId || !entry) return false;
+  if (!topicId || !eraId || !entry) return false;
 
-  await setDoc(doc(db, "Topics", topicId, "Era", eraId, "timeline", entry.id), {
-    ...entry,
-  });
+  // await setDoc(doc(db, "Topics", topicId, "Era", eraId, "timeline", entry.id), {
+  //   ...entry,
+  // });
   return true;
 };
 
 export const requestDeleteTimelineEntry = async (
-  db: Firestore | null,
   topicId: string,
   eraId: string,
   entry: ITimelineEntry
 ) => {
-  if (!db || !topicId || !eraId || !entry) return false;
+  if (!topicId || !eraId || !entry) return false;
 
-  await deleteDoc(
-    doc(db, "Topics", topicId, "Era", eraId, "timeline", entry.id)
-  );
+  // await deleteDoc(
+  //   doc(db, "Topics", topicId, "Era", eraId, "timeline", entry.id)
+  // );
   return true;
 };

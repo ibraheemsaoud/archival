@@ -2,10 +2,8 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { Box, Button, Dialog, DialogTitle, TextField } from "@mui/material";
 import { useState } from "react";
 import { requestCreateEntry } from "../../../requests";
-import { useFirebase } from "../../../hooks";
 import { useLoaderData } from "react-router-dom";
 import { IEra } from "../../../interfaces/era.interface";
-import { ITopic } from "../../../interfaces/topic.interface";
 
 interface SimpleDialogProps {
   open: boolean;
@@ -13,12 +11,9 @@ interface SimpleDialogProps {
 }
 
 export const SuggestNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
-  const { era, topic } = useLoaderData() as any as {
+  const { era } = useLoaderData() as any as {
     era: IEra;
-    topic: ITopic;
   };
-  const { db } = useFirebase();
-
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [text, setText] = useState("");
@@ -43,7 +38,7 @@ export const SuggestNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
 
   const createEntry = () => {
     if (!title || !date) return;
-    requestCreateEntry(db, topic.id, era.id, {
+    requestCreateEntry(era.id, {
       title,
       link,
       text,

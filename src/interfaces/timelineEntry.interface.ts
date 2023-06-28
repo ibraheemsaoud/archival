@@ -75,7 +75,18 @@ export interface ICollection {
   entries?: IEntry[];
 }
 
-export type ITimelineEntry = IQuickLinks | IMedia | ICoverPost | ICollection;
+export interface ITimelineEntry {
+  EraId: string;
+  order: number;
+  type: EntryType;
+  title?: string;
+  description?: string;
+  timestamp?: Date;
+  link?: string;
+  entryId?: string;
+  entryIds?: string[];
+  links?: string[];
+}
 export type ITimelineEntryCreate =
   | IQuickLinksCreate
   | IMediaCreate

@@ -4,11 +4,8 @@ import { TopicList, topicListLoader } from "../../screens/TopicList";
 import { EraList, eraListLoader } from "../../screens/EraList";
 import { Era, eraLoader } from "../../screens/Era";
 import { Entry, entryLoader } from "../../screens/Entry";
-import { useFirebase } from "../../hooks";
 
 export const Router = () => {
-  const { db } = useFirebase();
-
   const router = createBrowserRouter([
     {
       path: HOME,
@@ -23,7 +20,7 @@ export const Router = () => {
     {
       path: ERA,
       element: <Era />,
-      loader: eraLoader(db),
+      loader: eraLoader(),
     },
     {
       path: ENTRY,
