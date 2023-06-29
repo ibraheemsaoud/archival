@@ -1,11 +1,9 @@
 import { IEntry, IEntryCreate } from "../interfaces/entry.interface";
 import { Server } from "../config/server";
-import { Query } from "appwrite";
+import { Permission, Query, Role } from "appwrite";
 import api from "./apis";
 
-export const requestEntries = async (
-  eraId?: string
-) => {
+export const requestEntries = async (eraId?: string) => {
   if (!eraId) {
     return {
       data: [] as IEntry[],
@@ -29,17 +27,37 @@ export const requestEntries = async (
   };
 };
 
+const turnStringToValidTeamName = (eraId: string) => {
+  return eraId.slice(0, 36);
+};
+
 export const requestCreateEntry = async (
   eraId: string,
   entry: IEntryCreate
 ) => {
-  if (!eraId || !entry) return false;
-
-  // await addDoc(collection(db, "Topics", topicId, "Era", eraId, "Entry"), {
-  //   link: entry.link,
-  //   text: entry.text,
-  //   timestamp: entry.timestamp,
-  //   title: entry.title,
-  // } as IEntryCreate);
-  return true;
+  if (!eraId || !entry) return { data: false, error: "No eraId or entry" };
+  try {
+    const data = await api.createDocument(
+      Server.databaseID,
+      Server.entryCollectionId,
+      { ...entry, eraId },
+      [
+        Permission.read(Role.team(turnStringToValidTeamName(eraId))),
+        Permission.update(Role.team(turnStringToValidTeamName(eraId))),
+        Permission.delete(Role.team(turnStringToValidTeamName(eraId))),
+      ]
+    );
+    if (data.documents) {
+      return true;
+    }
+  } catch (error) {
+    return {
+      data: false,
+      error: error as string,
+    }
+  }
+  return {
+    data: false,
+    error: "Something went wrong",
+  };
 };
