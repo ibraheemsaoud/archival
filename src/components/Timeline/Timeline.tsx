@@ -3,7 +3,6 @@ import {
   ICollection,
   ICoverPost,
   IMedia,
-  IQuickLinks,
   ITimelineEntry,
 } from "../../interfaces/timelineEntry.interface";
 import { Collection, CoverPost, Media, QuickLinks } from "./components";
@@ -14,29 +13,29 @@ export const Timeline = ({ timeline }: { timeline: ITimelineEntry[] }) => {
       {timeline.map((entry) => {
         switch (entry.type) {
           case EntryType.CoverPost:
-            const coverPost: ICoverPost= {
+            const coverPost: ICoverPost = {
               ...entry,
               type: EntryType.CoverPost,
-              title: entry.title || '',
-              entryId: entry.entryId || '',
-            }
+              title: entry.title || "",
+              entryId: entry.entryId || "",
+            };
             return <CoverPost coverPost={coverPost} key={entry.$id} />;
           case EntryType.Collection:
             const collection: ICollection = {
               ...entry,
               type: EntryType.Collection,
-              title: entry.title || '',
-              entryIds: entry.entryIds || [] as string[],
-            }
+              title: entry.title || "",
+              entryIds: entry.entryIds || ([] as string[]),
+            };
             return <Collection collection={collection} key={entry.$id} />;
           case EntryType.Media:
-            const media: IMedia= {
+            const media: IMedia = {
               ...entry,
               type: EntryType.Media,
-              title: entry.title || '',
-              link: entry.link || '',
+              title: entry.title || "",
+              link: entry.link || "",
               timestamp: entry.timestamp || new Date(),
-            }
+            };
             return <Media media={media} key={entry.$id} />;
           case EntryType.QuickLinks:
             return <QuickLinks entry={entry} key={entry.$id} />;
