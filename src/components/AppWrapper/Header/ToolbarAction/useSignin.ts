@@ -1,40 +1,25 @@
 import { useState } from "react";
-import { sendSignInLinkToEmail, signInWithRedirect } from "firebase/auth";
 import {
-  useFirebase,
   useLocalStorage,
-  GoogleProvider,
 } from "../../../../hooks";
-import jsonPackage from "../../../../../package.json";
+import { requestLogin } from "../../../../requests";
 
 export const useSignin = () => {
-  const [emailSent, setEmailSent] = useState(false);
   const [email, setEmail] = useState("");
-  const { firebaseAuth } = useFirebase();
-  const { setEmail: setLSEmail } = useLocalStorage();
-
-  const signInWithEmail = (email: string) => {
-    if (!firebaseAuth) return undefined;
-    return sendSignInLinkToEmail(firebaseAuth, email, {
-      url: jsonPackage.homepage,
-      handleCodeInApp: true,
-    });
-  };
-
-  const signInWithGoogle = async () => {
-    if (!firebaseAuth) return undefined;
-    signInWithRedirect(firebaseAuth, GoogleProvider);
-  };
+  const [password, setPassword] = useState("");
+  const {} = useLocalStorage();
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
 
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
   const handleSignInWithEmail = async () => {
     try {
-      setLSEmail(email);
-      await signInWithEmail(email);
-      setEmailSent(true);
+      await requestLogin(email, password);
     } catch (error) {
       console.error(error);
     }
@@ -42,9 +27,9 @@ export const useSignin = () => {
 
   return {
     email,
+    password,
     handleEmailChange,
     handleSignInWithEmail,
-    signInWithGoogle,
-    emailSent,
+    handlePasswordChange
   };
 };

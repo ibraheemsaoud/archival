@@ -6,9 +6,9 @@ export const Signin = () => {
   const {
     handleEmailChange,
     handleSignInWithEmail,
-    signInWithGoogle,
+    handlePasswordChange,
     email,
-    emailSent,
+    password,
   } = useSignin();
 
   const [open, setOpen] = useState(false);
@@ -19,20 +19,6 @@ export const Signin = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  if (emailSent) {
-    return (
-      <>
-        <Dialog onClose={handleClose} open={open}>
-          <DialogTitle variant="h5">
-            Email is sent, check your email for a login link
-          </DialogTitle>
-        </Dialog>
-        <Button onClick={handleClickOpen} variant="contained">
-          Login
-        </Button>
-      </>
-    );
-  }
   return (
     <>
       <Dialog onClose={handleClose} open={open}>
@@ -72,6 +58,17 @@ export const Signin = () => {
                 onChange={handleEmailChange}
                 sx={{ marginBottom: 1 }}
               />
+              <TextField
+                id="password"
+                label="Password"
+                variant="outlined"
+                fullWidth
+                size="small"
+                value={password}
+                onChange={handlePasswordChange}
+                sx={{ marginBottom: 1 }}
+                type="password"
+              />
               <Button
                 variant="contained"
                 fullWidth
@@ -80,10 +77,6 @@ export const Signin = () => {
                 Sign In With Email
               </Button>
             </Box>
-            OR
-            <Button variant="contained" onClick={signInWithGoogle} fullWidth>
-              Sign In With Google
-            </Button>
           </Box>
         </div>
       </Dialog>

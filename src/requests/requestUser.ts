@@ -1,55 +1,46 @@
-import { doc, getDoc, Firestore, setDoc } from "firebase/firestore";
-import { IExtendedUser } from "../interfaces/extendedUser.interface";
+import api from "./apis";
 
-export const requestUser = async (db: Firestore | null, userId?: string) => {
-  if (!userId || !db)
+export const requestUser = async () => {
+  try {
+    const data = await api.getAccount();
     return {
-      data: undefined,
-      error: "no id provided",
-    };
-  const userSnapshot = await getDoc(doc(db, "User", userId));
-  if (userSnapshot.exists()) {
-    return {
-      data: {
-        username: userSnapshot.data().username,
-        admin: userSnapshot.data().admin,
-      } as IExtendedUser,
+      data,
       error: undefined,
     };
-  } else {
+  } catch (e) {
     return {
       data: undefined,
-      error:
-        "failed to load user, server might be down or you loaded the incorrect topic",
+      error: "failed to get user",
     };
   }
 };
 
-export const requsetCreateUser = async (
-  db: Firestore | null,
-  userId?: string,
-  username?: string
-) => {
-  if (!userId || !db || !username)
+export const requestLogin = async (username: string, password: string) => {
+  try {
+    await api.createSession(username, password);
     return {
-      data: undefined,
-      error: "no id provided",
-    };
-  const userSnapshot = await getDoc(doc(db, "User", userId));
-  if (userSnapshot.exists()) {
-    return {
-      data: undefined,
-      error: "user already exists",
-    };
-  } else {
-    await setDoc(doc(db, "User", userId), {
-      username: username,
-    });
-    return {
-      data: {
-        username: username,
-      } as IExtendedUser,
+      data: true,
       error: undefined,
+    };
+  } catch (e) {
+    return {
+      data: undefined,
+      error: "failed to login, server might be down",
     };
   }
 };
+
+export const requestLogout = async () => {
+  try {
+    await api.deleteCurrentSession();
+    return {
+      data: true,
+      error: undefined,
+    };
+  } catch (e) {
+    return {
+      data: undefined,
+      error: "failed to logout, server might be down",
+    };
+  }
+}

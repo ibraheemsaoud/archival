@@ -1,5 +1,4 @@
 import { useState, MouseEvent } from "react";
-import { useFirebase } from "../../../../hooks";
 import {
   Avatar,
   Box,
@@ -10,9 +9,10 @@ import {
   Typography,
 } from "@mui/material";
 import { Signin } from "./Signin";
+import { useUser } from "../../../../hooks/useUser";
 
 export const ToolbarAction = () => {
-  const { user, isLoading, signOut } = useFirebase();
+  const { user, isLoading, logout } = useUser();
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const isLoggedIn = !!user;
@@ -24,7 +24,7 @@ export const ToolbarAction = () => {
     setAnchorElUser(null);
   };
   const handleLogout = () => {
-    signOut();
+    logout();
     handleCloseUserMenu();
   };
 
@@ -36,7 +36,7 @@ export const ToolbarAction = () => {
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt={user.displayName} src={user.photoURL} />
+          <Avatar alt={user.name} src={''} />
         </IconButton>
       </Tooltip>
       <Menu
