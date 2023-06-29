@@ -16,7 +16,7 @@ export const requestEra = async (eraId?: string) => {
   );
   if (data.documents) {
     return {
-      data: data.documents,
+      data: data.documents[0],
       error: undefined,
     };
   }

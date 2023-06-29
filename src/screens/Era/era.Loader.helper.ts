@@ -30,8 +30,7 @@ export const eraLoader =
       }
       return entry;
     });
-    console.log(entries.data);
-    console.log(timeline.data);
+
     return {
       topic: topic.data,
       era: era.data,

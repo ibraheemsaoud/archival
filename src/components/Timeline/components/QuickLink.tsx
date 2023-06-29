@@ -24,8 +24,9 @@ export const QuickLinks = ({ entry }: { entry: ITimelineEntry }) => {
             component={NavLink}
             to={link.link}
             sx={{
-              marginBottom: { xs: 1, sm: 0 },
-              marginLeft: { xs: 0, sm: index !== 0 ? 2 : 0 },
+              marginBottom: { xs: 1, sm: 1 },
+              marginLeft: { xs: 0, sm: 1 },
+              marginRight: { xs: 0, sm: 1 },
               width: { xs: "100%", sm: "auto" },
             }}
             target="_blank"
