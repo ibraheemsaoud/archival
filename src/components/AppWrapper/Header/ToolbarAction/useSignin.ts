@@ -1,13 +1,10 @@
 import { useState } from "react";
-import {
-  useLocalStorage,
-} from "../../../../hooks";
-import { requestLogin } from "../../../../requests";
+import { useUser } from "../../../../hooks";
 
 export const useSignin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {} = useLocalStorage();
+  const { login } = useUser();
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -18,11 +15,7 @@ export const useSignin = () => {
   };
 
   const handleSignInWithEmail = async () => {
-    try {
-      await requestLogin(email, password);
-    } catch (error) {
-      console.error(error);
-    }
+    login(email, password);
   };
 
   return {
@@ -30,6 +23,6 @@ export const useSignin = () => {
     password,
     handleEmailChange,
     handleSignInWithEmail,
-    handlePasswordChange
+    handlePasswordChange,
   };
 };

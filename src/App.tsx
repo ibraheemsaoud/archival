@@ -13,6 +13,7 @@ import { theme } from "./theme";
 
 import { Client } from "appwrite";
 import { Server } from "./config/server";
+import { UserProvider } from "./hooks";
 
 function App() {
   const modedTheme = theme("light");
@@ -34,7 +35,9 @@ function App() {
       <CssBaseline enableColorScheme />
       <QueryClientProvider client={queryClient}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <Router />
+          <UserProvider>
+            <Router />
+          </UserProvider>
         </LocalizationProvider>
       </QueryClientProvider>
     </ThemeProvider>
