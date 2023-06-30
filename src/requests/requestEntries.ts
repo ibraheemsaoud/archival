@@ -17,7 +17,10 @@ export const requestEntries = async (eraId?: string) => {
   );
   if (data.documents) {
     return {
-      data: data.documents as IEntry[],
+      data: (data.documents as IEntry[]).map((entry) => ({
+        ...entry,
+        timestamp: new Date(entry.timestamp),
+      })),
       error: undefined,
     };
   }

@@ -16,4 +16,5 @@ export interface IEra {
   isPublic: boolean; 
   coverImageUrl: string;
   disableSuggestions: boolean;
+  accentColor?: string;
 }
