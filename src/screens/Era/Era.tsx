@@ -7,6 +7,7 @@ import { ITimelineEntry } from "../../interfaces/timelineEntry.interface";
 import { EditEra } from "./Edit/EditEra";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "../../theme";
+import { useUser } from "../../hooks";
 
 export const Era = () => {
   const { era, timeline } = useLoaderData() as any as {
@@ -14,7 +15,7 @@ export const Era = () => {
     timeline: ITimelineEntry[];
   };
   const modedTheme = theme("light", era.accentColor);
-  const hasEditAccess = false;
+  const { isAdmin } = useUser();
 
   if (!era) return <div>Not found</div>;
 
@@ -23,11 +24,11 @@ export const Era = () => {
     <ThemeProvider theme={modedTheme}>
     <AppWrapper>
       
-      {hasEditAccess && <EditEra />}
+      {isAdmin && <EditEra />}
       <Box textAlign="center" marginTop={6}>
         <Timeline timeline={timeline} />
         {!era.disableSuggestions && <SuggestNewEntry />}
-        {hasEditAccess && <EditTimeline />}
+        {isAdmin && <EditTimeline />}
       </Box>
     </AppWrapper>
     </ThemeProvider>

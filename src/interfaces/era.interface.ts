@@ -7,6 +7,7 @@ export interface IEraCreate {
 }
 
 export interface IEra {
+  $id: string;
   id: string;
   title: string;
   topicId: string;

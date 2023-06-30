@@ -12,7 +12,7 @@ export const EraCreator = ({ topicId }: { topicId: string }) => {
   const [description, setDescription] = useState("");
 
   const onClick = async () => {
-    const {error, data} = await requestCreateEra(topicId, {
+    const { error } = await requestCreateEra(topicId, {
       title,
       description,
       coverImageUrl,

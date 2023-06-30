@@ -57,7 +57,7 @@ export const requestCreateEra = async (topicId: string, era: IEraCreate) => {
       error: "no topic id provided",
     };
   }
-  const newEra: IEra = {
+  const newEra = {
     ...era,
     isPublic: false,
     disableSuggestions: false,
@@ -91,9 +91,39 @@ export const requestCreateEra = async (topicId: string, era: IEraCreate) => {
 };
 
 export const requestUpdateEra = async (topicId: string, era: IEra) => {
-  if (!topicId || !era) return false;
-  // await setDoc(doc(db, "Topics", topicId, "Era", era.id), {
-  //   ...era,
-  // });
-  return true;
+  if (!topicId || !era) {
+    return {
+      data: undefined,
+      error: "no topic id provided",
+    };
+  }
+
+  const newEra = {
+    accentColor: era.accentColor,
+    coverImageUrl: era.coverImageUrl,
+    description: era.description,
+    disableSuggestions: era.disableSuggestions,
+    id: era.id,
+    isPublic: era.isPublic,
+    title: era.title,
+    topicId: era.topicId,
+  };
+
+  try {
+    const data = await api.updateDocument(
+      Server.databaseID,
+      Server.eraCollectionId,
+      era.$id,
+      newEra
+    );
+    return {
+      data: data.documents,
+      error: undefined,
+    };
+  } catch (error) {
+    return {
+      data: undefined,
+      error: error as string,
+    };
+  }
 };

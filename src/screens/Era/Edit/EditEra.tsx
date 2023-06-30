@@ -34,13 +34,21 @@ export const EditEra = () => {
   };
 
   const handleSave = async () => {
-    await requestUpdateEra(topic.id, editableEra);
-    window.location.reload();
-    handleClose();
+    const { error } = await requestUpdateEra(topic.id, editableEra);
+    if (error) {
+      console.error(error);
+    } else {
+      window.location.reload();
+      handleClose();
+    }
   };
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditableEra({ ...editableEra, title: e.target.value });
+  };
+
+  const onChangeAccentColor = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditableEra({ ...editableEra, accentColor: e.target.value });
   };
 
   const onChangeDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +63,9 @@ export const EditEra = () => {
     setEditableEra({ ...editableEra, isPublic: !!e.target.value });
   };
 
-  const onChangeDisableSuggestions = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeDisableSuggestions = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setEditableEra({ ...editableEra, disableSuggestions: !!e.target.value });
   };
 
@@ -94,6 +104,13 @@ export const EditEra = () => {
           value={editableEra.coverImageUrl}
           onChange={onChangeCoverImageUrl}
           sx={{ marginBottom: 2 }}
+        />
+        <TextField
+          id="standard-basic"
+          label="Accent Color"
+          variant="standard"
+          value={editableEra.accentColor}
+          onChange={onChangeAccentColor}
         />
         <TextField
           id="description"
