@@ -1,20 +1,18 @@
 export interface IEraCreate {
-  title: string;
   id: string;
-  ownerId: string;
+  title: string;
   description: string;
   coverImageUrl?: string;
+  accentColor?: string;
 }
 
 export interface IEra {
   id: string;
   title: string;
+  topicId: string;
   description: string;
-  creationDate: Date; // deprecated
-  ownerId: string; // deprecated?
-  startDate: Date; // deprecated?
   isPublic: boolean; 
-  coverImageUrl: string;
+  coverImageUrl?: string;
   disableSuggestions: boolean;
   accentColor?: string;
 }

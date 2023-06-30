@@ -8,6 +8,7 @@ interface UserContext {
   logout: () => Promise<void>;
   login: (username: string, password: string) => Promise<void>;
   isLoading: boolean;
+  isAdmin: boolean;
 }
 const userContext = createContext({
   user: undefined,
@@ -15,6 +16,7 @@ const userContext = createContext({
   logout: async () => {},
   login: async (username: string, password: string) => {},
   isLoading: false,
+  isAdmin: false,
 } as UserContext);
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
@@ -56,6 +58,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     getUser();
   }, []);
 
+  const isAdmin = user?.prefs.isAdmin === "true";
+
   return (
     <userContext.Provider
       value={{
@@ -64,6 +68,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         logout,
         login,
         isLoading,
+        isAdmin,
       }}
     >
       {children}

@@ -4,22 +4,26 @@ import { requestCreateEra } from "../../../requests";
 import { useUser } from "../../../hooks/useUser";
 
 export const EraCreator = ({ topicId }: { topicId: string }) => {
-  const { user } = useUser();
-  const isAdmin = false;
+  const { isAdmin } = useUser();
   const [title, setTitle] = useState("");
   const [id, setId] = useState("");
+  const [accentColor, setAccentColor] = useState("");
   const [coverImageUrl, setCoverImageUrl] = useState("");
   const [description, setDescription] = useState("");
 
   const onClick = async () => {
-    await requestCreateEra(topicId, {
+    const {error, data} = await requestCreateEra(topicId, {
       title,
       description,
       coverImageUrl,
       id,
-      ownerId: user!.$id,
+      accentColor,
     });
-    window.location.reload();
+    if (error) {
+      console.error(error);
+    } else {
+      window.location.reload();
+    }
   };
 
   const onChangeName = (event: any) => {
@@ -37,6 +41,10 @@ export const EraCreator = ({ topicId }: { topicId: string }) => {
 
   const onChangeDescription = (event: any) => {
     setDescription(event.target.value);
+  };
+
+  const onChangeAccentColor = (event: any) => {
+    setAccentColor(event.target.value);
   };
 
   if (!isAdmin) {
@@ -76,6 +84,13 @@ export const EraCreator = ({ topicId }: { topicId: string }) => {
         variant="standard"
         value={coverImageUrl}
         onChange={onChangeCoverImageUrl}
+      />
+      <TextField
+        id="standard-basic"
+        label="Accent Color"
+        variant="standard"
+        value={accentColor}
+        onChange={onChangeAccentColor}
       />
       <TextField
         id="standard-multiline-static"

@@ -12,7 +12,6 @@ import { IEntry } from "../../../interfaces/entry.interface";
 import { ITimelineEntry } from "../../../interfaces/timelineEntry.interface";
 import { ITopic } from "../../../interfaces/topic.interface";
 import { IEra } from "../../../interfaces/era.interface";
-import { DatePicker } from "@mui/x-date-pickers";
 import { requestUpdateEra } from "../../../requests";
 
 export const EditEra = () => {
@@ -50,10 +49,6 @@ export const EditEra = () => {
 
   const onChangeCoverImageUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditableEra({ ...editableEra, coverImageUrl: e.target.value });
-  };
-
-  const onChangeStartDate = (date: Date | null) => {
-    setEditableEra({ ...editableEra, startDate: date || new Date() });
   };
 
   const onChangeIsPublic = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -111,12 +106,6 @@ export const EditEra = () => {
           multiline
           minRows={2}
           maxRows={8}
-        />
-        <DatePicker
-          label="Start Date"
-          value={editableEra.startDate}
-          onChange={onChangeStartDate}
-          sx={{ marginBottom: 2 }}
         />
         <Box sx={{ marginBottom: 2 }}>
           <FormControlLabel

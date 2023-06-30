@@ -2,6 +2,7 @@ import { IEntry, IEntryCreate } from "../interfaces/entry.interface";
 import { Server } from "../config/server";
 import { Permission, Query, Role } from "appwrite";
 import api from "./apis";
+import { turnStringToValidTeamName } from "../helpers";
 
 export const requestEntries = async (eraId?: string) => {
   if (!eraId) {
@@ -30,10 +31,6 @@ export const requestEntries = async (eraId?: string) => {
   };
 };
 
-const turnStringToValidTeamName = (eraId: string) => {
-  return eraId.slice(0, 36);
-};
-
 export const requestCreateEntry = async (
   eraId: string,
   entry: IEntryCreate
@@ -57,7 +54,7 @@ export const requestCreateEntry = async (
     return {
       data: false,
       error: error as string,
-    }
+    };
   }
   return {
     data: false,
