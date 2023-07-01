@@ -1,4 +1,6 @@
+import { Models } from "appwrite";
 import api from "./apis";
+import { UserPreferences } from "typescript";
 
 export const requestUser = async () => {
   try {
@@ -56,6 +58,21 @@ export const requestLogout = async () => {
     return {
       data: undefined,
       error: "failed to logout, server might be down",
+    };
+  }
+}
+
+export const updateUserPrefs = async (prefs: UserPreferences) => {
+  try {
+    const data = await api.updateAccountPrefs(prefs);
+    return {
+      data,
+      error: undefined,
+    };
+  } catch (e) {
+    return {
+      data: undefined,
+      error: "failed to update user",
     };
   }
 }

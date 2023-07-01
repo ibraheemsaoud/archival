@@ -15,6 +15,7 @@ const api: {
     name: string
   ) => Promise<Models.User<any>>;
   getAccount: () => Promise<Models.User<any>>;
+  updateAccountPrefs: (prefs: Models.Preferences) => Promise<Models.User<any>>;
   createEmailSession: (
     email: string,
     password: string
@@ -61,6 +62,10 @@ const api: {
 
   createAccount: (email, password, name) => {
     return api.provider().account.create("unique()", email, password, name);
+  },
+
+  updateAccountPrefs: (prefs) => {
+    return api.provider().account.updatePrefs(prefs);
   },
 
   getAccount: () => {

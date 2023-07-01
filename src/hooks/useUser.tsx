@@ -1,6 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { requestLogin, requestLoginWithGoogle, requestLogout, requestUser } from "../requests";
+import {
+  requestLogin,
+  requestLoginWithGoogle,
+  requestLogout,
+  requestUser,
+  updateUserPrefs,
+} from "../requests";
 import { Models } from "appwrite";
+import { UserPreferences } from "typescript";
 
 interface UserContext {
   user?: Models.User<any>;
@@ -8,6 +15,7 @@ interface UserContext {
   logout: () => Promise<void>;
   loginWithPassword: (username: string, password: string) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
+  updatePrefs: (prefs: Models.Preferences) => Promise<void>;
   isLoading: boolean;
   isAdmin: boolean;
 }
@@ -17,6 +25,7 @@ const userContext = createContext({
   logout: async () => {},
   loginWithPassword: async (username: string, password: string) => {},
   loginWithGoogle: async () => {},
+  updatePrefs: async (prefs: Models.Preferences) => {},
   isLoading: false,
   isAdmin: false,
 } as UserContext);
@@ -65,6 +74,15 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const updatePrefs = async (prefs: Models.Preferences) => {
+    const { error } = await updateUserPrefs(prefs);
+    if (error) {
+      setError(error);
+    } else {
+      getUser();
+    }
+  };
+
   useEffect(() => {
     getUser();
   }, []);
@@ -79,6 +97,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         logout,
         loginWithPassword,
         loginWithGoogle,
+        updatePrefs,
         isLoading,
         isAdmin,
       }}

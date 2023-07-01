@@ -3,13 +3,16 @@ import {
   Avatar,
   Box,
   IconButton,
+  Link,
   Menu,
   MenuItem,
   Tooltip,
   Typography,
 } from "@mui/material";
+import { Link as NavLink } from "react-router-dom";
 import { Signin } from "./Signin";
 import { useUser } from "../../../../hooks/useUser";
+import { PROFILE } from "../../../../consts/links.const";
 
 export const ToolbarAction = () => {
   const { user, isLoading, logout } = useUser();
@@ -28,6 +31,10 @@ export const ToolbarAction = () => {
     handleCloseUserMenu();
   };
 
+  const handleProfileClick = () => {
+    handleCloseUserMenu();
+  };
+
   if (isLoading) return <>Loading...</>;
   if (!isLoggedIn) {
     return <Signin />;
@@ -36,7 +43,10 @@ export const ToolbarAction = () => {
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt={user.name} src={''} />
+          <Avatar
+            alt={user.prefs?.displayName || user.name}
+            src={user.prefs?.imageURL}
+          />
         </IconButton>
       </Tooltip>
       <Menu
@@ -55,6 +65,11 @@ export const ToolbarAction = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
+        <Link underline="hover" component={NavLink} to={PROFILE}>
+          <MenuItem onClick={handleProfileClick}>
+            <Typography textAlign="center">Profile</Typography>
+          </MenuItem>
+        </Link>
         <MenuItem onClick={handleLogout}>
           <Typography textAlign="center">Logout</Typography>
         </MenuItem>

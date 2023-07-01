@@ -1,9 +1,10 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { ENTRY, ERA, HOME, TOPIC } from "../../consts/links.const";
+import { ENTRY, ERA, HOME, PROFILE, TOPIC } from "../../consts/links.const";
 import { TopicList, topicListLoader } from "../../screens/TopicList";
 import { EraList, eraListLoader } from "../../screens/EraList";
 import { Era, eraLoader } from "../../screens/Era";
 import { Entry, entryLoader } from "../../screens/Entry";
+import { Profile } from "../../screens/Profile";
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -27,6 +28,11 @@ export const Router = () => {
       element: <Entry />,
       loader: entryLoader(),
     },
+    {
+      path: PROFILE,
+      element: <Profile />,
+      loader: topicListLoader(),
+    }
   ]);
 
   return <RouterProvider router={router} />;
