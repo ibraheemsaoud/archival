@@ -1,12 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { requestLogin, requestLogout, requestUser } from "../requests";
+import { requestLogin, requestLoginWithGoogle, requestLogout, requestUser } from "../requests";
 import { Models } from "appwrite";
 
 interface UserContext {
   user?: Models.User<any>;
   error?: string;
   logout: () => Promise<void>;
-  login: (username: string, password: string) => Promise<void>;
+  loginWithPassword: (username: string, password: string) => Promise<void>;
+  loginWithGoogle: () => Promise<void>;
   isLoading: boolean;
   isAdmin: boolean;
 }
@@ -14,7 +15,8 @@ const userContext = createContext({
   user: undefined,
   error: undefined,
   logout: async () => {},
-  login: async (username: string, password: string) => {},
+  loginWithPassword: async (username: string, password: string) => {},
+  loginWithGoogle: async () => {},
   isLoading: false,
   isAdmin: false,
 } as UserContext);
@@ -45,8 +47,17 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const login = async (username: string, password: string) => {
+  const loginWithPassword = async (username: string, password: string) => {
     const { error } = await requestLogin(username, password);
+    if (error) {
+      setError(error);
+    } else {
+      getUser();
+    }
+  };
+
+  const loginWithGoogle = async () => {
+    const { error } = await requestLoginWithGoogle();
     if (error) {
       setError(error);
     } else {
@@ -66,7 +77,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         user,
         error,
         logout,
-        login,
+        loginWithPassword,
+        loginWithGoogle,
         isLoading,
         isAdmin,
       }}

@@ -4,7 +4,7 @@ import { useUser } from "../../../../hooks";
 export const useSignin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useUser();
+  const { loginWithPassword, loginWithGoogle } = useUser();
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -14,8 +14,12 @@ export const useSignin = () => {
     setPassword(event.target.value);
   };
 
-  const handleSignInWithEmail = async () => {
-    login(email, password);
+  const handleSignInWithEmail = () => {
+    loginWithPassword(email, password);
+  };
+
+  const handleSignInWithGoogle = () => {
+    loginWithGoogle();
   };
 
   return {
@@ -24,5 +28,6 @@ export const useSignin = () => {
     handleEmailChange,
     handleSignInWithEmail,
     handlePasswordChange,
+    handleSignInWithGoogle,
   };
 };

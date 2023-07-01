@@ -7,6 +7,7 @@ export const Signin = () => {
     handleEmailChange,
     handleSignInWithEmail,
     handlePasswordChange,
+    handleSignInWithGoogle,
     email,
     password,
   } = useSignin();
@@ -75,6 +76,14 @@ export const Signin = () => {
                 onClick={handleSignInWithEmail}
               >
                 Sign In With Email
+              </Button>
+              OR
+              <Button
+                variant="contained"
+                fullWidth
+                onClick={handleSignInWithGoogle}
+              >
+                Sign In With Google
               </Button>
             </Box>
           </Box>

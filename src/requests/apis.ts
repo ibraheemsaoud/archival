@@ -15,7 +15,11 @@ const api: {
     name: string
   ) => Promise<Models.User<any>>;
   getAccount: () => Promise<Models.User<any>>;
-  createSession: (email: string, password: string) => Promise<Models.Session>;
+  createEmailSession: (
+    email: string,
+    password: string
+  ) => Promise<Models.Session>;
+  createGoogleSession: () => void | URL;
   deleteCurrentSession: () => Promise<{}>;
   createDocument: (
     databaseId: string,
@@ -64,8 +68,18 @@ const api: {
     return account.get();
   },
 
-  createSession: (email, password) => {
+  createEmailSession: (email, password) => {
     return api.provider().account.createEmailSession(email, password);
+  },
+
+  createGoogleSession: () => {
+    return api
+      .provider()
+      .account.createOAuth2Session(
+        "google",
+        "https://archivals.eu/",
+        "https://archivals.eu/"
+      );
   },
 
   deleteCurrentSession: () => {

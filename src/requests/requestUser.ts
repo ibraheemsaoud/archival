@@ -17,7 +17,22 @@ export const requestUser = async () => {
 
 export const requestLogin = async (username: string, password: string) => {
   try {
-    await api.createSession(username, password);
+    await api.createEmailSession(username, password);
+    return {
+      data: true,
+      error: undefined,
+    };
+  } catch (e) {
+    return {
+      data: undefined,
+      error: "failed to login, server might be down",
+    };
+  }
+};
+
+export const requestLoginWithGoogle = async () => {
+  try {
+    await api.createGoogleSession();
     return {
       data: true,
       error: undefined,
