@@ -1,3 +1,5 @@
+import { IAppWrite } from "./appwrite.interface";
+
 export interface IEraCreate {
   id: string;
   title: string;
@@ -6,8 +8,7 @@ export interface IEraCreate {
   accentColor?: string;
 }
 
-export interface IEra {
-  $id: string;
+export interface IEra extends IAppWrite {
   id: string;
   title: string;
   topicId: string;
