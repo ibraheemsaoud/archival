@@ -4,7 +4,7 @@ import { AppWrapper } from "../../components";
 import { useState } from "react";
 
 export const Profile = () => {
-  const { user, updatePrefs } = useUser();
+  const { isLoading, user, updatePrefs } = useUser();
   const [displayName, setDisplayName] = useState<string>("");
   const [imageURL, setImageURL] = useState<string>("");
 
@@ -19,8 +19,12 @@ export const Profile = () => {
   };
 
   const onUpdate = () => {
-    updatePrefs({ displayName, imageURL });
+    updatePrefs({ ...user?.prefs, displayName, imageURL });
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <AppWrapper>

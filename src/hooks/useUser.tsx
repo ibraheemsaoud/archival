@@ -7,7 +7,6 @@ import {
   updateUserPrefs,
 } from "../requests";
 import { Models } from "appwrite";
-import { UserPreferences } from "typescript";
 
 interface UserContext {
   user?: Models.User<any>;

@@ -25,7 +25,16 @@ export const TopicCard = ({ topic }: { topic: ITopic }) => {
             <Typography gutterBottom variant="h5" component="div">
               {title}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{
+                display: "-webkit-box",
+                "-webkit-line-clamp": '3',
+                "-webkit-box-orient": "vertical",
+                overflow: "hidden",
+              }}
+            >
               {description}
             </Typography>
           </CardContent>
