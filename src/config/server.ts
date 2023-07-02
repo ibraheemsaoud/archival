@@ -7,4 +7,5 @@ export const Server = {
   entryCollectionId: "649ca13728f347564b42",
   linkCollectionId: "649ca0e277262eb90955",
   timelineEntryCollectionId: "649c4faf1ac8b45aa245",
+  commentCollectionId: "64a18d376e6f15bb5b68",
 }

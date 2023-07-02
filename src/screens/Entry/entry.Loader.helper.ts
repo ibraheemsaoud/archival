@@ -1,22 +1,17 @@
 import { Params } from "react-router-dom";
-import {
-  // requestComments,
-  requestTopic,
-  // useRequestEntry,
-  requestEra,
-} from "../../requests";
+import { requestEntry, requestEra, requestComments } from "../../requests";
 
 export const entryLoader =
   () =>
   async ({ params }: { params: Params<string> }) => {
-    const [topic, era] = await Promise.all([
-      requestTopic(params.topicId),
+    const [era, entry, comments] = await Promise.all([
       requestEra(params.eraId),
+      requestEntry(params.entryId),
+      requestComments(params.entryId),
     ]);
     return {
-      topic: topic.data,
       era: era.data,
-      // entry,
-      // comments,
+      entry: entry.data,
+      comments: comments.data,
     };
   };

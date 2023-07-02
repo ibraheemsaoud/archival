@@ -13,9 +13,10 @@ export const Comment = ({ comment }: { comment: IComment }) => {
         marginY: 4,
       })}
     >
-      <Typography variant="body2">{comment.content}</Typography>
+      <Typography variant="body2">{comment.message}</Typography>
       <Typography variant="body2" textAlign="end">
-        <Link>{comment.userId}</Link> - {comment.timestamp.toLocaleString()}
+        <Link>{comment.userId}</Link> -{" "}
+        {new Date(comment.$createdAt).toLocaleString()}
       </Typography>
     </Box>
   );

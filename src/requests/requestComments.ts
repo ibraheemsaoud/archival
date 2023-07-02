@@ -1,64 +1,56 @@
-import { IComment } from "../interfaces/comment.interface";
+import { Permission, Query, Role } from "appwrite";
+import { Server } from "../config/server";
+import { IComment, ICommentCreate } from "../interfaces/comment.interface";
+import api from "./apis";
 
-const list: IComment[] = [
-  {
-    id: "1",
-    content: "Comment 1",
-    timestamp: new Date(),
-    userId: "1",
-    entryId: "1",
-  },
-  {
-    id: "2",
-    content: "Comment 2",
-    timestamp: new Date(),
-    userId: "1",
-    entryId: "1",
-  },
-  {
-    id: "3",
-    content: "Comment 3",
-    timestamp: new Date(),
-    userId: "2",
-    entryId: "2",
-  },
-  {
-    id: "4",
-    content: "Comment 4",
-    timestamp: new Date(),
-    userId: "2",
-    entryId: "2",
-  },
-  {
-    id: "5",
-    content: "Comment 5",
-    timestamp: new Date(),
-    userId: "3",
-    entryId: "3",
-  },
-  {
-    id: "6",
-    content: "Comment 6",
-    timestamp: new Date(),
-    userId: "3",
-    entryId: "3",
-  },
-];
+export const requestComments = async (entryId?: string) => {
+  if (!entryId) {
+    return {
+      data: undefined,
+      error: "No entryId",
+    };
+  }
+  try {
+    const data = await api.listDocuments(
+      Server.databaseID,
+      Server.commentCollectionId,
+      [Query.equal("entryId", [entryId])]
+    );
 
-export const requestComment = (commentId: string) => {
-  const comment = list.filter((comment) => comment.id === commentId)?.[0];
-  return {
-    data: comment,
-    isLoading: false,
-    error: undefined,
-  };
+    return {
+      data: data.documents as IComment[],
+      error: undefined,
+    };
+  } catch (error) {
+    return {
+      data: undefined,
+      error: error as string,
+    };
+  }
 };
 
-export const requestComments = (entryId: string) => {
-  const comments = list.filter((comment) => comment.entryId === entryId);
-  return {
-    data: comments,
-    isLoading: false,
-    error: undefined,
-  };
+export const requestCreateComment = async (comment: ICommentCreate) => {
+  if (!comment) return { data: false, error: "No comment" };
+  try {
+    const data = await api.createDocument(
+      Server.databaseID,
+      Server.commentCollectionId,
+      { ...comment },
+      [
+        Permission.update(Role.user(comment.userId)),
+        Permission.delete(Role.user(comment.userId)),
+      ]
+    );
+    if (data.documents) {
+      return {
+        data: true,
+        error: undefined,
+      };
+    }
+  } catch (e) {
+    return {
+      data: false,
+      error: e as string,
+    };
+  }
 };

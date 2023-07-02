@@ -28,6 +28,11 @@ const api: {
     data: any,
     permissions: any
   ) => Promise<Models.Document>;
+  getDocument: (
+    databaseId: string,
+    collectionId: string,
+    documentId: string
+  ) => Promise<Models.Document>;
   listDocuments: (
     databaseId: string,
     collectionId: string,
@@ -101,6 +106,12 @@ const api: {
         data,
         permissions
       );
+  },
+
+  getDocument: (databaseId, collectionId, documentId) => {
+    return api
+      .provider()
+      .database.getDocument(databaseId, collectionId, documentId);
   },
 
   listDocuments: (databaseId, collectionId, queries) => {

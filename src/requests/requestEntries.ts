@@ -61,3 +61,32 @@ export const requestCreateEntry = async (
     error: "Something went wrong",
   };
 };
+
+export const requestEntry = async (entryId?: string) => {
+  if (!entryId) {
+    return {
+      data: undefined,
+      error: "No entryId",
+    };
+  }
+  try {
+    const data = await api.getDocument(
+      Server.databaseID,
+      Server.entryCollectionId,
+      entryId
+    );
+
+    return {
+      data: {
+        ...data,
+        timestamp: new Date(data.timestamp),
+      },
+      error: undefined,
+    };
+  } catch (error) {
+    return {
+      data: undefined,
+      error: error as string,
+    };
+  }
+};
