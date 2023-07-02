@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { ITimelineEntry } from "../../../../interfaces/timelineEntry.interface";
-import { Box, Button, TextField } from "@mui/material";
+import {
+  ILink,
+  ITimelineEntry,
+} from "../../../../interfaces/timelineEntry.interface";
+import { Autocomplete, Box, Button, TextField } from "@mui/material";
+import { useLoaderData } from "react-router-dom";
 
 interface IEditQuickLinks {
   entry: ITimelineEntry;
@@ -13,19 +17,20 @@ export const EditQuickLinks = ({
   onChange,
   onDelete,
 }: IEditQuickLinks) => {
-  const [links, setLinks] = useState(entry.links?.join(",") || "");
+  const { links } = useLoaderData() as any as {
+    links: ILink[];
+  };
 
-  const onChangeLinks = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLinks(e.target.value);
+  const [linkList, setLinkList] = useState(entry.links || []);
+
+  const onChangeLinks = (_: any, value: string[]) => {
+    setLinkList(value);
   };
 
   const onHandleChange = () => {
     onChange({
       ...entry,
-      links: links
-        .split(",")
-        .map((id) => id.trim())
-        .filter((id) => id !== ""),
+      links: linkList,
     });
   };
 
@@ -45,15 +50,17 @@ export const EditQuickLinks = ({
     >
       QuickLinks: Shows a set of links and titles.
       <br />
-      <TextField
-        id="standard-basic"
-        label="link IDs (comma separated)"
-        variant="standard"
-        fullWidth
-        value={links}
+      <Autocomplete
+        disablePortal
+        id="linkIds"
+        options={links.map((entry: ILink) => entry.$id)}
+        sx={{ marginY: 2 }}
         onChange={onChangeLinks}
-        multiline
-        maxRows={10}
+        defaultValue={linkList}
+        multiple
+        renderInput={(params) => (
+          <TextField {...params} label="link IDs (comma separated)" />
+        )}
       />
       <Button onClick={onHandleChange}>Update</Button>
       <Button onClick={onHandleDelete}>Delete</Button>

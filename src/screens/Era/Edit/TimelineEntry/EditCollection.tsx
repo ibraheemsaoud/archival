@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { ITimelineEntry } from "../../../../interfaces/timelineEntry.interface";
-import { Box, Button, TextField } from "@mui/material";
+import { Autocomplete, Box, Button, TextField } from "@mui/material";
+import { IEntry } from "../../../../interfaces/entry.interface";
+import { useLoaderData } from "react-router-dom";
 
 interface IEditCollection {
   entry: ITimelineEntry;
@@ -13,26 +15,25 @@ export const EditCollection = ({
   onChange,
   onDelete,
 }: IEditCollection) => {
+  const { entries } = useLoaderData() as any as {
+    entries: IEntry[];
+  };
+
   const [title, setTitle] = useState(entry.title || "");
-  const [listOfEntryIds, setListOfEntryIds] = useState(
-    entry.entryIds?.join(",") || ""
-  );
+  const [listOfEntryIds, setListOfEntryIds] = useState(entry.entryIds || []);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
-  const onChangeListOfEntryIds = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setListOfEntryIds(e.target.value);
+  const onChangeListOfEntryIds = (e: any, value: string[]) => {
+    setListOfEntryIds(value);
   };
 
   const onHandleChange = () => {
     onChange({
       ...entry,
       title,
-      entryIds: listOfEntryIds
-        .split(",")
-        .map((id) => id.trim())
-        .filter((id) => id !== ""),
+      entryIds: listOfEntryIds,
     });
   };
 
@@ -60,14 +61,17 @@ export const EditCollection = ({
         onChange={onChangeTitle}
         sx={{ marginBottom: 2 }}
       />
-      <TextField
-        id="standard-basic"
-        label="Entry IDs (comma separated)"
-        variant="standard"
-        fullWidth
-        value={listOfEntryIds}
-        onChange={onChangeListOfEntryIds}
+      <Autocomplete
+        disablePortal
+        id="entryIds"
+        options={entries.map((entry: IEntry) => entry.$id)}
         sx={{ marginBottom: 2 }}
+        onChange={onChangeListOfEntryIds}
+        defaultValue={listOfEntryIds}
+        multiple
+        renderInput={(params) => (
+          <TextField {...params} label="Entry IDs (comma separated)" />
+        )}
       />
       <Button onClick={onHandleChange}>Update</Button>
       <Button onClick={onHandleDelete}>Delete</Button>
