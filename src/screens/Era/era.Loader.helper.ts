@@ -36,5 +36,6 @@ export const eraLoader =
       era: era.data,
       timeline: timeline.data,
       entries: entries.data,
+      links: links.data,
     };
   };

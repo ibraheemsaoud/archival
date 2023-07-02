@@ -13,10 +13,7 @@ export const EditQuickLinks = ({
   onChange,
   onDelete,
 }: IEditQuickLinks) => {
-  const linksAsString = entry.links?.reduce((acc, link) => {
-    return `${acc}[${link}|${link.link}],`;
-  }, "");
-  const [links, setLinks] = useState(linksAsString || "");
+  const [links, setLinks] = useState(entry.links?.join(",") || "");
 
   const onChangeLinks = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLinks(e.target.value);
@@ -25,19 +22,10 @@ export const EditQuickLinks = ({
   const onHandleChange = () => {
     onChange({
       ...entry,
-      // links: links
-      //   .split(",")
-      //   .map((link) => {
-      //     const [title, linkUrl] = link
-      //       .replace("[", "")
-      //       .replace("]", "")
-      //       .split("|");
-      //     return {
-      //       title,
-      //       link: linkUrl,
-      //     };
-      //   })
-      //   .filter((link) => link.title !== ""),
+      links: links
+        .split(",")
+        .map((id) => id.trim())
+        .filter((id) => id !== ""),
     });
   };
 
@@ -57,12 +45,9 @@ export const EditQuickLinks = ({
     >
       QuickLinks: Shows a set of links and titles.
       <br />
-      extra sorry about this spesific mess.
-      <br />
-      write the array in this format: [name|link],[name|link]
       <TextField
         id="standard-basic"
-        label="links"
+        label="link IDs (comma separated)"
         variant="standard"
         fullWidth
         value={links}

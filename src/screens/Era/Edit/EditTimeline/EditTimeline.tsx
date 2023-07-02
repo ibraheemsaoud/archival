@@ -5,20 +5,25 @@ import {
   Dialog,
   DialogTitle,
   Grid,
+  TextField,
   Typography,
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import { IEntry } from "../../../../interfaces/entry.interface";
 import { EntryCard } from "../../../../components/Timeline/components/EntryCard";
 import { TimelineEditor } from "./TimelineEditor";
-import { ITimelineEntry } from "../../../../interfaces/timelineEntry.interface";
+import {
+  ILink,
+  ITimelineEntry,
+} from "../../../../interfaces/timelineEntry.interface";
 import { IEra } from "../../../../interfaces/era.interface";
 
 export const EditTimeline = () => {
-  const { timeline, entries, era } = useLoaderData() as any as {
+  const { timeline, entries, era, links } = useLoaderData() as any as {
     entries: IEntry[];
     timeline: ITimelineEntry[];
     era: IEra;
+    links: ILink[];
   };
   const [open, setOpen] = useState(false);
 
@@ -58,8 +63,48 @@ export const EditTimeline = () => {
             <Grid container>
               {entries.map((entry) => (
                 <Grid item xs={12} key={entry.$id}>
-                  <Typography variant="h5">id: {entry.$id}</Typography>
+                  <TextField
+                    id="entryId"
+                    label="Id"
+                    variant="standard"
+                    fullWidth
+                    defaultValue={entry.$id}
+                    disabled
+                    sx={{ marginBottom: 2 }}
+                  />
                   <EntryCard entry={entry} />
+                </Grid>
+              ))}
+              <Typography variant="h5">Links</Typography>
+              {links.map((link) => (
+                <Grid item xs={12} key={link.$id}>
+                  <TextField
+                    id="linkId"
+                    label="Id"
+                    variant="standard"
+                    fullWidth
+                    defaultValue={link.$id}
+                    disabled
+                    sx={{ marginBottom: 2 }}
+                  />
+                  <TextField
+                    id="linkTitle"
+                    label="Title"
+                    variant="standard"
+                    fullWidth
+                    defaultValue={link.title}
+                    disabled
+                    sx={{ marginBottom: 2 }}
+                  />
+                  <TextField
+                    id="LinkLink"
+                    label="Link"
+                    variant="standard"
+                    fullWidth
+                    defaultValue={link.link}
+                    disabled
+                    sx={{ marginBottom: 2 }}
+                  />
                 </Grid>
               ))}
             </Grid>
