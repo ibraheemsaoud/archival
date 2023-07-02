@@ -1,4 +1,3 @@
-import { Models } from "appwrite";
 import api from "./apis";
 import { UserPreferences } from "typescript";
 

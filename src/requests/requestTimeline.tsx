@@ -4,7 +4,8 @@ import {
 } from "../interfaces/timelineEntry.interface";
 import api from "./apis";
 import { Server } from "../config/server";
-import { Query } from "appwrite";
+import { Permission, Query, Role } from "appwrite";
+import { turnStringToValidTeamName } from "../helpers";
 
 export const requestTimeline = async (eraId?: string) => {
   if (!eraId) {
@@ -31,40 +32,95 @@ export const requestTimeline = async (eraId?: string) => {
 };
 
 export const requestCreateTimelineEntry = async (
-  topicId: string,
   eraId: string,
   entry: ITimelineEntryCreate
 ) => {
-  if (!topicId || !eraId || !entry) return false;
+  if (!eraId || !entry)
+    return {
+      error: "No eraId or entry",
+      data: undefined,
+    };
 
-  // await addDoc(collection(db, "Topics", topicId, "Era", eraId, "timeline"), {
-  //   ...entry,
-  // });
-  return true;
+  try {
+    await api.createDocument(
+      Server.databaseID,
+      Server.timelineEntryCollectionId,
+      entry,
+      [
+        Permission.read(Role.any()),
+        Permission.write(Role.team(turnStringToValidTeamName(eraId))),
+        Permission.delete(Role.team(turnStringToValidTeamName(eraId))),
+        Permission.update(Role.team(turnStringToValidTeamName(eraId))),
+      ]
+    );
+    return {
+      error: undefined,
+      data: true,
+    };
+  } catch (e) {
+    return {
+      error: e as string,
+      data: undefined,
+    };
+  }
 };
 
 export const requestUpdateTimelineEntry = async (
-  topicId: string,
   eraId: string,
   entry: ITimelineEntry
 ) => {
-  if (!topicId || !eraId || !entry) return false;
+  if (!eraId || !entry)
+    return {
+      error: "No eraId or entry",
+      data: undefined,
+    };
 
-  // await setDoc(doc(db, "Topics", topicId, "Era", eraId, "timeline", entry.id), {
-  //   ...entry,
-  // });
-  return true;
+  const { $id, $collectionId, $createdAt, $databaseId, $updatedAt, ...rest } =
+    entry;
+
+  try {
+    await api.updateDocument(
+      Server.databaseID,
+      Server.timelineEntryCollectionId,
+      entry.$id,
+      rest
+    );
+    return {
+      error: undefined,
+      data: true,
+    };
+  } catch (e) {
+    return {
+      error: e as string,
+      data: undefined,
+    };
+  }
 };
 
 export const requestDeleteTimelineEntry = async (
-  topicId: string,
   eraId: string,
   entry: ITimelineEntry
 ) => {
-  if (!topicId || !eraId || !entry) return false;
+  if (!eraId || !entry)
+    return {
+      error: "No eraId or entry",
+      data: undefined,
+    };
 
-  // await deleteDoc(
-  //   doc(db, "Topics", topicId, "Era", eraId, "timeline", entry.id)
-  // );
-  return true;
+  try {
+    await api.deleteDocument(
+      Server.databaseID,
+      Server.timelineEntryCollectionId,
+      entry.$id
+    );
+    return {
+      error: undefined,
+      data: true,
+    };
+  } catch (e) {
+    return {
+      error: e as string,
+      data: undefined,
+    };
+  }
 };

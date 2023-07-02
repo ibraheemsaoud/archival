@@ -71,22 +71,17 @@ export const EditEra = () => {
 
   if (!open)
     return (
-      <Button
-        variant="contained"
-        onClick={handleClickOpen}
-        sx={{
-          float: "right",
-        }}
-        color="brown"
-      >
-        Era Settings
-      </Button>
+      <Box display="flex" justifyContent="flex-end">
+        <Button variant="contained" onClick={handleClickOpen} color="brown">
+          Era Settings
+        </Button>
+      </Box>
     );
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} md={4} />
-      <Grid item xs={12} md={4}>
+      <Grid item xs={12} md={3} />
+      <Grid item xs={12} md={6}>
         <TextField
           id="title"
           label="Title"

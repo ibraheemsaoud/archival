@@ -1,9 +1,9 @@
 import { DatePicker } from "@mui/x-date-pickers";
 import { Box, Button, Dialog, DialogTitle, TextField } from "@mui/material";
 import { useState } from "react";
-import { requestCreateEntry } from "../../../requests";
+import { requestCreateEntry } from "../../../../requests";
 import { useLoaderData } from "react-router-dom";
-import { IEra } from "../../../interfaces/era.interface";
+import { IEra } from "../../../../interfaces/era.interface";
 
 interface SimpleDialogProps {
   open: boolean;

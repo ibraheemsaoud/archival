@@ -10,16 +10,14 @@ import {
   requestUpdateTimelineEntry,
 } from "../../../requests";
 
-export const useTimelineEditor = (topicId?: string, eraId?: string) => {
+export const useTimelineEditor = (eraId?: string) => {
   const [entries, setEntries] = useState<ITimelineEntry[]>([]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState<string | undefined>("");
   const [increment, setIncrement] = useState<number>(0);
 
   useEffect(() => {
-    const getEntries = async (
-      eraId: string
-    ) => {
+    const getEntries = async (eraId: string) => {
       const resp = await requestTimeline(eraId);
       setEntries(resp.data);
       setError(resp.error);
@@ -30,34 +28,35 @@ export const useTimelineEditor = (topicId?: string, eraId?: string) => {
   }, [eraId, increment]);
 
   const createNewEntry = async (entry: ITimelineEntryCreate) => {
-    if (!topicId || !eraId) {
-      return;
+    if (!eraId) {
+      return {
+        error: "No eraId",
+        data: undefined,
+      };
     }
-    const resp = await requestCreateTimelineEntry(topicId, eraId, entry);
-    // TODO handle error
-    // if (resp.error) {
-    //   setError(resp.error);
-    // } else
-    if (resp) {
+    const { error } = await requestCreateTimelineEntry(eraId, entry);
+    if (error) {
+      setError(error);
+    } else {
       setIncrement(increment + 1);
     }
   };
 
   const updateEntry = async (entry: ITimelineEntry) => {
-    if (!topicId || !eraId) {
+    if (!eraId) {
       return;
     }
-    const resp = await requestUpdateTimelineEntry(topicId, eraId, entry);
+    const resp = await requestUpdateTimelineEntry(eraId, entry);
     if (resp) {
       setIncrement(increment + 1);
     }
   };
 
   const deleteEntry = async (entry: ITimelineEntry) => {
-    if (!topicId || !eraId) {
+    if (!eraId) {
       return;
     }
-    const resp = await requestDeleteTimelineEntry(topicId, eraId, entry);
+    const resp = await requestDeleteTimelineEntry(eraId, entry);
     if (resp) {
       setIncrement(increment + 1);
     }

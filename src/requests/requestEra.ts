@@ -128,7 +128,6 @@ export const requestUpdateEra = async (topicId: string, era: IEra) => {
   }
 };
 
-
 export const requestDashboardEras = async () => {
   const data = await api.listDocuments(
     Server.databaseID,

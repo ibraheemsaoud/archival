@@ -1,3 +1,4 @@
+import { IAppWrite } from "./appwrite.interface";
 import { IEntry } from "./entry.interface";
 
 export enum EntryType {
@@ -73,8 +74,7 @@ export interface ICollection {
   entries?: IEntry[];
 }
 
-export interface ITimelineEntry {
-  $id: string;
+export interface ITimelineEntry extends IAppWrite {
   EraId: string;
   order: number;
   type: EntryType;
@@ -89,14 +89,30 @@ export interface ITimelineEntry {
   links?: string[];
   linksData?: ILink[];
 }
-export type ITimelineEntryCreate =
-  | IQuickLinksCreate
-  | IMediaCreate
-  | ICoverPostCreate
-  | ICollectionCreate;
 
-export interface ILink {
-  $id: string;
+export type ITimelineEntryCreate = {
+  EraId: string;
+  order: number;
+  type: EntryType;
+  title?: string;
+  description?: string;
+  timestamp?: Date;
+  link?: string;
+  entryId?: string;
+  entry?: IEntry;
+  entryIds?: string[];
+  entries?: IEntry[];
+  links?: string[];
+  linksData?: ILink[];
+};
+
+export interface ILink extends IAppWrite {
+  title: string;
+  link: string;
+  eraId: string;
+}
+
+export interface ILinkCreate {
   title: string;
   link: string;
   eraId: string;

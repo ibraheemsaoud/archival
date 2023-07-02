@@ -12,13 +12,10 @@ export const SuggestNewEntry = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <>
-      <Button
-        sx={{ position: "fixed", bottom: 4, right: 2 }}
-        variant="contained"
-        onClick={handleClickOpen}
-      >
+      <Button sx={{ bottom: 1 }} variant="contained" onClick={handleClickOpen}>
         Suggest New Entry
       </Button>
       <SuggestNewEntryDialog open={open} onClose={handleClose} />
