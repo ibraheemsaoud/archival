@@ -1,9 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import { IEntry } from "../../interfaces/entry.interface";
-import { IComment } from "../../interfaces/comment.interface";
 import { AppWrapper } from "../../components";
-import { ITopic } from "../../interfaces/topic.interface";
-import { IEra } from "../../interfaces/era.interface";
 import {
   Box,
   Card,
@@ -14,19 +11,19 @@ import {
 } from "@mui/material";
 import { useRequestLinkPreview } from "../../requests/external";
 import { Comment } from "./Comment";
+import { CreateComment } from "./CreateComment";
+import { useRequestComments } from "../../requests/useRequestComments";
 
 export const Entry = () => {
-  const { entry, comments } = useLoaderData() as any as {
-    topic: ITopic;
-    era: IEra;
+  const { entry } = useLoaderData() as any as {
     entry: IEntry;
-    comments: IComment[];
   };
+  const { data: comments, isLoading } = useRequestComments(entry?.$id);
 
   const { data } = useRequestLinkPreview(entry?.link);
 
   if (!entry) return <div>Not found</div>;
-  if (!comments) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <AppWrapper>
@@ -59,13 +56,17 @@ export const Entry = () => {
                   {data.description}
                 </Typography>
               )}
-              <Grid>
-                {comments.map((comment) => (
-                  <Comment key={comment.$id} comment={comment} />
-                ))}
-              </Grid>
             </CardContent>
           </Card>
+
+          <Box paddingTop={4}>
+            <CreateComment entryId={entry.$id} />
+            <Box marginTop={4}>
+              {comments?.map((comment) => (
+                <Comment key={comment.$id} comment={comment} />
+              ))}
+            </Box>
+          </Box>
         </Grid>
         <Grid item xs={12} md={3}>
           <Box
@@ -78,7 +79,8 @@ export const Entry = () => {
               minHeight: 400,
             })}
           >
-            chat
+            <Typography variant="h5">Chat</Typography>
+            <Typography variant="body2">coming soon...</Typography>
           </Box>
         </Grid>
       </Grid>
