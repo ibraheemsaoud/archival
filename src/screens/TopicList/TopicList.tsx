@@ -40,7 +40,7 @@ export const TopicList = () => {
       <Grid container spacing={2}>
         {eras?.map((era) => (
           <Grid item xs={12} md={6} lg={4} key={`ERA_CARD_${era.id}`}>
-            <EraCard era={era} topicId={"-1"} />
+            <EraCard era={era} topicId={era.topicId} />
           </Grid>
         ))}
       </Grid>

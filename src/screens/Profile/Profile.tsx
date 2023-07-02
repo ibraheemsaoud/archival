@@ -5,8 +5,8 @@ import { useState } from "react";
 
 export const Profile = () => {
   const { isLoading, user, updatePrefs } = useUser();
-  const [displayName, setDisplayName] = useState<string>("");
-  const [imageURL, setImageURL] = useState<string>("");
+  const [displayName, setDisplayName] = useState<string>(user?.prefs?.displayName || "");
+  const [imageURL, setImageURL] = useState<string>(user?.prefs?.imageURL || "");
 
   const handleDisplayNameChange = (
     event: React.ChangeEvent<HTMLInputElement>
