@@ -3,8 +3,10 @@ import {
   requestLogin,
   requestLoginWithGoogle,
   requestLogout,
+  requestSignUp,
   requestUser,
   updateUserPrefs,
+  verifyEmail,
 } from "../requests";
 import { Models } from "appwrite";
 
@@ -12,6 +14,11 @@ interface UserContext {
   user?: Models.User<any>;
   error?: string;
   logout: () => Promise<void>;
+  signUpWithEmail: (
+    email: string,
+    password: string,
+    name: string
+  ) => Promise<void>;
   loginWithPassword: (username: string, password: string) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
   updatePrefs: (prefs: Models.Preferences) => Promise<void>;
@@ -22,6 +29,7 @@ const userContext = createContext({
   user: undefined,
   error: undefined,
   logout: async () => {},
+  signUpWithEmail: async (email: string, password: string, name: string) => {},
   loginWithPassword: async (username: string, password: string) => {},
   loginWithGoogle: async () => {},
   updatePrefs: async (prefs: Models.Preferences) => {},
@@ -82,6 +90,21 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const signUpWithEmail = async (
+    email: string,
+    password: string,
+    name: string
+  ) => {
+    const { error } = await requestSignUp(email, password, name);
+    if (error) {
+      setError(error);
+    } else {
+      await loginWithPassword(email, password);
+      verifyEmail();
+      await updatePrefs({ displayName: name });
+    }
+  };
+
   useEffect(() => {
     getUser();
   }, []);
@@ -94,6 +117,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         user,
         error,
         logout,
+        signUpWithEmail,
         loginWithPassword,
         loginWithGoogle,
         updatePrefs,

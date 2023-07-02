@@ -59,7 +59,7 @@ export const requestLogout = async () => {
       error: "failed to logout, server might be down",
     };
   }
-}
+};
 
 export const updateUserPrefs = async (prefs: UserPreferences) => {
   try {
@@ -74,4 +74,38 @@ export const updateUserPrefs = async (prefs: UserPreferences) => {
       error: "failed to update user",
     };
   }
-}
+};
+
+export const requestSignUp = async (
+  username: string,
+  password: string,
+  name: string
+) => {
+  try {
+    await api.createAccount(username, password, name);
+    return {
+      data: true,
+      error: undefined,
+    };
+  } catch (e) {
+    return {
+      data: undefined,
+      error: "failed to sign up, server might be down",
+    };
+  }
+};
+
+export const verifyEmail = async () => {
+  try {
+    await api.verifyEmail();
+    return {
+      data: true,
+      error: undefined,
+    };
+  } catch (e) {
+    return {
+      data: undefined,
+      error: "failed to verify email, server might be down",
+    };
+  }
+};

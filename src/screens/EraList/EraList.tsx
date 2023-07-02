@@ -33,25 +33,7 @@ export const EraList = () => {
             <EraCreator topicId={topic.id} />
           </Grid>
         </Grid>
-        <Grid item md={3}>
-          {/* <Box
-            marginTop={2}
-            padding={2}
-            sx={(theme) => ({
-              background: theme.palette.background.paper,
-              border: `1px solid ${theme.palette.divider}`,
-              borderRadius: 1,
-              height: "600px",
-            })}
-          >
-            side bar
-            <br />
-            here you will have some tools to filter the eras
-            <br />
-            also the deffinition of the tags that are used in this topic
-            <br />
-          </Box> */}
-        </Grid>
+        <Grid item md={3} />
       </Grid>
     </AppWrapper>
   );
