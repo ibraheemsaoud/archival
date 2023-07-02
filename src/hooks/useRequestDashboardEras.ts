@@ -11,7 +11,7 @@ export const useRequestDashboardEras = () => {
     setLoading(true);
     try {
       const { data, error } = await requestDashboardEras();
-      console.log(data);
+
       if (error) {
         setError(error);
       } else if (data) {
