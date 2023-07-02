@@ -17,7 +17,7 @@ export const requestTimeline = async (eraId?: string) => {
   const data = await api.listDocuments(
     Server.databaseID,
     Server.timelineEntryCollectionId,
-    [Query.equal("EraId", [eraId]), Query.orderAsc("order")]
+    [Query.equal("EraId", [eraId]), Query.orderDesc("order")]
   );
   if (data.documents) {
     return {

@@ -29,7 +29,7 @@ export const TimelineEntryCreator = ({
   };
 
   const onCreate = () => {
-    const order = entries.length > 0 ? entries[0].order / 2 : 1;
+    const order = entries.length > 0 ? entries[0].order + 1 : 1;
     if (type === EntryType.Media) {
       createNewEntry({
         EraId: eraId,
