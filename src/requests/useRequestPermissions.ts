@@ -2,25 +2,27 @@ import { useQuery } from "react-query";
 import { Server } from "../config/server";
 import { Client, Functions } from "appwrite";
 import { IPermissions } from "../interfaces/permissions.interface";
+import { useUser } from "../hooks";
 
 export const useRequestEraPermissions = (eraId?: string) => {
+  const { user } = useUser();
   return useQuery<IPermissions>(
-    ["comments", eraId],
+    ["comments", eraId, user?.$id],
     async () => {
       const client = new Client()
         .setEndpoint(Server.endpoint)
         .setProject(Server.project);
       const functions = new Functions(client);
 
-      const response = functions.createExecution(
-        "64a31220b1c2d44e7e51",
+      const response = await functions.createExecution(
+        Server.permissionFunctionId,
         JSON.stringify({
           databaseId: Server.databaseID,
           collectionId: Server.eraCollectionId,
           eraId,
         })
       );
-      return JSON.parse((await response).response) as IPermissions;
+      return JSON.parse(response.response).permissions as IPermissions;
     },
     {
       enabled: !!eraId,
