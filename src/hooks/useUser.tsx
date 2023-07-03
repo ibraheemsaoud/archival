@@ -121,7 +121,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     getUser();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.$id]);
 
   const isAdmin = user?.prefs.isAdmin === "true";
 
