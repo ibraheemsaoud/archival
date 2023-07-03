@@ -7,8 +7,8 @@ import { ITimelineEntry } from "../../interfaces/timelineEntry.interface";
 import { EditEra } from "./Edit/EditEra";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "../../theme";
-import { useUser } from "../../hooks";
 import { CreateLink } from "./Edit/CreateLink";
+import { useRequestEraPermissions } from "../../requests";
 
 export const Era = () => {
   const { era, timeline } = useLoaderData() as any as {
@@ -16,14 +16,14 @@ export const Era = () => {
     timeline: ITimelineEntry[];
   };
   const modedTheme = theme("light", era.accentColor);
-  const { isAdmin } = useUser();
+  const { data: permissions } = useRequestEraPermissions(era.id);
 
   if (!era) return <div>Not found</div>;
 
   return (
     <ThemeProvider theme={modedTheme}>
       <AppWrapper>
-        {isAdmin && <EditEra />}
+        {permissions?.update && <EditEra />}
         <Box textAlign="center" marginTop={6}>
           <Timeline timeline={timeline} />
           <Grid
@@ -42,12 +42,12 @@ export const Era = () => {
                 <SuggestNewEntry />
               </Grid>
             )}
-            {isAdmin && (
+            {permissions?.update && (
               <Grid item>
                 <CreateLink />
               </Grid>
             )}
-            {isAdmin && (
+            {permissions?.update && (
               <Grid item>
                 <EditTimeline />
               </Grid>

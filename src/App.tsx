@@ -11,24 +11,11 @@ import "@fontsource/roboto/700.css";
 import { Router } from "./components";
 import { theme } from "./theme";
 
-import { Client } from "appwrite";
-import { Server } from "./config/server";
 import { UserProvider } from "./hooks";
 
 function App() {
   const modedTheme = theme("light");
   const queryClient = new QueryClient();
-
-  const client = new Client()
-    .setEndpoint(Server.endpoint) // Your API Endpoint
-    .setProject(Server.project);
-
-  client.subscribe("files", (response) => {
-    if (response.events.includes("buckets.*.files.*.create")) {
-      // Log when a new file is uploaded
-      console.log(response.payload);
-    }
-  });
 
   return (
     <ThemeProvider theme={modedTheme}>

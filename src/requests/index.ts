@@ -5,3 +5,4 @@ export * from "./requestTimeline";
 export * from "./requestUser";
 export * from "./requestLinks";
 export * from "./useRequestComments";
+export * from "./useRequestPermissions";

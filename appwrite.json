@@ -1,0 +1,21 @@
+{
+    "projectId": "Archival",
+    "projectName": "Archival",
+    "functions": [
+        {
+            "$id": "64a31220b1c2d44e7e51",
+            "name": "getPermissions",
+            "runtime": "node-16.0",
+            "path": "functions/getPermissions",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
+        }
+    ]
+}
