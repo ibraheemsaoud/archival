@@ -1,3 +1,4 @@
+import { toast } from "react-hot-toast";
 import api from "./apis";
 import { UserPreferences } from "typescript";
 
@@ -24,9 +25,20 @@ export const requestLogin = async (username: string, password: string) => {
       error: undefined,
     };
   } catch (e) {
+    toast.error(
+      "failed to login, please check your credentials or try again later",
+      {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      }
+    );
     return {
       data: undefined,
-      error: "failed to login, server might be down",
+      error:
+        "failed to login, please check your credentials or try again later",
     };
   }
 };
@@ -72,25 +84,6 @@ export const updateUserPrefs = async (prefs: UserPreferences) => {
     return {
       data: undefined,
       error: "failed to update user",
-    };
-  }
-};
-
-export const requestSignUp = async (
-  username: string,
-  password: string,
-  name: string
-) => {
-  try {
-    await api.createAccount(username, password, name);
-    return {
-      data: true,
-      error: undefined,
-    };
-  } catch (e) {
-    return {
-      data: undefined,
-      error: "failed to sign up, server might be down",
     };
   }
 };

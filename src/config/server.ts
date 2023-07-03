@@ -11,4 +11,5 @@ export const Server = {
 
   // Functions
   permissionFunctionId: "64a31220b1c2d44e7e51",
+  registerFunctionId: "64a337fd6ef9b5b9f8eb",
 };

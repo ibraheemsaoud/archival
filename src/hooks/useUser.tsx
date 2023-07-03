@@ -3,12 +3,12 @@ import {
   requestLogin,
   requestLoginWithGoogle,
   requestLogout,
-  requestSignUp,
   requestUser,
   updateUserPrefs,
   verifyEmail,
 } from "../requests";
 import { Models } from "appwrite";
+import { useRequestRegister } from "../requests/useRequestRegister";
 
 interface UserContext {
   user?: Models.User<any>;
@@ -41,6 +41,21 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<Models.User<any> | undefined>(undefined);
   const [error, setError] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const {
+    mutate: register,
+    error: registrationError,
+    data: registeredUser,
+  } = useRequestRegister();
+
+  useEffect(() => {
+    if (registeredUser) {
+      verifyEmail();
+      logout();
+    }
+    if (registrationError) {
+      setError(registrationError as string);
+    }
+  }, [registeredUser, registrationError]);
 
   const getUser = async () => {
     setIsLoading(true);
@@ -49,7 +64,12 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       setError(error);
     }
     if (data) {
-      setUser(data);
+      if (data.emailVerification === false) {
+        logout();
+        setError("Please verify your email address");
+      } else {
+        setUser(data);
+      }
     }
     setIsLoading(false);
   };
@@ -95,14 +115,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     password: string,
     name: string
   ) => {
-    const { error } = await requestSignUp(email, password, name);
-    if (error) {
-      setError(error);
-    } else {
-      await loginWithPassword(email, password);
-      verifyEmail();
-      await updatePrefs({ displayName: name });
-    }
+    await register({ email, password, name });
+    loginWithPassword(email, password);
   };
 
   useEffect(() => {

@@ -12,6 +12,7 @@ import { Router } from "./components";
 import { theme } from "./theme";
 
 import { UserProvider } from "./hooks";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const modedTheme = theme("light");
@@ -24,6 +25,7 @@ function App() {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <UserProvider>
             <Router />
+            <Toaster position="bottom-left" reverseOrder={false} />
           </UserProvider>
         </LocalizationProvider>
       </QueryClientProvider>
