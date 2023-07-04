@@ -18,8 +18,8 @@ export const Era = () => {
   };
   const modedTheme = theme("light", era.accentColor);
   const { data: permissions } = useRequestPermissions(
-    era.id,
     Server.eraCollectionId,
+    era.id,
     era.$id,
   );
   console.log(permissions);

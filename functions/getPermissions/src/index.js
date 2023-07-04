@@ -42,15 +42,16 @@ module.exports = async function (req, res) {
   const payload = JSON.parse(
     req.payload.replace(/\n|\s{2,}/g, "").replace(/(\w+):/g, '"$1":')
   );
-  if (!payload.databaseId || !payload.collectionId || !payload.teamName) {
+  if (!payload.databaseId || !payload.collectionId) {
     throw new Error("Missing required parameters");
   }
   const userId = req.variables["APPWRITE_FUNCTION_USER_ID"];
   const { databaseId, collectionId, teamName, documentId } = payload;
 
   try {
+    const permissions = [];
     const promise = await database.getCollection(databaseId, collectionId);
-    const permissions = promise.$permissions;
+    permissions.push(...promise.$permissions);
     if (documentId) {
       const promise = await database.getDocument(
         databaseId,
@@ -79,7 +80,7 @@ module.exports = async function (req, res) {
       if (permission === `${type}("user:${userId}")`) {
         return true;
       }
-      if (permission === `${type}("team:${teamName}")`) {
+      if (teamName && permission === `${type}("team:${teamName}")`) {
         return true;
       }
       return false;

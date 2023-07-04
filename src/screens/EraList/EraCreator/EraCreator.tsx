@@ -1,15 +1,17 @@
 import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
-import { requestCreateEra } from "../../../requests";
-import { useUser } from "../../../hooks/useUser";
+import { requestCreateEra, useRequestPermissions } from "../../../requests";
+import { Server } from "../../../config/server";
 
 export const EraCreator = ({ topicId }: { topicId: string }) => {
-  const { isAdmin } = useUser();
   const [title, setTitle] = useState("");
   const [id, setId] = useState("");
   const [accentColor, setAccentColor] = useState("");
   const [coverImageUrl, setCoverImageUrl] = useState("");
   const [description, setDescription] = useState("");
+
+  const { data: permissions } = useRequestPermissions(Server.eraCollectionId);
+  console.log(permissions);
 
   const onClick = async () => {
     const { error } = await requestCreateEra(topicId, {
@@ -47,7 +49,7 @@ export const EraCreator = ({ topicId }: { topicId: string }) => {
     setAccentColor(event.target.value);
   };
 
-  if (!isAdmin) {
+  if (!permissions?.create) {
     return null;
   }
 

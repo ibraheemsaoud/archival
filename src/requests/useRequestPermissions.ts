@@ -6,8 +6,8 @@ import { useUser } from "../hooks";
 import { turnStringToValidTeamName } from "../helpers";
 
 export const useRequestPermissions = (
-  eraId?: string,
   collectionId?: string,
+  eraId?: string,
   documentId?: string
 ) => {
   const { user } = useUser();
@@ -24,14 +24,14 @@ export const useRequestPermissions = (
         JSON.stringify({
           databaseId: Server.databaseID,
           collectionId,
-          teamName: turnStringToValidTeamName(eraId!),
+          teamName: eraId ? turnStringToValidTeamName(eraId!) : undefined,
           documentId,
         })
       );
       return JSON.parse(response.response).permissions as IPermissions;
     },
     {
-      enabled: !!eraId && !!collectionId && !!user?.$id,
+      enabled: !!collectionId && !!user?.$id,
       refetchOnWindowFocus: false,
       initialData: {
         read: false,

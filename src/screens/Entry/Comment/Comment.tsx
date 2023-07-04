@@ -9,8 +9,8 @@ import { Server } from "../../../config/server";
 
 export const Comment = ({ comment }: { comment: IComment }) => {
   const { data: permissions } = useRequestPermissions(
-    comment.eraId,
     Server.commentCollectionId,
+    comment.eraId,
     comment.$id
   );
   const hasDeleteAccess = permissions?.delete;
