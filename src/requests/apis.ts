@@ -102,7 +102,7 @@ const api: {
       .provider()
       .account.createOAuth2Session(
         "google",
-        "https://archivals.eu/",
+        window.location.href,
         "https://archivals.eu/"
       );
   },
