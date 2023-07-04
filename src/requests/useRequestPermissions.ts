@@ -3,11 +3,16 @@ import { Server } from "../config/server";
 import { Client, Functions } from "appwrite";
 import { IPermissions } from "../interfaces/permissions.interface";
 import { useUser } from "../hooks";
+import { turnStringToValidTeamName } from "../helpers";
 
-export const useRequestEraPermissions = (eraId?: string) => {
+export const useRequestPermissions = (
+  eraId?: string,
+  collectionId?: string,
+  documentId?: string
+) => {
   const { user } = useUser();
   return useQuery<IPermissions>(
-    ["comments", eraId, user?.$id],
+    ["eraPermissions", eraId, user?.$id, collectionId, documentId],
     async () => {
       const client = new Client()
         .setEndpoint(Server.endpoint)
@@ -18,14 +23,15 @@ export const useRequestEraPermissions = (eraId?: string) => {
         Server.permissionFunctionId,
         JSON.stringify({
           databaseId: Server.databaseID,
-          collectionId: Server.eraCollectionId,
-          eraId,
+          collectionId,
+          teamName: turnStringToValidTeamName(eraId!),
+          documentId,
         })
       );
       return JSON.parse(response.response).permissions as IPermissions;
     },
     {
-      enabled: !!eraId,
+      enabled: !!eraId && !!collectionId && !!user?.$id,
       refetchOnWindowFocus: false,
       initialData: {
         read: false,

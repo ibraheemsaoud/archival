@@ -8,7 +8,8 @@ import { EditEra } from "./Edit/EditEra";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "../../theme";
 import { CreateLink } from "./Edit/CreateLink";
-import { useRequestEraPermissions } from "../../requests";
+import { useRequestPermissions } from "../../requests";
+import { Server } from "../../config/server";
 
 export const Era = () => {
   const { era, timeline } = useLoaderData() as any as {
@@ -16,7 +17,12 @@ export const Era = () => {
     timeline: ITimelineEntry[];
   };
   const modedTheme = theme("light", era.accentColor);
-  const { data: permissions } = useRequestEraPermissions(era.id);
+  const { data: permissions } = useRequestPermissions(
+    era.id,
+    Server.eraCollectionId,
+    era.$id,
+  );
+  console.log(permissions);
 
   if (!era) return <div>Not found</div>;
 

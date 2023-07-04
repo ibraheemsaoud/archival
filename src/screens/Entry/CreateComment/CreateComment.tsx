@@ -3,7 +3,13 @@ import { ChangeEvent, useState } from "react";
 import { useRequestCreateComment } from "../../../requests";
 import { useUser } from "../../../hooks";
 
-export const CreateComment = ({ entryId }: { entryId: string }) => {
+export const CreateComment = ({
+  entryId,
+  eraId,
+}: {
+  entryId: string;
+  eraId: string;
+}) => {
   const [comment, setComment] = useState("");
   const { user } = useUser();
 
@@ -14,7 +20,7 @@ export const CreateComment = ({ entryId }: { entryId: string }) => {
   };
 
   const handleSubmit = () => {
-    mutate({ entryId, userId: user?.$id!, message: comment });
+    mutate({ entryId, userId: user?.$id!, message: comment, eraId });
     setComment("");
   };
 

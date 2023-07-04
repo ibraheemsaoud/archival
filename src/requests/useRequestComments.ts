@@ -3,6 +3,7 @@ import api from "./apis";
 import { Server } from "../config/server";
 import { Permission, Query, Role } from "appwrite";
 import { IComment, ICommentCreate } from "../interfaces/comment.interface";
+import { turnStringToValidTeamName } from "../helpers";
 
 export const useRequestComments = (entryId?: string) => {
   return useQuery<IComment[]>(
@@ -34,6 +35,7 @@ export const useRequestCreateComment = () => {
       [
         Permission.update(Role.user(comment.userId)),
         Permission.delete(Role.user(comment.userId)),
+        Permission.delete(Role.team(turnStringToValidTeamName(comment.eraId))),
       ]
     );
     queryClient.invalidateQueries("comments");

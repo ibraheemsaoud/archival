@@ -60,7 +60,7 @@ export const Entry = () => {
           </Card>
 
           <Box paddingTop={4}>
-            <CreateComment entryId={entry.$id} />
+            <CreateComment entryId={entry.$id} eraId={entry.eraId} />
             <Box marginTop={4}>
               {comments?.map((comment) => (
                 <Comment key={comment.$id} comment={comment} />

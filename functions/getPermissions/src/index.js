@@ -5,7 +5,7 @@ example for the era collection
 {
 databaseId: "649bf127bdd26e9850cd",
 collectionId: "649c10682f8446d89bb3",
-eraId: "jacquemus-le-chouchou-fall-winter-2023",
+teamName: "jacquemus-le-chouchou-fall-winter-2023",
 documentId: "649c44280eef587be97b",
 }
 */
@@ -36,29 +36,40 @@ module.exports = async function (req, res) {
   //   databaseId: string;
   //   collectionId: string;
   //   documentId: string;
-  //   eraId: string;
+  //   teamName: string;
   // }
 
   const payload = JSON.parse(
     req.payload.replace(/\n|\s{2,}/g, "").replace(/(\w+):/g, '"$1":')
   );
-  if (!payload.databaseId || !payload.collectionId || !payload.eraId) {
+  if (!payload.databaseId || !payload.collectionId || !payload.teamName) {
     throw new Error("Missing required parameters");
   }
   const userId = req.variables["APPWRITE_FUNCTION_USER_ID"];
-  const { databaseId, collectionId, eraId } = payload;
+  const { databaseId, collectionId, teamName, documentId } = payload;
 
   try {
     const promise = await database.getCollection(databaseId, collectionId);
     const permissions = promise.$permissions;
+    if (documentId) {
+      const promise = await database.getDocument(
+        databaseId,
+        collectionId,
+        documentId
+      );
+      const documentPermissions = promise.$permissions;
+      permissions.push(...documentPermissions);
+    }
     let read = false,
       create = false,
       update = false,
       delete_ = false;
-    const teamName = eraId.slice(0, 36);
+
+    console.log(permissions);
+    console.log(userId);
+    console.log(teamName);
 
     const checkPermission = (permission, type) => {
-      console.log(permission, type, userId, teamName)
       if (
         permission === `${type}("users")` ||
         permission === `${type}("any")`
