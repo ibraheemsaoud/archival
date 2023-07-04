@@ -1,9 +1,18 @@
-import { Client as Appwrite, Databases, Account, Models } from "appwrite";
+import {
+  Client as Appwrite,
+  Databases,
+  Account,
+  Models,
+  Teams,
+  ID,
+} from "appwrite";
 import { Server } from "../config/server";
+import { turnStringToValidTeamName } from "../helpers";
 
 interface SDK {
   database: Databases;
   account: Account;
+  teams: Teams;
 }
 
 const api: {
@@ -16,10 +25,7 @@ const api: {
   ) => Promise<Models.User<any>>;
   getAccount: () => Promise<Models.User<any>>;
   verifyEmail: () => void;
-  updateVerification: (
-    userId: string,
-    secret: string
-  ) => void;
+  updateVerification: (userId: string, secret: string) => void;
   updateAccountPrefs: (prefs: Models.Preferences) => Promise<Models.User<any>>;
   createEmailSession: (
     email: string,
@@ -54,6 +60,7 @@ const api: {
     collectionId: string,
     documentId: string
   ) => Promise<{}>;
+  createTeam: (name: string) => Promise<Models.Team<any>>;
 } = {
   sdk: null,
 
@@ -65,8 +72,9 @@ const api: {
     appwrite.setEndpoint(Server.endpoint).setProject(Server.project);
     const account = new Account(appwrite);
     const database = new Databases(appwrite);
+    const teams = new Teams(appwrite);
 
-    api.sdk = { database, account };
+    api.sdk = { database, account, teams };
     return api.sdk;
   },
 
@@ -145,6 +153,12 @@ const api: {
     return api
       .provider()
       .database.deleteDocument(databaseId, collectionId, documentId);
+  },
+
+  createTeam: (name: string) => {
+    return api
+      .provider()
+      .teams.create(ID.unique(), turnStringToValidTeamName(name));
   },
 };
 

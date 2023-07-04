@@ -22,7 +22,6 @@ export const Era = () => {
     era.id,
     era.$id,
   );
-  console.log(permissions);
 
   if (!era) return <div>Not found</div>;
 

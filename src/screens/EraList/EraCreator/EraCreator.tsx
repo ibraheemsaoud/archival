@@ -11,7 +11,6 @@ export const EraCreator = ({ topicId }: { topicId: string }) => {
   const [description, setDescription] = useState("");
 
   const { data: permissions } = useRequestPermissions(Server.eraCollectionId);
-  console.log(permissions);
 
   const onClick = async () => {
     const { error } = await requestCreateEra(topicId, {

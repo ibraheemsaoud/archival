@@ -2,7 +2,6 @@ import { IEra, IEraCreate } from "../interfaces/era.interface";
 import api from "./apis";
 import { Server } from "../config/server";
 import { Permission, Query, Role } from "appwrite";
-import { turnStringToValidTeamName } from "../helpers";
 
 export const requestEra = async (eraId?: string) => {
   if (!eraId)
@@ -64,6 +63,7 @@ export const requestCreateEra = async (topicId: string, era: IEraCreate) => {
     topicId,
   };
   try {
+    const team = await api.createTeam(newEra.id);
     const data = await api.createDocument(
       Server.databaseID,
       Server.eraCollectionId,
@@ -72,10 +72,10 @@ export const requestCreateEra = async (topicId: string, era: IEraCreate) => {
         topicId,
       },
       [
-        Permission.read(Role.team(turnStringToValidTeamName(newEra.id))),
-        Permission.write(Role.team(turnStringToValidTeamName(newEra.id))),
-        Permission.delete(Role.team(turnStringToValidTeamName(newEra.id))),
-        Permission.update(Role.team(turnStringToValidTeamName(newEra.id))),
+        Permission.read(Role.team(team.$id)),
+        Permission.write(Role.team(team.$id)),
+        Permission.delete(Role.team(team.$id)),
+        Permission.update(Role.team(team.$id)),
       ]
     );
     return {
