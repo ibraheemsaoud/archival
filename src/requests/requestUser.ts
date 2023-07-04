@@ -17,9 +17,9 @@ export const requestUser = async () => {
   }
 };
 
-export const requestLogin = async (username: string, password: string) => {
+export const requestLogin = async (email: string, password: string) => {
   try {
-    await api.createEmailSession(username, password);
+    await api.createEmailSession(email, password);
     return {
       data: true,
       error: undefined,

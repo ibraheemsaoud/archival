@@ -34,7 +34,7 @@ export const useSignin = () => {
   };
 
   const handleSignInWithEmail = () => {
-    loginWithPassword(email, password);
+    loginWithPassword(loginEmail, loginPassword);
   };
 
   const handleSignInWithGoogle = () => {

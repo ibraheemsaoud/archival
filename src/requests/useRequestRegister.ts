@@ -21,7 +21,7 @@ export const useRequestRegister = () => {
       return JSON.parse(
         (
           await functions.createExecution(
-            Server.permissionFunctionId,
+            Server.registerFunctionId,
             JSON.stringify({
               email,
               password,

@@ -9,16 +9,13 @@ import {
 } from "../requests";
 import { Models } from "appwrite";
 import { useRequestRegister } from "../requests/useRequestRegister";
+import { VerifyEmailModal } from "./VerifyEmailModal";
 
 interface UserContext {
   user?: Models.User<any>;
   error?: string;
   logout: () => Promise<void>;
-  signUpWithEmail: (
-    email: string,
-    password: string,
-    name: string
-  ) => Promise<void>;
+  signUpWithEmail: (email: string, password: string, name: string) => void;
   loginWithPassword: (username: string, password: string) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
   updatePrefs: (prefs: Models.Preferences) => Promise<void>;
@@ -38,6 +35,8 @@ const userContext = createContext({
 } as UserContext);
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
+  const [email, setEmail] = useState<string | undefined>(undefined);
+  const [password, setPassword] = useState<string | undefined>(undefined);
   const [user, setUser] = useState<Models.User<any> | undefined>(undefined);
   const [error, setError] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -49,12 +48,17 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (registeredUser) {
+      if (email && password) {
+        loginWithPassword(email, password);
+        setEmail(undefined);
+        setPassword(undefined);
+      }
       verifyEmail();
-      logout();
     }
     if (registrationError) {
       setError(registrationError as string);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [registeredUser, registrationError]);
 
   const getUser = async () => {
@@ -64,12 +68,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       setError(error);
     }
     if (data) {
-      if (data.emailVerification === false) {
-        logout();
-        setError("Please verify your email address");
-      } else {
-        setUser(data);
-      }
+      setUser(data);
     }
     setIsLoading(false);
   };
@@ -83,8 +82,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const loginWithPassword = async (username: string, password: string) => {
-    const { error } = await requestLogin(username, password);
+  const loginWithPassword = async (email: string, password: string) => {
+    const { error } = await requestLogin(email, password);
     if (error) {
       setError(error);
     } else {
@@ -110,13 +109,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const signUpWithEmail = async (
-    email: string,
-    password: string,
-    name: string
-  ) => {
-    await register({ email, password, name });
-    loginWithPassword(email, password);
+  const signUpWithEmail = (email: string, password: string, name: string) => {
+    register({ email, password, name });
+    setEmail(email);
+    setPassword(password);
   };
 
   useEffect(() => {
@@ -140,7 +136,11 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         isAdmin,
       }}
     >
-      {children}
+      {user?.emailVerification === false ? (
+        <VerifyEmailModal logout={logout} />
+      ) : (
+        children
+      )}
     </userContext.Provider>
   );
 };
