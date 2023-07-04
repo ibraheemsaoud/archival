@@ -25,12 +25,16 @@ export const EditCollection = ({
 
   const [title, setTitle] = useState(entry.title || "");
   const [listOfEntryIds, setListOfEntryIds] = useState(entry.entryIds || []);
+  const [order, setOrder] = useState(entry.order || 0);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
   const onChangeListOfEntryIds = (e: any, value: string[]) => {
     setListOfEntryIds(value);
+  };
+  const onChangeOrder = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOrder(parseInt(e.target.value));
   };
 
   const onHandleChange = () => {
@@ -65,7 +69,7 @@ export const EditCollection = ({
     >
       Collection: shows multiple entries.
       <TextField
-        id="standard-basic"
+        id="title"
         label="Title"
         variant="standard"
         fullWidth
@@ -84,6 +88,16 @@ export const EditCollection = ({
         renderInput={(params) => (
           <TextField {...params} label="Entry IDs (comma separated)" />
         )}
+      />
+      <TextField
+        id="order"
+        label="Order"
+        variant="standard"
+        type="number"
+        fullWidth
+        value={order}
+        onChange={onChangeOrder}
+        sx={{ marginBottom: 2 }}
       />
       <Button onClick={onHandleChange}>Update</Button>
       <Button onClick={onHandleDelete}>Delete</Button>

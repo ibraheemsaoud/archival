@@ -26,6 +26,7 @@ export const EditCoverPost = ({
   const [title, setTitle] = useState(entry.title || "");
   const [description, setDescription] = useState(entry.description || "");
   const [linkedEntryId, setLinkedEntryId] = useState(entry.entryId || "");
+  const [order, setOrder] = useState(entry.order || 0);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -35,6 +36,9 @@ export const EditCoverPost = ({
   };
   const onChangeLinkedEntryId = (_: any, value: string | null) => {
     setLinkedEntryId(value || "");
+  };
+  const onChangeOrder = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOrder(parseInt(e.target.value));
   };
   const onHandleChange = () => {
     onChange({
@@ -69,7 +73,7 @@ export const EditCoverPost = ({
     >
       Cover Post: shows a featured entry.
       <TextField
-        id="standard-basic"
+        id="title"
         label="Title"
         variant="standard"
         fullWidth
@@ -78,7 +82,7 @@ export const EditCoverPost = ({
         sx={{ marginBottom: 2 }}
       />
       <TextField
-        id="standard-basic"
+        id="description"
         label="Description"
         variant="standard"
         fullWidth
@@ -96,6 +100,16 @@ export const EditCoverPost = ({
         onChange={onChangeLinkedEntryId}
         defaultValue={linkedEntryId}
         renderInput={(params) => <TextField {...params} label="Entry ID" />}
+      />
+      <TextField
+        id="order"
+        label="Order"
+        variant="standard"
+        type="number"
+        fullWidth
+        value={order}
+        onChange={onChangeOrder}
+        sx={{ marginBottom: 2 }}
       />
       <Button onClick={onHandleChange}>Update</Button>
       <Button onClick={onHandleDelete}>Delete</Button>

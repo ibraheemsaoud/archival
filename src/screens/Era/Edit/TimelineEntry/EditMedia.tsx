@@ -20,6 +20,7 @@ export const EditMedia = ({
   const [title, setTitle] = useState(entry.title || "");
   const [description, setDescription] = useState(entry.description || "");
   const [link, setLink] = useState(entry.link || "");
+  const [order, setOrder] = useState(entry.order || 0);
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -29,6 +30,9 @@ export const EditMedia = ({
   };
   const onChangeLink = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLink(e.target.value);
+  };
+  const onChangeOrder = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOrder(parseInt(e.target.value));
   };
   const onHandleChange = () => {
     onChange({
@@ -89,6 +93,16 @@ export const EditMedia = ({
         fullWidth
         value={link}
         onChange={onChangeLink}
+        sx={{ marginBottom: 2 }}
+      />
+      <TextField
+        id="order"
+        label="Order"
+        variant="standard"
+        type="number"
+        fullWidth
+        value={order}
+        onChange={onChangeOrder}
         sx={{ marginBottom: 2 }}
       />
       <Button onClick={onHandleChange}>Update</Button>

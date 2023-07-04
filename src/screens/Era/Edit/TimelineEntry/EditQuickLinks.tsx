@@ -26,9 +26,13 @@ export const EditQuickLinks = ({
   };
 
   const [linkList, setLinkList] = useState(entry.links || []);
+  const [order, setOrder] = useState(entry.order || 0);
 
   const onChangeLinks = (_: any, value: string[]) => {
     setLinkList(value);
+  };
+  const onChangeOrder = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOrder(parseInt(e.target.value));
   };
 
   const onHandleChange = () => {
@@ -73,6 +77,16 @@ export const EditQuickLinks = ({
         renderInput={(params) => (
           <TextField {...params} label="link IDs (comma separated)" />
         )}
+      />
+      <TextField
+        id="order"
+        label="Order"
+        variant="standard"
+        type="number"
+        fullWidth
+        value={order}
+        onChange={onChangeOrder}
+        sx={{ marginBottom: 2 }}
       />
       <Button onClick={onHandleChange}>Update</Button>
       <Button onClick={onHandleDelete}>Delete</Button>
