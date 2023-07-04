@@ -21,7 +21,6 @@ interface UserContext {
   loginWithGoogle: () => Promise<void>;
   updatePrefs: (prefs: Models.Preferences) => Promise<void>;
   isLoading: boolean;
-  isAdmin: boolean;
 }
 
 const userContext = createContext({
@@ -33,7 +32,6 @@ const userContext = createContext({
   loginWithGoogle: async () => {},
   updatePrefs: async (prefs: Models.Preferences) => {},
   isLoading: false,
-  isAdmin: false,
 } as UserContext);
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
@@ -122,8 +120,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.$id]);
 
-  const isAdmin = user?.prefs.isAdmin === "true";
-
   return (
     <userContext.Provider
       value={{
@@ -135,7 +131,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         loginWithGoogle,
         updatePrefs,
         isLoading,
-        isAdmin,
       }}
     >
       {user?.emailVerification === false &&
