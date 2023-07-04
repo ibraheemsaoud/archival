@@ -16,7 +16,7 @@ export const VerifyEmailModal = ({ logout }: { logout: () => void }) => {
   return (
     <Dialog open={true}>
       <Box paddingX={6} paddingY={4}>
-        <DialogTitle variant="h5" textAlign="center" color="red">
+        <DialogTitle variant="h5" textAlign="center">
           Email Verification
         </DialogTitle>
         <Typography variant="body1" textAlign="center">
