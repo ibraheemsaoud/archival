@@ -8,12 +8,16 @@ interface IEditCoverPost {
   entry: ITimelineEntry;
   onChange: (entry: ITimelineEntry) => void;
   onDelete: (entry: ITimelineEntry) => void;
+  onMoveDown: (entry: ITimelineEntry) => void;
+  onMoveUp: (entry: ITimelineEntry) => void;
 }
 
 export const EditCoverPost = ({
   entry,
   onChange,
   onDelete,
+  onMoveDown,
+  onMoveUp,
 }: IEditCoverPost) => {
   const { entries } = useLoaderData() as any as {
     entries: IEntry[];
@@ -43,6 +47,14 @@ export const EditCoverPost = ({
 
   const onHandleDelete = () => {
     onDelete(entry);
+  };
+
+  const onHandleMoveUp = () => {
+    onMoveUp(entry);
+  };
+
+  const onHandleMoveDown = () => {
+    onMoveDown(entry);
   };
 
   return (
@@ -87,6 +99,8 @@ export const EditCoverPost = ({
       />
       <Button onClick={onHandleChange}>Update</Button>
       <Button onClick={onHandleDelete}>Delete</Button>
+      <Button onClick={onHandleMoveUp}>Move Up</Button>
+      <Button onClick={onHandleMoveDown}>Move Down</Button>
     </Box>
   );
 };

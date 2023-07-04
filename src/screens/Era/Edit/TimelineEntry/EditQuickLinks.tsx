@@ -10,12 +10,16 @@ interface IEditQuickLinks {
   entry: ITimelineEntry;
   onChange: (entry: ITimelineEntry) => void;
   onDelete: (entry: ITimelineEntry) => void;
+  onMoveDown: (entry: ITimelineEntry) => void;
+  onMoveUp: (entry: ITimelineEntry) => void;
 }
 
 export const EditQuickLinks = ({
   entry,
   onChange,
   onDelete,
+  onMoveDown,
+  onMoveUp,
 }: IEditQuickLinks) => {
   const { links } = useLoaderData() as any as {
     links: ILink[];
@@ -36,6 +40,14 @@ export const EditQuickLinks = ({
 
   const onHandleDelete = () => {
     onDelete(entry);
+  };
+
+  const onHandleMoveUp = () => {
+    onMoveUp(entry);
+  };
+
+  const onHandleMoveDown = () => {
+    onMoveDown(entry);
   };
 
   return (
@@ -64,6 +76,8 @@ export const EditQuickLinks = ({
       />
       <Button onClick={onHandleChange}>Update</Button>
       <Button onClick={onHandleDelete}>Delete</Button>
+      <Button onClick={onHandleMoveUp}>Move up</Button>
+      <Button onClick={onHandleMoveDown}>Move down</Button>
     </Box>
   );
 };

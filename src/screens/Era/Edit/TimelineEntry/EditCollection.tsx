@@ -8,12 +8,16 @@ interface IEditCollection {
   entry: ITimelineEntry;
   onChange: (entry: ITimelineEntry) => void;
   onDelete: (entry: ITimelineEntry) => void;
+  onMoveDown: (entry: ITimelineEntry) => void;
+  onMoveUp: (entry: ITimelineEntry) => void;
 }
 
 export const EditCollection = ({
   entry,
   onChange,
   onDelete,
+  onMoveDown,
+  onMoveUp,
 }: IEditCollection) => {
   const { entries } = useLoaderData() as any as {
     entries: IEntry[];
@@ -39,6 +43,14 @@ export const EditCollection = ({
 
   const onHandleDelete = () => {
     onDelete(entry);
+  };
+
+  const onHandleMoveUp = () => {
+    onMoveUp(entry);
+  };
+
+  const onHandleMoveDown = () => {
+    onMoveDown(entry);
   };
 
   return (
@@ -75,6 +87,8 @@ export const EditCollection = ({
       />
       <Button onClick={onHandleChange}>Update</Button>
       <Button onClick={onHandleDelete}>Delete</Button>
+      <Button onClick={onHandleMoveUp}>Move Up</Button>
+      <Button onClick={onHandleMoveDown}>Move Down</Button>
     </Box>
   );
 };

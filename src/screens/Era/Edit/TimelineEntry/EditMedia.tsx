@@ -6,9 +6,17 @@ interface IEditMedia {
   entry: ITimelineEntry;
   onChange: (entry: ITimelineEntry) => void;
   onDelete: (entry: ITimelineEntry) => void;
+  onMoveDown: (entry: ITimelineEntry) => void;
+  onMoveUp: (entry: ITimelineEntry) => void;
 }
 
-export const EditMedia = ({ entry, onChange, onDelete }: IEditMedia) => {
+export const EditMedia = ({
+  entry,
+  onChange,
+  onDelete,
+  onMoveDown,
+  onMoveUp,
+}: IEditMedia) => {
   const [title, setTitle] = useState(entry.title || "");
   const [description, setDescription] = useState(entry.description || "");
   const [link, setLink] = useState(entry.link || "");
@@ -33,6 +41,14 @@ export const EditMedia = ({ entry, onChange, onDelete }: IEditMedia) => {
 
   const onHandleDelete = () => {
     onDelete(entry);
+  };
+
+  const onHandleMoveUp = () => {
+    onMoveUp(entry);
+  };
+
+  const onHandleMoveDown = () => {
+    onMoveDown(entry);
   };
 
   return (
@@ -77,6 +93,8 @@ export const EditMedia = ({ entry, onChange, onDelete }: IEditMedia) => {
       />
       <Button onClick={onHandleChange}>Update</Button>
       <Button onClick={onHandleDelete}>Delete</Button>
+      <Button onClick={onHandleMoveUp}>Move Up</Button>
+      <Button onClick={onHandleMoveDown}>Move Down</Button>
     </Box>
   );
 };

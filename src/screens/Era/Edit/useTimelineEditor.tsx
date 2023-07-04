@@ -9,18 +9,19 @@ import {
   requestTimeline,
   requestUpdateTimelineEntry,
 } from "../../../requests";
+import { toast } from "react-hot-toast";
 
 export const useTimelineEditor = (eraId?: string) => {
   const [entries, setEntries] = useState<ITimelineEntry[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [error, setError] = useState<string | undefined>("");
   const [increment, setIncrement] = useState<number>(0);
 
   useEffect(() => {
     const getEntries = async (eraId: string) => {
       const resp = await requestTimeline(eraId);
       setEntries(resp.data);
-      setError(resp.error);
+      if (resp.error) {
+        toast.error(resp.error);
+      }
     };
     if (eraId) {
       getEntries(eraId);
@@ -36,7 +37,7 @@ export const useTimelineEditor = (eraId?: string) => {
     }
     const { error } = await requestCreateTimelineEntry(eraId, entry);
     if (error) {
-      setError(error);
+      toast.error(error);
     } else {
       setIncrement(increment + 1);
     }
