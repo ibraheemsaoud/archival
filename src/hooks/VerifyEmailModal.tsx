@@ -22,6 +22,10 @@ export const VerifyEmailModal = ({ logout }: { logout: () => void }) => {
         <Typography variant="body1" textAlign="center">
           We sent you an email to verify your account, please do :D
         </Typography>
+        <Typography variant="body1" textAlign="center">
+          For the best experience, keep this page open and click the link we
+          sent you in the email.
+        </Typography>
         <Grid container marginTop={4} marginBottom={2} spacing={1}>
           <Grid item xs={12} md={5}>
             <Button variant="text" onClick={logout} color="error" fullWidth>

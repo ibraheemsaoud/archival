@@ -102,3 +102,18 @@ export const verifyEmail = async () => {
     };
   }
 };
+
+export const updateVerification = async (userId: string, secret: string) => {
+  try {
+    await api.updateVerification(userId, secret);
+    return {
+      data: true,
+      error: undefined,
+    };
+  } catch (e) {
+    return {
+      data: undefined,
+      error: "failed to update verification, server might be down",
+    };
+  }
+}

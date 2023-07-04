@@ -16,6 +16,10 @@ const api: {
   ) => Promise<Models.User<any>>;
   getAccount: () => Promise<Models.User<any>>;
   verifyEmail: () => void;
+  updateVerification: (
+    userId: string,
+    secret: string
+  ) => void;
   updateAccountPrefs: (prefs: Models.Preferences) => Promise<Models.User<any>>;
   createEmailSession: (
     email: string,
@@ -74,6 +78,10 @@ const api: {
     return api
       .provider()
       .account.createVerification("https://archivals.eu/verification");
+  },
+
+  updateVerification: (userId, secret) => {
+    return api.provider().account.updateVerification(userId, secret);
   },
 
   updateAccountPrefs: (prefs) => {

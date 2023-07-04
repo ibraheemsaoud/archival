@@ -10,6 +10,7 @@ import {
 import { Models } from "appwrite";
 import { useRequestRegister } from "../requests/useRequestRegister";
 import { VerifyEmailModal } from "./VerifyEmailModal";
+import { VERIFICATION } from "../consts/links.const";
 
 interface UserContext {
   user?: Models.User<any>;
@@ -22,6 +23,7 @@ interface UserContext {
   isLoading: boolean;
   isAdmin: boolean;
 }
+
 const userContext = createContext({
   user: undefined,
   error: undefined,
@@ -136,7 +138,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         isAdmin,
       }}
     >
-      {user?.emailVerification === false ? (
+      {user?.emailVerification === false &&
+      window.location.pathname !== VERIFICATION ? (
         <VerifyEmailModal logout={logout} />
       ) : (
         children
