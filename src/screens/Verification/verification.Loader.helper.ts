@@ -36,7 +36,7 @@ export const verificationLoader =
         );
         return {};
       }
-      Navigate({ to: HOME, replace: true });
+      // Navigate({ to: HOME, replace: true });
     } catch (e) {
       toast.error(e as string, {
         style: {
