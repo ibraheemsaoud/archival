@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -10,19 +10,36 @@ import {
 import { useLoaderData } from "react-router-dom";
 import { IEntry } from "../../../interfaces/entry.interface";
 import { ITimelineEntry } from "../../../interfaces/timelineEntry.interface";
-import { ITopic } from "../../../interfaces/topic.interface";
 import { IEra } from "../../../interfaces/era.interface";
-import { requestUpdateEra } from "../../../requests";
+import { useEra } from "../useEra";
 
 export const EditEra = () => {
-  const { timeline, entries, topic, era } = useLoaderData() as any as {
+  const {
+    timeline,
+    entries,
+    era: loaderEra,
+  } = useLoaderData() as any as {
     entries: IEntry[];
     timeline: ITimelineEntry[];
-    topic: ITopic;
     era: IEra;
   };
+  const { era, isLoading, updateEra, isUpdated } = useEra(loaderEra.$id);
+
   const [open, setOpen] = useState(false);
   const [editableEra, setEditableEra] = useState(era);
+
+  useEffect(() => {
+    if (isUpdated) {
+      setOpen(false);
+    }
+  }, [isUpdated]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (!editableEra) {
+    return <div>Era Not found</div>;
+  }
 
   if (!timeline || !entries) return <div>Not found</div>;
   const handleClickOpen = () => {
@@ -34,13 +51,7 @@ export const EditEra = () => {
   };
 
   const handleSave = async () => {
-    const { error } = await requestUpdateEra(topic.id, editableEra);
-    if (error) {
-      console.error(error);
-    } else {
-      window.location.reload();
-      handleClose();
-    }
+    updateEra(editableEra);
   };
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {

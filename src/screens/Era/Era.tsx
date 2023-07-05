@@ -10,19 +10,22 @@ import { theme } from "../../theme";
 import { CreateLink } from "./Edit/CreateLink";
 import { useRequestPermissions } from "../../requests";
 import { Server } from "../../config/server";
+import { useEra } from "./useEra";
 
 export const Era = () => {
-  const { era, timeline } = useLoaderData() as any as {
+  const { era: loaderEra, timeline } = useLoaderData() as any as {
     era: IEra;
     timeline: ITimelineEntry[];
   };
-  const modedTheme = theme("light", era.accentColor);
+  const modedTheme = theme("light", loaderEra.accentColor);
   const { data: permissions } = useRequestPermissions(
     Server.eraCollectionId,
-    era.id,
-    era.$id,
+    loaderEra.id,
+    loaderEra.$id
   );
+  const { era, isLoading } = useEra(loaderEra.$id);
 
+  if (isLoading) return <div>Loading...</div>;
   if (!era) return <div>Not found</div>;
 
   return (

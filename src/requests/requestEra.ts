@@ -1,4 +1,4 @@
-import { IEra, IEraCreate } from "../interfaces/era.interface";
+import { IEraCreate } from "../interfaces/era.interface";
 import api from "./apis";
 import { Server } from "../config/server";
 import { Permission, Query, Role } from "appwrite";
@@ -77,48 +77,6 @@ export const requestCreateEra = async (topicId: string, era: IEraCreate) => {
         Permission.delete(Role.team(team.$id)),
         Permission.update(Role.team(team.$id)),
       ]
-    );
-    return {
-      data: data.documents,
-      error: undefined,
-    };
-  } catch (error) {
-    return {
-      data: undefined,
-      error: error as string,
-    };
-  }
-};
-
-export const requestUpdateEra = async (topicId: string, era: IEra) => {
-  if (!topicId || !era) {
-    return {
-      data: undefined,
-      error: "no topic id provided",
-    };
-  }
-
-  const newEra = {
-    accentColor: era.accentColor,
-    coverImageUrl: era.coverImageUrl,
-    description: era.description,
-    disableSuggestions: era.disableSuggestions,
-    id: era.id,
-    isPublic: era.isPublic,
-    title: era.title,
-    topicId: era.topicId,
-    $permissions: era.isPublic
-      ? [...era.$permissions, Permission.read(Role.any())]
-      : era.$permissions.filter((p) => p !== Permission.read(Role.any())),
-  };
-
-  try {
-    const data = await api.updateDocument(
-      Server.databaseID,
-      Server.eraCollectionId,
-      era.$id,
-      newEra,
-      newEra.$permissions
     );
     return {
       data: data.documents,
