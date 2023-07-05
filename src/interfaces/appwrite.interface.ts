@@ -4,5 +4,5 @@ export interface IAppWrite {
   $databaseId: string;
   $id: string;
   $updatedAt: string;
-  permissions: string[];
+  $permissions: string[];
 }

@@ -107,6 +107,9 @@ export const requestUpdateEra = async (topicId: string, era: IEra) => {
     isPublic: era.isPublic,
     title: era.title,
     topicId: era.topicId,
+    $permissions: era.isPublic
+      ? [...era.$permissions, Permission.read(Role.any())]
+      : era.$permissions.filter((p) => p !== Permission.read(Role.any())),
   };
 
   try {
@@ -114,7 +117,8 @@ export const requestUpdateEra = async (topicId: string, era: IEra) => {
       Server.databaseID,
       Server.eraCollectionId,
       era.$id,
-      newEra
+      newEra,
+      newEra.$permissions
     );
     return {
       data: data.documents,

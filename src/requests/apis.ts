@@ -53,7 +53,8 @@ const api: {
     databaseId: string,
     collectionId: string,
     documentId: string,
-    data: any
+    data: any,
+    permissions?: any
   ) => Promise<Models.Document>;
   deleteDocument: (
     databaseId: string,
@@ -143,7 +144,18 @@ const api: {
       .database.listDocuments(databaseId, collectionId, queries);
   },
 
-  updateDocument: (databaseId, collectionId, documentId, data) => {
+  updateDocument: (databaseId, collectionId, documentId, data, permissions) => {
+    if (permissions) {
+      return api
+        .provider()
+        .database.updateDocument(
+          databaseId,
+          collectionId,
+          documentId,
+          data,
+          permissions
+        );
+    }
     return api
       .provider()
       .database.updateDocument(databaseId, collectionId, documentId, data);

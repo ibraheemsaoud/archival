@@ -59,14 +59,15 @@ export const EditEra = () => {
     setEditableEra({ ...editableEra, coverImageUrl: e.target.value });
   };
 
-  const onChangeIsPublic = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditableEra({ ...editableEra, isPublic: !!e.target.value });
+  const onChangeIsPublic = () => {
+    setEditableEra({ ...editableEra, isPublic: !editableEra.isPublic });
   };
 
-  const onChangeDisableSuggestions = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setEditableEra({ ...editableEra, disableSuggestions: !!e.target.value });
+  const onChangeDisableSuggestions = () => {
+    setEditableEra({
+      ...editableEra,
+      disableSuggestions: !editableEra.disableSuggestions,
+    });
   };
 
   if (!open)
