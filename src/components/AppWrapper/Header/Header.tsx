@@ -5,6 +5,7 @@ import { HOME } from "../../../consts/links.const";
 import { ToolbarAction } from "./ToolbarAction";
 
 export const Header = () => {
+  const isMobile = window.innerWidth < 600;
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -19,7 +20,7 @@ export const Header = () => {
                   borderRight: `1px solid ${theme.palette.divider}`,
                 })}
               >
-                <b>Archival</b>
+                <b>{isMobile ? "A" : "Archival"}</b>
               </Typography>
             </Link>
           </Box>
