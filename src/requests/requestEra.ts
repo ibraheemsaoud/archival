@@ -89,21 +89,3 @@ export const requestCreateEra = async (topicId: string, era: IEraCreate) => {
     };
   }
 };
-
-export const requestDashboardEras = async () => {
-  const data = await api.listDocuments(
-    Server.databaseID,
-    Server.eraCollectionId,
-    [Query.limit(16), Query.orderDesc("$createdAt")]
-  );
-  if (data.documents) {
-    return {
-      data: data.documents,
-      error: undefined,
-    };
-  }
-  return {
-    data: [],
-    error: "no era found",
-  };
-};

@@ -3,13 +3,13 @@ import { Grid, Link, Typography } from "@mui/material";
 import { SUPPORT_EMAIL } from "../../consts/outsideLinks";
 import { useLoaderData } from "react-router-dom";
 import { ITopic } from "../../interfaces/topic.interface";
-import { useRequestDashboardEras } from "../../hooks";
+import { useRequestDashboardEras } from "../../requests";
 
 export const TopicList = () => {
   const { topics } = useLoaderData() as any as {
     topics?: ITopic[];
   };
-  const { eras } = useRequestDashboardEras();
+  const { data: eras } = useRequestDashboardEras();
 
   if (!topics) return <div>Loading...</div>;
 
