@@ -99,6 +99,9 @@ export const SuggestNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
           onChange={onChangeText}
           sx={{ marginBottom: 2 }}
           fullWidth
+          inputProps={{
+            maxLength: 500,
+          }}
         />
         <TextField
           id="pictureURL"

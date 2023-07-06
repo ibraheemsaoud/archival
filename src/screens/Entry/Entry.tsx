@@ -7,6 +7,7 @@ import {
   CardContent,
   CardMedia,
   Grid,
+  Link,
   Typography,
 } from "@mui/material";
 import { Comment } from "./Comment";
@@ -53,6 +54,21 @@ export const Entry = () => {
                   {entry.text}
                 </Typography>
               )}
+              <Link href={entry.link} target="_blank">
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  marginTop={2}
+                  sx={{
+                    display: "-webkit-box",
+                    "-webkit-line-clamp": "1",
+                    "-webkit-box-orient": "vertical",
+                    overflow: "hidden",
+                  }}
+                >
+                  {entry.link}
+                </Typography>
+              </Link>
             </CardContent>
           </Card>
 

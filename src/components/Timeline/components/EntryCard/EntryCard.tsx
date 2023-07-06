@@ -43,23 +43,44 @@ export const EntryCard = ({ entry }: { entry: IEntry }) => {
             <Typography textAlign="end" variant="body2" color="text.secondary">
               {entry.timestamp?.toLocaleDateString()}
             </Typography>
-            <Typography variant="h5">{entry.title}</Typography>
-            {entry?.text && (
+            <Typography
+              variant="h5"
+              sx={{
+                display: "-webkit-box",
+                "-webkit-line-clamp": "2",
+                "-webkit-box-orient": "vertical",
+                overflow: "hidden",
+              }}
+            >
+              {entry.title}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{
+                display: "-webkit-box",
+                "-webkit-line-clamp": "3",
+                "-webkit-box-orient": "vertical",
+                overflow: "hidden",
+              }}
+            >
+              {entry.text}
+            </Typography>
+            <Link href={entry.link} target="_blank">
               <Typography
                 variant="body2"
                 color="text.secondary"
+                marginTop={2}
                 sx={{
-                  textOverflow: "ellipsis",
+                  display: "-webkit-box",
+                  "-webkit-line-clamp": "1",
+                  "-webkit-box-orient": "vertical",
                   overflow: "hidden",
-                  whiteSpace: "nowrap",
                 }}
               >
-                {entry?.text}
+                {entry.link}
               </Typography>
-            )}
-            <Typography variant="body2" color="text.secondary">
-              {entry.text}
-            </Typography>
+            </Link>
           </CardContent>
         </CardActionArea>
       </Card>

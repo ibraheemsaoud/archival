@@ -40,7 +40,12 @@ export const requestCreateEntry = async (
     const data = await api.createDocument(
       Server.databaseID,
       Server.entryCollectionId,
-      { ...entry, eraId },
+      {
+        ...entry,
+        eraId,
+        pictureUrl: entry.pictureUrl || undefined,
+        link: entry.link || undefined,
+      } as IEntry,
       [
         Permission.read(Role.team(turnStringToValidTeamName(eraId))),
         Permission.update(Role.team(turnStringToValidTeamName(eraId))),
