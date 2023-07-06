@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ITimelineEntry } from "../../../../interfaces/timelineEntry.interface";
 import { Autocomplete, Box, Button, TextField } from "@mui/material";
 import { IEntry } from "../../../../interfaces/entry.interface";
@@ -27,6 +27,12 @@ export const EditCollection = ({
   const [listOfEntryIds, setListOfEntryIds] = useState(entry.entryIds || []);
   const [order, setOrder] = useState(entry.order || 0);
 
+  useEffect(() => {
+    setTitle(entry.title || "");
+    setListOfEntryIds(entry.entryIds || []);
+    setOrder(entry.order || 0);
+  }, [entry]);
+
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
@@ -42,6 +48,7 @@ export const EditCollection = ({
       ...entry,
       title,
       entryIds: listOfEntryIds,
+      order,
     });
   };
 

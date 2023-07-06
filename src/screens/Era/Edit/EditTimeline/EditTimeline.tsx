@@ -43,7 +43,7 @@ export const EditTimeline = () => {
         Edit timeline
       </Button>
 
-      <Dialog onClose={handleClose} open={open} fullScreen>
+      <Dialog onClose={handleClose} open={open} fullScreen sx={{ margin: 3 }}>
         <Box display="flex" justifyContent="space-between">
           <DialogTitle variant="h5">
             Era Editor

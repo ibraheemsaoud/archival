@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ITimelineEntry } from "../../../../interfaces/timelineEntry.interface";
 import { Box, Button, TextField } from "@mui/material";
 
@@ -22,6 +22,13 @@ export const EditMedia = ({
   const [link, setLink] = useState(entry.link || "");
   const [order, setOrder] = useState(entry.order || 0);
 
+  useEffect(() => {
+    setTitle(entry.title || "");
+    setDescription(entry.description || "");
+    setLink(entry.link || "");
+    setOrder(entry.order || 0);
+  }, [entry]);
+
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
@@ -40,6 +47,7 @@ export const EditMedia = ({
       title,
       description,
       link,
+      order,
     });
   };
 

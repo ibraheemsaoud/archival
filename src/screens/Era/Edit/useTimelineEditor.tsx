@@ -48,7 +48,7 @@ export const useTimelineEditor = (eraId?: string) => {
       return;
     }
     const resp = await requestUpdateTimelineEntry(eraId, entry);
-    if (resp) {
+    if (resp.data) {
       setIncrement(increment + 1);
     }
   };

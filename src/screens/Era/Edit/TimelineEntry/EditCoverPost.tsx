@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ITimelineEntry } from "../../../../interfaces/timelineEntry.interface";
 import { Autocomplete, Box, Button, TextField } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
@@ -28,6 +28,13 @@ export const EditCoverPost = ({
   const [linkedEntryId, setLinkedEntryId] = useState(entry.entryId || "");
   const [order, setOrder] = useState(entry.order || 0);
 
+  useEffect(() => {
+    setTitle(entry.title || "");
+    setDescription(entry.description || "");
+    setLinkedEntryId(entry.entryId || "");
+    setOrder(entry.order || 0);
+  }, [entry]);
+
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
@@ -46,6 +53,7 @@ export const EditCoverPost = ({
       title,
       description,
       entryId: linkedEntryId,
+      order,
     });
   };
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ILink,
   ITimelineEntry,
@@ -28,6 +28,11 @@ export const EditQuickLinks = ({
   const [linkList, setLinkList] = useState(entry.links || []);
   const [order, setOrder] = useState(entry.order || 0);
 
+  useEffect(() => {
+    setLinkList(entry.links || []);
+    setOrder(entry.order || 0);
+  }, [entry]);
+
   const onChangeLinks = (_: any, value: string[]) => {
     setLinkList(value);
   };
@@ -39,6 +44,7 @@ export const EditQuickLinks = ({
     onChange({
       ...entry,
       links: linkList,
+      order,
     });
   };
 
@@ -90,8 +96,8 @@ export const EditQuickLinks = ({
       />
       <Button onClick={onHandleChange}>Update</Button>
       <Button onClick={onHandleDelete}>Delete</Button>
-      <Button onClick={onHandleMoveUp}>Move up</Button>
-      <Button onClick={onHandleMoveDown}>Move down</Button>
+      <Button onClick={onHandleMoveUp}>Move Up</Button>
+      <Button onClick={onHandleMoveDown}>Move Down</Button>
     </Box>
   );
 };
