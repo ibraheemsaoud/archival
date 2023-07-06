@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import { Link as NavLink, useLoaderData } from "react-router-dom";
 import { IEntry } from "../../../../interfaces/entry.interface";
-import { useRequestLinkPreview } from "../../../../requests/external";
 import { replaceRouteParams } from "../../../../helpers";
 import { ENTRY } from "../../../../consts/links.const";
 import { IEra } from "../../../../interfaces/era.interface";
@@ -19,7 +18,6 @@ export const EntryCard = ({ entry }: { entry: IEntry }) => {
     era: IEra;
     topic: ITopic;
   };
-  const { data } = useRequestLinkPreview(entry?.link);
 
   return (
     <Link
@@ -33,12 +31,12 @@ export const EntryCard = ({ entry }: { entry: IEntry }) => {
     >
       <Card sx={{ textAlign: "start" }}>
         <CardActionArea>
-          {data?.image && (
+          {entry?.pictureUrl && (
             <CardMedia
               component="img"
               height={175}
-              image={data.image}
-              alt={data?.title}
+              image={entry?.pictureUrl}
+              alt={entry?.title}
             />
           )}
           <CardContent>
@@ -46,7 +44,7 @@ export const EntryCard = ({ entry }: { entry: IEntry }) => {
               {entry.timestamp?.toLocaleDateString()}
             </Typography>
             <Typography variant="h5">{entry.title}</Typography>
-            {data?.description && (
+            {entry?.text && (
               <Typography
                 variant="body2"
                 color="text.secondary"
@@ -56,7 +54,7 @@ export const EntryCard = ({ entry }: { entry: IEntry }) => {
                   whiteSpace: "nowrap",
                 }}
               >
-                {data.description}
+                {entry?.text}
               </Typography>
             )}
             <Typography variant="body2" color="text.secondary">
@@ -67,6 +65,4 @@ export const EntryCard = ({ entry }: { entry: IEntry }) => {
       </Card>
     </Link>
   );
-  // backup preview link: https://github.com/dhaiwat10/react-link-preview
-  // https://my.linkpreview.net/access_keys
 };

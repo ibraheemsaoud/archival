@@ -17,6 +17,7 @@ export const SuggestNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [text, setText] = useState("");
+  const [pictureUrl, setPictureUrl] = useState("");
   const [date, setDate] = useState<Date | null>(new Date());
 
   const handleClose = () => {
@@ -35,6 +36,9 @@ export const SuggestNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
   const onChangeDate = (date: Date | null) => {
     setDate(date);
   };
+  const onChangePictureUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPictureUrl(e.target.value);
+  };
 
   const createEntry = () => {
     if (!title || !date) return;
@@ -43,10 +47,12 @@ export const SuggestNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
       link,
       text,
       timestamp: date,
+      pictureUrl,
     });
     setTitle("");
     setLink("");
     setText("");
+    setPictureUrl("");
     setDate(new Date());
     onClose();
   };
@@ -62,7 +68,7 @@ export const SuggestNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
         alignItems="center"
       >
         <TextField
-          id="standard-basic"
+          id="title"
           label="Title"
           variant="standard"
           fullWidth
@@ -77,7 +83,7 @@ export const SuggestNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
           value={date}
         />
         <TextField
-          id="standard-basic"
+          id="link"
           label="Link"
           variant="standard"
           value={link}
@@ -86,11 +92,20 @@ export const SuggestNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
           sx={{ marginBottom: 2 }}
         />
         <TextField
-          id="standard-basic"
+          id="text"
           label="Text"
           variant="standard"
           value={text}
           onChange={onChangeText}
+          sx={{ marginBottom: 2 }}
+          fullWidth
+        />
+        <TextField
+          id="pictureURL"
+          label="Picture URL"
+          variant="standard"
+          value={pictureUrl}
+          onChange={onChangePictureUrl}
           sx={{ marginBottom: 2 }}
           fullWidth
         />

@@ -9,8 +9,9 @@ export type IEntryInteraction = {
 export type IEntryCreate = {
   title: string;
   timestamp: Date;
-  link: string;
-  text: string;
+  link?: string;
+  text?: string;
+  pictureUrl?: string;
 };
 
 export interface IEntry {
@@ -20,4 +21,5 @@ export interface IEntry {
   timestamp: Date;
   link?: string;
   text?: string;
+  pictureUrl?: string;
 }

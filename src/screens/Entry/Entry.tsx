@@ -9,7 +9,6 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { useRequestLinkPreview } from "../../requests/external";
 import { Comment } from "./Comment";
 import { CreateComment } from "./CreateComment";
 import { useRequestComments } from "../../requests/useRequestComments";
@@ -20,8 +19,6 @@ export const Entry = () => {
   };
   const { data: comments, isLoading } = useRequestComments(entry?.$id);
 
-  const { data } = useRequestLinkPreview(entry?.link);
-
   if (!entry) return <div>Not found</div>;
   if (isLoading) return <div>Loading...</div>;
 
@@ -30,12 +27,12 @@ export const Entry = () => {
       <Grid container spacing={4}>
         <Grid item xs={12} md={9}>
           <Card sx={{ textAlign: "start" }}>
-            {data?.image && (
+            {entry?.pictureUrl && (
               <CardMedia
                 component="img"
                 height={300}
-                image={data.image}
-                alt={data?.title}
+                image={entry?.pictureUrl}
+                alt={entry?.title}
               />
             )}
             <CardContent>
@@ -43,7 +40,7 @@ export const Entry = () => {
                 {entry.timestamp.toLocaleString()}
               </Typography>
               <Typography variant="h5">{entry.title}</Typography>
-              {data?.description && (
+              {entry?.text && (
                 <Typography
                   variant="body2"
                   color="text.secondary"
@@ -53,7 +50,7 @@ export const Entry = () => {
                     whiteSpace: "nowrap",
                   }}
                 >
-                  {data.description}
+                  {entry.text}
                 </Typography>
               )}
             </CardContent>

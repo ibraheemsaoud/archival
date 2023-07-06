@@ -1,10 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { ICoverPost } from "../../../interfaces/timelineEntry.interface";
-import { useRequestLinkPreview } from "../../../requests/external";
 
 export const CoverPost = ({ coverPost }: { coverPost: ICoverPost }) => {
-  const { data } = useRequestLinkPreview(coverPost.entry?.link);
-
   if (!coverPost.entry) return null;
   return (
     <Box marginBottom={6}>
@@ -19,27 +16,29 @@ export const CoverPost = ({ coverPost }: { coverPost: ICoverPost }) => {
       <Box marginTop={4}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={2} />
-          <Grid
-            item
-            xs={12}
-            md={4}
-            sx={{
-              height: 500,
-              maxHeight: { xs: 350, lg: 250 },
-            }}
-          >
-            <Box
-              component="img"
+          {coverPost.entry?.pictureUrl && (
+            <Grid
+              item
+              xs={12}
+              md={4}
               sx={{
                 height: 500,
-                width: "100%",
                 maxHeight: { xs: 350, lg: 250 },
-                objectFit: "cover",
               }}
-              alt={data?.title}
-              src={data?.image}
-            />
-          </Grid>
+            >
+              <Box
+                component="img"
+                sx={{
+                  height: 500,
+                  width: "100%",
+                  maxHeight: { xs: 350, lg: 250 },
+                  objectFit: "cover",
+                }}
+                alt={coverPost.entry?.title}
+                src={coverPost.entry?.pictureUrl}
+              />
+            </Grid>
+          )}
           <Grid item xs={12} md={4} sx={{ textAlign: "left" }}>
             <Typography variant="h5" gutterBottom>
               {coverPost.entry.title}
