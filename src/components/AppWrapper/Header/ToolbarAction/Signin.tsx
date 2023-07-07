@@ -35,7 +35,6 @@ export const Signin = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  const isMobile = window.innerWidth < 600;
   return (
     <>
       <Dialog onClose={handleClose} open={open} maxWidth="xs">
@@ -151,7 +150,10 @@ export const Signin = () => {
         </Box>
       </Dialog>
       <Button onClick={handleClickOpen} variant="contained">
-        {isMobile ? "Login" : "Login / Register"}
+        <Box sx={{ display: { md: "block", xs: "none" } }}>
+          Login / Register
+        </Box>
+        <Box sx={{ display: { md: "none", xs: "block" } }}>Login</Box>
       </Button>
     </>
   );
