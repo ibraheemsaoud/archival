@@ -5,6 +5,9 @@ export const theme = (mode, accentColor) => {
   const palette = getDesignTokens(mode, accentColor);
   return createTheme({
     ...palette,
+    typography: {
+      fontFamily: "IBM Plex Sans Condensed",
+    },
     components: {
       MuiButtonBase: {
         defaultProps: {
