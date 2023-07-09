@@ -14,7 +14,6 @@ export const Media = ({ media }: { media: IMedia }) => {
         </Typography>
       )}
       <br />
-
       <Box
         component="img"
         sx={{

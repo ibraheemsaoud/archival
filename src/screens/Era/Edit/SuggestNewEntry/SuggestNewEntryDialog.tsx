@@ -12,7 +12,10 @@ import { useState } from "react";
 import { requestCreateEntry } from "../../../../requests";
 import { useLoaderData } from "react-router-dom";
 import { IEra } from "../../../../interfaces/era.interface";
-import { UploadImage } from "../../../../components/UploadImage";
+import {
+  UploadImage,
+  useUploadImage,
+} from "../../../../components/UploadImage";
 
 interface SimpleDialogProps {
   open: boolean;
@@ -26,14 +29,14 @@ export const SuggestNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [text, setText] = useState("");
-  const [pictureUrl, setPictureUrl] = useState("");
-  const [file, setFile] = useState<File | null>(null);
   const [date, setDate] = useState<Date | null>(new Date());
+
+  const { file, onChangeFile, onRemoveFile, pictureUrl, onReset } =
+    useUploadImage({});
 
   const handleClose = () => {
     onClose();
   };
-
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
@@ -45,15 +48,6 @@ export const SuggestNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
   };
   const onChangeDate = (date: Date | null) => {
     setDate(date);
-  };
-  const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
-    setFile(e.target.files[0]);
-    setPictureUrl(URL.createObjectURL(e.target.files[0]));
-  };
-  const onRemoveFile = () => {
-    setFile(null);
-    setPictureUrl("");
   };
 
   const createEntry = () => {
@@ -68,8 +62,7 @@ export const SuggestNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
     setTitle("");
     setLink("");
     setText("");
-    setFile(null);
-    setPictureUrl("");
+    onRemoveFile();
     setDate(new Date());
     onClose();
   };
@@ -79,10 +72,7 @@ export const SuggestNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
       <Box>
         <DialogTitle variant="h5">Suggest New Entry</DialogTitle>
         <DialogContent>
-          <Box
-            display="flex"
-            flexDirection="column"
-          >
+          <Box display="flex" flexDirection="column">
             <TextField
               id="title"
               label="Title"
@@ -119,9 +109,9 @@ export const SuggestNewEntryDialog = ({ onClose, open }: SimpleDialogProps) => {
                 maxLength: 500,
               }}
             />
-            <UploadImage  
+            <UploadImage
               onChangeFile={onChangeFile}
-              onRemoveFile={onRemoveFile}
+              onReset={onReset}
               pictureUrl={pictureUrl}
               file={file}
             />

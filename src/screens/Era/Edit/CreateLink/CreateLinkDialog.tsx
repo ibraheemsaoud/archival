@@ -1,4 +1,12 @@
-import { Box, Button, Dialog, DialogTitle, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { IEra } from "../../../../interfaces/era.interface";
@@ -42,35 +50,33 @@ export const CreateLinkDialog = ({ onClose, open }: SimpleDialogProps) => {
   return (
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle variant="h5">Create New Link</DialogTitle>
-      <Box
-        display="flex"
-        flexDirection="column"
-        paddingX={4}
-        paddingBottom={6}
-        alignItems="center"
-      >
-        <TextField
-          id="standard-basic"
-          label="Title"
-          variant="standard"
-          fullWidth
-          value={title}
-          onChange={onChangeName}
-          sx={{ marginBottom: 2 }}
-        />
-        <TextField
-          id="standard-basic"
-          label="Link"
-          variant="standard"
-          value={link}
-          onChange={onChangeLink}
-          fullWidth
-          sx={{ marginBottom: 2 }}
-        />
-        <Button variant="contained" onClick={createLink} fullWidth>
+      <DialogContent>
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <TextField
+            id="standard-basic"
+            label="Title"
+            variant="standard"
+            fullWidth
+            value={title}
+            onChange={onChangeName}
+            sx={{ marginBottom: 2 }}
+          />
+          <TextField
+            id="standard-basic"
+            label="Link"
+            variant="standard"
+            value={link}
+            onChange={onChangeLink}
+            fullWidth
+            sx={{ marginBottom: 2 }}
+          />
+        </Box>
+      </DialogContent>
+      <DialogActions>
+        <Button variant="contained" onClick={createLink}>
           Submit
         </Button>
-      </Box>
+      </DialogActions>
     </Dialog>
   );
 };
