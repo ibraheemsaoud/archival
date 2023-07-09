@@ -5,6 +5,7 @@ import {
   Models,
   Teams,
   ID,
+  Storage,
 } from "appwrite";
 import { Server } from "../config/server";
 import { turnStringToValidTeamName } from "../helpers";
@@ -13,9 +14,10 @@ interface SDK {
   database: Databases;
   account: Account;
   teams: Teams;
+  storage: Storage;
 }
 
-const api: {
+interface Api {
   sdk: SDK | null;
   provider: () => SDK;
   createAccount: (
@@ -62,7 +64,14 @@ const api: {
     documentId: string
   ) => Promise<{}>;
   createTeam: (name: string) => Promise<Models.Team<any>>;
-} = {
+  uploadFile: (
+    bucketId: string,
+    fileName: string,
+    file: File
+  ) => Promise<Models.File>;
+}
+
+const api: Api = {
   sdk: null,
 
   provider: () => {
@@ -74,8 +83,9 @@ const api: {
     const account = new Account(appwrite);
     const database = new Databases(appwrite);
     const teams = new Teams(appwrite);
+    const storage = new Storage(appwrite);
 
-    api.sdk = { database, account, teams };
+    api.sdk = { database, account, teams, storage };
     return api.sdk;
   },
 
@@ -172,6 +182,10 @@ const api: {
       .provider()
       .teams.create(ID.unique(), turnStringToValidTeamName(name));
   },
+
+  uploadFile: (bucketId: string, fileName: string, file: File) => {
+    return api.provider().storage.createFile(bucketId, fileName, file);
+  }
 };
 
 export default api;

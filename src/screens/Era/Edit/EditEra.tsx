@@ -3,6 +3,10 @@ import {
   Box,
   Button,
   Checkbox,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   FormControlLabel,
   Grid,
   TextField,
@@ -91,80 +95,85 @@ export const EditEra = () => {
     );
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} md={3} />
-      <Grid item xs={12} md={6}>
-        <TextField
-          id="title"
-          label="Title"
-          variant="standard"
-          fullWidth
-          value={editableEra.title}
-          onChange={onChangeTitle}
-          sx={{ marginBottom: 2 }}
-        />
-        <TextField
-          id="coverImageUrl"
-          label="Cover Image URL"
-          variant="standard"
-          fullWidth
-          value={editableEra.coverImageUrl}
-          onChange={onChangeCoverImageUrl}
-          sx={{ marginBottom: 2 }}
-        />
-        <TextField
-          id="standard-basic"
-          label="Accent Color"
-          variant="standard"
-          value={editableEra.accentColor}
-          onChange={onChangeAccentColor}
-        />
-        <TextField
-          id="description"
-          label="Description"
-          variant="standard"
-          fullWidth
-          value={editableEra.description}
-          onChange={onChangeDescription}
-          sx={{ marginBottom: 2 }}
-          multiline
-          minRows={2}
-          maxRows={8}
-        />
-        <Box sx={{ marginBottom: 2 }}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                id="isPublic"
-                checked={editableEra.isPublic}
-                onChange={onChangeIsPublic}
+    <Dialog open>
+      <DialogTitle variant="h5">Edit Era</DialogTitle>
+      <DialogContent>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={3} />
+          <Grid item xs={12} md={6}>
+            <TextField
+              id="title"
+              label="Title"
+              variant="standard"
+              fullWidth
+              value={editableEra.title}
+              onChange={onChangeTitle}
+              sx={{ marginBottom: 2 }}
+            />
+            <TextField
+              id="coverImageUrl"
+              label="Cover Image URL"
+              variant="standard"
+              fullWidth
+              value={editableEra.coverImageUrl}
+              onChange={onChangeCoverImageUrl}
+              sx={{ marginBottom: 2 }}
+            />
+            <TextField
+              id="standard-basic"
+              label="Accent Color"
+              variant="standard"
+              value={editableEra.accentColor}
+              onChange={onChangeAccentColor}
+            />
+            <TextField
+              id="description"
+              label="Description"
+              variant="standard"
+              fullWidth
+              value={editableEra.description}
+              onChange={onChangeDescription}
+              sx={{ marginBottom: 2 }}
+              multiline
+              minRows={2}
+              maxRows={8}
+            />
+            <Box sx={{ marginBottom: 2 }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    id="isPublic"
+                    checked={editableEra.isPublic}
+                    onChange={onChangeIsPublic}
+                  />
+                }
+                label="public"
               />
-            }
-            label="public"
-          />
-        </Box>
-        <Box sx={{ marginBottom: 2 }}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                id="disableSuggestions"
-                checked={editableEra.disableSuggestions}
-                onChange={onChangeDisableSuggestions}
+            </Box>
+            <Box sx={{ marginBottom: 2 }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    id="disableSuggestions"
+                    checked={editableEra.disableSuggestions}
+                    onChange={onChangeDisableSuggestions}
+                  />
+                }
+                label="disable suggestions"
               />
-            }
-            label="disable suggestions"
-          />
-        </Box>
-        <Box textAlign="end">
-          <Button onClick={handleClose} sx={{ marginRight: 1 }}>
-            Cancel
-          </Button>
-          <Button variant="contained" onClick={handleSave}>
-            Save
-          </Button>
-        </Box>
-      </Grid>
-      <Grid item xs={12} md={4} />
-    </Grid>
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={4} />
+        </Grid>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} sx={{ marginRight: 1 }}>
+          Cancel
+        </Button>
+        <Button variant="contained" onClick={handleSave}>
+          Save
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };

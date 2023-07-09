@@ -1,8 +1,9 @@
 import { IEntry, IEntryCreate } from "../interfaces/entry.interface";
 import { Server } from "../config/server";
-import { Permission, Query, Role } from "appwrite";
+import { ID, Permission, Query, Role } from "appwrite";
 import api from "./apis";
 import { turnStringToValidTeamName } from "../helpers";
+import { toast } from "react-hot-toast";
 
 export const requestEntries = async (eraId?: string) => {
   if (!eraId) {
@@ -33,9 +34,30 @@ export const requestEntries = async (eraId?: string) => {
 
 export const requestCreateEntry = async (
   eraId: string,
+  file: File | null,
   entry: IEntryCreate
 ) => {
   if (!eraId || !entry) return { data: false, error: "No eraId or entry" };
+  try {
+    if (file) {
+      const fileData = await api.uploadFile(
+        Server.entriesPicturesBucketId,
+        ID.unique(),
+        file
+      );
+      if (fileData.$id) {
+        entry.pictureUrl = `https://cloud.appwrite.io/v1/storage/buckets/${Server.entriesPicturesBucketId}/files/${fileData.$id}/view?project=Archival`;
+      } else {
+        entry.pictureUrl = undefined;
+      }
+    }
+  } catch (e) {
+    toast.error("Error uploading file");
+    return {
+      data: false,
+      error: e as string,
+    };
+  }
   try {
     const data = await api.createDocument(
       Server.databaseID,

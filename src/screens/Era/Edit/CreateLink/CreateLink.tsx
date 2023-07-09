@@ -15,7 +15,7 @@ export const CreateLink = () => {
   return (
     <>
       <Button variant="contained" onClick={handleClickOpen}>
-        CreateLink
+        Create Link
       </Button>
       <CreateLinkDialog open={open} onClose={handleClose} />
     </>
