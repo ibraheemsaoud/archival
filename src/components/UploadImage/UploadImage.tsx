@@ -6,6 +6,7 @@ interface UploadImageProps {
   onReset: () => void;
   pictureUrl?: string;
   file: File | null;
+  height?: string;
 }
 
 export const UploadImage = ({
@@ -13,6 +14,7 @@ export const UploadImage = ({
   onReset,
   pictureUrl,
   file,
+  height = "100px",
 }: UploadImageProps) => {
   return (
     <Box
@@ -29,7 +31,7 @@ export const UploadImage = ({
             component="img"
             src={pictureUrl}
             alt={file?.name}
-            height="100px"
+            height={height}
             width="100%"
             sx={{
               objectFit: "cover",

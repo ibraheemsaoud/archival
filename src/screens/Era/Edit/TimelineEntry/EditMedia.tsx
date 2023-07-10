@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ITimelineEntry } from "../../../../interfaces/timelineEntry.interface";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import {
   UploadImage,
   useUploadImage,
@@ -9,6 +9,8 @@ import api from "../../../../requests/apis";
 import { ID } from "appwrite";
 import { Server } from "../../../../config/server";
 import { toast } from "react-hot-toast";
+import { H5TextField } from "../../../../components/H5TextField";
+import { Body1TextField } from "../../../../components/Body1TextField";
 
 interface IEditMedia {
   entry: ITimelineEntry;
@@ -92,50 +94,46 @@ export const EditMedia = ({
 
   return (
     <Box
-      sx={(theme) => ({
-        margin: 1,
-        paddingX: 1,
-        paddingY: 2,
-        border: `1px solid ${theme.palette.divider}`,
-        borderRadius: 1,
-      })}
+      sx={{
+        marginY: 2,
+      }}
     >
-      Media Element: shows a big picture.
-      <TextField
+      <H5TextField
         id="standard-basic"
-        label="Title"
+        placeholder="Title"
         variant="standard"
+        hiddenLabel
         fullWidth
         value={title}
         onChange={onChangeTitle}
-        sx={{ marginBottom: 2 }}
       />
-      <TextField
+      <Body1TextField
         id="standard-basic"
-        label="Description"
+        placeholder="Description"
         variant="standard"
         fullWidth
         value={description}
         onChange={onChangeDescription}
-        sx={{ marginBottom: 2 }}
         multiline
         maxRows={4}
-      />
-      <TextField
-        id="order"
-        label="Order"
-        variant="standard"
-        type="number"
-        fullWidth
-        value={order}
-        onChange={onChangeOrder}
-        sx={{ marginBottom: 2 }}
+        sx={{ marginBottom: "30px" }}
       />
       <UploadImage
         file={file}
         onChangeFile={onChangeFile}
         onReset={onReset}
         pictureUrl={pictureUrl}
+        height="350px"
+      />
+      <H5TextField
+        id="order"
+        placeholder="Order"
+        variant="standard"
+        type="number"
+        fullWidth
+        value={order}
+        onChange={onChangeOrder}
+        sx={{ marginBottom: 2 }}
       />
       <Button onClick={onHandleChange}>Update</Button>
       <Button onClick={onHandleDelete}>Delete</Button>

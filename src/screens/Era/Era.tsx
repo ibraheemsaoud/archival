@@ -40,6 +40,7 @@ export const Era = () => {
             alignItems="flex-end"
             flexDirection="column"
             sx={{
+              width: "auto",
               position: "fixed",
               bottom: 8,
               right: 8,

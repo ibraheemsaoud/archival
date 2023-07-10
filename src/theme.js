@@ -38,6 +38,9 @@ export const theme = (mode, accentColor) => {
           h4: {
             color: palette.palette.text.primary,
           },
+          body1: {
+            color: palette.palette.green.dark,
+          }
         },
       },
       MuiToolbar: {
