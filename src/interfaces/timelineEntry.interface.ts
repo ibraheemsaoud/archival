@@ -8,18 +8,6 @@ export enum EntryType {
   QuickLinks = "quickLinks",
 }
 
-export interface IQuickLinksCreate {
-  order: number;
-  type: EntryType.QuickLinks;
-  links: ILink[];
-}
-
-export interface IQuickLinks {
-  $id: string;
-  order: number;
-  links: string[];
-}
-
 export interface IMediaCreate {
   order: number;
   type: EntryType.Media;
@@ -56,22 +44,6 @@ export interface ICoverPost {
   description?: string;
   entryId: string;
   entry?: IEntry;
-}
-
-export interface ICollectionCreate {
-  order: number;
-  type: EntryType.Collection;
-  title: string;
-  entryIds: string[];
-}
-
-export interface ICollection {
-  $id: string;
-  order: number;
-  type: EntryType.Collection;
-  title: string;
-  entryIds: string[];
-  entries?: IEntry[];
 }
 
 export interface ITimelineEntry extends IAppWrite {

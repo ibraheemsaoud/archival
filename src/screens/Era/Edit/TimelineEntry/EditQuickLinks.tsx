@@ -78,7 +78,7 @@ export const EditQuickLinks = ({
         defaultValue={linkList}
         multiple
         renderInput={(params) => (
-          <TextField {...params} label="link IDs (comma separated)" />
+          <TextField {...params} placeholder="link IDs (comma separated)" />
         )}
       />
       <H5TextField

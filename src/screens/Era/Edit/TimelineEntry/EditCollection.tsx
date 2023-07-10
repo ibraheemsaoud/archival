@@ -3,6 +3,8 @@ import { ITimelineEntry } from "../../../../interfaces/timelineEntry.interface";
 import { Autocomplete, Box, Button, TextField } from "@mui/material";
 import { IEntry } from "../../../../interfaces/entry.interface";
 import { useLoaderData } from "react-router-dom";
+import { H3TextField, H5TextField } from "../../../../components";
+import { Collection } from "../../../../components/Timeline/components";
 
 interface IEditCollection {
   entry: ITimelineEntry;
@@ -65,24 +67,14 @@ export const EditCollection = ({
   };
 
   return (
-    <Box
-      sx={(theme) => ({
-        margin: 1,
-        paddingX: 1,
-        paddingY: 2,
-        border: `1px solid ${theme.palette.divider}`,
-        borderRadius: 1,
-      })}
-    >
-      Collection: shows multiple entries.
-      <TextField
+    <Box sx={{ marginY: 2 }}>
+      <H3TextField
         id="title"
-        label="Title"
+        placeholder="Title"
         variant="standard"
         fullWidth
         value={title}
         onChange={onChangeTitle}
-        sx={{ marginBottom: 2 }}
       />
       <Autocomplete
         disablePortal
@@ -93,12 +85,20 @@ export const EditCollection = ({
         defaultValue={listOfEntryIds}
         multiple
         renderInput={(params) => (
-          <TextField {...params} label="Entry IDs (comma separated)" />
+          <TextField {...params} placeholder="Entry IDs (comma separated)" />
         )}
       />
-      <TextField
+      <Collection
+        entry={{
+          ...entry,
+          entryIds: listOfEntryIds,
+          title,
+        }}
+        minimalDisplay
+      />
+      <H5TextField
         id="order"
-        label="Order"
+        placeholder="Order"
         variant="standard"
         type="number"
         fullWidth

@@ -7,6 +7,15 @@ export const theme = (mode, accentColor) => {
     ...palette,
     typography: {
       fontFamily: "IBM Plex Sans Condensed",
+      h5: {
+        color: palette.palette.text.primary,
+      },
+      h3: {
+        color: palette.palette.green.dark,
+      },
+      body1: {
+        color: palette.palette.green.dark,
+      },
     },
     components: {
       MuiButtonBase: {
@@ -38,9 +47,12 @@ export const theme = (mode, accentColor) => {
           h4: {
             color: palette.palette.text.primary,
           },
+          h3: {
+            color: palette.palette.green.dark,
+          },
           body1: {
             color: palette.palette.green.dark,
-          }
+          },
         },
       },
       MuiToolbar: {
