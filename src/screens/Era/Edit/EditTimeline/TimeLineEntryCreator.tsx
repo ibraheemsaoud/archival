@@ -73,12 +73,15 @@ export const TimelineEntryCreator = ({
     <Box
       sx={(theme) => ({
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "space-around",
         alignItems: "center",
-        margin: theme.spacing(1),
         padding: theme.spacing(2),
         border: `1px solid ${theme.palette.divider}`,
         borderRadius: "4px",
+        position: "sticky",
+        top: 0,
+        background: "white",
+        zIndex: 1,
       })}
     >
       <Typography variant="h5">Create New Entry</Typography>

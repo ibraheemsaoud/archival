@@ -63,5 +63,62 @@ export const useTimelineEditor = (eraId?: string) => {
     }
   };
 
-  return { entries, createNewEntry, updateEntry, deleteEntry };
+  const onChange = (entry: ITimelineEntry) => {
+    updateEntry(entry);
+  };
+
+  const onDelete = (entry: ITimelineEntry) => {
+    deleteEntry(entry);
+  };
+
+  const onMoveDown = (entry: ITimelineEntry) => {
+    const index = entries.findIndex((e) => e.$id === entry.$id);
+    if (index === -1) {
+      return;
+    }
+    if (index === entries.length - 1) {
+      return;
+    }
+    // swap the order property of the two entries
+    const newEntries = [...entries];
+    const temp = newEntries[index].order;
+    newEntries[index].order = newEntries[index + 1].order;
+    newEntries[index + 1].order = temp;
+    // update the database
+    onChange(newEntries[index]);
+    // send this request in 50ms
+    setTimeout(() => {
+      onChange(newEntries[index + 1]);
+    }, 50);
+  };
+
+  const onMoveUp = (entry: ITimelineEntry) => {
+    const index = entries.findIndex((e) => e.$id === entry.$id);
+    if (index === -1) {
+      return;
+    }
+    if (index === 0) {
+      return;
+    }
+    // swap the order property of the two entries
+    const newEntries = [...entries];
+    const temp = newEntries[index].order;
+    newEntries[index].order = newEntries[index - 1].order;
+    newEntries[index - 1].order = temp;
+    // update the database
+    onChange(newEntries[index]);
+    // send this request in 50ms
+    setTimeout(() => {
+      onChange(newEntries[index - 1]);
+    }, 50);
+  };
+
+  return {
+    entries,
+    createNewEntry,
+    onChange,
+    onDelete,
+    onMoveDown,
+    onMoveUp,
+  };
 };
