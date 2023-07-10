@@ -39,18 +39,7 @@ export const Timeline = ({ timeline }: { timeline: ITimelineEntry[] }) => {
             };
             return <Media media={media} key={entry.$id} />;
           case EntryType.QuickLinks:
-            return (
-              <>
-                <QuickLinks entry={entry} key={entry.$id} />
-                <EditQuickLinks
-                  entry={entry}
-                  onChange={() => {}}
-                  onDelete={() => {}}
-                  onMoveDown={() => {}}
-                  onMoveUp={() => {}}
-                />
-              </>
-            );
+            return <QuickLinks entry={entry} key={entry.$id} />;
           default:
             return <></>;
         }

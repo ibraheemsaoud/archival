@@ -17,7 +17,7 @@ export interface IQuickLinksCreate {
 export interface IQuickLinks {
   $id: string;
   order: number;
-  links: ILink[];
+  links: string[];
 }
 
 export interface IMediaCreate {
@@ -87,7 +87,6 @@ export interface ITimelineEntry extends IAppWrite {
   entryIds?: string[];
   entries?: IEntry[];
   links?: string[];
-  linksData?: ILink[];
 }
 
 export type ITimelineEntryCreate = {
@@ -103,7 +102,6 @@ export type ITimelineEntryCreate = {
   entryIds?: string[];
   entries?: IEntry[];
   links?: string[];
-  linksData?: ILink[];
 };
 
 export interface ILink extends IAppWrite {
