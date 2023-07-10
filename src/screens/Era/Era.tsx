@@ -38,8 +38,6 @@ export const Era = () => {
     setIsEditing(!isEditing);
   };
 
-  console.log(isEditing);
-
   return (
     <ThemeProvider theme={modedTheme}>
       <AppWrapper>
