@@ -1,10 +1,7 @@
 import {
   EntryType,
-  ICoverPost,
-  IMedia,
   ITimelineEntry,
 } from "../../interfaces/timelineEntry.interface";
-import { EditCollection } from "../../screens/Era/Edit/TimelineEntry/EditCollection";
 import { Collection, CoverPost, Media, QuickLinks } from "./components";
 
 export const Timeline = ({ timeline }: { timeline: ITimelineEntry[] }) => {
@@ -13,24 +10,11 @@ export const Timeline = ({ timeline }: { timeline: ITimelineEntry[] }) => {
       {timeline.map((entry) => {
         switch (entry.type) {
           case EntryType.CoverPost:
-            const coverPost: ICoverPost = {
-              ...entry,
-              type: EntryType.CoverPost,
-              title: entry.title || "",
-              entryId: entry.entryId || "",
-            };
-            return <CoverPost coverPost={coverPost} key={entry.$id} />;
+            return <CoverPost entry={entry} key={entry.$id} />;
           case EntryType.Collection:
             return <Collection entry={entry} key={entry.$id} />;
           case EntryType.Media:
-            const media: IMedia = {
-              ...entry,
-              type: EntryType.Media,
-              title: entry.title || "",
-              link: entry.link || "",
-              timestamp: entry.timestamp || new Date(),
-            };
-            return <Media media={media} key={entry.$id} />;
+            return <Media entry={entry} key={entry.$id} />;
           case EntryType.QuickLinks:
             return <QuickLinks entry={entry} key={entry.$id} />;
           default:

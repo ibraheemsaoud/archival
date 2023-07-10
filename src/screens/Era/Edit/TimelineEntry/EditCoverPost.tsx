@@ -3,6 +3,9 @@ import { ITimelineEntry } from "../../../../interfaces/timelineEntry.interface";
 import { Autocomplete, Box, Button, TextField } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import { IEntry } from "../../../../interfaces/entry.interface";
+import { H3TextField, H5TextField } from "../../../../components";
+import { Body1TextField } from "../../../../components/Body1TextField";
+import { CoverPost } from "../../../../components/Timeline/components";
 
 interface IEditCoverPost {
   entry: ITimelineEntry;
@@ -70,33 +73,22 @@ export const EditCoverPost = ({
   };
 
   return (
-    <Box
-      sx={(theme) => ({
-        margin: 1,
-        paddingX: 1,
-        paddingY: 2,
-        border: `1px solid ${theme.palette.divider}`,
-        borderRadius: 1,
-      })}
-    >
-      Cover Post: shows a featured entry.
-      <TextField
+    <Box sx={{ marginY: 2 }}>
+      <H3TextField
         id="title"
-        label="Title"
+        placeholder="Title"
         variant="standard"
         fullWidth
         value={title}
         onChange={onChangeTitle}
-        sx={{ marginBottom: 2 }}
       />
-      <TextField
+      <Body1TextField
         id="description"
-        label="Description"
+        placeholder="Description"
         variant="standard"
         fullWidth
         value={description}
         onChange={onChangeDescription}
-        sx={{ marginBottom: 2 }}
         multiline
         maxRows={4}
       />
@@ -104,14 +96,17 @@ export const EditCoverPost = ({
         disablePortal
         id="entryId"
         options={entries.map((entry: IEntry) => entry.$id)}
-        sx={{ marginBottom: 2 }}
+        sx={{ marginY: 2 }}
         onChange={onChangeLinkedEntryId}
         defaultValue={linkedEntryId}
-        renderInput={(params) => <TextField {...params} label="Entry ID" />}
+        renderInput={(params) => (
+          <TextField {...params} placeholder="Entry ID" />
+        )}
       />
-      <TextField
+      <CoverPost entry={{ ...entry, entryId: linkedEntryId }} minimalDisplay />
+      <H5TextField
         id="order"
-        label="Order"
+        placeholder="Order"
         variant="standard"
         type="number"
         fullWidth

@@ -1,16 +1,16 @@
 import { Box, Typography } from "@mui/material";
-import { IMedia } from "../../../interfaces/timelineEntry.interface";
+import { ITimelineEntry } from "../../../interfaces/timelineEntry.interface";
 
-export const Media = ({ media }: { media: IMedia }) => {
-  if (!media.link) return null;
+export const Media = ({ entry }: { entry: ITimelineEntry }) => {
+  if (!entry.link) return null;
   return (
     <Box>
       <Typography variant="h5" gutterBottom>
-        {media.title}
+        {entry.title}
       </Typography>
-      {media.description && (
+      {entry.description && (
         <Typography variant="body1" gutterBottom>
-          {media.description}
+          {entry.description}
         </Typography>
       )}
       <br />
@@ -22,8 +22,8 @@ export const Media = ({ media }: { media: IMedia }) => {
           maxHeight: { xs: 350, lg: 500 },
           objectFit: "cover",
         }}
-        alt={media.title}
-        src={media.link}
+        alt={entry.title}
+        src={entry.link}
       />
     </Box>
   );
