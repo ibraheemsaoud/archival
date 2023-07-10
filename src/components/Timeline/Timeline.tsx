@@ -5,6 +5,7 @@ import {
   IMedia,
   ITimelineEntry,
 } from "../../interfaces/timelineEntry.interface";
+import { EditQuickLinks } from "../../screens/Era/Edit/TimelineEntry/EditQuickLinks";
 import { Collection, CoverPost, Media, QuickLinks } from "./components";
 
 export const Timeline = ({ timeline }: { timeline: ITimelineEntry[] }) => {
@@ -38,7 +39,18 @@ export const Timeline = ({ timeline }: { timeline: ITimelineEntry[] }) => {
             };
             return <Media media={media} key={entry.$id} />;
           case EntryType.QuickLinks:
-            return <QuickLinks entry={entry} key={entry.$id} />;
+            return (
+              <>
+                <QuickLinks entry={entry} key={entry.$id} />
+                <EditQuickLinks
+                  entry={entry}
+                  onChange={() => {}}
+                  onDelete={() => {}}
+                  onMoveDown={() => {}}
+                  onMoveUp={() => {}}
+                />
+              </>
+            );
           default:
             return <></>;
         }

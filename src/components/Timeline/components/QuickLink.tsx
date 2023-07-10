@@ -3,6 +3,7 @@ import { Link as NavLink } from "react-router-dom";
 import { ILink, IQuickLinks, ITimelineEntry } from "../../../interfaces/timelineEntry.interface";
 
 export const QuickLinks = ({ entry }: { entry: ITimelineEntry }) => {
+  console.log(entry);
   const quickLinks: IQuickLinks = {
     ...entry,
     links: entry.linksData || [] as ILink[],

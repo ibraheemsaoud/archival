@@ -5,6 +5,8 @@ import {
 } from "../../../../interfaces/timelineEntry.interface";
 import { Autocomplete, Box, Button, TextField } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
+import { H5TextField } from "../../../../components/H5TextField";
+import { QuickLinks } from "../../../../components/Timeline/components";
 
 interface IEditQuickLinks {
   entry: ITimelineEntry;
@@ -62,16 +64,11 @@ export const EditQuickLinks = ({
 
   return (
     <Box
-      sx={(theme) => ({
-        margin: 1,
-        paddingX: 1,
-        paddingY: 2,
-        border: `1px solid ${theme.palette.divider}`,
-        borderRadius: 1,
-      })}
+      sx={{
+        marginY: 2,
+      }}
     >
-      QuickLinks: Shows a set of links and titles.
-      <br />
+      <QuickLinks entry={{ ...entry, links: linkList }} />
       <Autocomplete
         disablePortal
         id="linkIds"
@@ -84,9 +81,9 @@ export const EditQuickLinks = ({
           <TextField {...params} label="link IDs (comma separated)" />
         )}
       />
-      <TextField
+      <H5TextField
         id="order"
-        label="Order"
+        placeholder="Order"
         variant="standard"
         type="number"
         fullWidth
