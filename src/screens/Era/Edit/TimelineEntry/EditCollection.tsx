@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { ITimelineEntry } from "../../../../interfaces/timelineEntry.interface";
-import { Autocomplete, Box, Button, TextField } from "@mui/material";
-import { IEntry } from "../../../../interfaces/entry.interface";
-import { useLoaderData } from "react-router-dom";
-import { H3TextField, H5TextField } from "../../../../components";
+import { Box, Button } from "@mui/material";
+import {
+  EntryAutocomplete,
+  H3TextField,
+  H5TextField,
+} from "../../../../components";
 import { Collection } from "../../../../components/Timeline/components";
 
 interface IEditCollection {
@@ -21,10 +23,6 @@ export const EditCollection = ({
   onMoveDown,
   onMoveUp,
 }: IEditCollection) => {
-  const { entries } = useLoaderData() as any as {
-    entries: IEntry[];
-  };
-
   const [title, setTitle] = useState(entry.title || "");
   const [listOfEntryIds, setListOfEntryIds] = useState(entry.entryIds || []);
   const [order, setOrder] = useState(entry.order || 0);
@@ -76,23 +74,11 @@ export const EditCollection = ({
         value={title}
         onChange={onChangeTitle}
       />
-      <Autocomplete
-        disablePortal
+      <EntryAutocomplete
         id="entryIds"
-        options={entries.map((entry: IEntry) => entry.$id)}
         sx={{ marginBottom: 2 }}
         onChange={onChangeListOfEntryIds}
         defaultValue={listOfEntryIds}
-        multiple
-        selectOnFocus
-        clearOnBlur
-        handleHomeEndKeys
-        renderOption={(props, option, state) =>
-          [props, option, state.index] as React.ReactNode
-        }
-        renderInput={(params) => (
-          <TextField {...params} placeholder="Entry IDs (comma separated)" />
-        )}
       />
       <Collection
         entry={{

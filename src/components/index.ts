@@ -6,3 +6,5 @@ export * from "./Router";
 export * from "./H5TextField";
 export * from "./H3TextField";
 export * from "./LinkAutocomplete";
+export * from "./EntryAutocomplete";
+export * from "./SingleEntryAutocomplete";

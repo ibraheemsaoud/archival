@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { ITimelineEntry } from "../../../../interfaces/timelineEntry.interface";
-import { Autocomplete, Box, Button, TextField } from "@mui/material";
-import { useLoaderData } from "react-router-dom";
-import { IEntry } from "../../../../interfaces/entry.interface";
-import { H3TextField, H5TextField } from "../../../../components";
+import { Box, Button } from "@mui/material";
+import {
+  H3TextField,
+  H5TextField,
+  SingleEntryAutocomplete,
+} from "../../../../components";
 import { Body1TextField } from "../../../../components/Body1TextField";
 import { CoverPost } from "../../../../components/Timeline/components";
 
@@ -22,10 +24,6 @@ export const EditCoverPost = ({
   onMoveDown,
   onMoveUp,
 }: IEditCoverPost) => {
-  const { entries } = useLoaderData() as any as {
-    entries: IEntry[];
-  };
-
   const [title, setTitle] = useState(entry.title || "");
   const [description, setDescription] = useState(entry.description || "");
   const [linkedEntryId, setLinkedEntryId] = useState(entry.entryId || "");
@@ -44,7 +42,7 @@ export const EditCoverPost = ({
   const onChangeDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDescription(e.target.value);
   };
-  const onChangeLinkedEntryId = (_: any, value: string | null) => {
+  const onChangeLinkedEntryId = (value?: string) => {
     setLinkedEntryId(value || "");
   };
   const onChangeOrder = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,16 +90,11 @@ export const EditCoverPost = ({
         multiline
         maxRows={4}
       />
-      <Autocomplete
-        disablePortal
+      <SingleEntryAutocomplete
         id="entryId"
-        options={entries.map((entry: IEntry) => entry.$id)}
         sx={{ marginY: 2 }}
         onChange={onChangeLinkedEntryId}
         defaultValue={linkedEntryId}
-        renderInput={(params) => (
-          <TextField {...params} placeholder="Entry ID" />
-        )}
       />
       <CoverPost entry={{ ...entry, entryId: linkedEntryId }} minimalDisplay />
       <H5TextField
