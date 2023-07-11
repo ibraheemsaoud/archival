@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-import {
-  ILink,
-  ITimelineEntry,
-} from "../../../../interfaces/timelineEntry.interface";
-import { Autocomplete, Box, Button, TextField } from "@mui/material";
-import { useLoaderData } from "react-router-dom";
+import { ITimelineEntry } from "../../../../interfaces/timelineEntry.interface";
+import { Box, Button } from "@mui/material";
 import { H5TextField } from "../../../../components/H5TextField";
 import { QuickLinks } from "../../../../components/Timeline/components";
+import { LinkAutocomplete } from "../../../../components";
 
 interface IEditQuickLinks {
   entry: ITimelineEntry;
@@ -23,10 +20,6 @@ export const EditQuickLinks = ({
   onMoveDown,
   onMoveUp,
 }: IEditQuickLinks) => {
-  const { links } = useLoaderData() as any as {
-    links: ILink[];
-  };
-
   const [linkList, setLinkList] = useState(entry.links || []);
   const [order, setOrder] = useState(entry.order || 0);
 
@@ -35,8 +28,8 @@ export const EditQuickLinks = ({
     setOrder(entry.order || 0);
   }, [entry]);
 
-  const onChangeLinks = (_: any, value: string[]) => {
-    setLinkList(value);
+  const onChangeLinks = (links: string[]) => {
+    setLinkList(links);
   };
   const onChangeOrder = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOrder(parseInt(e.target.value));
@@ -69,17 +62,11 @@ export const EditQuickLinks = ({
       }}
     >
       <QuickLinks entry={{ ...entry, links: linkList }} />
-      <Autocomplete
-        disablePortal
+      <LinkAutocomplete
         id="linkIds"
-        options={links.map((entry: ILink) => entry.$id)}
-        sx={{ marginY: 2 }}
-        onChange={onChangeLinks}
         defaultValue={linkList}
-        multiple
-        renderInput={(params) => (
-          <TextField {...params} placeholder="link IDs (comma separated)" />
-        )}
+        onChange={onChangeLinks}
+        sx={{ marginY: 2 }}
       />
       <H5TextField
         id="order"

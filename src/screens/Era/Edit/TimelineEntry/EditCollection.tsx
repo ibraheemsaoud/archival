@@ -84,6 +84,12 @@ export const EditCollection = ({
         onChange={onChangeListOfEntryIds}
         defaultValue={listOfEntryIds}
         multiple
+        selectOnFocus
+        clearOnBlur
+        handleHomeEndKeys
+        renderOption={(props, option, state) =>
+          [props, option, state.index] as React.ReactNode
+        }
         renderInput={(params) => (
           <TextField {...params} placeholder="Entry IDs (comma separated)" />
         )}
