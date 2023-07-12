@@ -1,4 +1,4 @@
-import { Breadcrumbs, Link } from "@mui/material";
+import { Breadcrumbs, Link, useMediaQuery, useTheme } from "@mui/material";
 import { useLoaderData, useParams, Link as NavLink } from "react-router-dom";
 import { replaceRouteParams } from "../../../../helpers";
 import { ENTRY, ERA, TOPIC } from "../../../../consts/links.const";
@@ -19,15 +19,29 @@ export const Navigation = () => {
     entry: IEntry;
   };
 
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.up("sm"));
+
   return (
     <div role="presentation">
-      <Breadcrumbs aria-label="breadcrumb">
+      <Breadcrumbs
+        maxItems={isTablet ? 4 : 1}
+        aria-label="breadcrumb"
+        sx={{
+          "&>ol": { flexFlow: "nowrap", overflow: "hidden" },
+        }}
+      >
         {params.topicId && (
           <Link
             underline="hover"
             color={isTopicPrimary ? "text.primary" : "inherit"}
             component={NavLink}
             to={replaceRouteParams(TOPIC, { topicId: params.topicId })}
+            sx={{
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              whiteSpace: "nowrap",
+            }}
           >
             {topic?.title}
           </Link>
@@ -41,6 +55,11 @@ export const Navigation = () => {
               topicId: params.topicId,
               eraId: params.eraId,
             })}
+            sx={{
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              whiteSpace: "nowrap",
+            }}
           >
             {era.title}
           </Link>
@@ -56,6 +75,11 @@ export const Navigation = () => {
               eraId: params.eraId,
               entryId: params.entryId,
             })}
+            sx={{
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              whiteSpace: "nowrap",
+            }}
           >
             {entry.title}
           </Link>

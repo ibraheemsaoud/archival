@@ -1,4 +1,4 @@
-import { Box, Typography, Link, Button, Grid } from "@mui/material";
+import { Box, Typography, Button, Grid } from "@mui/material";
 import { IComment } from "../../../interfaces/comment.interface";
 import {
   useRequestDeleteComment,
@@ -6,6 +6,7 @@ import {
 } from "../../../requests";
 import { showSmartDate } from "./comment.helper";
 import { Server } from "../../../config/server";
+import { UserPicture } from "../../../components";
 
 export const Comment = ({ comment }: { comment: IComment }) => {
   const { data: permissions } = useRequestPermissions(
@@ -60,9 +61,15 @@ export const Comment = ({ comment }: { comment: IComment }) => {
           alignItems="center"
           justifyContent="flex-end"
         >
-          <Typography variant="body2">
-            <Link>{comment.userId}</Link> -{" "}
-            {showSmartDate(new Date(comment.$createdAt))}
+          <Typography
+            variant="body2"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            {showSmartDate(new Date(comment.$createdAt))} -{" "}
+            <UserPicture userId={comment.userId} />
           </Typography>
         </Grid>
       </Grid>

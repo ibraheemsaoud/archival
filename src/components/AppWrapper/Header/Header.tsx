@@ -33,7 +33,13 @@ export const Header = () => {
               </Typography>
             </Link>
           </Box>
-          <Box sx={{ flexGrow: 1 }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              maxWidth: "calc(100% - 133px)",
+              marginRight: "9px",
+            }}
+          >
             <Navigation />
           </Box>
           <ToolbarAction />

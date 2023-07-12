@@ -8,3 +8,4 @@ export * from "./H3TextField";
 export * from "./LinkAutocomplete";
 export * from "./EntryAutocomplete";
 export * from "./SingleEntryAutocomplete";
+export * from "./UserPicture";
