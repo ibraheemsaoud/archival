@@ -6,11 +6,11 @@ import {
   requestUser,
   updateUserPrefs,
   verifyEmail,
-} from "../requests";
+} from "../../requests";
 import { Models } from "appwrite";
-import { useRequestRegister } from "../requests/useRequestRegister";
+import { useRequestRegister } from "../../requests/useRequestRegister";
 import { VerifyEmailModal } from "./VerifyEmailModal";
-import { VERIFICATION } from "../consts/links.const";
+import { VERIFICATION } from "../../consts/links.const";
 
 interface UserContext {
   user?: Models.User<any>;

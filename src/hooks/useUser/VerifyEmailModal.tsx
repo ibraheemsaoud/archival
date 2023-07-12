@@ -6,7 +6,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { verifyEmail } from "../requests";
+import { verifyEmail } from "../../requests";
 
 export const VerifyEmailModal = ({ logout }: { logout: () => void }) => {
   const handleResendEmail = () => {
