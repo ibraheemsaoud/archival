@@ -6,3 +6,4 @@ export const PROFILE = "/profile";
 export const VERIFICATION = "/verification";
 export const VERSION2 = "/v2";
 export const BRAND = "/brand/:brandId";
+export const SEASON = "/season/:seasonId";

@@ -20,16 +20,17 @@ export const requestBrands = async () => {
   };
 };
 
-export const requestBrand = async (id?: string) => {
-  if (!id)
+export const requestBrand = async (slug?: string) => {
+  console.log(slug);
+  if (!slug)
     return {
       data: undefined,
-      error: "no id provided",
+      error: "no slug provided",
     };
   const data = await api.listDocuments(
     Server.databaseID,
     Server.brandsCollectionId,
-    [Query.equal("id", [id])]
+    [Query.equal("slug", [slug])]
   );
   if (data.documents?.length > 0) {
     return {

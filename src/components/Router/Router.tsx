@@ -4,6 +4,7 @@ import {
   ERA,
   HOME,
   PROFILE,
+  SEASON,
   TOPIC,
   VERIFICATION,
   VERSION2,
@@ -16,6 +17,7 @@ import { Profile } from "../../screens/Profile";
 import { Verification } from "../../screens/Verification";
 import { verificationLoader } from "../../screens/Verification/verification.Loader.helper";
 import { Home, homeLoader } from "../../screens/Home";
+import { Season, SeasonsLoader } from "../../screens/Season";
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -53,6 +55,11 @@ export const Router = () => {
       path: VERSION2,
       element: <Home />,
       loader: homeLoader(),
+    },
+    {
+      path: SEASON,
+      element: <Season />,
+      loader: SeasonsLoader(),
     },
   ]);
 

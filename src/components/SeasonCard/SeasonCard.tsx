@@ -1,6 +1,6 @@
 import { Card, CardActionArea, CardContent, CardMedia } from "@mui/material";
 import { Link } from "react-router-dom";
-import { BRAND } from "../../consts/links.const";
+import { SEASON } from "../../consts/links.const";
 import { replaceRouteParams } from "../../helpers";
 import { useRequestSeason } from "../../requests/useRequestSeason";
 
@@ -22,10 +22,10 @@ export const SeasonCard = ({ seasonId }: { seasonId: string }) => {
     <Card
       sx={{
         backgroundColor: primaryColor,
-        borderRadius: 2,
+        borderRadius: 1,
       }}
     >
-      <Link to={replaceRouteParams(BRAND, { brandId: slug })}>
+      <Link to={replaceRouteParams(SEASON, { seasonId: slug })}>
         <CardActionArea
           sx={{
             position: "relative",

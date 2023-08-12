@@ -1,4 +1,4 @@
-import { Box, Chip, Container, Grid, Typography } from "@mui/material";
+import { Box, Chip, Grid, Typography } from "@mui/material";
 import { IFashionWeek } from "../../interfaces/fashionWeek.interface";
 import { SeasonCard } from "../SeasonCard";
 
