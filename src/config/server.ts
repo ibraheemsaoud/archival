@@ -9,6 +9,8 @@ export const Server = {
   timelineEntryCollectionId: "649c4faf1ac8b45aa245",
   commentCollectionId: "64a18d376e6f15bb5b68",
 
+  brandsCollectionId: "64d74abf6f084493267f",
+
   // Functions
   permissionFunctionId: "64a31220b1c2d44e7e51",
   registerFunctionId: "64a337fd6ef9b5b9f8eb",

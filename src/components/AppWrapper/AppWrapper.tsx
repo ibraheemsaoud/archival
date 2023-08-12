@@ -6,15 +6,17 @@ interface IAppWrapper {
 }
 export const AppWrapper = ({ children }: IAppWrapper) => {
   return (
-    <Box
-      sx={{
-        height: "100vh",
-      }}
-    >
-      <Header />
-      <Box paddingY={2}>
-        <Container maxWidth="xl">{children}</Container>
+    <Container maxWidth="sm">
+      <Box
+        sx={{
+          height: "100vh",
+          backgroundColor: "#ffffff",
+          border: "1px solid #e0e0e0",
+        }}
+      >
+        <Header />
+        {children}
       </Box>
-    </Box>
+    </Container>
   );
 };

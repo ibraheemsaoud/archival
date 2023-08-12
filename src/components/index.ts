@@ -9,3 +9,4 @@ export * from "./LinkAutocomplete";
 export * from "./EntryAutocomplete";
 export * from "./SingleEntryAutocomplete";
 export * from "./UserPicture";
+export * from "./BrandCard";

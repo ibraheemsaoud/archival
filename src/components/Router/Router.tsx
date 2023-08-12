@@ -6,6 +6,7 @@ import {
   PROFILE,
   TOPIC,
   VERIFICATION,
+  VERSION2,
 } from "../../consts/links.const";
 import { TopicList, topicListLoader } from "../../screens/TopicList";
 import { EraList, eraListLoader } from "../../screens/EraList";
@@ -14,6 +15,7 @@ import { Entry, entryLoader } from "../../screens/Entry";
 import { Profile } from "../../screens/Profile";
 import { Verification } from "../../screens/Verification";
 import { verificationLoader } from "../../screens/Verification/verification.Loader.helper";
+import { Home, homeLoader } from "../../screens/Home";
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -46,6 +48,11 @@ export const Router = () => {
       path: VERIFICATION,
       element: <Verification />,
       loader: verificationLoader(),
+    },
+    {
+      path: VERSION2,
+      element: <Home />,
+      loader: homeLoader(),
     },
   ]);
 
