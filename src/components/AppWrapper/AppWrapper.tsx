@@ -6,7 +6,7 @@ interface IAppWrapper {
 }
 export const AppWrapper = ({ children }: IAppWrapper) => {
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" disableGutters>
       <Box
         sx={{
           height: "100vh",

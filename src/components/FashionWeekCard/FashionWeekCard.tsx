@@ -13,12 +13,17 @@ export const FashionWeekCard = ({
       <Typography variant="h6">{name}</Typography>
       <Box display="flex" marginBottom={2}>
         {tags?.map((tag) => (
-          <Chip key={`TAG_${tag}`} sx={{ marginRight: 1 }} label={tag} size="small" />
+          <Chip
+            key={`TAG_${tag}`}
+            sx={{ marginRight: 1 }}
+            label={tag}
+            size="small"
+          />
         ))}
       </Box>
       <Grid container spacing={1}>
         {seasonIds?.map((seasonId) => (
-          <Grid item sm={6} key={`SEASON_${seasonId}`}>
+          <Grid item xs={6} lg={4} key={`SEASON_${seasonId}`}>
             <SeasonCard seasonId={seasonId} />
           </Grid>
         ))}
