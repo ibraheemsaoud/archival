@@ -39,7 +39,7 @@ export const theme = (mode, accentColor) => {
             textDecoration: "none",
           },
           h6: {
-            color: palette.palette.platinum.light,
+            color: palette.palette.text.primary,
           },
           h5: {
             color: palette.palette.text.primary,

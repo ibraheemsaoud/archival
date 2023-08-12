@@ -10,6 +10,7 @@ export const Server = {
   commentCollectionId: "64a18d376e6f15bb5b68",
 
   brandsCollectionId: "64d74abf6f084493267f",
+  fashionWeeksCollectionId: "64d75694839749467fef",
 
   // Functions
   permissionFunctionId: "64a31220b1c2d44e7e51",

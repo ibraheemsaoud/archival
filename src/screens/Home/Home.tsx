@@ -1,11 +1,13 @@
-import { AppWrapper, BrandCard } from "../../components";
+import { AppWrapper, BrandCard, FashionWeekCard } from "../../components";
 import { Box } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import { IBrand } from "../../interfaces/brand.interface";
+import { IFashionWeek } from "../../interfaces/fashionWeek.interface";
 
 export const Home = () => {
-  const { brands } = useLoaderData() as any as {
+  const { brands, fashionWeek } = useLoaderData() as any as {
     brands?: IBrand[];
+    fashionWeek?: IFashionWeek;
   };
 
   if (!brands) return <div>Loading...</div>;
@@ -26,6 +28,7 @@ export const Home = () => {
           </Box>
         ))}
       </Box>
+      {fashionWeek && <FashionWeekCard fashionWeek={fashionWeek} />}
     </AppWrapper>
   );
 };
