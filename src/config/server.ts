@@ -12,6 +12,7 @@ export const Server = {
   brandsCollectionId: "64d74abf6f084493267f",
   fashionWeeksCollectionId: "64d75694839749467fef",
   seasonsCollectionId: "64d7553572e3a931f847",
+  postsCollectionId: "64d7565c8f49e3fa094f",
 
   // Functions
   permissionFunctionId: "64a31220b1c2d44e7e51",

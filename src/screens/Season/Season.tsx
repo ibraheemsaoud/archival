@@ -8,16 +8,17 @@ import {
   Typography,
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
-import { IFashionWeek } from "../../interfaces/fashionWeek.interface";
 import { ISeason } from "../../interfaces/season.interface";
 import { theme } from "../../theme";
 import { IBrand } from "../../interfaces/brand.interface";
+import { IPost } from "../../interfaces/post.interface";
+import { PostCard } from "../../components";
 
 export const Season = () => {
   const { season, posts, brand } = useLoaderData() as any as {
     brand?: IBrand;
     season?: ISeason;
-    posts?: IFashionWeek;
+    posts?: IPost[];
   };
 
   if (!season || !brand) return <div>Loading...</div>;
@@ -65,6 +66,9 @@ export const Season = () => {
               </Button>
             </Toolbar>
           </AppBar>
+        </Box>
+        <Box sx={{ flexGrow: 1 }}>
+          {posts && posts.map((post) => <PostCard post={post} />)}
         </Box>
       </Container>
     </ThemeProvider>
