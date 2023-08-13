@@ -4,6 +4,7 @@ import { BRAND } from "../../consts/links.const";
 import { replaceRouteParams } from "../../helpers";
 import { IPost } from "../../interfaces/post.interface";
 import { PRIMARY_COLOR, SECONDARY_COLOR } from "../../consts/defaults.const";
+import { ReactionBox } from "./ReactionBox";
 
 export const PostCard = ({
   post,
@@ -16,19 +17,6 @@ export const PostCard = ({
 }) => {
   const { pictureLink, $id } = post;
   const size = 40;
-
-  const circleStyle = {
-    width: 32,
-    height: 32,
-    position: "absolute",
-    background: primaryColor,
-    zIndex: 1,
-    textAlign: "center",
-    lineHeight: "32px",
-    color: secondaryColor,
-    borderRadius: 8,
-    border: `1px solid ${secondaryColor}`,
-  };
 
   return (
     <Card
@@ -55,35 +43,11 @@ export const PostCard = ({
           </CardActionArea>
         </Link>
       </Box>
-      <Box
-        sx={{
-          ...circleStyle,
-          top: -16,
-          right: 12,
-        }}
-      >
-        4
-      </Box>
-
-      <Box
-        sx={{
-          ...circleStyle,
-          top: 10,
-          right: -14,
-        }}
-      >
-        4
-      </Box>
-
-      <Box
-        sx={{
-          ...circleStyle,
-          top: 46,
-          right: -14,
-        }}
-      >
-        4
-      </Box>
+      <ReactionBox
+        post={post}
+        primaryColor={primaryColor}
+        secondaryColor={secondaryColor}
+      />
     </Card>
   );
 };
