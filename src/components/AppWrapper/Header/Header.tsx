@@ -1,5 +1,4 @@
 import { AppBar, Box, Link, Toolbar, Typography } from "@mui/material";
-import { Navigation } from "./Navigation";
 import { Link as NavLink } from "react-router-dom";
 import { HOME } from "../../../consts/links.const";
 import { ToolbarAction } from "./ToolbarAction";
@@ -32,15 +31,6 @@ export const Header = () => {
                 </Box>
               </Typography>
             </Link>
-          </Box>
-          <Box
-            sx={{
-              flexGrow: 1,
-              maxWidth: "calc(100% - 133px)",
-              marginRight: "9px",
-            }}
-          >
-            <Navigation />
           </Box>
           <ToolbarAction />
         </Toolbar>

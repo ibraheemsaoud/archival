@@ -14,8 +14,11 @@ import { theme } from "../../theme";
 import { IBrand } from "../../interfaces/brand.interface";
 import { IPost } from "../../interfaces/post.interface";
 import { PostCard } from "../../components";
+import { useNavigation } from "../../hooks";
+import { HOME } from "../../consts/links.const";
 
 export const Season = () => {
+  const { onBack } = useNavigation();
   const { season, posts, brand } = useLoaderData() as any as {
     brand?: IBrand;
     season?: ISeason;
@@ -36,7 +39,7 @@ export const Season = () => {
                 size="small"
                 variant="outlined"
                 sx={{ marginBottom: 1 }}
-                onClick={() => {}}
+                onClick={() => onBack(HOME)}
               >
                 Back
               </Button>

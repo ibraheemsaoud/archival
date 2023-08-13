@@ -35,7 +35,6 @@ export const PostCard = ({
       sx={{
         borderRadius: 4,
         position: "relative",
-        padding: `${size / 2}%`,
         width: `${size}%`,
         marginTop: `${50 - size}%`,
         overflow: "unset",
@@ -43,11 +42,6 @@ export const PostCard = ({
     >
       <Box
         sx={{
-          position: "absolute",
-          top: 0,
-          bottom: 0,
-          right: 0,
-          left: 0,
           overflow: "hidden",
           borderRadius: 4,
         }}
