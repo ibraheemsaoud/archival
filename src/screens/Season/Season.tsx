@@ -2,7 +2,6 @@ import {
   AppBar,
   Box,
   Button,
-  Container,
   Grid,
   ThemeProvider,
   Toolbar,
@@ -13,7 +12,7 @@ import { ISeason } from "../../interfaces/season.interface";
 import { theme } from "../../theme";
 import { IBrand } from "../../interfaces/brand.interface";
 import { IPost } from "../../interfaces/post.interface";
-import { PostCard } from "../../components";
+import { AppWrapper, PostCard } from "../../components";
 import { useNavigation } from "../../hooks";
 import { HOME } from "../../consts/links.const";
 
@@ -29,9 +28,12 @@ export const Season = () => {
 
   const modedTheme = theme("light", season.primaryColor);
 
+  const featuredPosts = posts?.slice(0, 2);
+  const otherPosts = posts?.slice(2);
+
   return (
     <ThemeProvider theme={modedTheme}>
-      <Container maxWidth="sm" disableGutters>
+      <AppWrapper>
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
             <Toolbar sx={{ alignItems: "flex-end" }}>
@@ -71,15 +73,16 @@ export const Season = () => {
             </Toolbar>
           </AppBar>
         </Box>
-        {posts?.length && (
+        {featuredPosts?.length && (
           <Grid
             sx={{
               display: "flex",
               flexFlow: "wrap",
               justifyContent: "space-around",
+              marginTop: 2,
             }}
           >
-            {posts.map((post) => (
+            {featuredPosts.map((post) => (
               <PostCard
                 post={post}
                 primaryColor={season.primaryColor}
@@ -88,7 +91,34 @@ export const Season = () => {
             ))}
           </Grid>
         )}
-      </Container>
+        <Box sx={{ marginY: 2, maxHeight: 250, overflow: "hidden" }}>
+          {season.coverImage && (
+            <img
+              src={season.coverImage}
+              alt={season.name}
+              style={{ maxWidth: "100%" }}
+            />
+          )}
+        </Box>
+        {otherPosts?.length && (
+          <Grid
+            sx={{
+              display: "flex",
+              flexFlow: "wrap",
+              justifyContent: "space-around",
+              marginBottom: 2,
+            }}
+          >
+            {otherPosts.map((post) => (
+              <PostCard
+                post={post}
+                primaryColor={season.primaryColor}
+                secondaryColor={season.secondaryColor}
+              />
+            ))}
+          </Grid>
+        )}
+      </AppWrapper>
     </ThemeProvider>
   );
 };

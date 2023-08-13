@@ -16,7 +16,9 @@ export const AppWrapper = ({ children }: IAppWrapper) => {
         // boxSizing: "content-box",
       }}
     >
-      <Box sx={{ height: "calc(100vh - 64px)" }}>{children}</Box>
+      <Box sx={{ height: "calc(100vh - 56px)", overflowY: "auto" }}>
+        {children}
+      </Box>
       <Navigation />
     </Container>
   );

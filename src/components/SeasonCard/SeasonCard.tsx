@@ -1,4 +1,10 @@
-import { Card, CardActionArea, CardContent, CardMedia } from "@mui/material";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { SEASON } from "../../consts/links.const";
 import { replaceRouteParams } from "../../helpers";
@@ -46,11 +52,11 @@ export const SeasonCard = ({ seasonId }: { seasonId: string }) => {
               position: "absolute",
               bottom: 0,
               color: secondaryColor,
-              background: `${primaryColor}80`,
+              background: `${primaryColor}B0`,
               width: "100%",
             }}
           >
-            <div>{name}</div>
+            <Typography fontWeight="bold">{name}</Typography>
           </CardContent>
         </CardActionArea>
       </Link>

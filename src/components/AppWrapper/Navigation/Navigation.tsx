@@ -31,7 +31,7 @@ export const Navigation = () => {
           lineHeight: "38px",
         }}
       >
-        +
+        X
       </Typography>
       <Link
         underline="none"

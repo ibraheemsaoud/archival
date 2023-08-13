@@ -24,7 +24,6 @@ export const PostCard = ({
         borderRadius: 4,
         position: "relative",
         width: `${size}%`,
-        marginTop: `${50 - size}%`,
         overflow: "unset",
       }}
     >
