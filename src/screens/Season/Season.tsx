@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Container,
+  Grid,
   ThemeProvider,
   Toolbar,
   Typography,
@@ -67,9 +68,23 @@ export const Season = () => {
             </Toolbar>
           </AppBar>
         </Box>
-        <Box sx={{ flexGrow: 1 }}>
-          {posts && posts.map((post) => <PostCard post={post} />)}
-        </Box>
+        {posts?.length && (
+          <Grid
+            sx={{
+              display: "flex",
+              flexFlow: "wrap",
+              justifyContent: "space-around",
+            }}
+          >
+            {posts.map((post) => (
+              <PostCard
+                post={post}
+                primaryColor={season.primaryColor}
+                secondaryColor={season.secondaryColor}
+              />
+            ))}
+          </Grid>
+        )}
       </Container>
     </ThemeProvider>
   );

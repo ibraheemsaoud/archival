@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { SEASON } from "../../consts/links.const";
 import { replaceRouteParams } from "../../helpers";
 import { useRequestSeason } from "../../requests/useRequestSeason";
+import { PRIMARY_COLOR, SECONDARY_COLOR } from "../../consts/defaults.const";
 
 export const SeasonCard = ({ seasonId }: { seasonId: string }) => {
   const { data: season, isLoading, error } = useRequestSeason(seasonId);
@@ -12,8 +13,8 @@ export const SeasonCard = ({ seasonId }: { seasonId: string }) => {
 
   const {
     slug,
-    primaryColor = "#ffffff",
-    secondaryColor = "#000000",
+    primaryColor = PRIMARY_COLOR,
+    secondaryColor = SECONDARY_COLOR,
     coverImage,
     name,
   } = season;

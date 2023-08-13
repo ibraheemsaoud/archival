@@ -21,7 +21,6 @@ export const requestBrands = async () => {
 };
 
 export const requestBrand = async (slug?: string) => {
-  console.log(slug);
   if (!slug)
     return {
       data: undefined,
