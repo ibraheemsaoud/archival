@@ -5,23 +5,21 @@ const { augmentColor } = palette;
 const createColor = (mainColor: string) =>
   augmentColor({ color: { 500: mainColor } });
 
-export const getDesignTokens = (mode: PaletteMode, color?: string): ThemeOptions => {
-  const green = createColor("#1E453E");
+export const getDesignTokens = (
+  mode: PaletteMode,
+  color?: string
+): ThemeOptions => {
+  //#f7eee3
   const platinum = createColor("#CCDBDC");
-  const brown = createColor("#957964");
-  const yellow = createColor("#FFC914");
-  const eggplant = createColor("#603140");
-  const gray = createColor("#72809D");
-  const eraAccent = color ? createColor(color) : green;
+  const pumpkin = createColor("#4a3215");
+  const lightPumpkin = createColor("#fdfcf9");
+  const eraAccent = color ? createColor(color) : pumpkin;
 
   return {
     palette: {
-      green,
       platinum,
-      brown,
-      yellow,
-      eggplant,
-      gray,
+      pumpkin,
+      lightPumpkin,
       mode,
       ...(mode === "light"
         ? {
@@ -29,7 +27,7 @@ export const getDesignTokens = (mode: PaletteMode, color?: string): ThemeOptions
             primary: eraAccent,
             divider: eraAccent.dark,
             background: {
-              default: '#f7fcff',
+              default: lightPumpkin.light,
               paper: platinum.light,
             },
             text: {

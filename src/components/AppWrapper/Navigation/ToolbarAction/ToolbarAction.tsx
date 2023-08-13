@@ -59,8 +59,8 @@ export const ToolbarAction = () => {
         }}
         keepMounted
         transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
+          vertical: "bottom",
+          horizontal: "left",
         }}
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}

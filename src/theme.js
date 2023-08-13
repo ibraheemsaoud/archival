@@ -11,10 +11,10 @@ export const theme = (mode, accentColor) => {
         color: palette.palette.text.primary,
       },
       h3: {
-        color: palette.palette.green.dark,
+        color: palette.palette.text.primary,
       },
       body1: {
-        color: palette.palette.green.dark,
+        color: palette.palette.text.primary,
       },
     },
     components: {
@@ -48,10 +48,10 @@ export const theme = (mode, accentColor) => {
             color: palette.palette.text.primary,
           },
           h3: {
-            color: palette.palette.green.dark,
+            color: palette.palette.text.primary,
           },
           body1: {
-            color: palette.palette.green.dark,
+            color: palette.palette.text.primary,
           },
         },
       },
