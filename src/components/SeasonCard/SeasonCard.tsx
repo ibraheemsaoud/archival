@@ -17,9 +17,12 @@ export const SeasonCard = ({ seasonId }: { seasonId: string }) => {
   const { data: brand, isLoading: isBrandLoading } = useRequestBrand(
     season?.brandId
   );
-  if (error) return <>{error}</>;
+
+  if (error) return <div>{error?.toString()}</div>;
   if (isLoading || isBrandLoading) return <div>Loading...</div>;
   if (!season || !brand) return <div>Season not found</div>;
+
+  console.log(season);
 
   const {
     slug,
@@ -27,6 +30,7 @@ export const SeasonCard = ({ seasonId }: { seasonId: string }) => {
     secondaryColor = SECONDARY_COLOR,
     coverImage,
   } = season;
+  console.log(primaryColor, secondaryColor);
 
   const { name } = brand;
 
@@ -56,7 +60,9 @@ export const SeasonCard = ({ seasonId }: { seasonId: string }) => {
               width: "100%",
             }}
           >
-            <Typography fontWeight="bold">{name}</Typography>
+            <Typography fontWeight="bold" color={secondaryColor}>
+              {name}
+            </Typography>
           </CardContent>
         </CardActionArea>
       </Link>

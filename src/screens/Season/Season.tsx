@@ -26,7 +26,7 @@ export const Season = () => {
 
   if (!season || !brand) return <div>Loading...</div>;
 
-  const modedTheme = theme("light", season.primaryColor);
+  const modedTheme = theme("light", season.primaryColor, season.secondaryColor);
 
   const featuredPosts = posts?.slice(0, 2);
   const otherPosts = posts?.slice(2);
@@ -106,7 +106,9 @@ export const Season = () => {
               display: "flex",
               flexFlow: "wrap",
               justifyContent: "space-around",
-              marginBottom: 2,
+              "& > *": {
+                marginTop: 2,
+              },
             }}
           >
             {otherPosts.map((post) => (

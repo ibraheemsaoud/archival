@@ -7,13 +7,15 @@ const createColor = (mainColor: string) =>
 
 export const getDesignTokens = (
   mode: PaletteMode,
-  color?: string
+  primaryColor?: string,
+  secondaryColor?: string
 ): ThemeOptions => {
   //#f7eee3
   const platinum = createColor("#CCDBDC");
   const pumpkin = createColor("#4a3215");
   const lightPumpkin = createColor("#fdfcf9");
-  const eraAccent = color ? createColor(color) : pumpkin;
+  const primary = primaryColor ? createColor(primaryColor) : pumpkin;
+  const secondary = secondaryColor ? createColor(secondaryColor) : platinum;
 
   return {
     palette: {
@@ -24,28 +26,28 @@ export const getDesignTokens = (
       ...(mode === "light"
         ? {
             // palette values for light mode
-            primary: eraAccent,
-            divider: eraAccent.dark,
+            primary: primary,
+            divider: primary.dark,
             background: {
               default: lightPumpkin.light,
-              paper: platinum.light,
+              paper: secondary.light,
             },
             text: {
-              primary: eraAccent.dark,
-              secondary: platinum.dark,
+              primary: primary.dark,
+              secondary: secondary.dark,
             },
           }
         : {
             // palette values for dark mode
-            primary: eraAccent,
-            divider: eraAccent.light,
+            primary: primary,
+            divider: primary.light,
             background: {
-              default: platinum.dark,
-              paper: platinum.light,
+              default: secondary.dark,
+              paper: secondary.light,
             },
             text: {
-              primary: eraAccent.light,
-              secondary: platinum.light,
+              primary: primary.light,
+              secondary: secondary.light,
             },
           }),
     },

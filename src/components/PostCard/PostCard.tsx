@@ -25,6 +25,7 @@ export const PostCard = ({
         position: "relative",
         width: `${size}%`,
         overflow: "unset",
+        height: "fit-content",
       }}
     >
       <Box

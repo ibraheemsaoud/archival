@@ -16,7 +16,7 @@ export const useRequestSeason = (slug?: string) => {
       if (data.documents?.length > 0) {
         return data.documents[0] as ISeason;
       }
-      throw new Error("Season not found");
+      throw "Season not found";
     },
     {
       enabled: !!slug,

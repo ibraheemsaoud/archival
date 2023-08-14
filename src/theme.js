@@ -1,8 +1,8 @@
 import { getDesignTokens } from "./consts/palette.const";
 import { createTheme } from "@mui/material";
 
-export const theme = (mode, accentColor) => {
-  const palette = getDesignTokens(mode, accentColor);
+export const theme = (mode, primaryColor, secondaryColor) => {
+  const palette = getDesignTokens(mode, primaryColor, secondaryColor);
   return createTheme({
     ...palette,
     typography: {
