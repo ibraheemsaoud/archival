@@ -1,6 +1,6 @@
 import { Box, Card, CardActionArea, CardMedia } from "@mui/material";
 import { Link } from "react-router-dom";
-import { BRAND } from "../../consts/links.const";
+import { POST } from "../../consts/links.const";
 import { replaceRouteParams } from "../../helpers";
 import { IPost } from "../../interfaces/post.interface";
 import { PRIMARY_COLOR, SECONDARY_COLOR } from "../../consts/defaults.const";
@@ -34,7 +34,7 @@ export const PostCard = ({
           borderRadius: 4,
         }}
       >
-        <Link to={replaceRouteParams(BRAND, { brandId: $id })}>
+        <Link to={replaceRouteParams(POST, { postId: $id })}>
           <CardActionArea>
             <CardMedia
               component="img"

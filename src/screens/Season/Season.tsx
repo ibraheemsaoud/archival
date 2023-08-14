@@ -87,6 +87,7 @@ export const Season = () => {
                 post={post}
                 primaryColor={season.primaryColor}
                 secondaryColor={season.secondaryColor}
+                key={post.$id}
               />
             ))}
           </Grid>
@@ -116,6 +117,7 @@ export const Season = () => {
                 post={post}
                 primaryColor={season.primaryColor}
                 secondaryColor={season.secondaryColor}
+                key={post.$id}
               />
             ))}
           </Grid>

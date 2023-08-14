@@ -3,7 +3,7 @@ import { requestSeason } from "../../requests/requestSeason";
 import { requestBrand } from "../../requests/requestBrand";
 import { requestPosts } from "../../requests/requestPost";
 
-export const SeasonsLoader =
+export const seasonsLoader =
   () =>
   async ({ params }: { params: Params<string> }) => {
     const { data: season } = await requestSeason(params.seasonId);
