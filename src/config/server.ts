@@ -2,18 +2,13 @@ export const Server = {
   endpoint: "https://cloud.appwrite.io/v1",
   project: "Archival",
   databaseID: "649bf127bdd26e9850cd",
-  topicCollectionId: "649bf12d45677db133fc",
-  eraCollectionId: "649c10682f8446d89bb3",
-  entryCollectionId: "649ca13728f347564b42",
-  linkCollectionId: "649ca0e277262eb90955",
-  timelineEntryCollectionId: "649c4faf1ac8b45aa245",
-  commentCollectionId: "64a18d376e6f15bb5b68",
 
   brandsCollectionId: "64d74abf6f084493267f",
   fashionWeeksCollectionId: "64d75694839749467fef",
   seasonsCollectionId: "64d7553572e3a931f847",
   postsCollectionId: "64d7565c8f49e3fa094f",
   referencesCollectionId: "64d757c1c388b559eba1",
+  commentsCollectionId: "64dbab02c289fae33a89",
 
   // Functions
   permissionFunctionId: "64a31220b1c2d44e7e51",

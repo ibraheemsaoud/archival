@@ -3,7 +3,7 @@ import { IAppWrite } from "./appwrite.interface";
 export interface IReference extends IAppWrite {
   postId: string;
   userId: string;
-  referenceType:
+  reference_type:
     | "wikipedia"
     | "archivals_post"
     | "archivals_brand"
@@ -11,5 +11,5 @@ export interface IReference extends IAppWrite {
     | "instagram_account"
     | "instagram_post"
     | "youtube";
-  referenceLink: string;
+    reference_link: string;
 }

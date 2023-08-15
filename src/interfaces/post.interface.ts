@@ -4,4 +4,5 @@ export interface IPost extends IAppWrite {
   seasonId: string;
   pictureLink: string;
   userId: string;
+  postTitle: string;
 }

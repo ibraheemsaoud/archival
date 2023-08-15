@@ -1,4 +1,10 @@
-import { Box, Card, CardActionArea, CardMedia } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { POST } from "../../consts/links.const";
 import { replaceRouteParams } from "../../helpers";
@@ -42,6 +48,22 @@ export const PostCard = ({
             />
           </CardActionArea>
         </Link>
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            color: secondaryColor,
+            background: `${primaryColor}B0`,
+            width: "100%",
+            borderRadius: "0 0 12px 12px",
+            padding: "8px",
+            textAlign: "center",
+          }}
+        >
+          <Typography fontWeight="bold" color={secondaryColor}>
+            {post.postTitle}
+          </Typography>
+        </Box>
       </Box>
       <ReactionBox
         post={post}
