@@ -11,5 +11,6 @@ export interface IReference extends IAppWrite {
     | "instagram_account"
     | "instagram_post"
     | "youtube";
-    reference_link: string;
+  reference_link: string;
+  imageLink: string;
 }

@@ -105,11 +105,22 @@ export const Post = () => {
             {post.postTitle}
           </Box>
         </Box>
-        <Box>
-          {references?.map((reference: IReference) => {
-            return <Reference reference={reference} key={reference.$id} />;
-          })}
-        </Box>
+        {references?.length ? (
+          <Box>
+            <Typography
+              variant="h6"
+              component="div"
+              marginX={1}
+              marginTop={2}
+              sx={{ textDecoration: "underline" }}
+            >
+              References
+            </Typography>
+            {references?.map((reference: IReference) => {
+              return <Reference reference={reference} key={reference.$id} />;
+            })}
+          </Box>
+        ) : null}
         <Box
           sx={{
             background: "#dddddd",
