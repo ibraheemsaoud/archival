@@ -2,6 +2,7 @@ import {
   AppBar,
   Box,
   Button,
+  TextField,
   ThemeProvider,
   Toolbar,
   Typography,
@@ -18,6 +19,7 @@ import { replaceRouteParams } from "../../helpers";
 import { useRequestBrand } from "../../requests/useRequestBrand";
 import { useRequestSeason } from "../../requests/useRequestSeason";
 import { theme } from "../../theme";
+import { ChevronRight } from "@mui/icons-material";
 
 export const Post = () => {
   const { onBack } = useNavigation();
@@ -42,7 +44,7 @@ export const Post = () => {
   return (
     <ThemeProvider theme={modedTheme}>
       <AppWrapper>
-        <Box sx={{ flexGrow: 1, marginBottom: 2 }}>
+        <Box>
           <AppBar position="static">
             <Toolbar sx={{ alignItems: "flex-end" }}>
               <Button
@@ -88,6 +90,7 @@ export const Post = () => {
             position: "relative",
             overflow: "hidden",
             maxHeight: "360px",
+            borderBottom: "1px solid #d6d6d6",
           }}
         >
           <img src={post.pictureLink} alt="post" width="100%" />
@@ -106,12 +109,15 @@ export const Post = () => {
           </Box>
         </Box>
         {references?.length ? (
-          <Box>
+          <Box
+            sx={{
+              borderTop: "1px solid #d6d6d6",
+            }}
+          >
             <Typography
               variant="h6"
               component="div"
               marginX={1}
-              marginTop={2}
               sx={{ textDecoration: "underline" }}
             >
               References
@@ -121,30 +127,86 @@ export const Post = () => {
             })}
           </Box>
         ) : null}
-        <Box
-          sx={{
-            background: "#dddddd",
-            height: "auto",
-            padding: "20px",
-          }}
-        >
+        {comments?.length ? (
+          <Box
+            sx={{
+              borderTop: "1px solid #d6d6d6",
+            }}
+          >
+            <Typography
+              variant="h6"
+              component="div"
+              marginX={1}
+              sx={{ textDecoration: "underline" }}
+            >
+              Discussions
+            </Typography>
+          </Box>
+        ) : null}
+        <Box>
           {comments?.map((comment: IComment) => {
             return (
               <Box
+                display="flex"
                 sx={{
-                  borderRadius: "4px",
-                  background: "white",
-                  padding: "8px 8px 4px 8px",
-                  margin: "16px 72px 16px 16px",
-                  color: "black",
-                  fontSize: "14px",
-                  whiteSpace: "pre-wrap",
+                  borderBottom: "1px solid #d6d6d6",
+                  paddingBottom: "4px",
+                  margin: 1,
                 }}
               >
-                {comment.comment}
+                <Box
+                  sx={{
+                    background: "#d6d6d6",
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "40px",
+                  }}
+                />
+                <Box
+                  sx={{
+                    borderRadius: "4px",
+                    padding: "0px 8px 0px 8px",
+                    fontSize: "14px",
+                    whiteSpace: "pre-wrap",
+                    lineHeight: "20px",
+                  }}
+                >
+                  {comment.comment}
+                </Box>
               </Box>
             );
           })}
+        </Box>
+        <Box position="relative" marginTop={4}>
+          <TextField
+            id="filled-multiline-static"
+            label="Comment"
+            multiline
+            rows={4}
+            variant="filled"
+            sx={{
+              width: "-webkit-fill-available",
+              margin: 1,
+            }}
+            color="primary"
+          />
+          <Button
+            size="small"
+            sx={{
+              borderRadius: 40,
+              position: "absolute",
+              bottom: 16,
+              right: 16,
+              padding: "4px",
+              minWidth: "40px",
+              lineHeight: "40px",
+              height: "40px",
+            }}
+            variant="contained"
+            color="secondary"
+          >
+            <ChevronRight />
+          </Button>
         </Box>
       </AppWrapper>
     </ThemeProvider>
