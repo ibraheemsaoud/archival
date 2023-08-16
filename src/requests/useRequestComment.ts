@@ -1,10 +1,36 @@
-import { useMutation } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Server } from "../config/server";
 import api from "./apis";
-import { Permission, Role } from "appwrite";
-import { ICommentCreate } from "../interfaces/comment.interface";
+import { Permission, Query, Role } from "appwrite";
+import { IComment, ICommentCreate } from "../interfaces/comment.interface";
 
-export const useRequestComment = (postId: string) => {
+export const useRequestComments = (postId: string) => {
+  return useQuery<IComment[]>(
+    ["comment", postId],
+    async () => {
+      const data = await api.listDocuments(
+        Server.databaseID,
+        Server.commentsCollectionId,
+        [Query.equal("postId", [postId!])]
+      );
+      console.log(data, postId);
+      if (data.documents?.length > 0) {
+        return data.documents as IComment[];
+      }
+      throw "Season not found";
+    },
+    {
+      enabled: !!postId,
+      refetchOnMount: true,
+      refetchOnWindowFocus: false,
+      initialData: [],
+    }
+  );
+};
+
+export const useRequestCreateComment = (postId: string) => {
+  const queryClient = useQueryClient();
+
   return useMutation(["comment", postId], async (comment: ICommentCreate) => {
     const data = await api.createDocument(
       Server.databaseID,
@@ -15,6 +41,7 @@ export const useRequestComment = (postId: string) => {
         Permission.delete(Role.user(comment.userId)),
       ]
     );
+    queryClient.invalidateQueries(["comment", postId]);
     return data;
   });
 };

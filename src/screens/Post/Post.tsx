@@ -20,18 +20,22 @@ import { useRequestBrand } from "../../requests/useRequestBrand";
 import { useRequestSeason } from "../../requests/useRequestSeason";
 import { theme } from "../../theme";
 import { ChevronRight } from "@mui/icons-material";
-import { useRequestComment } from "../../requests/useRequestComment";
-import { useEffect, useState } from "react";
+import {
+  useRequestComments,
+  useRequestCreateComment,
+} from "../../requests/useRequestComment";
+import { useState } from "react";
 
 export const Post = () => {
   const [comment, setComment] = useState("");
   const { onBack } = useNavigation();
-  const { references, post, comments } = useLoaderData() as any as {
+  const { references, post } = useLoaderData() as any as {
     references?: IReference[];
     post?: IPost;
     comments?: IComment[];
   };
-  const { mutate, isSuccess } = useRequestComment(post?.$id || "");
+  const { data: comments } = useRequestComments(post?.$id || "");
+  const { mutate } = useRequestCreateComment(post?.$id || "");
   const { user } = useUser();
 
   const { data: season, isLoading: isSeasonLoading } = useRequestSeason(
@@ -40,12 +44,6 @@ export const Post = () => {
   const { data: brand, isLoading: isBrandLoading } = useRequestBrand(
     season?.brandId
   );
-
-  useEffect(() => {
-    if (isSuccess) {
-      window.location.reload();
-    }
-  }, [isSuccess]);
 
   if (isSeasonLoading || isBrandLoading) return <div>Loading...</div>;
   if (!post || !season || !brand) return <div>Not found</div>;
@@ -203,7 +201,7 @@ export const Post = () => {
             id="filled-multiline-static"
             label="Comment"
             multiline
-            rows={4}
+            rows={3}
             variant="filled"
             sx={{
               width: "-webkit-fill-available",
@@ -226,7 +224,7 @@ export const Post = () => {
               height: "40px",
             }}
             variant="contained"
-            color="secondary"
+            color="primary"
             onClick={onSubmit}
           >
             <ChevronRight />
