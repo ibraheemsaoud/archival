@@ -16,6 +16,7 @@ export const useRequestSeason = (slug?: string) => {
       if (data.documents?.length > 0) {
         return data.documents[0] as ISeason;
       }
+      // eslint-disable-next-line no-throw-literal
       throw "Season not found";
     },
     {

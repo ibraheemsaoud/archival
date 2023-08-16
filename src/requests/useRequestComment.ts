@@ -17,6 +17,7 @@ export const useRequestComments = (postId: string) => {
       if (data.documents?.length > 0) {
         return data.documents as IComment[];
       }
+      // eslint-disable-next-line no-throw-literal
       throw "Season not found";
     },
     {
