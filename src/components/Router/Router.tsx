@@ -1,11 +1,19 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { HOME, POST, PROFILE, SEASON, VERIFICATION } from "../../consts/links.const";
+import {
+  BRAND,
+  HOME,
+  POST,
+  PROFILE,
+  SEASON,
+  VERIFICATION,
+} from "../../consts/links.const";
 import { Profile } from "../../screens/Profile";
 import { Verification } from "../../screens/Verification";
 import { verificationLoader } from "../../screens/Verification/verification.Loader.helper";
 import { Home, homeLoader } from "../../screens/Home";
 import { Season, seasonsLoader } from "../../screens/Season";
 import { Post, postLoader } from "../../screens/Post";
+import { Brand, brandLoader } from "../../screens/Brand";
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -33,7 +41,12 @@ export const Router = () => {
       path: POST,
       element: <Post />,
       loader: postLoader(),
-    }
+    },
+    {
+      path: BRAND,
+      element: <Brand />,
+      loader: brandLoader(),
+    },
   ]);
 
   return <RouterProvider router={router} />;
