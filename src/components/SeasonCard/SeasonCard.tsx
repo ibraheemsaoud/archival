@@ -22,15 +22,12 @@ export const SeasonCard = ({ seasonId }: { seasonId: string }) => {
   if (isLoading || isBrandLoading) return <div>Loading...</div>;
   if (!season || !brand) return <div>Season not found</div>;
 
-  console.log(season);
-
   const {
     slug,
     primaryColor = PRIMARY_COLOR,
     secondaryColor = SECONDARY_COLOR,
     coverImage,
   } = season;
-  console.log(primaryColor, secondaryColor);
 
   const { name } = brand;
 

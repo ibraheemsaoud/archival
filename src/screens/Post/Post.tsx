@@ -13,21 +13,26 @@ import { AppWrapper } from "../../components";
 import { IReference } from "../../interfaces/reference.interface";
 import { Reference } from "./Refernce";
 import { IComment } from "../../interfaces/comment.interface";
-import { POST } from "../../consts/links.const";
-import { useNavigation } from "../../hooks";
+import { SEASON } from "../../consts/links.const";
+import { useNavigation, useUser } from "../../hooks";
 import { replaceRouteParams } from "../../helpers";
 import { useRequestBrand } from "../../requests/useRequestBrand";
 import { useRequestSeason } from "../../requests/useRequestSeason";
 import { theme } from "../../theme";
 import { ChevronRight } from "@mui/icons-material";
+import { useRequestComment } from "../../requests/useRequestComment";
+import { useEffect, useState } from "react";
 
 export const Post = () => {
+  const [comment, setComment] = useState("");
   const { onBack } = useNavigation();
   const { references, post, comments } = useLoaderData() as any as {
     references?: IReference[];
     post?: IPost;
     comments?: IComment[];
   };
+  const { mutate, isSuccess } = useRequestComment(post?.$id || "");
+  const { user } = useUser();
 
   const { data: season, isLoading: isSeasonLoading } = useRequestSeason(
     post?.seasonId
@@ -36,10 +41,27 @@ export const Post = () => {
     season?.brandId
   );
 
+  useEffect(() => {
+    if (isSuccess) {
+      window.location.reload();
+    }
+  }, [isSuccess]);
+
   if (isSeasonLoading || isBrandLoading) return <div>Loading...</div>;
   if (!post || !season || !brand) return <div>Not found</div>;
 
   const modedTheme = theme("light", season.primaryColor, season.secondaryColor);
+  const onBackClicked = () => {
+    onBack(replaceRouteParams(SEASON, { seasonId: season.slug }));
+  };
+  const onSubmit = () => {
+    mutate({
+      comment,
+      postId: post.$id || "",
+      userId: user?.$id || "",
+    });
+    setComment("");
+  };
 
   return (
     <ThemeProvider theme={modedTheme}>
@@ -51,9 +73,7 @@ export const Post = () => {
                 size="small"
                 variant="outlined"
                 sx={{ marginBottom: 1 }}
-                onClick={() =>
-                  onBack(replaceRouteParams(POST, { postId: post.$id }))
-                }
+                onClick={onBackClicked}
               >
                 Back
               </Button>
@@ -147,6 +167,7 @@ export const Post = () => {
           {comments?.map((comment: IComment) => {
             return (
               <Box
+                key={comment.$id}
                 display="flex"
                 sx={{
                   borderBottom: "1px solid #d6d6d6",
@@ -189,6 +210,8 @@ export const Post = () => {
               margin: 1,
             }}
             color="primary"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
           />
           <Button
             size="small"
@@ -204,6 +227,7 @@ export const Post = () => {
             }}
             variant="contained"
             color="secondary"
+            onClick={onSubmit}
           >
             <ChevronRight />
           </Button>

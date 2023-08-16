@@ -1,14 +1,13 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const useNavigation = () => {
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const onBack = (defaultRoute: string) => {
-    if (location.key) {
-      navigate(-1);
-    } else {
+  const onBack = (defaultRoute?: string) => {
+    if (defaultRoute) {
       navigate(defaultRoute);
+    } else {
+      navigate(-1);
     }
   };
 
