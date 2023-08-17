@@ -11,7 +11,6 @@ import { useLoaderData } from "react-router-dom";
 import { ISeason } from "../../interfaces/season.interface";
 import { theme } from "../../theme";
 import { IBrand } from "../../interfaces/brand.interface";
-import { IPost } from "../../interfaces/post.interface";
 import { AppWrapper, PostCard } from "../../components";
 import { useNavigation } from "../../hooks";
 import { HOME } from "../../consts/links.const";
