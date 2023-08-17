@@ -13,7 +13,6 @@ export const useRequestComments = (postId: string) => {
         Server.commentsCollectionId,
         [Query.equal("postId", [postId!])]
       );
-      console.log(data, postId);
       if (data.documents?.length > 0) {
         return data.documents as IComment[];
       }
