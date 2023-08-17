@@ -8,16 +8,16 @@ import {
 import { Link } from "react-router-dom";
 import { POST } from "../../consts/links.const";
 import { replaceRouteParams } from "../../helpers";
-import { IPost } from "../../interfaces/post.interface";
 import { PRIMARY_COLOR, SECONDARY_COLOR } from "../../consts/defaults.const";
 import { ReactionBox } from "./ReactionBox";
+import { ISeasonData } from "../../interfaces/seasonData.interface";
 
 export const PostCard = ({
   post,
   primaryColor = PRIMARY_COLOR,
   secondaryColor = SECONDARY_COLOR,
 }: {
-  post: IPost;
+  post: ISeasonData;
   primaryColor?: string;
   secondaryColor?: string;
 }) => {
@@ -46,6 +46,11 @@ export const PostCard = ({
               component="img"
               image={pictureLink || "\\static\\images\\potm2209a.jpg"}
             />
+            <ReactionBox
+              post={post}
+              primaryColor={primaryColor}
+              secondaryColor={secondaryColor}
+            />
           </CardActionArea>
         </Link>
         <Box
@@ -65,11 +70,6 @@ export const PostCard = ({
           </Typography>
         </Box>
       </Box>
-      <ReactionBox
-        post={post}
-        primaryColor={primaryColor}
-        secondaryColor={secondaryColor}
-      />
     </Card>
   );
 };

@@ -1,13 +1,13 @@
 import { Box, Typography } from "@mui/material";
-import { IPost } from "../../interfaces/post.interface";
 import { PRIMARY_COLOR, SECONDARY_COLOR } from "../../consts/defaults.const";
+import { ISeasonData } from "../../interfaces/seasonData.interface";
 
 export const ReactionBox = ({
   post,
   primaryColor = PRIMARY_COLOR,
   secondaryColor = SECONDARY_COLOR,
 }: {
-  post: IPost;
+  post: ISeasonData;
   primaryColor?: string;
   secondaryColor?: string;
 }) => {
@@ -29,7 +29,7 @@ export const ReactionBox = ({
         zIndex: 1,
         position: "absolute",
         top: 10,
-        right: -14,
+        right: 8,
         width: 32,
         transition: "all 1s ease",
         overflow: "hidden",
@@ -49,7 +49,7 @@ export const ReactionBox = ({
             fontWeight="bold"
             lineHeight="30px"
           >
-            4
+            {post.comments.length}
           </Typography>
         </Box>
         <Typography
@@ -67,7 +67,7 @@ export const ReactionBox = ({
             fontWeight="bold"
             lineHeight="30px"
           >
-            4
+            {post.references.length}
           </Typography>
         </Box>
         <Typography
@@ -78,14 +78,14 @@ export const ReactionBox = ({
           References
         </Typography>
       </Box>
-      <Box display="flex" alignItems="baseline" justifyContent="flex-start">
+      {/* <Box display="flex" alignItems="baseline" justifyContent="flex-start">
         <Box sx={{ ...circleStyle, marginBottom: 0 }}>
           <Typography
             color={secondaryColor}
             fontWeight="bold"
             lineHeight="30px"
           >
-            4
+            0
           </Typography>
         </Box>
         <Typography
@@ -95,7 +95,7 @@ export const ReactionBox = ({
         >
           Mentions
         </Typography>
-      </Box>
+      </Box> */}
     </Box>
   );
 };
