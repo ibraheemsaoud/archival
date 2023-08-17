@@ -12,7 +12,13 @@ import { useRequestSeason } from "../../requests/useRequestSeason";
 import { PRIMARY_COLOR, SECONDARY_COLOR } from "../../consts/defaults.const";
 import { useRequestBrand } from "../../requests/useRequestBrand";
 
-export const SeasonCard = ({ seasonId }: { seasonId: string }) => {
+export const SeasonCard = ({
+  seasonId,
+  brandView = false,
+}: {
+  seasonId: string;
+  brandView?: boolean;
+}) => {
   const { data: season, isLoading, error } = useRequestSeason(seasonId);
   const { data: brand, isLoading: isBrandLoading } = useRequestBrand(
     season?.brandId
@@ -58,7 +64,7 @@ export const SeasonCard = ({ seasonId }: { seasonId: string }) => {
             }}
           >
             <Typography fontWeight="bold" color={secondaryColor}>
-              {name}
+              {brandView ? season.name : name}
             </Typography>
           </CardContent>
         </CardActionArea>

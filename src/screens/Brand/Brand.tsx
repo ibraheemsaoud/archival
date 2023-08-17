@@ -2,6 +2,7 @@ import {
   AppBar,
   Box,
   Button,
+  Grid,
   ThemeProvider,
   Toolbar,
   Typography,
@@ -67,10 +68,17 @@ export const Brand = () => {
             </Toolbar>
           </AppBar>
         </Box>
-        <Box>
-          {seasons.map((season: ISeason) => (
-            <SeasonCard key={season.$id} seasonId={season.slug} />
-          ))}
+        <Box marginX={1} marginY={2}>
+          <Typography variant="h6" component="div" sx={{ textDecoration: "underline" }}>
+            Seasons
+          </Typography>
+          <Grid container spacing={1}>
+            {seasons.map((season: ISeason) => (
+              <Grid item xs={6} lg={4} key={season.$id}>
+                <SeasonCard seasonId={season.slug} brandView />
+              </Grid>
+            ))}
+          </Grid>
         </Box>
       </AppWrapper>
     </ThemeProvider>
