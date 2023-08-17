@@ -22,16 +22,16 @@ export const theme = (mode, primaryColor, secondaryColor) => {
         defaultProps: {
           disableRipple: true,
         },
-        styleOverrides: {
-          root: ({ ownerState }) => ({
-            ...(ownerState.variant === "contained" &&
-              ownerState.color === "primary" &&
-              {
-                // backgroundColor: "#202020",
-                // color: "#fff",
-              }),
-          }),
-        },
+        // styleOverrides: {
+        //   root: ({ ownerState }) => ({
+        //     ...(ownerState.variant === "contained" &&
+        //       ownerState.color === "primary" &&
+        //       {
+        //         // backgroundColor: "#202020",
+        //         // color: "#fff",
+        //       }),
+        //   }),
+        // },
       },
       MuiTypography: {
         styleOverrides: {
@@ -58,7 +58,16 @@ export const theme = (mode, primaryColor, secondaryColor) => {
       MuiToolbar: {
         styleOverrides: {
           root: {
-            backgroundColor: palette.palette.platinum.light,
+            backgroundColor: palette.palette.primary.light,
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            color: palette.palette.text.primary,
+            borderColor: palette.palette.text.primary,
+            backgroundColor: palette.palette.primary.light,
           },
         },
       },

@@ -25,7 +25,7 @@ export const Season = () => {
   };
   const { data: seasonData } = useRequestSeasonData(season?.slug);
 
-  if (!season || !brand) return <div>Loading...</div>;
+  if (!season || !brand || !seasonData?.length) return <div>Loading...</div>;
 
   const modedTheme = theme("light", season.primaryColor, season.secondaryColor);
 
