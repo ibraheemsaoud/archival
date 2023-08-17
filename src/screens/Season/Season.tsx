@@ -15,6 +15,7 @@ import { AppWrapper, PostCard } from "../../components";
 import { useNavigation } from "../../hooks";
 import { HOME } from "../../consts/links.const";
 import { useRequestSeasonData } from "../../requests/useRequestSeasonData";
+import { PostUploader } from "./PostUploader";
 
 export const Season = () => {
   const { onBack } = useNavigation();
@@ -122,6 +123,7 @@ export const Season = () => {
             ))}
           </Grid>
         )}
+        <PostUploader seasonId={season.slug} />
       </AppWrapper>
     </ThemeProvider>
   );
