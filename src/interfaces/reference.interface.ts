@@ -13,4 +13,6 @@ export interface IReference extends IAppWrite {
     | "youtube";
   reference_link: string;
   imageLink: string;
+  referenceTitle: string;
+  referenceDescription: string;
 }

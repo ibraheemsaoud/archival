@@ -2,7 +2,6 @@ import {
   AppBar,
   Box,
   Button,
-  TextField,
   ThemeProvider,
   Toolbar,
   Typography,
@@ -11,32 +10,21 @@ import { useLoaderData } from "react-router-dom";
 import { IPost } from "../../interfaces/post.interface";
 import { AppWrapper } from "../../components";
 import { IReference } from "../../interfaces/reference.interface";
-import { Reference } from "./Reference";
-import { IComment } from "../../interfaces/comment.interface";
 import { SEASON } from "../../consts/links.const";
-import { useNavigation, useUser } from "../../hooks";
+import { useNavigation } from "../../hooks";
 import { replaceRouteParams } from "../../helpers";
 import { useRequestBrand } from "../../requests/useRequestBrand";
 import { useRequestSeason } from "../../requests/useRequestSeason";
 import { theme } from "../../theme";
-import { ChevronRight } from "@mui/icons-material";
-import {
-  useRequestComments,
-  useRequestCreateComment,
-} from "../../requests/useRequestComment";
-import { useState } from "react";
+import { CommentSection } from "./CommentSection";
+import { ReferenceSection } from "./ReferencesSection";
 
 export const Post = () => {
-  const [comment, setComment] = useState("");
   const { onBack } = useNavigation();
   const { references, post } = useLoaderData() as any as {
     references?: IReference[];
     post?: IPost;
-    comments?: IComment[];
   };
-  const { data: comments } = useRequestComments(post?.$id || "");
-  const { mutate } = useRequestCreateComment(post?.$id || "");
-  const { user } = useUser();
 
   const { data: season, isLoading: isSeasonLoading } = useRequestSeason(
     post?.seasonId
@@ -51,14 +39,6 @@ export const Post = () => {
   const modedTheme = theme("light", season.primaryColor, season.secondaryColor);
   const onBackClicked = () => {
     onBack(replaceRouteParams(SEASON, { seasonId: season.slug }));
-  };
-  const onSubmit = () => {
-    mutate({
-      comment,
-      postId: post.$id || "",
-      userId: user?.$id || "",
-    });
-    setComment("");
   };
 
   return (
@@ -126,118 +106,8 @@ export const Post = () => {
             {post.postTitle}
           </Box>
         </Box>
-        {references?.length ? (
-          <Box
-            sx={{
-              borderTop: "1px solid #d6d6d6",
-            }}
-          >
-            <Typography
-              variant="h6"
-              component="div"
-              marginX={1}
-              sx={{ textDecoration: "underline" }}
-            >
-              References
-            </Typography>
-            <Box
-              sx={{
-                display: "flex",
-                overflow: "auto",
-                marginX: 1,
-              }}
-            >
-              {references?.map((reference: IReference) => {
-                return <Reference reference={reference} key={reference.$id} />;
-              })}
-            </Box>
-          </Box>
-        ) : null}
-        {comments?.length ? (
-          <Box
-            sx={{
-              borderTop: "1px solid #d6d6d6",
-            }}
-          >
-            <Typography
-              variant="h6"
-              component="div"
-              marginX={1}
-              sx={{ textDecoration: "underline" }}
-            >
-              Discussions
-            </Typography>
-          </Box>
-        ) : null}
-        <Box>
-          {comments?.map((comment: IComment) => {
-            return (
-              <Box
-                key={comment.$id}
-                display="flex"
-                sx={{
-                  borderBottom: "1px solid #d6d6d6",
-                  paddingBottom: "4px",
-                  margin: 1,
-                }}
-              >
-                <Box
-                  sx={{
-                    background: "#d6d6d6",
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "40px",
-                  }}
-                />
-                <Box
-                  sx={{
-                    borderRadius: "4px",
-                    padding: "0px 8px 0px 8px",
-                    fontSize: "14px",
-                    whiteSpace: "pre-wrap",
-                    lineHeight: "20px",
-                  }}
-                >
-                  {comment.comment}
-                </Box>
-              </Box>
-            );
-          })}
-        </Box>
-        <Box position="relative" marginTop={4}>
-          <TextField
-            id="filled-multiline-static"
-            label="Comment"
-            multiline
-            rows={3}
-            variant="filled"
-            sx={{
-              width: "-webkit-fill-available",
-              margin: 1,
-            }}
-            color="primary"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-          <Button
-            size="small"
-            sx={{
-              borderRadius: 40,
-              position: "absolute",
-              bottom: 16,
-              right: 16,
-              padding: "4px",
-              minWidth: "40px",
-              lineHeight: "40px",
-              height: "40px",
-            }}
-            variant="contained"
-            color="primary"
-            onClick={onSubmit}
-          >
-            <ChevronRight />
-          </Button>
-        </Box>
+        <ReferenceSection post={post} references={references} />
+        <CommentSection postId={post.$id} />
       </AppWrapper>
     </ThemeProvider>
   );
