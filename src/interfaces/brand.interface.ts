@@ -6,4 +6,5 @@ export interface IBrand extends IAppWrite {
   primaryColor?: string;
   secondaryColor?: string;
   logoLink: string;
+  isPublic?: boolean;
 }

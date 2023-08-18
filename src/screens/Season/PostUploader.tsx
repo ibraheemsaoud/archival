@@ -8,6 +8,7 @@ import { requestUploadFile } from "../../requests/requestUploadFile";
 
 export const PostUploader = ({ seasonId }: { seasonId: string }) => {
   const [title, setTitle] = useState("");
+  const [outsideLink, setOutsideLink] = useState("");
   const { file, onChangeFile, onReset, pictureUrl, onRemoveFile } =
     useUploadImage({});
   const { mutate, isSuccess, error } = useRequestCreatePost();
@@ -15,11 +16,14 @@ export const PostUploader = ({ seasonId }: { seasonId: string }) => {
 
   const onCreate = async () => {
     if (!user || !pictureUrl) return;
-    const pictureLink = await requestUploadFile(file);
-    if (pictureLink) {
+    let pictureLink = undefined;
+    if (outsideLink !== "") {
+      pictureLink = await requestUploadFile(file);
+    }
+    if (pictureLink || outsideLink !== "") {
       mutate({
         postTitle: title,
-        pictureLink,
+        pictureLink: pictureLink || outsideLink,
         seasonId,
         userId: user.$id,
       });
@@ -69,6 +73,23 @@ export const PostUploader = ({ seasonId }: { seasonId: string }) => {
         pictureUrl={pictureUrl}
         height="350px"
       />
+      {!file && (
+        <>
+          OR
+          <TextField
+            id="filled-multiline-static"
+            label="picture link"
+            variant="filled"
+            sx={{
+              width: "-webkit-fill-available",
+              marginBottom: 2,
+            }}
+            color="primary"
+            value={outsideLink}
+            onChange={(e) => setOutsideLink(e.target.value)}
+          />
+        </>
+      )}
       <TextField
         id="filled-multiline-static"
         label="title"

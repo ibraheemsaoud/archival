@@ -9,4 +9,5 @@ export interface ISeason extends IAppWrite {
   primaryColor?: string;
   secondaryColor?: string;
   tags: FashionWeekTags[];
+  isPublic: boolean;
 }

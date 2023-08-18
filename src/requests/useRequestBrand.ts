@@ -11,7 +11,7 @@ export const useRequestBrand = (slug?: string) => {
       const data = await api.listDocuments(
         Server.databaseID,
         Server.brandsCollectionId,
-        [Query.equal("slug", [slug!])]
+        [Query.equal("slug", [slug!]), Query.equal("isPublic", [true])]
       );
       if (data.documents?.length > 0) {
         return data.documents[0] as IBrand;

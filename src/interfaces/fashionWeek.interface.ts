@@ -14,4 +14,5 @@ export interface IFashionWeek extends IAppWrite {
   name: string;
   seasonIds: string[];
   tags: FashionWeekTags[];
+  isPublic: boolean;
 }

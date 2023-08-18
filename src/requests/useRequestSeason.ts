@@ -11,7 +11,7 @@ export const useRequestSeason = (slug?: string) => {
       const data = await api.listDocuments(
         Server.databaseID,
         Server.seasonsCollectionId,
-        [Query.equal("slug", [slug!])]
+        [Query.equal("slug", [slug!]), Query.equal("isPublic", [true])]
       );
       if (data.documents?.length > 0) {
         return data.documents[0] as ISeason;

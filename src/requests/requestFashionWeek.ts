@@ -12,7 +12,7 @@ export const requestFashionWeek = async (slug?: string) => {
   const data = await api.listDocuments(
     Server.databaseID,
     Server.fashionWeeksCollectionId,
-    [Query.equal("slug", [slug])]
+    [Query.equal("slug", [slug]), Query.equal("isPublic", [true])]
   );
   if (data.documents?.length > 0) {
     return {

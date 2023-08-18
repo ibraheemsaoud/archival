@@ -6,7 +6,8 @@ import { IBrand } from "../interfaces/brand.interface";
 export const requestBrands = async () => {
   const data = await api.listDocuments(
     Server.databaseID,
-    Server.brandsCollectionId
+    Server.brandsCollectionId,
+    [Query.equal("isPublic", [true])]
   );
   if (data.documents) {
     return {
@@ -29,7 +30,7 @@ export const requestBrand = async (slug?: string) => {
   const data = await api.listDocuments(
     Server.databaseID,
     Server.brandsCollectionId,
-    [Query.equal("slug", [slug])]
+    [Query.equal("slug", [slug]), Query.equal("isPublic", [true])]
   );
   if (data.documents?.length > 0) {
     return {

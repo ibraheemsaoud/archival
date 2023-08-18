@@ -4,7 +4,7 @@ import { Query } from "appwrite";
 import { ISeason } from "../interfaces/season.interface";
 
 export const requestSeasons = async (brandId?: string) => {
-  const query = [];
+  const query = [Query.equal("isPublic", [true])];
   if (brandId) {
     query.push(Query.equal("brandId", [brandId!]));
   }
@@ -34,7 +34,7 @@ export const requestSeason = async (slug?: string) => {
   const data = await api.listDocuments(
     Server.databaseID,
     Server.seasonsCollectionId,
-    [Query.equal("slug", [slug])]
+    [Query.equal("slug", [slug]), Query.equal("isPublic", [true])]
   );
   if (data.documents?.length > 0) {
     return {
