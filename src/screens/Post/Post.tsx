@@ -11,7 +11,7 @@ import { useLoaderData } from "react-router-dom";
 import { IPost } from "../../interfaces/post.interface";
 import { AppWrapper } from "../../components";
 import { IReference } from "../../interfaces/reference.interface";
-import { Reference } from "./Refernce";
+import { Reference } from "./Reference";
 import { IComment } from "../../interfaces/comment.interface";
 import { SEASON } from "../../consts/links.const";
 import { useNavigation, useUser } from "../../hooks";
@@ -140,9 +140,17 @@ export const Post = () => {
             >
               References
             </Typography>
-            {references?.map((reference: IReference) => {
-              return <Reference reference={reference} key={reference.$id} />;
-            })}
+            <Box
+              sx={{
+                display: "flex",
+                overflow: "auto",
+                marginX: 1,
+              }}
+            >
+              {references?.map((reference: IReference) => {
+                return <Reference reference={reference} key={reference.$id} />;
+              })}
+            </Box>
           </Box>
         ) : null}
         {comments?.length ? (

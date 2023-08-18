@@ -54,6 +54,7 @@ export const PostUploader = ({ seasonId }: { seasonId: string }) => {
         margin: 2,
         padding: 1,
         borderRadius: 2,
+        backgroundColor: "#ffffff",
       }}
     >
       <Typography

@@ -30,7 +30,7 @@ export const Brand = () => {
 
   return (
     <ThemeProvider theme={modedTheme}>
-      <AppWrapper>
+      <AppWrapper primaryColor={brand.primaryColor}>
         <Box sx={{ position: "sticky", top: -60, zIndex: 2 }}>
           <AppBar position="static">
             <Toolbar sx={{ alignItems: "flex-end" }}>

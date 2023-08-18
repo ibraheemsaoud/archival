@@ -2,6 +2,7 @@ import { Box, Link, Typography } from "@mui/material";
 import { Link as NavLink } from "react-router-dom";
 import { HOME } from "../../../consts/links.const";
 import { ToolbarAction } from "./ToolbarAction";
+import { Search } from "@mui/icons-material";
 
 export const Navigation = () => {
   return (
@@ -30,9 +31,12 @@ export const Navigation = () => {
           background: "white",
           textAlign: "center",
           lineHeight: "38px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        X
+        <Search />
       </Typography>
       <Link
         underline="none"

@@ -25,13 +25,21 @@ export const Reference = ({ reference }: { reference: IReference }) => {
       return (
         <Box
           sx={{
-            background: "#8b8e8e",
-            color: "#ffffff",
-            ...commonProps,
-            ...imageProps,
+            maxWidth: 80,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          {reference.imageLink ? undefined : "W"}
+          <Box
+            sx={{
+              background: "#8b8e8e",
+              color: "#ffffff",
+              ...commonProps,
+              ...imageProps,
+            }}
+          />
+          Wikipedia
         </Box>
       );
     case "youtube":
