@@ -35,7 +35,7 @@ export const Season = () => {
   return (
     <ThemeProvider theme={modedTheme}>
       <AppWrapper>
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ position: "sticky", top: -60, zIndex: 2 }}>
           <AppBar position="static">
             <Toolbar sx={{ alignItems: "flex-end" }}>
               <Button

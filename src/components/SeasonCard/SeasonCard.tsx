@@ -41,7 +41,7 @@ export const SeasonCard = ({
     <Card
       sx={{
         backgroundColor: primaryColor,
-        borderRadius: 1,
+        borderRadius: brandView ? 0 : 1,
       }}
     >
       <Link to={replaceRouteParams(SEASON, { seasonId: slug })}>
@@ -50,23 +50,35 @@ export const SeasonCard = ({
             position: "relative",
           }}
         >
+          <CardContent
+            sx={{
+              position: brandView ? "relative" : "absolute",
+              bottom: 0,
+              color: secondaryColor,
+              background: brandView ? primaryColor : `${primaryColor}B0`,
+              width: "100%",
+              textAlign: brandView ? "center" : "start",
+            }}
+          >
+            <Typography
+              fontWeight="bold"
+              color={secondaryColor}
+              sx={
+                brandView
+                  ? {
+                      fontSize: "22px",
+                      lineHeight: "21px",
+                    }
+                  : {}
+              }
+            >
+              {brandView ? season.name : name}
+            </Typography>
+          </CardContent>
           <CardMedia
             component="img"
             image={coverImage || "\\static\\images\\potm2209a.jpg"}
           />
-          <CardContent
-            sx={{
-              position: "absolute",
-              bottom: 0,
-              color: secondaryColor,
-              background: `${primaryColor}B0`,
-              width: "100%",
-            }}
-          >
-            <Typography fontWeight="bold" color={secondaryColor}>
-              {brandView ? season.name : name}
-            </Typography>
-          </CardContent>
         </CardActionArea>
       </Link>
     </Card>

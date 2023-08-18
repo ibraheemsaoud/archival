@@ -31,7 +31,7 @@ export const Brand = () => {
   return (
     <ThemeProvider theme={modedTheme}>
       <AppWrapper>
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ position: "sticky", top: -60, zIndex: 2 }}>
           <AppBar position="static">
             <Toolbar sx={{ alignItems: "flex-end" }}>
               <Button
@@ -69,18 +69,7 @@ export const Brand = () => {
             </Toolbar>
           </AppBar>
         </Box>
-        {lastSeason && (
-          <>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ textDecoration: "underline" }}
-            >
-              Latest Season
-            </Typography>
-            <SeasonCard seasonId={lastSeason.slug} brandView />
-          </>
-        )}
+        {lastSeason && <SeasonCard seasonId={lastSeason.slug} brandView />}
         {restOfSeasons.length > 0 && (
           <Box marginX={1} marginY={2}>
             <Typography

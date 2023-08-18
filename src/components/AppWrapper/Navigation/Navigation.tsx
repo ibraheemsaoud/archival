@@ -16,6 +16,7 @@ export const Navigation = () => {
         justifyContent: "space-between",
         boxSizing: "border-box",
         backgroundColor: "#f7eee3",
+        zIndex: 2,
       }}
     >
       <Typography
