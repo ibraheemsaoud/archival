@@ -20,24 +20,6 @@ export const Navigation = () => {
         zIndex: 2,
       }}
     >
-      <Typography
-        variant="h5"
-        sx={{
-          minWidth: 40,
-          minHeight: 40,
-          maxWidth: 40,
-          maxHeight: 40,
-          borderRadius: 40,
-          background: "white",
-          textAlign: "center",
-          lineHeight: "38px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Search />
-      </Typography>
       <Link
         underline="none"
         component={NavLink}
@@ -61,6 +43,24 @@ export const Navigation = () => {
           A
         </Typography>
       </Link>
+      <Typography
+        variant="h5"
+        sx={{
+          minWidth: 40,
+          minHeight: 40,
+          maxWidth: 40,
+          maxHeight: 40,
+          borderRadius: 40,
+          background: "white",
+          textAlign: "center",
+          lineHeight: "38px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Search />
+      </Typography>
       <ToolbarAction />
     </Box>
   );
