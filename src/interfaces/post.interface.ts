@@ -12,4 +12,6 @@ export interface IPost extends IAppWrite {
   pictureLink: string;
   userId: string;
   postTitle: string;
+  commentsCount: number;
+  referencesCount: number;
 }

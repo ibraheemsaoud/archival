@@ -3,6 +3,7 @@ import { IReference } from "../../interfaces/reference.interface";
 import { Reference } from "./Reference";
 import { useState } from "react";
 import { IPost } from "../../interfaces/post.interface";
+import { ReferenceCreation } from "./RefernceCreation";
 
 export const ReferenceSection = ({
   references,
@@ -12,11 +13,16 @@ export const ReferenceSection = ({
   post: IPost;
 }) => {
   const [selectedReference, setSelectedReference] = useState<IReference>();
+  const [referenceCreationOpen, setReferenceCreationOpen] = useState(false);
 
   if (references?.length === 0) return null;
 
   const onReferenceClicked = (reference: IReference) => {
     setSelectedReference(reference);
+  };
+
+  const onReferenceCreationClicked = () => {
+    setReferenceCreationOpen(true);
   };
 
   const removeHTTPWWW = (link: string) => {
@@ -57,6 +63,20 @@ export const ReferenceSection = ({
             </Button>
           );
         })}
+        <Button
+          size="small"
+          variant="text"
+          sx={{
+            backgroundColor: "transparent",
+            marginBottom: "33px",
+            marginTop: "12px",
+            borderRadius: "8px",
+            width: "72px",
+          }}
+          onClick={() => onReferenceCreationClicked()}
+        >
+          Add
+        </Button>
       </Box>
       <Dialog
         open={!!selectedReference}
@@ -117,6 +137,18 @@ export const ReferenceSection = ({
             </Box>
           </Box>
         )}
+      </Dialog>
+      <Dialog
+        open={referenceCreationOpen}
+        onClose={() => setReferenceCreationOpen(false)}
+        fullWidth
+        PaperProps={{
+          sx: {
+            backgroundColor: "#ffffff",
+          },
+        }}
+      >
+        <ReferenceCreation postId={post.$id} />
       </Dialog>
     </Box>
   );

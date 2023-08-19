@@ -76,6 +76,21 @@
             "events": [],
             "schedule": "",
             "timeout": 15
+        },
+        {
+            "$id": "64e10ea16d23dfa6890a",
+            "name": "UpdateSeasonStats",
+            "runtime": "node-16.0",
+            "path": "functions/UpdateSeasonStats",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
         }
     ]
 }

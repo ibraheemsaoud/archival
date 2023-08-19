@@ -14,23 +14,23 @@ import { IBrand } from "../../interfaces/brand.interface";
 import { AppWrapper, PostCard } from "../../components";
 import { useNavigation } from "../../hooks";
 import { HOME } from "../../consts/links.const";
-import { useRequestSeasonData } from "../../requests/useRequestSeasonData";
 import { PostUploader } from "./PostUploader";
+import { IPost } from "../../interfaces/post.interface";
 
 export const Season = () => {
   const { onBack } = useNavigation();
-  const { season, brand } = useLoaderData() as any as {
+  const { season, brand, posts } = useLoaderData() as any as {
     brand?: IBrand;
     season?: ISeason;
+    posts?: IPost[];
   };
-  const { data: seasonData } = useRequestSeasonData(season?.slug);
 
-  if (!season || !brand || !seasonData?.length) return <div>Loading...</div>;
+  if (!season || !brand) return <div>Loading...</div>;
 
   const modedTheme = theme("light", season.primaryColor, season.secondaryColor);
 
-  const featuredPosts = seasonData?.slice(0, 2);
-  const otherPosts = seasonData?.slice(2);
+  const featuredPosts = posts?.slice(0, 2);
+  const otherPosts = posts?.slice(2);
 
   return (
     <ThemeProvider theme={modedTheme}>

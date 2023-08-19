@@ -10,14 +10,14 @@ import { POST } from "../../consts/links.const";
 import { replaceRouteParams } from "../../helpers";
 import { PRIMARY_COLOR, SECONDARY_COLOR } from "../../consts/defaults.const";
 import { ReactionBox } from "./ReactionBox";
-import { ISeasonData } from "../../interfaces/seasonData.interface";
+import { IPost } from "../../interfaces/post.interface";
 
 export const PostCard = ({
   post,
   primaryColor = PRIMARY_COLOR,
   secondaryColor = SECONDARY_COLOR,
 }: {
-  post: ISeasonData;
+  post: IPost;
   primaryColor?: string;
   secondaryColor?: string;
 }) => {

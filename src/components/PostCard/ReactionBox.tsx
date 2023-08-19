@@ -1,13 +1,13 @@
 import { Box, Typography } from "@mui/material";
 import { PRIMARY_COLOR, SECONDARY_COLOR } from "../../consts/defaults.const";
-import { ISeasonData } from "../../interfaces/seasonData.interface";
+import { IPost } from "../../interfaces/post.interface";
 
 export const ReactionBox = ({
   post,
   primaryColor = PRIMARY_COLOR,
   secondaryColor = SECONDARY_COLOR,
 }: {
-  post: ISeasonData;
+  post: IPost;
   primaryColor?: string;
   secondaryColor?: string;
 }) => {
@@ -49,7 +49,7 @@ export const ReactionBox = ({
             fontWeight="bold"
             lineHeight="30px"
           >
-            {post.comments.length}
+            {post.commentsCount || 0}
           </Typography>
         </Box>
         <Typography
@@ -67,7 +67,7 @@ export const ReactionBox = ({
             fontWeight="bold"
             lineHeight="30px"
           >
-            {post.references.length}
+            {post.referencesCount || 0}
           </Typography>
         </Box>
         <Typography

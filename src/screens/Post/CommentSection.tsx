@@ -36,6 +36,7 @@ export const CommentSection = ({ postId }: { postId: string }) => {
             variant="h6"
             component="div"
             marginX={1}
+            marginBottom={2}
             sx={{ textDecoration: "underline" }}
           >
             Discussions
