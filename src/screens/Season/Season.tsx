@@ -2,10 +2,13 @@ import {
   AppBar,
   Box,
   Button,
+  ButtonGroup,
   Grid,
   ThemeProvider,
   Toolbar,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import { ISeason } from "../../interfaces/season.interface";
@@ -15,15 +18,21 @@ import { AppWrapper, PostCard } from "../../components";
 import { useNavigation } from "../../hooks";
 import { HOME } from "../../consts/links.const";
 import { PostUploader } from "./PostUploader";
-import { IPost } from "../../interfaces/post.interface";
+import { useRequestPosts } from "../../requests/useRequestPost";
+import { useState } from "react";
+import { Query } from "appwrite";
 
 export const Season = () => {
+  const [query, setQuery] = useState("");
   const { onBack } = useNavigation();
-  const { season, brand, posts } = useLoaderData() as any as {
+  const { season, brand } = useLoaderData() as any as {
     brand?: IBrand;
     season?: ISeason;
-    posts?: IPost[];
   };
+  const { data: posts } = useRequestPosts(season?.slug, query);
+
+  const theme2 = useTheme();
+  const isMobile = useMediaQuery(theme2.breakpoints.down("sm"));
 
   if (!season || !brand) return <div>Loading...</div>;
 
@@ -66,13 +75,48 @@ export const Season = () => {
               <Button
                 size="small"
                 variant="outlined"
-                sx={{ marginBottom: 1 }}
+                sx={{ marginBottom: 1, visibility: "hidden" }}
                 onClick={() => {}}
               >
                 Chat
               </Button>
             </Toolbar>
           </AppBar>
+        </Box>
+        <Box
+          sx={{ margin: 2, textAlign: "right", marginRight: isMobile ? 2 : 4 }}
+        >
+          <ButtonGroup fullWidth={isMobile}>
+            <Button
+              onClick={() => setQuery("")}
+              size="small"
+              variant={query === "" ? "contained" : "outlined"}
+            >
+              Normal
+            </Button>
+            <Button
+              onClick={() => setQuery(Query.orderDesc("referencesCount"))}
+              size="small"
+              variant={
+                query === Query.orderDesc("referencesCount")
+                  ? "contained"
+                  : "outlined"
+              }
+            >
+              Referential
+            </Button>
+            <Button
+              onClick={() => setQuery(Query.orderDesc("commentsCount"))}
+              size="small"
+              variant={
+                query === Query.orderDesc("commentsCount")
+                  ? "contained"
+                  : "outlined"
+              }
+            >
+              Discussed
+            </Button>
+          </ButtonGroup>
         </Box>
         {featuredPosts?.length && (
           <Grid

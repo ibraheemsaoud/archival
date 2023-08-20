@@ -65,9 +65,7 @@ export const PostCard = ({
             textAlign: "center",
           }}
         >
-          <Typography fontWeight="bold" color={secondaryColor}>
-            {post.postTitle}
-          </Typography>
+          <Typography color={secondaryColor}>{post.postTitle}</Typography>
         </Box>
       </Box>
     </Card>

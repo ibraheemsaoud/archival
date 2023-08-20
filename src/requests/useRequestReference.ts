@@ -42,7 +42,6 @@ export const useRequestReference = () => {
       ]
     );
     queryClient.invalidateQueries(["referenceList"]);
-    // queryClient.invalidateQueries(["seasonData", post.seasonId]);
     return data;
   });
 };

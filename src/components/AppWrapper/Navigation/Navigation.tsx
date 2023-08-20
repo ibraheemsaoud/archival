@@ -2,7 +2,7 @@ import { Box, Link, Typography } from "@mui/material";
 import { Link as NavLink } from "react-router-dom";
 import { HOME } from "../../../consts/links.const";
 import { ToolbarAction } from "./ToolbarAction";
-import { Search } from "@mui/icons-material";
+// import { Search } from "@mui/icons-material";
 
 export const Navigation = () => {
   return (
@@ -40,7 +40,7 @@ export const Navigation = () => {
           A
         </Typography>
       </Link>
-      <Typography
+      {/* <Typography
         variant="h5"
         sx={{
           minWidth: 40,
@@ -57,7 +57,7 @@ export const Navigation = () => {
         }}
       >
         <Search />
-      </Typography>
+      </Typography> */}
       <ToolbarAction />
     </Box>
   );
