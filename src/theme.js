@@ -22,16 +22,14 @@ export const theme = (mode, primaryColor, secondaryColor) => {
         defaultProps: {
           disableRipple: true,
         },
-        // styleOverrides: {
-        //   root: ({ ownerState }) => ({
-        //     ...(ownerState.variant === "contained" &&
-        //       ownerState.color === "primary" &&
-        //       {
-        //         // backgroundColor: "#202020",
-        //         // color: "#fff",
-        //       }),
-        //   }),
-        // },
+        // change the hover color
+        styleOverrides: {
+          root: {
+            "&:hover": {
+              color: palette.palette.text.secondary,
+            },
+          },
+        },
       },
       MuiTypography: {
         styleOverrides: {
