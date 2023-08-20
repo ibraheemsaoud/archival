@@ -12,8 +12,13 @@ import { ISeason } from "../../interfaces/season.interface";
 import { theme } from "../../theme";
 import { IBrand } from "../../interfaces/brand.interface";
 import { AppWrapper, SeasonCard } from "../../components";
-import { useNavigation } from "../../hooks";
+import { useNavigation, useUser } from "../../hooks";
 import { HOME } from "../../consts/links.const";
+import {
+  useRequestFollow,
+  useRequestFollows,
+  useRequestUnfollow,
+} from "../../requests/useRequestFollow";
 
 export const Brand = () => {
   const { onBack } = useNavigation();
@@ -22,7 +27,31 @@ export const Brand = () => {
     seasons?: ISeason[];
   };
 
+  const { data: follows, isLoading } = useRequestFollows("brand");
+  const { mutate: followBrand, isLoading: isLoadingFollowAction } =
+    useRequestFollow();
+  const { mutate: unfollowBrand, isLoading: isLoadingUnfollowAction } =
+    useRequestUnfollow();
+  const { user } = useUser();
+
   if (!seasons || !brand) return <div>Loading...</div>;
+
+  const isFollowing = follows?.find(
+    (follow) => follow.targetId === brand.$id && follow.targetType === "brand"
+  );
+
+  const onFollow = () => {
+    if (!user) return;
+    if (isFollowing) {
+      unfollowBrand(isFollowing);
+    } else {
+      followBrand({
+        targetType: "brand",
+        targetId: brand.$id,
+        userId: user.$id,
+      });
+    }
+  };
 
   const modedTheme = theme("light", brand.primaryColor, brand.secondaryColor);
   const lastSeason = seasons[0];
@@ -60,11 +89,17 @@ export const Brand = () => {
               </Box>
               <Button
                 size="small"
-                variant="outlined"
-                sx={{ marginBottom: 1, visibility: "hidden" }}
-                onClick={() => {}}
+                variant={isFollowing ? "contained" : "outlined"}
+                sx={{
+                  marginBottom: 1,
+                  visibility: user ? "visible" : "hidden",
+                }}
+                onClick={onFollow}
+                disabled={
+                  isLoading || isLoadingFollowAction || isLoadingUnfollowAction
+                }
               >
-                Chat
+                {isFollowing ? "Following" : "Follow"}
               </Button>
             </Toolbar>
           </AppBar>
