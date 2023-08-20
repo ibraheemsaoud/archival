@@ -1,9 +1,10 @@
-import { Box, Typography, Button, Dialog, Link } from "@mui/material";
+import { Box, Typography, Button, Dialog } from "@mui/material";
 import { IReference } from "../../interfaces/reference.interface";
 import { Reference } from "./Reference";
 import { useState } from "react";
 import { IPost } from "../../interfaces/post.interface";
 import { ReferenceCreation } from "./RefernceCreation";
+import { ReferenceDisplay } from "./ReferenceDisplay";
 
 export const ReferenceSection = ({
   references,
@@ -23,13 +24,9 @@ export const ReferenceSection = ({
     setReferenceCreationOpen(true);
   };
 
-  const removeHTTPWWW = (link: string) => {
-    return link.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "");
-  };
-
   const onDone = () => {
     setReferenceCreationOpen(false);
-  }
+  };
 
   return (
     <Box
@@ -91,55 +88,11 @@ export const ReferenceSection = ({
           },
         }}
       >
-        {selectedReference && (
-          <Box>
-            <Box display="flex">
-              <Box
-                sx={{
-                  backgroundImage: `url(${post.pictureLink})`,
-                  backgroundSize: "cover",
-                  backgroundRepeat: "no-repeat",
-                  flexGrow: 1,
-                  height: "400px",
-                  backgroundPositionX: "center",
-                  backgroundPositionY: "top",
-                }}
-              />
-              <Box
-                sx={{
-                  backgroundImage: `url(${selectedReference.imageLink})`,
-                  backgroundSize: "cover",
-                  backgroundRepeat: "no-repeat",
-                  flexGrow: 1,
-                  height: "400px",
-                  backgroundPositionX: "center",
-                  backgroundPositionY: "top",
-                }}
-              />
-            </Box>
-            <Box marginX={2} marginBottom={4}>
-              <Link href={selectedReference.imageLink}>
-                <Typography
-                  variant="body1"
-                  component="div"
-                  sx={{
-                    overflow: "hidden",
-                    breakAfter: "auto",
-                    textOverflow: "ellipsis",
-                  }}
-                >
-                  {removeHTTPWWW(selectedReference.imageLink)}
-                </Typography>
-              </Link>
-              <Typography variant="h4" component="div" marginTop={3}>
-                {selectedReference.referenceTitle}
-              </Typography>
-              <Typography variant="body1" component="div">
-                {selectedReference.referenceDescription}
-              </Typography>
-            </Box>
-          </Box>
-        )}
+        <ReferenceDisplay
+          reference={selectedReference}
+          postPictureLink={post.pictureLink}
+          onDone={() => setSelectedReference(undefined)}
+        />
       </Dialog>
       <Dialog
         open={referenceCreationOpen}

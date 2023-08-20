@@ -17,7 +17,7 @@ export const useRequestComments = (postId: string) => {
         return data.documents as IComment[];
       }
       // eslint-disable-next-line no-throw-literal
-      throw "Season not found";
+      throw "comments not found";
     },
     {
       enabled: !!postId,

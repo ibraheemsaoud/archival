@@ -12,12 +12,27 @@ export const requestUploadFile = async (file: File | null, userId: string) => {
         file,
         [Permission.delete(Role.user(userId))]
       );
-      console.log(fileData)
       if (fileData.$id) {
         return `https://cloud.appwrite.io/v1/storage/buckets/${Server.entriesPicturesBucketId}/files/${fileData.$id}/view?project=Archival`;
       } else {
         return undefined;
       }
+    }
+  } catch (e) {
+    toast.error("Failed to upload file");
+    console.error(e);
+    return undefined;
+  }
+  return undefined;
+};
+
+export const requestDeleteFile = async (fileLink: string) => {
+  "https://cloud.appwrite.io/v1/storage/buckets/64a71fe5628b8aa304db/files/64e23cb67cd452425f40/view?project=Archival"
+  const fileId = fileLink.split("/").slice(-2)[0];
+  try {
+    if (fileId) {
+      await api.deleteFile(Server.entriesPicturesBucketId, fileId);
+      return;
     }
   } catch (e) {
     toast.error("Failed to upload file");

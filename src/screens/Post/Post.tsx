@@ -9,7 +9,6 @@ import {
 import { useLoaderData } from "react-router-dom";
 import { IPost } from "../../interfaces/post.interface";
 import { AppWrapper } from "../../components";
-import { IReference } from "../../interfaces/reference.interface";
 import { SEASON } from "../../consts/links.const";
 import { useNavigation } from "../../hooks";
 import { replaceRouteParams } from "../../helpers";
@@ -18,14 +17,15 @@ import { useRequestSeason } from "../../requests/useRequestSeason";
 import { theme } from "../../theme";
 import { CommentSection } from "./CommentSection";
 import { ReferenceSection } from "./ReferencesSection";
+import { useRequestReferences } from "../../requests/useRequestReference";
 
 export const Post = () => {
   const { onBack } = useNavigation();
-  const { references, post } = useLoaderData() as any as {
-    references?: IReference[];
+  const { post } = useLoaderData() as any as {
     post?: IPost;
   };
 
+  const { data: references } = useRequestReferences(post?.$id);
   const { data: season, isLoading: isSeasonLoading } = useRequestSeason(
     post?.seasonId
   );

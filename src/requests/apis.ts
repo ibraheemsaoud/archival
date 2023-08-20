@@ -70,6 +70,7 @@ interface Api {
     file: File,
     permissions?: any
   ) => Promise<Models.File>;
+  deleteFile: (bucketId: string, fileId: string) => Promise<{}>;
 }
 
 const api: Api = {
@@ -184,8 +185,19 @@ const api: Api = {
       .teams.create(ID.unique(), turnStringToValidTeamName(name));
   },
 
-  uploadFile: (bucketId: string, fileName: string, file: File, permissions?: any) => {
-    return api.provider().storage.createFile(bucketId, fileName, file, permissions);
+  uploadFile: (
+    bucketId: string,
+    fileName: string,
+    file: File,
+    permissions?: any
+  ) => {
+    return api
+      .provider()
+      .storage.createFile(bucketId, fileName, file, permissions);
+  },
+
+  deleteFile: (bucketId: string, fileId: string) => {
+    return api.provider().storage.deleteFile(bucketId, fileId);
   }
 };
 
