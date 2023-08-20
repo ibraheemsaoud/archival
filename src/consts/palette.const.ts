@@ -14,6 +14,7 @@ export const getDesignTokens = (
   const platinum = createColor("#CCDBDC");
   const pumpkin = createColor("#4a3215");
   const lightPumpkin = createColor("#fdfcf9");
+  const red = createColor("#f44336");
   const primary = primaryColor ? createColor(primaryColor) : pumpkin;
   const secondary = secondaryColor ? createColor(secondaryColor) : platinum;
 
@@ -22,6 +23,7 @@ export const getDesignTokens = (
       platinum,
       pumpkin,
       lightPumpkin,
+      red,
       mode,
       ...(mode === "light"
         ? {

@@ -67,7 +67,8 @@ interface Api {
   uploadFile: (
     bucketId: string,
     fileName: string,
-    file: File
+    file: File,
+    permissions?: any
   ) => Promise<Models.File>;
 }
 
@@ -183,8 +184,8 @@ const api: Api = {
       .teams.create(ID.unique(), turnStringToValidTeamName(name));
   },
 
-  uploadFile: (bucketId: string, fileName: string, file: File) => {
-    return api.provider().storage.createFile(bucketId, fileName, file);
+  uploadFile: (bucketId: string, fileName: string, file: File, permissions?: any) => {
+    return api.provider().storage.createFile(bucketId, fileName, file, permissions);
   }
 };
 

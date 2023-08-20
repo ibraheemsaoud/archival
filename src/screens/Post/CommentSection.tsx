@@ -5,23 +5,29 @@ import { useState } from "react";
 import {
   useRequestComments,
   useRequestCreateComment,
+  useRequestDeleteComment,
 } from "../../requests/useRequestComment";
 import { useUser } from "../../hooks";
 
 export const CommentSection = ({ postId }: { postId: string }) => {
   const { data: comments } = useRequestComments(postId);
-  const { mutate } = useRequestCreateComment(postId);
+  const { mutate: onComment } = useRequestCreateComment(postId);
+  const { mutate: onDelete } = useRequestDeleteComment(postId);
   const { user } = useUser();
 
   const [comment, setComment] = useState("");
 
   const onSubmit = () => {
-    mutate({
+    onComment({
       comment,
       postId,
       userId: user?.$id || "",
     });
     setComment("");
+  };
+
+  const deleteComment = (commentId: string) => () => {
+    onDelete(commentId)
   };
 
   return (
@@ -74,6 +80,21 @@ export const CommentSection = ({ postId }: { postId: string }) => {
               >
                 {comment.comment}
               </Box>
+              {user?.$id === comment.userId && (
+                <Button
+                  size="small"
+                  variant="text"
+                  color="red"
+                  onClick={deleteComment(comment.$id)}
+                  sx={{
+                    maxHeight: "30px",
+                    marginTop: "auto",
+                    marginLeft: "auto",
+                  }}
+                >
+                  Delete
+                </Button>
+              )}
             </Box>
           );
         })}

@@ -22,14 +22,6 @@ export const theme = (mode, primaryColor, secondaryColor) => {
         defaultProps: {
           disableRipple: true,
         },
-        // change the hover color
-        styleOverrides: {
-          root: {
-            "&:hover": {
-              color: palette.palette.text.secondary,
-            },
-          },
-        },
       },
       MuiTypography: {
         styleOverrides: {
@@ -62,7 +54,7 @@ export const theme = (mode, primaryColor, secondaryColor) => {
       },
       MuiButton: {
         styleOverrides: {
-          root: {
+          outlinedPrimary: {
             color: palette.palette.text.primary,
             borderColor: palette.palette.text.primary,
             backgroundColor: palette.palette.primary.light,

@@ -45,3 +45,17 @@ export const useRequestCreateComment = (postId: string) => {
     return data;
   });
 };
+
+export const useRequestDeleteComment = (postId: string) => {
+  const queryClient = useQueryClient();
+
+  return useMutation(["comment", postId], async (commentId: string) => {
+    const data = await api.deleteDocument(
+      Server.databaseID,
+      Server.commentsCollectionId,
+      commentId
+    );
+    queryClient.invalidateQueries(["comment", postId]);
+    return data;
+  });
+};

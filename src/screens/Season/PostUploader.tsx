@@ -18,7 +18,7 @@ export const PostUploader = ({ seasonId }: { seasonId: string }) => {
     if (!user || !pictureUrl) return;
     let pictureLink = undefined;
     if (outsideLink !== "") {
-      pictureLink = await requestUploadFile(file);
+      pictureLink = await requestUploadFile(file, user.$id);
     }
     if (pictureLink || outsideLink !== "") {
       mutate({

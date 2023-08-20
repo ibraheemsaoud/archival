@@ -25,7 +25,7 @@ export const ReferenceCreation = ({
     if (!user || !pictureUrl) return;
     let pictureLink = outsideLink;
     if (outsideLink?.length === 0) {
-      pictureLink = (await requestUploadFile(file)) || "";
+      pictureLink = (await requestUploadFile(file, user.$id)) || "";
     }
     let referenceType = "wikipedia";
     if (referenceLink.includes("youtube")) referenceType = "youtube";
