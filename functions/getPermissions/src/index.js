@@ -66,10 +66,6 @@ module.exports = async function (req, res) {
       update = false,
       delete_ = false;
 
-    console.log(permissions);
-    console.log(userId);
-    console.log(teamName);
-
     const checkPermission = (permission, type) => {
       if (
         permission === `${type}("users")` ||
@@ -105,7 +101,7 @@ module.exports = async function (req, res) {
       },
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 
   res.json({

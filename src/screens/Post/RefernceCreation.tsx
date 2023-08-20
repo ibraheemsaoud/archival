@@ -5,7 +5,13 @@ import { useRequestReference } from "../../requests/useRequestReference";
 import { useUser } from "../../hooks";
 import { requestUploadFile } from "../../requests/requestUploadFile";
 
-export const ReferenceCreation = ({ postId }: { postId: string }) => {
+export const ReferenceCreation = ({
+  postId,
+  onDone,
+}: {
+  postId: string;
+  onDone: () => void;
+}) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [outsideLink, setOutsideLink] = useState("");
@@ -18,7 +24,7 @@ export const ReferenceCreation = ({ postId }: { postId: string }) => {
   const onCreate = async () => {
     if (!user || !pictureUrl) return;
     let pictureLink = outsideLink;
-    if (outsideLink !== "") {
+    if (outsideLink?.length === 0) {
       pictureLink = (await requestUploadFile(file)) || "";
     }
     let referenceType = "wikipedia";
@@ -38,6 +44,10 @@ export const ReferenceCreation = ({ postId }: { postId: string }) => {
     if (isSuccess) {
       onRemoveFile();
       setTitle("");
+      setDescription("");
+      setOutsideLink("");
+      setReferenceLink("");
+      onDone();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);

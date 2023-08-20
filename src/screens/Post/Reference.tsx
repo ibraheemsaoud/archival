@@ -13,38 +13,45 @@ export const Reference = ({ reference }: { reference: IReference }) => {
     margin: 1,
     overflow: "hidden",
   };
+  const imageProps = reference.imageLink
+    ? {
+        backgroundImage: `url(${reference.imageLink})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }
+    : {};
+
+  let title = "";
   switch (reference.reference_type) {
     case "wikipedia":
-      const imageProps = reference.imageLink
-        ? {
-            backgroundImage: `url(${reference.imageLink})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-          }
-        : {};
-      return (
-        <Box
-          sx={{
-            maxWidth: 80,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Box
-            sx={{
-              background: "#8b8e8e",
-              color: "#ffffff",
-              ...commonProps,
-              ...imageProps,
-            }}
-          />
-          Wikipedia
-        </Box>
-      );
+      title = "Wikipedia";
+      break;
     case "youtube":
-      return <div>Youtube</div>;
+      title = "Youtube";
+      break;
     default:
-      return null;
+      title = reference.reference_link;
+      break;
   }
+
+  return (
+    <Box
+      sx={{
+        maxWidth: 80,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <Box
+        sx={{
+          background: "#8b8e8e",
+          color: "#ffffff",
+          ...commonProps,
+          ...imageProps,
+        }}
+      />
+      {title}
+    </Box>
+  );
 };

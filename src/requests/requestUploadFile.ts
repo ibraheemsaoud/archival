@@ -11,6 +11,7 @@ export const requestUploadFile = async (file: File | null) => {
         ID.unique(),
         file
       );
+      console.log(fileData)
       if (fileData.$id) {
         return `https://cloud.appwrite.io/v1/storage/buckets/${Server.entriesPicturesBucketId}/files/${fileData.$id}/view?project=Archival`;
       } else {

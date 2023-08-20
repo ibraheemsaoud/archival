@@ -15,8 +15,6 @@ export const ReferenceSection = ({
   const [selectedReference, setSelectedReference] = useState<IReference>();
   const [referenceCreationOpen, setReferenceCreationOpen] = useState(false);
 
-  if (references?.length === 0) return null;
-
   const onReferenceClicked = (reference: IReference) => {
     setSelectedReference(reference);
   };
@@ -28,6 +26,10 @@ export const ReferenceSection = ({
   const removeHTTPWWW = (link: string) => {
     return link.replace(/^(?:https?:\/\/)?(?:www\.)?/i, "");
   };
+
+  const onDone = () => {
+    setReferenceCreationOpen(false);
+  }
 
   return (
     <Box
@@ -72,6 +74,7 @@ export const ReferenceSection = ({
             marginTop: "12px",
             borderRadius: "8px",
             width: "72px",
+            height: "72px",
           }}
           onClick={() => onReferenceCreationClicked()}
         >
@@ -140,7 +143,7 @@ export const ReferenceSection = ({
       </Dialog>
       <Dialog
         open={referenceCreationOpen}
-        onClose={() => setReferenceCreationOpen(false)}
+        onClose={onDone}
         fullWidth
         PaperProps={{
           sx: {
@@ -148,7 +151,7 @@ export const ReferenceSection = ({
           },
         }}
       >
-        <ReferenceCreation postId={post.$id} />
+        <ReferenceCreation postId={post.$id} onDone={onDone} />
       </Dialog>
     </Box>
   );
