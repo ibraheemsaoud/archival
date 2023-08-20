@@ -8,8 +8,6 @@ export const Navigation = () => {
   return (
     <Box
       sx={{
-        position: "fixed",
-        bottom: 0,
         maxWidth: 600,
         padding: 1,
         width: "inherit",
@@ -17,7 +15,6 @@ export const Navigation = () => {
         justifyContent: "space-between",
         boxSizing: "border-box",
         backgroundColor: "#f7eee3",
-        zIndex: 2,
       }}
     >
       <Link

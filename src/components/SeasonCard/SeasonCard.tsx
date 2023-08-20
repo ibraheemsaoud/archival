@@ -61,7 +61,6 @@ export const SeasonCard = ({
             }}
           >
             <Typography
-              fontWeight="bold"
               color={secondaryColor}
               sx={
                 brandView
