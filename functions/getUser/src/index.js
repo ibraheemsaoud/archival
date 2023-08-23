@@ -27,8 +27,7 @@ module.exports = async function (req, res) {
     function (response) {
       console.log(response);
       res.json({
-        comments,
-        references,
+        response,
       });
     },
     function (error) {
