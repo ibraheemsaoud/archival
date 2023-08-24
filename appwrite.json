@@ -91,6 +91,21 @@
             "events": [],
             "schedule": "",
             "timeout": 15
+        },
+        {
+            "$id": "64e7a6c7216afad86b7f",
+            "name": "getUserData",
+            "runtime": "node-16.0",
+            "path": "functions/getUserData",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
         }
     ]
 }

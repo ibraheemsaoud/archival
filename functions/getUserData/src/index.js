@@ -27,11 +27,12 @@ module.exports = async function (req, res) {
     function (response) {
       console.log(response);
       res.json({
-        response,
+        name: response.user.name,
+        imageURL: response.user.prefs?.imageURL,
       });
     },
     function (error) {
-      console.log(error);
+      console.error(error);
     }
   );
 };
