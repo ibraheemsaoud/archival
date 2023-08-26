@@ -21,18 +21,19 @@ module.exports = async function (req, res) {
   }
 
   const { userId } = payload;
-  const promise = users.get(userId);
+  let userName;
+  let imageURL;
 
-  promise.then(
-    function (response) {
-      console.log(response);
-      res.json({
-        name: response.user.name,
-        imageURL: response.user.prefs?.imageURL,
-      });
-    },
-    function (error) {
-      console.error(error);
-    }
-  );
+  try {
+    const userData = await users.get(userId);
+    userName = userData.name;
+    imageURL = userData.prefs?.imageURL;
+  } catch (error) {
+    throw new Error(error);
+  }
+
+  res.json({
+    userName,
+    imageURL,
+  });
 };
