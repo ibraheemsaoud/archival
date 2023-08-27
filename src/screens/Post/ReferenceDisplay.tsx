@@ -27,6 +27,7 @@ export const ReferenceDisplay = ({
         onDone();
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
   if (!reference) return null;
