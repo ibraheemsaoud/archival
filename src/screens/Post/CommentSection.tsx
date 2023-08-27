@@ -8,6 +8,7 @@ import {
   useRequestDeleteComment,
 } from "../../requests/useRequestComment";
 import { useUser } from "../../hooks";
+import { Comment } from "./Comment";
 
 export const CommentSection = ({ postId }: { postId: string }) => {
   const { data: comments } = useRequestComments(postId);
@@ -26,9 +27,6 @@ export const CommentSection = ({ postId }: { postId: string }) => {
     setComment("");
   };
 
-  const deleteComment = (commentId: string) => () => {
-    onDelete(commentId)
-  };
 
   return (
     <Box>
@@ -52,50 +50,11 @@ export const CommentSection = ({ postId }: { postId: string }) => {
       <Box>
         {comments?.map((comment: IComment) => {
           return (
-            <Box
+            <Comment
               key={comment.$id}
-              display="flex"
-              sx={{
-                borderBottom: "1px solid #d6d6d6",
-                paddingBottom: "4px",
-                margin: 1,
-              }}
-            >
-              <Box
-                sx={{
-                  background: "#d6d6d6",
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "40px",
-                }}
-              />
-              <Box
-                sx={{
-                  borderRadius: "4px",
-                  padding: "0px 8px 0px 8px",
-                  fontSize: "14px",
-                  whiteSpace: "pre-wrap",
-                  lineHeight: "20px",
-                }}
-              >
-                {comment.comment}
-              </Box>
-              {user?.$id === comment.userId && (
-                <Button
-                  size="small"
-                  variant="text"
-                  color="red"
-                  onClick={deleteComment(comment.$id)}
-                  sx={{
-                    maxHeight: "30px",
-                    marginTop: "auto",
-                    marginLeft: "auto",
-                  }}
-                >
-                  Delete
-                </Button>
-              )}
-            </Box>
+              comment={comment}
+              onDelete={onDelete}
+            />
           );
         })}
       </Box>

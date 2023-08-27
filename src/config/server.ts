@@ -14,7 +14,7 @@ export const Server = {
   // Functions
   permissionFunctionId: "64a31220b1c2d44e7e51",
   registerFunctionId: "64a337fd6ef9b5b9f8eb",
-  seasonDataId: "64de550a996f6b5a29aa",
+  userProfileFunctionId: "64e7a6c7216afad86b7f",
 
   // Storage
   entriesPicturesBucketId: "64a71fe5628b8aa304db",
