@@ -18,8 +18,11 @@ import { theme } from "../../theme";
 import { CommentSection } from "./CommentSection";
 import { ReferenceSection } from "./ReferencesSection";
 import { useRequestReferences } from "../../requests/useRequestReference";
+import { useState } from "react";
 
 export const Post = () => {
+  const [shouldShowLogin, setShowLogin] = useState(false);
+
   const { onBack } = useNavigation();
   const { post } = useLoaderData() as any as {
     post?: IPost;
@@ -41,9 +44,16 @@ export const Post = () => {
     onBack(replaceRouteParams(SEASON, { seasonId: season.slug }));
   };
 
+  const showLogin = () => {
+    setShowLogin(false);
+    setTimeout(() => {
+      setShowLogin(true);
+    });
+  };
+
   return (
     <ThemeProvider theme={modedTheme}>
-      <AppWrapper>
+      <AppWrapper shouldLogin={shouldShowLogin}>
         <Box sx={{ position: "sticky", top: -60, zIndex: 2 }}>
           <AppBar position="static">
             <Toolbar sx={{ alignItems: "flex-end" }}>
@@ -106,8 +116,12 @@ export const Post = () => {
             {post.postTitle}
           </Box>
         </Box>
-        <ReferenceSection post={post} references={references} />
-        <CommentSection postId={post.$id} />
+        <ReferenceSection
+          post={post}
+          references={references}
+          showLogin={showLogin}
+        />
+        <CommentSection postId={post.$id} showLogin={showLogin} />
       </AppWrapper>
     </ThemeProvider>
   );

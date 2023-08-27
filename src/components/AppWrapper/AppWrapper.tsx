@@ -5,8 +5,13 @@ import { PRIMARY_COLOR } from "../../consts/defaults.const";
 interface IAppWrapper {
   children: React.ReactNode;
   primaryColor?: string;
+  shouldLogin?: boolean;
 }
-export const AppWrapper = ({ children, primaryColor= PRIMARY_COLOR }: IAppWrapper) => {
+export const AppWrapper = ({
+  children,
+  primaryColor = PRIMARY_COLOR,
+  shouldLogin,
+}: IAppWrapper) => {
   return (
     <Container
       maxWidth="sm"
@@ -25,7 +30,7 @@ export const AppWrapper = ({ children, primaryColor= PRIMARY_COLOR }: IAppWrappe
       >
         {children}
       </Box>
-      <Navigation />
+      <Navigation shouldLogin={shouldLogin} />
     </Container>
   );
 };

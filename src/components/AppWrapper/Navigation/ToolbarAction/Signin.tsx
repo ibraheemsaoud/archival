@@ -8,9 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useSignin } from "./useSignin";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const Signin = () => {
+export const Signin = ({ shouldLogin = false }: { shouldLogin?: boolean }) => {
   const {
     handleSignInWithGoogle,
     handleSignUpWithEmail,
@@ -27,7 +27,11 @@ export const Signin = () => {
     loginPassword,
   } = useSignin();
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(shouldLogin);
+
+  useEffect(() => {
+    setOpen(shouldLogin);
+  }, [shouldLogin]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -62,7 +66,7 @@ export const Signin = () => {
                   sx={{ marginBottom: 1 }}
                 />
                 <TextField
-                  id="email"
+                  id="regEmail"
                   label="Email"
                   variant="outlined"
                   fullWidth
@@ -72,7 +76,7 @@ export const Signin = () => {
                   sx={{ marginBottom: 1 }}
                 />
                 <TextField
-                  id="password"
+                  id="regPassword"
                   label="Password"
                   variant="outlined"
                   fullWidth
@@ -103,7 +107,7 @@ export const Signin = () => {
                 }}
               >
                 <TextField
-                  id="email"
+                  id="loginEmail"
                   label="Email"
                   variant="outlined"
                   fullWidth
@@ -113,7 +117,7 @@ export const Signin = () => {
                   sx={{ marginBottom: 1 }}
                 />
                 <TextField
-                  id="password"
+                  id="loginPassword"
                   label="Password"
                   variant="outlined"
                   fullWidth

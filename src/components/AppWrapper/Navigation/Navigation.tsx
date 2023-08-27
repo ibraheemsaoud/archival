@@ -4,7 +4,7 @@ import { HOME } from "../../../consts/links.const";
 import { ToolbarAction } from "./ToolbarAction";
 // import { Search } from "@mui/icons-material";
 
-export const Navigation = () => {
+export const Navigation = ({ shouldLogin }: { shouldLogin?: boolean }) => {
   return (
     <Box
       sx={{
@@ -58,7 +58,7 @@ export const Navigation = () => {
       >
         <Search />
       </Typography> */}
-      <ToolbarAction />
+      <ToolbarAction shouldLogin={shouldLogin} />
     </Box>
   );
 };

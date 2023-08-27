@@ -14,7 +14,7 @@ import { Signin } from "./Signin";
 import { useUser } from "../../../../hooks/useUser";
 import { PROFILE } from "../../../../consts/links.const";
 
-export const ToolbarAction = () => {
+export const ToolbarAction = ({ shouldLogin }: { shouldLogin?: boolean }) => {
   const { user, isLoading, logout } = useUser();
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -37,7 +37,7 @@ export const ToolbarAction = () => {
 
   if (isLoading) return <>Loading...</>;
   if (!isLoggedIn) {
-    return <Signin />;
+    return <Signin shouldLogin={shouldLogin} />;
   }
   return (
     <Box sx={{ flexGrow: 0 }}>

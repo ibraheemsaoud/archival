@@ -5,14 +5,18 @@ import { useState } from "react";
 import { IPost } from "../../interfaces/post.interface";
 import { ReferenceCreation } from "./RefernceCreation";
 import { ReferenceDisplay } from "./ReferenceDisplay";
+import { useUser } from "../../hooks";
 
 export const ReferenceSection = ({
   references,
   post,
+  showLogin,
 }: {
   references?: IReference[];
   post: IPost;
+  showLogin: () => void;
 }) => {
+  const { user } = useUser();
   const [selectedReference, setSelectedReference] = useState<IReference>();
   const [referenceCreationOpen, setReferenceCreationOpen] = useState(false);
 
@@ -21,6 +25,10 @@ export const ReferenceSection = ({
   };
 
   const onReferenceCreationClicked = () => {
+    if (!user) {
+      showLogin();
+      return;
+    }
     setReferenceCreationOpen(true);
   };
 

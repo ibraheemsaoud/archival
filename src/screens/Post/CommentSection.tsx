@@ -10,7 +10,13 @@ import {
 import { useUser } from "../../hooks";
 import { Comment } from "./Comment";
 
-export const CommentSection = ({ postId }: { postId: string }) => {
+export const CommentSection = ({
+  postId,
+  showLogin,
+}: {
+  postId: string;
+  showLogin: () => void;
+}) => {
   const { data: comments } = useRequestComments(postId);
   const { mutate: onComment } = useRequestCreateComment(postId);
   const { mutate: onDelete } = useRequestDeleteComment(postId);
@@ -19,14 +25,17 @@ export const CommentSection = ({ postId }: { postId: string }) => {
   const [comment, setComment] = useState("");
 
   const onSubmit = () => {
+    if (!user) {
+      showLogin();
+      return;
+    }
     onComment({
       comment,
       postId,
-      userId: user?.$id || "",
+      userId: user.$id || "",
     });
     setComment("");
   };
-
 
   return (
     <Box>
@@ -50,11 +59,7 @@ export const CommentSection = ({ postId }: { postId: string }) => {
       <Box>
         {comments?.map((comment: IComment) => {
           return (
-            <Comment
-              key={comment.$id}
-              comment={comment}
-              onDelete={onDelete}
-            />
+            <Comment key={comment.$id} comment={comment} onDelete={onDelete} />
           );
         })}
       </Box>
