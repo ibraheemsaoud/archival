@@ -33,40 +33,10 @@
             "timeout": 15
         },
         {
-            "$id": "64de4ebfe6d310297781",
-            "name": "getSeasonStats",
-            "runtime": "node-16.0",
-            "path": "functions/getSeasonStats",
-            "entrypoint": "src/index.js",
-            "ignore": [
-                "node_modules",
-                ".npm"
-            ],
-            "execute": [],
-            "events": [],
-            "schedule": "",
-            "timeout": 15
-        },
-        {
             "$id": "64de4f4e3402128d9d46",
             "name": "getPostStats",
             "runtime": "node-16.0",
             "path": "functions/getPostStats",
-            "entrypoint": "src/index.js",
-            "ignore": [
-                "node_modules",
-                ".npm"
-            ],
-            "execute": [],
-            "events": [],
-            "schedule": "",
-            "timeout": 15
-        },
-        {
-            "$id": "64de550a996f6b5a29aa",
-            "name": "getSeasonStats",
-            "runtime": "node-16.0",
-            "path": "functions/getSeasonStats",
             "entrypoint": "src/index.js",
             "ignore": [
                 "node_modules",

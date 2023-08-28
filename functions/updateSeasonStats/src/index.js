@@ -17,9 +17,12 @@ const sdk = require("node-appwrite");
 // databases.*.collections.64d757c1c388b559eba1
 
 module.exports = async function (req, res) {
-  const client = new sdk.Client();
+  const apiKey = req.variables.SECRET_KEY;
+  if (!apiKey) {
+    throw new Error("Missing API key");
+  }
 
-  // You can remove services you don't use
+  const client = new sdk.Client();
   const database = new sdk.Databases(client);
 
   const value = req.variables.APPWRITE_FUNCTION_EVENT.endsWith("create")
@@ -46,9 +49,7 @@ module.exports = async function (req, res) {
   client
     .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("Archival")
-    .setKey(
-      "b2e1a0b7c7c2c0bd5a876b67795c6d6bd40700afc742a580e878979b88daed2fde4d21ff24836fcaf7e09b51726be84b3e20cc20e5ae5a018088e0d27b23ebdb27fde66a7569a71b34f0274b26e10c0e7fa7762c24aeb6a54db4d848c5896a375179f5018e673f0125a9471b3071b00ad199ad76b01751faac357598c3130649"
-    )
+    .setKey(apiKey)
     .setSelfSigned(true);
 
   let post = null;
