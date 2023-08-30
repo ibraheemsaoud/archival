@@ -12,7 +12,7 @@
                 "node_modules",
                 ".npm"
             ],
-            "execute": [],
+            "execute": ["any"],
             "events": [],
             "schedule": "",
             "timeout": 15
@@ -27,22 +27,7 @@
                 "node_modules",
                 ".npm"
             ],
-            "execute": [],
-            "events": [],
-            "schedule": "",
-            "timeout": 15
-        },
-        {
-            "$id": "64de4ebfe6d310297781",
-            "name": "getSeasonStats",
-            "runtime": "node-16.0",
-            "path": "functions/getSeasonStats",
-            "entrypoint": "src/index.js",
-            "ignore": [
-                "node_modules",
-                ".npm"
-            ],
-            "execute": [],
+            "execute": ["any"],
             "events": [],
             "schedule": "",
             "timeout": 15
@@ -57,22 +42,7 @@
                 "node_modules",
                 ".npm"
             ],
-            "execute": [],
-            "events": [],
-            "schedule": "",
-            "timeout": 15
-        },
-        {
-            "$id": "64de550a996f6b5a29aa",
-            "name": "getSeasonStats",
-            "runtime": "node-16.0",
-            "path": "functions/getSeasonStats",
-            "entrypoint": "src/index.js",
-            "ignore": [
-                "node_modules",
-                ".npm"
-            ],
-            "execute": [],
+            "execute": ["any"],
             "events": [],
             "schedule": "",
             "timeout": 15
@@ -88,7 +58,10 @@
                 ".npm"
             ],
             "execute": [],
-            "events": [],
+            "events": [
+                "databases.*.collections.64dbab02c289fae33a89",
+                "databases.*.collections.64d757c1c388b559eba1"
+            ],
             "schedule": "",
             "timeout": 15
         },
