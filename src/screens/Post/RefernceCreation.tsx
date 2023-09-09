@@ -32,7 +32,7 @@ export const ReferenceCreation = ({
     mutate({
       referenceTitle: title,
       referenceDescription: description,
-      postId: postId,
+      post: postId,
       userId: user.$id,
       imageLink: pictureLink,
       reference_link: referenceLink,

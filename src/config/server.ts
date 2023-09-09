@@ -17,5 +17,5 @@ export const Server = {
   userProfileFunctionId: "64e7a6c7216afad86b7f",
 
   // Storage
-  entriesPicturesBucketId: "64a71fe5628b8aa304db",
+  entriesPicturesBucketId: "64d74bc2d8bceaa39ca3",
 };

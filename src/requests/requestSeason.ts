@@ -3,28 +3,6 @@ import { Server } from "../config/server";
 import { Query } from "appwrite";
 import { ISeason } from "../interfaces/season.interface";
 
-export const requestSeasons = async (brandId?: string) => {
-  const query = [Query.equal("isPublic", [true])];
-  if (brandId) {
-    query.push(Query.equal("brandId", [brandId!]));
-  }
-  const data = await api.listDocuments(
-    Server.databaseID,
-    Server.seasonsCollectionId,
-    query
-  );
-  if (data.documents) {
-    return {
-      data: data.documents as ISeason[],
-      error: undefined,
-    };
-  }
-  return {
-    data: [],
-    error: "failed to load brands, server might be down",
-  };
-};
-
 export const requestSeason = async (slug?: string) => {
   if (!slug)
     return {

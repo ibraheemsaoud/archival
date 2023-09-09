@@ -1,7 +1,8 @@
 import { IAppWrite } from "./appwrite.interface";
+import { IPost } from "./post.interface";
 
 export interface IReferenceCreate {
-  postId: string;
+  post: string;
   userId: string;
   reference_type:
     | "wikipedia"
@@ -18,7 +19,7 @@ export interface IReferenceCreate {
 }
 
 export interface IReference extends IAppWrite {
-  postId: string;
+  post: IPost;
   userId: string;
   reference_type:
     | "wikipedia"

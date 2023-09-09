@@ -31,7 +31,7 @@ export const CommentSection = ({
     }
     onComment({
       comment,
-      postId,
+      post: postId,
       userId: user.$id || "",
     });
     setComment("");

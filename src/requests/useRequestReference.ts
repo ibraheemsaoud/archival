@@ -11,7 +11,7 @@ export const useRequestReferences = (postId?: string) => {
       const data = await api.listDocuments(
         Server.databaseID,
         Server.referencesCollectionId,
-        [Query.equal("postId", [postId!])]
+        [Query.equal("post", [postId!])]
       );
       if (data.documents?.length > 0) {
         return data.documents as IReference[];
