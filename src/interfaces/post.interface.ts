@@ -1,4 +1,5 @@
 import { IAppWrite } from "./appwrite.interface";
+import { ISeason } from "./season.interface";
 
 export interface IPostCreate {
   seasonId: string;
@@ -8,7 +9,7 @@ export interface IPostCreate {
 }
 
 export interface IPost extends IAppWrite {
-  seasonId: string;
+  season: ISeason;
   pictureLink: string;
   userId: string;
   postTitle: string;

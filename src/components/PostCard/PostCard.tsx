@@ -45,6 +45,10 @@ export const PostCard = ({
             <CardMedia
               component="img"
               image={pictureLink || "\\static\\images\\potm2209a.jpg"}
+              sx={{
+                minHeight: "310px",
+                maxHeight: "310px",
+              }}
             />
             <ReactionBox
               post={post}

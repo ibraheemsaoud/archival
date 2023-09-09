@@ -45,7 +45,7 @@ export const PostUploader = ({ seasonId }: { seasonId: string }) => {
   }, [error]);
 
   if (!user) return null;
-  if (user.$id !== "649b64af3576d64d457f") return null;
+  if (user.$id !== "64fc4c02359c716b96b4") return null;
 
   return (
     <Box

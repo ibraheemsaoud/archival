@@ -17,7 +17,6 @@ import { AppWrapper, PostCard } from "../../components";
 import { useNavigation } from "../../hooks";
 import { HOME } from "../../consts/links.const";
 import { PostUploader } from "./PostUploader";
-import { useRequestPosts } from "../../requests/useRequestPost";
 import { useState } from "react";
 import { Query } from "appwrite";
 
@@ -27,8 +26,7 @@ export const Season = () => {
   const { season } = useLoaderData() as any as {
     season?: ISeason;
   };
-  const { brand } = season || {};
-  const { data: posts } = useRequestPosts(season?.slug, query);
+  const { brand, posts } = season || {};
 
   const theme2 = useTheme();
   const isMobile = useMediaQuery(theme2.breakpoints.down("sm"));

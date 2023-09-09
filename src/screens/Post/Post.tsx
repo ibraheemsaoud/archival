@@ -12,7 +12,6 @@ import { AppWrapper } from "../../components";
 import { SEASON } from "../../consts/links.const";
 import { useNavigation } from "../../hooks";
 import { replaceRouteParams } from "../../helpers";
-import { useRequestSeason } from "../../requests/useRequestSeason";
 import { theme } from "../../theme";
 import { CommentSection } from "./CommentSection";
 import { ReferenceSection } from "./ReferencesSection";
@@ -28,13 +27,11 @@ export const Post = () => {
   };
 
   const { data: references } = useRequestReferences(post?.$id);
-  const { data: season, isLoading: isSeasonLoading } = useRequestSeason(
-    post?.seasonId
-  );
-  const { brand } = season || {};
 
-  if (isSeasonLoading) return <div>Loading...</div>;
-  if (!post || !season || !brand) return <div>Not found</div>;
+  const season = post?.season;
+  const brand = season?.brand;
+
+  if (!post || !brand) return <div>Not found</div>;
 
   const modedTheme = theme("light", season.primaryColor, season.secondaryColor);
   const onBackClicked = () => {
