@@ -26,8 +26,6 @@ export const Brand = () => {
     brand?: IBrand;
   };
 
-  console.log(brand);
-
   const { data: follows, isLoading } = useRequestFollows("brand");
   const { mutate: followBrand, isLoading: isLoadingFollowAction } =
     useRequestFollow();
