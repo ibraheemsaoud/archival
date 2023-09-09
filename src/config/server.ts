@@ -1,5 +1,5 @@
 export const Server = {
-  endpoint: "https://cloud.appwrite.io/v1",
+  endpoint: "https://appwrite.archivals.eu/v1",
   project: "Archival",
   databaseID: "649bf127bdd26e9850cd",
 

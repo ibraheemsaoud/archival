@@ -22,10 +22,11 @@ import {
 
 export const Brand = () => {
   const { onBack } = useNavigation();
-  const { seasons, brand } = useLoaderData() as any as {
+  const { brand } = useLoaderData() as any as {
     brand?: IBrand;
-    seasons?: ISeason[];
   };
+
+  console.log(brand);
 
   const { data: follows, isLoading } = useRequestFollows("brand");
   const { mutate: followBrand, isLoading: isLoadingFollowAction } =
@@ -34,7 +35,7 @@ export const Brand = () => {
     useRequestUnfollow();
   const { user } = useUser();
 
-  if (!seasons || !brand) return <div>Loading...</div>;
+  if (!brand) return <div>Loading...</div>;
 
   const isFollowing = follows?.find(
     (follow) => follow.targetId === brand.$id && follow.targetType === "brand"
@@ -54,8 +55,8 @@ export const Brand = () => {
   };
 
   const modedTheme = theme("light", brand.primaryColor, brand.secondaryColor);
-  const lastSeason = seasons[0];
-  const restOfSeasons = seasons.slice(1);
+  const lastSeason = brand.seasons[0];
+  const restOfSeasons = brand.seasons.slice(1);
 
   return (
     <ThemeProvider theme={modedTheme}>
@@ -104,7 +105,7 @@ export const Brand = () => {
             </Toolbar>
           </AppBar>
         </Box>
-        {lastSeason && <SeasonCard seasonId={lastSeason.slug} brandView />}
+        {lastSeason && <SeasonCard season={lastSeason} brandView />}
         {restOfSeasons.length > 0 && (
           <Box marginX={1} marginY={2}>
             <Typography
@@ -117,7 +118,7 @@ export const Brand = () => {
             <Grid container spacing={1}>
               {restOfSeasons.map((season: ISeason) => (
                 <Grid item xs={6} lg={4} key={season.$id}>
-                  <SeasonCard seasonId={season.slug} brandView />
+                  <SeasonCard season={season} brandView />
                 </Grid>
               ))}
             </Grid>

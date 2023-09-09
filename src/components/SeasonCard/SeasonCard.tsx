@@ -8,25 +8,20 @@ import {
 import { Link } from "react-router-dom";
 import { SEASON } from "../../consts/links.const";
 import { replaceRouteParams } from "../../helpers";
-import { useRequestSeason } from "../../requests/useRequestSeason";
 import { PRIMARY_COLOR, SECONDARY_COLOR } from "../../consts/defaults.const";
-import { useRequestBrand } from "../../requests/useRequestBrand";
+import { ISeason } from "../../interfaces/season.interface";
+import { IBrand } from "../../interfaces/brand.interface";
 
 export const SeasonCard = ({
-  seasonId,
+  season,
   brandView = false,
+  brand,
 }: {
-  seasonId: string;
+  brand?: IBrand;
+  season: ISeason;
   brandView?: boolean;
 }) => {
-  const { data: season, isLoading, error } = useRequestSeason(seasonId);
-  const { data: brand, isLoading: isBrandLoading } = useRequestBrand(
-    season?.brandId
-  );
-
-  if (error) return <div>{error?.toString()}</div>;
-  if (isLoading || isBrandLoading) return <div>Loading...</div>;
-  if (!season || !brand) return <div>Season not found</div>;
+  const name = brand?.name || season.brand?.name;
 
   const {
     slug,
@@ -35,7 +30,6 @@ export const SeasonCard = ({
     coverImage,
   } = season;
 
-  const { name } = brand;
 
   return (
     <Card

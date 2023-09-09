@@ -12,7 +12,9 @@
                 "node_modules",
                 ".npm"
             ],
-            "execute": ["any"],
+            "execute": [
+                "any"
+            ],
             "events": [],
             "schedule": "",
             "timeout": 15
@@ -27,7 +29,9 @@
                 "node_modules",
                 ".npm"
             ],
-            "execute": ["any"],
+            "execute": [
+                "any"
+            ],
             "events": [],
             "schedule": "",
             "timeout": 15
@@ -42,7 +46,9 @@
                 "node_modules",
                 ".npm"
             ],
-            "execute": ["any"],
+            "execute": [
+                "any"
+            ],
             "events": [],
             "schedule": "",
             "timeout": 15

@@ -47,7 +47,7 @@ module.exports = async function (req, res) {
   const postId = payload.postId;
 
   client
-    .setEndpoint("https://cloud.appwrite.io/v1")
+    .setEndpoint("https://appwrite.archivals.eu/v1")
     .setProject("Archival")
     .setKey(apiKey)
     .setSelfSigned(true);

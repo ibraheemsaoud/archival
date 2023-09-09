@@ -7,7 +7,8 @@ export const FashionWeekCard = ({
 }: {
   fashionWeek: IFashionWeek;
 }) => {
-  const { name, seasonIds, tags } = fashionWeek;
+  const { name, seasons, tags } = fashionWeek;
+
   return (
     <Box marginTop={3} marginRight={2} marginLeft={2}>
       <Typography variant="h6">{name}</Typography>
@@ -22,9 +23,9 @@ export const FashionWeekCard = ({
         ))}
       </Box>
       <Grid container spacing={1}>
-        {seasonIds?.map((seasonId) => (
-          <Grid item xs={6} lg={4} key={`SEASON_${seasonId}`}>
-            <SeasonCard seasonId={seasonId} />
+        {seasons?.map((season) => (
+          <Grid item xs={6} lg={4} key={`SEASON_${season.$id}`}>
+            <SeasonCard season={season} />
           </Grid>
         ))}
       </Grid>

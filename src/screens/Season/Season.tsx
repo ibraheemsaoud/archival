@@ -13,7 +13,6 @@ import {
 import { useLoaderData } from "react-router-dom";
 import { ISeason } from "../../interfaces/season.interface";
 import { theme } from "../../theme";
-import { IBrand } from "../../interfaces/brand.interface";
 import { AppWrapper, PostCard } from "../../components";
 import { useNavigation } from "../../hooks";
 import { HOME } from "../../consts/links.const";
@@ -25,10 +24,10 @@ import { Query } from "appwrite";
 export const Season = () => {
   const [query, setQuery] = useState("");
   const { onBack } = useNavigation();
-  const { season, brand } = useLoaderData() as any as {
-    brand?: IBrand;
+  const { season } = useLoaderData() as any as {
     season?: ISeason;
   };
+  const { brand } = season || {};
   const { data: posts } = useRequestPosts(season?.slug, query);
 
   const theme2 = useTheme();
@@ -118,7 +117,7 @@ export const Season = () => {
             </Button>
           </ButtonGroup>
         </Box>
-        {featuredPosts?.length && (
+        {featuredPosts?.length ? (
           <Grid
             sx={{
               display: "flex",
@@ -136,7 +135,7 @@ export const Season = () => {
               />
             ))}
           </Grid>
-        )}
+        ) : null}
         <Box sx={{ marginY: 2, maxHeight: 250, overflow: "hidden" }}>
           {season.coverImage && (
             <img
@@ -146,7 +145,7 @@ export const Season = () => {
             />
           )}
         </Box>
-        {otherPosts?.length && (
+        {otherPosts?.length ? (
           <Grid
             sx={{
               display: "flex",
@@ -166,7 +165,7 @@ export const Season = () => {
               />
             ))}
           </Grid>
-        )}
+        ) : null}
         <PostUploader seasonId={season.slug} />
       </AppWrapper>
     </ThemeProvider>

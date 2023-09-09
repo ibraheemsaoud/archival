@@ -1,4 +1,5 @@
 import { IAppWrite } from "./appwrite.interface";
+import { ISeason } from "./season.interface";
 
 export enum FashionWeekTags {
   "Menswear" = "Menswear",
@@ -12,7 +13,7 @@ export enum FashionWeekTags {
 export interface IFashionWeek extends IAppWrite {
   slug: string;
   name: string;
-  seasonIds: string[];
+  seasons: ISeason[];
   tags: FashionWeekTags[];
   isPublic: boolean;
 }

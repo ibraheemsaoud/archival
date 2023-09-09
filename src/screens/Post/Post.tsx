@@ -12,7 +12,6 @@ import { AppWrapper } from "../../components";
 import { SEASON } from "../../consts/links.const";
 import { useNavigation } from "../../hooks";
 import { replaceRouteParams } from "../../helpers";
-import { useRequestBrand } from "../../requests/useRequestBrand";
 import { useRequestSeason } from "../../requests/useRequestSeason";
 import { theme } from "../../theme";
 import { CommentSection } from "./CommentSection";
@@ -32,11 +31,9 @@ export const Post = () => {
   const { data: season, isLoading: isSeasonLoading } = useRequestSeason(
     post?.seasonId
   );
-  const { data: brand, isLoading: isBrandLoading } = useRequestBrand(
-    season?.brandId
-  );
+  const { brand } = season || {};
 
-  if (isSeasonLoading || isBrandLoading) return <div>Loading...</div>;
+  if (isSeasonLoading) return <div>Loading...</div>;
   if (!post || !season || !brand) return <div>Not found</div>;
 
   const modedTheme = theme("light", season.primaryColor, season.secondaryColor);
