@@ -37,23 +37,6 @@
             "timeout": 15
         },
         {
-            "$id": "64de4f4e3402128d9d46",
-            "name": "getPostStats",
-            "runtime": "node-16.0",
-            "path": "functions/getPostStats",
-            "entrypoint": "src/index.js",
-            "ignore": [
-                "node_modules",
-                ".npm"
-            ],
-            "execute": [
-                "any"
-            ],
-            "events": [],
-            "schedule": "",
-            "timeout": 15
-        },
-        {
             "$id": "64e10ea16d23dfa6890a",
             "name": "updateSeasonStats",
             "runtime": "node-16.0",
