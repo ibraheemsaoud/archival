@@ -30,7 +30,6 @@ export const SeasonCard = ({
     coverImage,
   } = season;
 
-
   return (
     <Card
       sx={{
@@ -52,6 +51,7 @@ export const SeasonCard = ({
               background: brandView ? primaryColor : `${primaryColor}B0`,
               width: "100%",
               textAlign: brandView ? "center" : "start",
+              minHeight: 280,
             }}
           >
             <Typography
