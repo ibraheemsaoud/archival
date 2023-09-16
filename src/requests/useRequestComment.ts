@@ -28,6 +28,30 @@ export const useRequestComments = (postId: string) => {
   );
 };
 
+export const useRequestCommentsByUserId = (userId: string) => {
+  return useQuery<IComment[]>(
+    ["comment", userId],
+    async () => {
+      const data = await api.listDocuments(
+        Server.databaseID,
+        Server.commentsCollectionId,
+        [Query.equal("userId", [userId!])]
+      );
+      if (data.documents?.length > 0) {
+        return data.documents as IComment[];
+      }
+      // eslint-disable-next-line no-throw-literal
+      throw "comments not found";
+    },
+    {
+      enabled: !!userId,
+      refetchOnMount: true,
+      refetchOnWindowFocus: false,
+      initialData: [],
+    }
+  );
+};
+
 export const useRequestCreateComment = (postId: string) => {
   const queryClient = useQueryClient();
 
@@ -46,7 +70,7 @@ export const useRequestCreateComment = (postId: string) => {
   });
 };
 
-export const useRequestDeleteComment = (postId: string) => {
+export const useRequestDeleteComment = (postId?: string) => {
   const queryClient = useQueryClient();
 
   return useMutation(["comment", postId], async (commentId: string) => {
