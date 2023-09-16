@@ -1,8 +1,10 @@
 import { IAppWrite } from "./appwrite.interface";
 import { IPost } from "./post.interface";
+import { ISeason } from "./season.interface";
 
 export interface IReferenceCreate {
-  post: string;
+  post?: string;
+  season?: string;
   userId: string;
   reference_type:
     | "wikipedia"
@@ -20,6 +22,7 @@ export interface IReferenceCreate {
 
 export interface IReference extends IAppWrite {
   post: IPost;
+  season: ISeason;
   userId: string;
   reference_type:
     | "wikipedia"

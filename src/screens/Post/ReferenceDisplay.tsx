@@ -11,7 +11,7 @@ export const ReferenceDisplay = ({
   onDone,
 }: {
   reference?: IReference;
-  postPictureLink: string;
+  postPictureLink?: string;
   onDone(): void;
 }) => {
   const { user } = useUser();
@@ -27,7 +27,7 @@ export const ReferenceDisplay = ({
         onDone();
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
   if (!reference) return null;
@@ -43,17 +43,19 @@ export const ReferenceDisplay = ({
   return (
     <Box>
       <Box display="flex">
-        <Box
-          sx={{
-            backgroundImage: `url(${postPictureLink})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            flexGrow: 1,
-            height: "400px",
-            backgroundPositionX: "center",
-            backgroundPositionY: "top",
-          }}
-        />
+        {postPictureLink ? (
+          <Box
+            sx={{
+              backgroundImage: `url(${postPictureLink})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              flexGrow: 1,
+              height: "400px",
+              backgroundPositionX: "center",
+              backgroundPositionY: "top",
+            }}
+          />
+        ) : null}
         <Box
           sx={{
             backgroundImage: `url(${reference.imageLink})`,

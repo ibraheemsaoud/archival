@@ -7,9 +7,11 @@ import { requestUploadFile } from "../../requests/requestUploadFile";
 
 export const ReferenceCreation = ({
   postId,
+  seasonId,
   onDone,
 }: {
-  postId: string;
+  postId?: string;
+  seasonId?: string;
   onDone: () => void;
 }) => {
   const [title, setTitle] = useState("");
@@ -33,6 +35,7 @@ export const ReferenceCreation = ({
       referenceTitle: title,
       referenceDescription: description,
       post: postId,
+      season: seasonId,
       userId: user.$id,
       imageLink: pictureLink,
       reference_link: referenceLink,

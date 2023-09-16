@@ -6,14 +6,17 @@ import { IPost } from "../../interfaces/post.interface";
 import { ReferenceCreation } from "./RefernceCreation";
 import { ReferenceDisplay } from "./ReferenceDisplay";
 import { useUser } from "../../hooks";
+import { ISeason } from "../../interfaces/season.interface";
 
 export const ReferenceSection = ({
   references,
   post,
+  season,
   showLogin,
 }: {
   references?: IReference[];
-  post: IPost;
+  post?: IPost;
+  season?: ISeason;
   showLogin: () => void;
 }) => {
   const { user } = useUser();
@@ -98,7 +101,7 @@ export const ReferenceSection = ({
       >
         <ReferenceDisplay
           reference={selectedReference}
-          postPictureLink={post.pictureLink}
+          postPictureLink={post?.pictureLink}
           onDone={() => setSelectedReference(undefined)}
         />
       </Dialog>
@@ -112,7 +115,7 @@ export const ReferenceSection = ({
           },
         }}
       >
-        <ReferenceCreation postId={post.$id} onDone={onDone} />
+        <ReferenceCreation postId={post?.$id} seasonId={season?.$id} onDone={onDone} />
       </Dialog>
     </Box>
   );

@@ -19,9 +19,12 @@ import { HOME } from "../../consts/links.const";
 import { PostUploader } from "./PostUploader";
 import { useState } from "react";
 import { Query } from "appwrite";
+import { ReferenceSection } from "../Post/ReferencesSection";
 
 export const Season = () => {
   const [query, setQuery] = useState("");
+  const [shouldShowLogin, setShowLogin] = useState(false);
+
   const { onBack } = useNavigation();
   const { season } = useLoaderData() as any as {
     season?: ISeason;
@@ -38,9 +41,19 @@ export const Season = () => {
   const featuredPosts = posts?.slice(0, 2);
   const otherPosts = posts?.slice(2);
 
+  const showLogin = () => {
+    setShowLogin(false);
+    setTimeout(() => {
+      setShowLogin(true);
+    });
+  };
+
   return (
     <ThemeProvider theme={modedTheme}>
-      <AppWrapper primaryColor={season.primaryColor}>
+      <AppWrapper
+        primaryColor={season.primaryColor}
+        shouldLogin={shouldShowLogin}
+      >
         <Box sx={{ position: "sticky", top: -60, zIndex: 2 }}>
           <AppBar position="static">
             <Toolbar sx={{ alignItems: "flex-end" }}>
@@ -143,6 +156,11 @@ export const Season = () => {
             />
           )}
         </Box>
+        <ReferenceSection
+          season={season}
+          references={season.references}
+          showLogin={showLogin}
+        />
         {otherPosts?.length ? (
           <Grid
             sx={{
