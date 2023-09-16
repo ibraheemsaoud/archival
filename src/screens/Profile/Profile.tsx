@@ -1,8 +1,12 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, TextField } from "@mui/material";
 import { useUser } from "../../hooks";
 import { AppWrapper } from "../../components";
 import { useState } from "react";
-import { useRequestCommentsByUserId, useRequestDeleteComment } from "../../requests/useRequestComment";
+import { useRequestCommentsByUserId } from "../../requests/useRequestComment";
+import { ProfileComments } from "./ProfileComments";
+import { useRequestReferencesByUserId } from "../../requests/useRequestReference";
+import { ProfilePostReferences } from "./ProfilePostReferences";
+import { SeasonPostReferences } from "./SeasonPostReferences";
 
 export const Profile = () => {
   const { isLoading, user, updatePrefs } = useUser();
@@ -12,7 +16,10 @@ export const Profile = () => {
   const [imageURL, setImageURL] = useState<string>(user?.prefs?.imageURL || "");
 
   const { data: comments } = useRequestCommentsByUserId(user?.$id || "");
-  const { mutate: onDelete } = useRequestDeleteComment();
+  const { data: references } = useRequestReferencesByUserId(user?.$id || "");
+
+  const postReferences = references?.filter((reference) => reference.post);
+  const seasonReferences = references?.filter((reference) => reference.season);
 
   const handleDisplayNameChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -26,10 +33,6 @@ export const Profile = () => {
 
   const onUpdate = () => {
     updatePrefs({ ...user?.prefs, displayName, imageURL });
-  };
-
-  const deleteComment = (commentId: string) => () => {
-    onDelete(commentId);
   };
 
   if (isLoading) {
@@ -81,53 +84,9 @@ export const Profile = () => {
             </Button>
           </Box>
         </Grid>
-        <Grid item xs={12} md={12}>
-          {comments?.length ? (
-            <Typography variant="h6" component="div">
-              Comments
-            </Typography>
-          ) : null}
-          {comments?.map((comment) => (
-            <Box
-              sx={{
-                display: "flex",
-                borderRadius: 1,
-                border: "1px solid #c4c4c4",
-                overflow: "hidden",
-              }}
-            >
-              <Box
-                sx={{
-                  backgroundImage: `url(${comment.post.pictureLink})`,
-                  backgroundSize: "cover",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center",
-                  width: "60px",
-                  maxHeight: "60px",
-                  minHeight: "60px",
-                  marginRight: 1,
-                }}
-              />
-              <Box sx={{ flex: 1 }}>
-                <Typography variant="h6" component="div">
-                  {comment.post.postTitle}
-                </Typography>
-                <Typography variant="body1" component="div">
-                  {comment.comment}
-                </Typography>
-              </Box>
-              <Button
-                size="small"
-                variant="text"
-                color="red"
-                onClick={deleteComment(comment.$id)}
-                sx={{ maxHeight: "45px", marginTop: "auto" }}
-              >
-                Delete
-              </Button>
-            </Box>
-          ))}
-        </Grid>
+        <ProfileComments comments={comments} />
+        <ProfilePostReferences references={postReferences} />
+        <SeasonPostReferences references={seasonReferences} />
       </Grid>
     </AppWrapper>
   );

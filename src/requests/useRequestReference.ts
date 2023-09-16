@@ -28,6 +28,30 @@ export const useRequestReferences = (postId?: string) => {
   );
 };
 
+export const useRequestReferencesByUserId = (userId?: string) => {
+  return useQuery<IReference[]>(
+    ["referenceList"],
+    async () => {
+      const data = await api.listDocuments(
+        Server.databaseID,
+        Server.referencesCollectionId,
+        [Query.equal("userId", [userId!])]
+      );
+      if (data.documents?.length > 0) {
+        return data.documents as IReference[];
+      }
+      // eslint-disable-next-line no-throw-literal
+      throw "references not found";
+    },
+    {
+      enabled: !!userId,
+      refetchOnMount: true,
+      refetchOnWindowFocus: false,
+      initialData: [],
+    }
+  );
+};
+
 export const useRequestReference = () => {
   const queryClient = useQueryClient();
 
