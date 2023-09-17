@@ -1,5 +1,5 @@
-import { Grid, Typography, Box, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Grid, Typography, Box, Button, Link } from "@mui/material";
+import { Link as NavLink } from "react-router-dom";
 import { SEASON } from "../../consts/links.const";
 import { replaceRouteParams } from "../../helpers";
 import { IReference } from "../../interfaces/reference.interface";
@@ -27,53 +27,55 @@ export const SeasonPostReferences = ({
           key={reference.$id}
           sx={{
             display: "flex",
+            flexDirection: "column",
             borderRadius: 1,
             border: "1px solid #c4c4c4",
             overflow: "hidden",
           }}
         >
-          <Box
-            sx={{
-              backgroundImage: `url(${reference.season.coverImage})`,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-              width: "60px",
-              maxHeight: "-webkit-fill-available",
-              minHeight: "60px",
-              marginRight: 1,
-            }}
-          />
-          <Box sx={{ flex: 1 }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box
+              sx={{
+                backgroundImage: `url(${reference.season.coverImage})`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "top",
+                minWidth: "60px",
+                maxWidth: "60px",
+                maxHeight: "60px",
+                minHeight: "60px",
+              }}
+            />
             <Link
+              underline="hover"
+              component={NavLink}
               to={replaceRouteParams(SEASON, {
                 seasonId: reference.season.slug,
               })}
+              sx={{ flex: 1, paddingLeft: 1 }}
             >
               <Typography variant="h6" component="div">
                 {reference.season.brand.name} - {reference.season.name}
               </Typography>
             </Link>
-            <Typography
-              variant="body1"
-              component="div"
-              sx={{
-                overflow: "auto",
-                wordBreak: "break-all",
-              }}
+            <Button
+              size="small"
+              variant="text"
+              color="red"
+              onClick={deleteReference(reference.$id)}
             >
-              {reference.imageLink}
-            </Typography>
+              Delete
+            </Button>
           </Box>
-          <Button
-            size="small"
-            variant="text"
-            color="red"
-            onClick={deleteReference(reference.$id)}
-            sx={{ maxHeight: "45px", marginTop: "auto" }}
-          >
-            Delete
-          </Button>
+          <Box
+            sx={{
+              backgroundImage: `url(${reference.imageLink})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              minHeight: "450px",
+            }}
+          />
         </Box>
       ))}
     </Grid>

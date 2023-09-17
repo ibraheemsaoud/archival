@@ -1,9 +1,9 @@
-import { Grid, Typography, Box, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Grid, Typography, Box, Button, Link } from "@mui/material";
 import { POST } from "../../consts/links.const";
 import { replaceRouteParams } from "../../helpers";
 import { IReference } from "../../interfaces/reference.interface";
 import { useRequestDeleteReference } from "../../requests/useRequestReference";
+import { Link as NavLink } from "react-router-dom";
 
 export const ProfilePostReferences = ({
   references,
@@ -15,6 +15,9 @@ export const ProfilePostReferences = ({
   const deleteReference = (referenceId: string) => () => {
     onDelete(referenceId);
   };
+
+  console.log(references);
+
   return (
     <Grid item xs={12} md={12}>
       {references?.length ? (
@@ -27,6 +30,7 @@ export const ProfilePostReferences = ({
           key={reference.$id}
           sx={{
             display: "flex",
+            flexDirection: "column",
             borderRadius: 1,
             border: "1px solid #c4c4c4",
             overflow: "hidden",
@@ -34,42 +38,50 @@ export const ProfilePostReferences = ({
         >
           <Box
             sx={{
-              backgroundImage: `url(${reference.post.pictureLink})`,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-              width: "60px",
-              maxHeight: "-webkit-fill-available",
-              minHeight: "60px",
-              marginRight: 1,
+              display: "flex",
+              alignItems: "center",
             }}
-          />
-          <Box sx={{ flex: 1 }}>
-            <Link to={replaceRouteParams(POST, { postId: reference.post.$id })}>
+          >
+            <Box
+              sx={{
+                backgroundImage: `url(${reference.post.pictureLink})`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "top",
+                minWidth: "60px",
+                maxWidth: "60px",
+                maxHeight: "60px",
+                minHeight: "60px",
+              }}
+            />
+            <Link
+              underline="hover"
+              component={NavLink}
+              to={replaceRouteParams(POST, { postId: reference.post.$id })}
+              sx={{ flex: 1, paddingLeft: 1 }}
+            >
               <Typography variant="h6" component="div">
                 {reference.post.postTitle}
               </Typography>
             </Link>
-            <Typography
-              variant="body1"
-              component="div"
-              sx={{
-                overflow: "auto",
-                wordBreak: "break-all",
-              }}
+            <Button
+              size="small"
+              variant="text"
+              color="red"
+              onClick={deleteReference(reference.$id)}
             >
-              {reference.imageLink}
-            </Typography>
+              Delete
+            </Button>
           </Box>
-          <Button
-            size="small"
-            variant="text"
-            color="red"
-            onClick={deleteReference(reference.$id)}
-            sx={{ maxHeight: "45px", marginTop: "auto" }}
-          >
-            Delete
-          </Button>
+          <Box
+            sx={{
+              backgroundImage: `url(${reference.imageLink})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              minHeight: "450px",
+            }}
+          />
         </Box>
       ))}
     </Grid>
