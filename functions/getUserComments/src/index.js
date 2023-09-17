@@ -5,9 +5,8 @@ module.exports = async function (req, res) {
   const apiKey = req.variables.SECRET_KEY;
   const dbKey = req.variables.DATABASE_KEY;
   const commentKey = req.variables.COMMENT_COLLECTION_KEY;
-  const postKey = req.variables.POST_COLLECTION_KEY;
 
-  if (!apiKey | !dbKey | !commentKey | !postKey) {
+  if (!apiKey | !dbKey | !commentKey) {
     throw new Error("Missing secret key");
   }
 
