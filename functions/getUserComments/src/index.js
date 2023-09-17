@@ -39,7 +39,7 @@ module.exports = async function (req, res) {
         commentAuthor: document.userId,
         comment: document.comment,
         postTitle: document.post.postTitle,
-        postPicture: document.post.postPictureLink,
+        postPicture: document.post.pictureLink,
         postAuthor: document.post.userId,
       });
     });
