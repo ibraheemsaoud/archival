@@ -68,6 +68,21 @@
             "events": [],
             "schedule": "",
             "timeout": 15
+        },
+        {
+            "$id": "65074ba7f17c2c0fc738",
+            "name": "getUserComments",
+            "runtime": "node-16.0",
+            "path": "functions/getUserComments",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
         }
     ]
 }
