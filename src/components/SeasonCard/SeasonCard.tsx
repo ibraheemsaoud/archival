@@ -35,6 +35,7 @@ export const SeasonCard = ({
       sx={{
         backgroundColor: primaryColor,
         borderRadius: brandView ? 0 : 1,
+        minHeight: 280,
       }}
     >
       <Link to={replaceRouteParams(SEASON, { seasonId: slug })}>
@@ -51,7 +52,6 @@ export const SeasonCard = ({
               background: brandView ? primaryColor : `${primaryColor}B0`,
               width: "100%",
               textAlign: brandView ? "center" : "start",
-              minHeight: 280,
             }}
           >
             <Typography
