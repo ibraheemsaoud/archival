@@ -16,8 +16,6 @@ export const ProfilePostReferences = ({
     onDelete(referenceId);
   };
 
-  console.log(references);
-
   return (
     <Grid item xs={12} md={12}>
       {references?.length ? (

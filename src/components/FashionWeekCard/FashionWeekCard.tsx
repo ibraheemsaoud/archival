@@ -1,6 +1,7 @@
 import { Box, Chip, Grid, Typography } from "@mui/material";
 import { IFashionWeek } from "../../interfaces/fashionWeek.interface";
 import { SeasonCard } from "../SeasonCard";
+import { CreateASeason } from "./CreateASeason";
 
 export const FashionWeekCard = ({
   fashionWeek,
@@ -23,12 +24,15 @@ export const FashionWeekCard = ({
         ))}
       </Box>
       <Grid container spacing={1}>
-        {seasons?.map((season) => (
-          <Grid item xs={6} lg={4} key={`SEASON_${season.$id}`}>
-            <SeasonCard season={season} />
-          </Grid>
-        ))}
+        {seasons?.map((season) =>
+          season.isPublic ? (
+            <Grid item xs={6} lg={4} key={`SEASON_${season.$id}`}>
+              <SeasonCard season={season} />
+            </Grid>
+          ) : null
+        )}
       </Grid>
+      <CreateASeason fashionWeekId={fashionWeek.$id} />
     </Box>
   );
 };
