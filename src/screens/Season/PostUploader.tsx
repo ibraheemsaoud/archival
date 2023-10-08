@@ -17,7 +17,7 @@ export const PostUploader = ({ seasonId }: { seasonId: string }) => {
   const onCreate = async () => {
     if (!user || !pictureUrl) return;
     let pictureLink = undefined;
-    if (outsideLink !== "") {
+    if (outsideLink === "") {
       pictureLink = await requestUploadFile(file, user.$id);
     }
     if (pictureLink || outsideLink !== "") {

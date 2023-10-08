@@ -4,6 +4,18 @@ import { FashionWeekTags } from "./fashionWeek.interface";
 import { IPost } from "./post.interface";
 import { IReference } from "./reference.interface";
 
+export interface ISeasonCreate {
+  slug: string;
+  name: string;
+  coverImage: string;
+  primaryColor: string;
+  secondaryColor: string;
+  tags?: FashionWeekTags[];
+  isPublic?: boolean;
+  brand: string;
+  fashionWeek: string;
+}
+
 export interface ISeason extends IAppWrite {
   slug: string;
   name: string;

@@ -23,66 +23,62 @@
             "$id": "64a337fd6ef9b5b9f8eb",
             "name": "register",
             "runtime": "node-16.0",
-            "path": "functions/register",
-            "entrypoint": "src/index.js",
-            "ignore": [
-                "node_modules",
-                ".npm"
-            ],
             "execute": [
                 "any"
             ],
             "events": [],
             "schedule": "",
-            "timeout": 15
+            "timeout": 15,
+            "enabled": true,
+            "logging": true,
+            "entrypoint": "src/main.js",
+            "commands": "npm install",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "path": "functions/register"
         },
         {
             "$id": "64e10ea16d23dfa6890a",
             "name": "updateSeasonStats",
             "runtime": "node-16.0",
-            "path": "functions/updateSeasonStats",
-            "entrypoint": "src/index.js",
-            "ignore": [
-                "node_modules",
-                ".npm"
-            ],
             "execute": [],
             "events": [
                 "databases.*.collections.64dbab02c289fae33a89",
                 "databases.*.collections.64d757c1c388b559eba1"
             ],
             "schedule": "",
-            "timeout": 15
+            "timeout": 15,
+            "enabled": true,
+            "logging": true,
+            "entrypoint": "src/main.js",
+            "commands": "npm install",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "path": "functions/updateSeasonStats"
         },
         {
             "$id": "64e7a6c7216afad86b7f",
             "name": "getUserData",
             "runtime": "node-16.0",
-            "path": "functions/getUserData",
-            "entrypoint": "src/index.js",
+            "execute": [
+                "any"
+            ],
+            "events": [],
+            "schedule": "",
+            "timeout": 15,
+            "enabled": true,
+            "logging": true,
+            "entrypoint": "src/main.js",
+            "commands": "npm install",
             "ignore": [
                 "node_modules",
                 ".npm"
             ],
-            "execute": [],
-            "events": [],
-            "schedule": "",
-            "timeout": 15
-        },
-        {
-            "$id": "65074ba7f17c2c0fc738",
-            "name": "getUserComments",
-            "runtime": "node-16.0",
-            "path": "functions/getUserComments",
-            "entrypoint": "src/index.js",
-            "ignore": [
-                "node_modules",
-                ".npm"
-            ],
-            "execute": [],
-            "events": [],
-            "schedule": "",
-            "timeout": 15
+            "path": "functions/getUserData"
         }
     ]
 }
