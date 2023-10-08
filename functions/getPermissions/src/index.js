@@ -24,6 +24,15 @@ module.exports = async function (req, res) {
   const userId = req.variables["APPWRITE_FUNCTION_USER_ID"];
   const { databaseId, collectionId, teamName, documentId } = payload;
 
+  const checkPermission = (permission, type) => {
+    return (
+      permission === `${type}("users")` ||
+      permission === `${type}("any")` ||
+      permission === `${type}("user:${userId}")` ||
+      (teamName && permission === `${type}("team:${teamName}")`)
+    );
+  };
+
   try {
     const permissions = [];
     const promise = await database.getCollection(databaseId, collectionId);
@@ -37,37 +46,19 @@ module.exports = async function (req, res) {
       const documentPermissions = promise.$permissions;
       permissions.push(...documentPermissions);
     }
+
     let read = false,
       create = false,
       update = false,
       delete_ = false;
 
-    const checkPermission = (permission, type) => {
-      if (
-        permission === `${type}("users")` ||
-        permission === `${type}("any")`
-      ) {
-        return true;
-      }
-      if (permission === `${type}("user:${userId}")`) {
-        return true;
-      }
-      if (teamName && permission === `${type}("team:${teamName}")`) {
-        return true;
-      }
-      return false;
-    };
     permissions.forEach((permission) => {
-      if (checkPermission(permission, "read")) {
-        read = true;
-      } else if (checkPermission(permission, "create")) {
-        create = true;
-      } else if (checkPermission(permission, "update")) {
-        update = true;
-      } else if (checkPermission(permission, "delete")) {
-        delete_ = true;
-      }
+      read = checkPermission(permission, "read");
+      create = checkPermission(permission, "create");
+      update = checkPermission(permission, "update");
+      delete_ = checkPermission(permission, "delete");
     });
+
     res.json({
       permissions: {
         read,
