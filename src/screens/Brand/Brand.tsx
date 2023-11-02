@@ -2,13 +2,13 @@ import {
   AppBar,
   Box,
   Button,
-  Grid,
   ThemeProvider,
   Toolbar,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
-import { ISeason } from "../../interfaces/season.interface";
 import { theme } from "../../theme";
 import { IBrand } from "../../interfaces/brand.interface";
 import { AppWrapper, SeasonCard } from "../../components";
@@ -19,6 +19,7 @@ import {
   useRequestFollows,
   useRequestUnfollow,
 } from "../../requests/useRequestFollow";
+import { Masonry } from "@mui/lab";
 
 export const Brand = () => {
   const { onBack } = useNavigation();
@@ -32,6 +33,9 @@ export const Brand = () => {
   const { mutate: unfollowBrand, isLoading: isLoadingUnfollowAction } =
     useRequestUnfollow();
   const { user } = useUser();
+
+  const theme2 = useTheme();
+  const isMobile = useMediaQuery(theme2.breakpoints.down("sm"));
 
   if (!brand) return <div>Loading...</div>;
 
@@ -113,13 +117,14 @@ export const Brand = () => {
             >
               Seasons
             </Typography>
-            <Grid container spacing={1}>
-              {restOfSeasons.map((season: ISeason) => (
-                <Grid item xs={6} lg={4} key={season.$id}>
-                  <SeasonCard season={season} brandView />
-                </Grid>
-              ))}
-            </Grid>
+
+            <Masonry columns={isMobile ? 2 : 3} spacing={2}>
+              {restOfSeasons?.map((season) =>
+                season.isPublic ? (
+                  <SeasonCard season={season} brandView key={season.$id} />
+                ) : null
+              )}
+            </Masonry>
           </Box>
         )}
       </AppWrapper>

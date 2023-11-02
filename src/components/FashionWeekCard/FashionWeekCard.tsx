@@ -1,7 +1,8 @@
-import { Box, Chip, Grid, Typography } from "@mui/material";
+import { Box, Chip, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { IFashionWeek } from "../../interfaces/fashionWeek.interface";
 import { SeasonCard } from "../SeasonCard";
 import { CreateASeason } from "./CreateASeason";
+import { Masonry } from "@mui/lab";
 
 export const FashionWeekCard = ({
   fashionWeek,
@@ -9,6 +10,9 @@ export const FashionWeekCard = ({
   fashionWeek: IFashionWeek;
 }) => {
   const { name, seasons, tags } = fashionWeek;
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Box marginTop={3} marginRight={2} marginLeft={2}>
@@ -23,15 +27,13 @@ export const FashionWeekCard = ({
           />
         ))}
       </Box>
-      <Grid container spacing={1}>
+      <Masonry columns={isMobile ? 2 : 3} spacing={2}>
         {seasons?.map((season) =>
           season.isPublic ? (
-            <Grid item xs={6} lg={4} key={`SEASON_${season.$id}`}>
-              <SeasonCard season={season} />
-            </Grid>
+            <SeasonCard season={season} key={`SEASON_${season.$id}`} />
           ) : null
         )}
-      </Grid>
+      </Masonry>
       <CreateASeason fashionWeekId={fashionWeek.$id} />
     </Box>
   );

@@ -31,14 +31,13 @@ export const SeasonCard = ({
   } = season;
 
   return (
-    <Card
-      sx={{
-        backgroundColor: primaryColor,
-        borderRadius: brandView ? 0 : 1,
-        minHeight: 280,
-      }}
-    >
-      <Link to={replaceRouteParams(SEASON, { seasonId: slug })}>
+    <Link to={replaceRouteParams(SEASON, { seasonId: slug })}>
+      <Card
+        sx={{
+          backgroundColor: primaryColor,
+          borderRadius: brandView ? 0 : 1,
+        }}
+      >
         <CardActionArea
           sx={{
             position: "relative",
@@ -73,7 +72,7 @@ export const SeasonCard = ({
             image={coverImage || "\\static\\images\\potm2209a.jpg"}
           />
         </CardActionArea>
-      </Link>
-    </Card>
+      </Card>
+    </Link>
   );
 };
