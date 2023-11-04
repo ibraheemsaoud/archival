@@ -5,6 +5,7 @@ import { useRequestCreatePost } from "../../requests/useRequestPost";
 import { useUser } from "../../hooks";
 import { toast } from "react-hot-toast";
 import { requestUploadFile } from "../../requests/requestUploadFile";
+import { Server } from "../../config/server";
 
 export const PostUploader = ({ seasonId }: { seasonId: string }) => {
   const [title, setTitle] = useState("");
@@ -45,7 +46,7 @@ export const PostUploader = ({ seasonId }: { seasonId: string }) => {
   }, [error]);
 
   if (!user) return null;
-  if (user.$id !== "64fc4c02359c716b96b4") return null;
+  if (user.$id !== Server.adminId) return null;
 
   return (
     <Box

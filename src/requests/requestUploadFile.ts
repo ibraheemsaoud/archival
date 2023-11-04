@@ -13,7 +13,7 @@ export const requestUploadFile = async (file: File | null, userId: string) => {
         [Permission.delete(Role.user(userId))]
       );
       if (fileData.$id) {
-        return `https://appwrite.archivals.eu/v1/storage/buckets/${Server.entriesPicturesBucketId}/files/${fileData.$id}/view?project=Archival`;
+        return `${Server.endpoint}/storage/buckets/${Server.entriesPicturesBucketId}/files/${fileData.$id}/view?project=Archival`;
       } else {
         return undefined;
       }
@@ -27,7 +27,6 @@ export const requestUploadFile = async (file: File | null, userId: string) => {
 };
 
 export const requestDeleteFile = async (fileLink: string) => {
-  "https://appwrite.archivals.eu/v1/storage/buckets/64a71fe5628b8aa304db/files/64e23cb67cd452425f40/view?project=Archival"
   const fileId = fileLink.split("/").slice(-2)[0];
   try {
     if (fileId) {

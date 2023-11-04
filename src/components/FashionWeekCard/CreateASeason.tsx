@@ -19,6 +19,9 @@ import { requestUploadFile } from "../../requests/requestUploadFile";
 import { useRequestCreateSeason } from "../../requests/useRequestSeason";
 import { FashionWeekTags } from "../../interfaces/fashionWeek.interface";
 import { useCreateASeason } from "./useCreateASeason";
+import { Server } from "../../config/server";
+import { ISeasonCreateErrors } from "../../interfaces/season.interface";
+import { Error } from "../Error";
 
 export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
   const {
@@ -42,6 +45,10 @@ export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
     handleIsPublic,
   } = useCreateASeason();
   const [outsideLink, setOutsideLink] = useState("");
+  const [submissionError, setSubmissionError] = useState<ISeasonCreateErrors>(
+    {}
+  );
+  const [generalErrors, setGeneralErrors] = useState<string>("");
 
   const { file, onChangeFile, onReset, pictureUrl, onRemoveFile } =
     useUploadImage({});
@@ -49,13 +56,18 @@ export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
   const { user } = useUser();
 
   const onCreate = async () => {
-    if (!user || !pictureUrl) return;
+    if (!user) {
+      setGeneralErrors("missing user data");
+      return;
+    }
+    if (!pictureUrl && !outsideLink) {
+      setSubmissionError({ coverImage: "missing cover image" });
+      return;
+    }
     let pictureLink = undefined;
     if (outsideLink === "") {
-      console.log("uploading file");
       pictureLink = await requestUploadFile(file, user.$id);
     }
-    console.log(pictureLink, outsideLink);
     if (pictureLink || outsideLink !== "") {
       mutate({
         name,
@@ -68,6 +80,8 @@ export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
         tags: [season, wear, type],
         isPublic,
       });
+    } else {
+      setSubmissionError({ coverImage: "failed to upload image" });
     }
   };
 
@@ -86,7 +100,7 @@ export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
   }, [error]);
 
   if (!user) return null;
-  if (user.$id !== "64fc4c02359c716b96b4") return null;
+  if (user.$id !== Server.adminId) return null;
 
   return (
     <Box
@@ -98,6 +112,7 @@ export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
         backgroundColor: "#ffffff",
       }}
     >
+      <Error error={generalErrors} />
       <Typography
         variant="h6"
         component="div"
@@ -113,6 +128,7 @@ export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
         file={file}
         onReset={onReset}
         pictureUrl={pictureUrl}
+        error={submissionError.coverImage}
         height="350px"
       />
       {!file && (

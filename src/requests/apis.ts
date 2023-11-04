@@ -98,7 +98,7 @@ const api: Api = {
   verifyEmail: () => {
     return api
       .provider()
-      .account.createVerification("https://archivals.eu/verification");
+      .account.createVerification(Server.baseURL + "/verification");
   },
 
   updateVerification: (userId, secret) => {
@@ -124,7 +124,7 @@ const api: Api = {
       .account.createOAuth2Session(
         "google",
         window.location.href,
-        "https://archivals.eu/"
+        Server.baseURL,
       );
   },
 

@@ -5,9 +5,9 @@ import { IBrand } from "../../interfaces/brand.interface";
 import { IFashionWeek } from "../../interfaces/fashionWeek.interface";
 
 export const Home = () => {
-  const { brands, fashionWeek } = useLoaderData() as any as {
+  const { brands, fashionWeeks } = useLoaderData() as any as {
     brands?: IBrand[];
-    fashionWeek?: IFashionWeek;
+    fashionWeeks?: IFashionWeek[];
   };
 
   if (!brands) return <div>Loading...</div>;
@@ -28,7 +28,9 @@ export const Home = () => {
           </Box>
         ))}
       </Box>
-      {fashionWeek && <FashionWeekCard fashionWeek={fashionWeek} />}
+      {fashionWeeks?.map((fashionWeek) => (
+        <FashionWeekCard fashionWeek={fashionWeek} key={fashionWeek.$id} />
+      ))}
     </AppWrapper>
   );
 };

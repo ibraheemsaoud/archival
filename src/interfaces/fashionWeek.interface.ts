@@ -5,9 +5,9 @@ export enum FashionWeekTags {
   "Menswear" = "Menswear",
   "Womenswear" = "Womenswear",
   "Couture" = "Couture",
-  "ReadyToWear" = "Ready-to-wear",
-  "SS" = "Spring/Summer",
-  "AW" = "Fall/Winter",
+  "ReadyToWear" = "ReadyToWear",
+  "SS" = "SS",
+  "AW" = "AW",
 }
 
 export interface IFashionWeek extends IAppWrite {

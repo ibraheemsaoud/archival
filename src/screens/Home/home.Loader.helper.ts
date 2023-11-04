@@ -1,12 +1,12 @@
 import { requestBrands } from "../../requests/requestBrand";
-import { requestFashionWeek } from "../../requests/requestFashionWeek";
+import { requestFashionWeeks } from "../../requests/requestFashionWeek";
 
 export const homeLoader = () => async () => {
   const { data: brands } = await requestBrands();
-  const { data: fashionWeek } = await requestFashionWeek("PFW-M-RTW-SS2024");
+  const { data: fashionWeeks } = await requestFashionWeeks();
 
   return {
     brands,
-    fashionWeek,
+    fashionWeeks,
   };
 };

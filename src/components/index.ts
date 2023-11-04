@@ -5,3 +5,4 @@ export * from "./BrandCard";
 export * from "./FashionWeekCard";
 export * from "./SeasonCard";
 export * from "./PostCard";
+export * from "./Error";

@@ -1,5 +1,6 @@
 import { Close } from "@mui/icons-material";
 import { Box, Button, IconButton } from "@mui/material";
+import { Error } from "../Error";
 
 interface UploadImageProps {
   onChangeFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -7,6 +8,7 @@ interface UploadImageProps {
   pictureUrl?: string;
   file: File | null;
   height?: string;
+  error?: string;
 }
 
 export const UploadImage = ({
@@ -14,6 +16,7 @@ export const UploadImage = ({
   onReset,
   pictureUrl,
   file,
+  error,
   height = "100px",
 }: UploadImageProps) => {
   return (
@@ -25,6 +28,7 @@ export const UploadImage = ({
         border: `1px solid ${theme.palette.primary.main}`,
       })}
     >
+      <Error error={error} />
       {pictureUrl && (
         <>
           <Box

@@ -16,6 +16,18 @@ export interface ISeasonCreate {
   fashionWeek: string;
 }
 
+export interface ISeasonCreateErrors {
+  slug?: string;
+  name?: string;
+  coverImage?: string;
+  primaryColor?: string;
+  secondaryColor?: string;
+  tags?: string;
+  isPublic?: string;
+  brand?: string;
+  fashionWeek?: string;
+}
+
 export interface ISeason extends IAppWrite {
   slug: string;
   name: string;

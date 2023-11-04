@@ -1,7 +1,9 @@
 export const Server = {
-  endpoint: "https://appwrite.archivals.eu/v1",
+  endpoint: "https://cloud.appwrite.io/v1",
+  baseURL: "https://appwrite.archivals.eu",
   project: "Archival",
   databaseID: "649bf127bdd26e9850cd",
+  adminId: "649b64af3576d64d457f",
 
   brandsCollectionId: "64d74abf6f084493267f",
   fashionWeeksCollectionId: "64d75694839749467fef",
