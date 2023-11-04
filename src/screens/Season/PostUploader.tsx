@@ -16,7 +16,7 @@ export const PostUploader = ({ seasonId }: { seasonId: string }) => {
   const { user } = useUser();
 
   const onCreate = async () => {
-    if (!user || !pictureUrl) return;
+    if (!user) return;
     let pictureLink = undefined;
     if (outsideLink === "") {
       pictureLink = await requestUploadFile(file, user.$id);
@@ -35,6 +35,7 @@ export const PostUploader = ({ seasonId }: { seasonId: string }) => {
     if (isSuccess) {
       onRemoveFile();
       setTitle("");
+      setOutsideLink("");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);

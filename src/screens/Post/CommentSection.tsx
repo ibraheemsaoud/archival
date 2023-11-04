@@ -9,17 +9,18 @@ import {
 } from "../../requests/useRequestComment";
 import { useUser } from "../../hooks";
 import { Comment } from "./Comment";
+import { IPost } from "../../interfaces/post.interface";
 
 export const CommentSection = ({
-  postId,
+  post,
   showLogin,
 }: {
-  postId: string;
+  post: IPost;
   showLogin: () => void;
 }) => {
-  const { data: comments } = useRequestComments(postId);
-  const { mutate: onComment } = useRequestCreateComment(postId);
-  const { mutate: onDelete } = useRequestDeleteComment(postId);
+  const { data: comments } = useRequestComments(post.$id);
+  const { mutate: onComment } = useRequestCreateComment(post.$id);
+  const { mutate: onDelete } = useRequestDeleteComment(post.$id);
   const { user } = useUser();
 
   const [comment, setComment] = useState("");
@@ -31,7 +32,7 @@ export const CommentSection = ({
     }
     onComment({
       comment,
-      post: postId,
+      post: post.$id,
       userId: user.$id || "",
     });
     setComment("");
@@ -42,7 +43,7 @@ export const CommentSection = ({
       {comments?.length ? (
         <Box
           sx={{
-            borderTop: "1px solid #d6d6d6",
+            borderTop: `1px solid ${post.season.secondaryColor}`,
           }}
         >
           <Typography

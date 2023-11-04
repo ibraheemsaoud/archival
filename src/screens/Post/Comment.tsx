@@ -22,7 +22,7 @@ export const Comment = ({
     <Box
       display="flex"
       sx={{
-        borderBottom: "1px solid #d6d6d6",
+        borderBottom: `1px solid ${comment.post.season.secondaryColor}`,
         paddingBottom: "4px",
         margin: 1,
       }}
@@ -30,7 +30,7 @@ export const Comment = ({
       {isProfileLoading ? (
         <Box
           sx={{
-            background: "#d6d6d6",
+            background: comment.post.season.secondaryColor,
             width: "40px",
             height: "40px",
             borderRadius: "40px",
@@ -39,7 +39,7 @@ export const Comment = ({
       ) : (
         <Box
           sx={{
-            background: "#d6d6d6",
+            background: comment.post.season.secondaryColor,
             width: "40px",
             height: "40px",
             borderRadius: "40px",

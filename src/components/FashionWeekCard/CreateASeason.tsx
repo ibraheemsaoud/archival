@@ -89,6 +89,10 @@ export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
     if (isSuccess) {
       onRemoveFile();
       setName("");
+      setOutsideLink("");
+      setPrimaryColor("");
+      setSecondaryColor("");
+      setBrandId("");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);

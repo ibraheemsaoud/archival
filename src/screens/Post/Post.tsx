@@ -92,7 +92,7 @@ export const Post = () => {
             position: "relative",
             overflow: "hidden",
             maxHeight: "360px",
-            borderBottom: "1px solid #d6d6d6",
+            borderBottom: `1px solid ${season?.secondaryColor}`,
           }}
         >
           <img src={post.pictureLink} alt="post" width="100%" />
@@ -115,7 +115,7 @@ export const Post = () => {
           references={references}
           showLogin={showLogin}
         />
-        <CommentSection postId={post.$id} showLogin={showLogin} />
+        <CommentSection post={post} showLogin={showLogin} />
       </AppWrapper>
     </ThemeProvider>
   );
