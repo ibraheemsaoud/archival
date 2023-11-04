@@ -18,7 +18,7 @@ export const useRequestCreatePost = () => {
       ]
     );
     queryClient.invalidateQueries(["postList"]);
-    queryClient.invalidateQueries(["seasonData", post.seasonId]);
+    queryClient.invalidateQueries(["seasonData", post.season]);
     return data;
   });
 };

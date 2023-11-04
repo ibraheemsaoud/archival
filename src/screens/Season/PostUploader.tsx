@@ -25,7 +25,7 @@ export const PostUploader = ({ seasonId }: { seasonId: string }) => {
       mutate({
         postTitle: title,
         pictureLink: pictureLink || outsideLink,
-        seasonId,
+        season: seasonId,
         userId: user.$id,
       });
     }

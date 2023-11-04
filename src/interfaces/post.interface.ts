@@ -2,7 +2,7 @@ import { IAppWrite } from "./appwrite.interface";
 import { ISeason } from "./season.interface";
 
 export interface IPostCreate {
-  seasonId: string;
+  season: string;
   pictureLink: string;
   postTitle: string;
   userId: string;
