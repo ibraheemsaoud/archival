@@ -27,7 +27,7 @@ const t = async ({ req, res, log, error }) => {
     const postId = payload.post?.$id;
   
     client
-      .setEndpoint("https://appwrite.archivals.eu/v1")
+      .setEndpoint("https://cloud.appwrite.io/v1")
       .setProject("Archival")
       .setKey(apiKey)
       .setSelfSigned(true);

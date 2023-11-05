@@ -13,7 +13,7 @@ const t = async ({ req, res, log, error }) => {
     const users = new Users(client);
     
     client
-      .setEndpoint("https://appwrite.archivals.eu/v1")
+      .setEndpoint("https://cloud.appwrite.io/v1")
       .setProject("Archival")
       .setKey(apiKey)
       .setSelfSigned(true);

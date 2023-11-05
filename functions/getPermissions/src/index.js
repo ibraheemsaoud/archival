@@ -10,7 +10,7 @@ module.exports = async function (req, res) {
   const database = new sdk.Databases(client);
 
   client
-    .setEndpoint("https://appwrite.archivals.eu/v1")
+    .setEndpoint("https://cloud.appwrite.io/v1")
     .setProject("Archival")
     .setKey(apiKey)
     .setSelfSigned(true);
