@@ -1,48 +1,42 @@
-import { Client, Users } from 'node-appwrite';
+import { Query } from 'appwrite';
+import { Client, Databases } from 'node-appwrite';
 
 const t = async ({ req, res, log, error }) => {
   if (req.method === 'POST') {
     const apiKey = process.env.SECRET_KEY;
     if (!apiKey) {
-      error("Missing API key");
+      error('Missing API key');
       return;
     }
-  
+
     const client = new Client();
-    const users = new Users(client);
-  
+    const database = new Databases(client);
+
     client
-      .setEndpoint("https://cloud.appwrite.io/v1")
-      .setProject("Archival")
+      .setEndpoint('https://cloud.appwrite.io/v1')
+      .setProject('Archival')
       .setKey(apiKey)
       .setSelfSigned(true);
 
-    const payload = JSON.parse(
-      req.body.replace(/\n|\s{2,}/g, "").replace(/(\w+):/g, '"$1":')
-    );
-  
-    if (!payload.userId) {
-      error("Missing required userId parameter");
-      return;
-    }
-    
-    const { userId } = payload;
-    let userName;
-    let imageURL;
+    let fashionWeeks;
 
     try {
-      const userData = await users.get(userId);
-      userName = userData.name;
-      imageURL = userData.prefs?.imageURL;
+      fashionWeeks = await database.listDocuments(
+        '649bf127bdd26e9850cd',
+        '64d75694839749467fef',
+        [Query.equal('isPublic', true)]
+      );
     } catch (err) {
       error(err);
-      return;  
+      return;
     }
 
-    return res.json({
-      userName,
-      imageURL,
-    });
+    return res.json([
+      {
+        type: 'featured_fashion_week',
+        entry: fashionWeeks,
+      },
+    ]);
   }
 
   return res.send("we shouldn't get there");
