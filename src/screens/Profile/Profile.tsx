@@ -1,6 +1,6 @@
 import { Box, Button, Grid, TextField } from "@mui/material";
 import { useUser } from "../../hooks";
-import { AppWrapper } from "../../components";
+import { AppWrapper, Loader } from "../../components";
 import { useState } from "react";
 import { useRequestCommentsByUserId } from "../../requests/useRequestComment";
 import { ProfileComments } from "./ProfileComments";
@@ -36,7 +36,7 @@ export const Profile = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (

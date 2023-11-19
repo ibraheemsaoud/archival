@@ -13,8 +13,8 @@ export const useRequestPost = (postId: string) => {
         Server.postsCollectionId,
         postId
       );
-      if (data.documents?.length > 0) {
-        return data.documents as IPost;
+      if (data) {
+        return data as IPost;
       }
       throw new Error("failed to load post, server might be down");
     },

@@ -10,7 +10,7 @@ import {
 import { useLoaderData } from "react-router-dom";
 import { ISeason } from "../../interfaces/season.interface";
 import { theme } from "../../theme";
-import { AppWrapper, PostCard, TopToolbar } from "../../components";
+import { AppWrapper, Loader, PostCard, TopToolbar } from "../../components";
 import { HOME } from "../../consts/links.const";
 import { PostUploader } from "./PostUploader";
 import { useState } from "react";
@@ -29,7 +29,7 @@ export const Season = () => {
   const theme2 = useTheme();
   const isMobile = useMediaQuery(theme2.breakpoints.down("sm"));
 
-  if (!season || !brand) return <div>Loading...</div>;
+  if (!season || !brand) return <Loader />;
 
   const modedTheme = theme("light", season.primaryColor, season.secondaryColor);
 

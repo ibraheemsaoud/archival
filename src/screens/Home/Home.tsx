@@ -1,4 +1,4 @@
-import { AppWrapper, BrandCard, FashionWeekCard } from "../../components";
+import { AppWrapper, BrandCard, FashionWeekCard, Loader } from "../../components";
 import { Box } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import { IBrand } from "../../interfaces/brand.interface";
@@ -10,7 +10,7 @@ export const Home = () => {
     fashionWeeks?: IFashionWeek[];
   };
 
-  if (!brands) return <div>Loading...</div>;
+  if (!brands) return <Loader />;
 
   return (
     <AppWrapper>

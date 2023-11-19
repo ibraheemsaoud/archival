@@ -13,6 +13,7 @@ import { Link as NavLink } from "react-router-dom";
 import { Signin } from "./Signin";
 import { useUser } from "../../../../hooks/useUser";
 import { PROFILE } from "../../../../consts/links.const";
+import { Loader } from "../../../Loader";
 
 export const ToolbarAction = ({ shouldLogin }: { shouldLogin?: boolean }) => {
   const { user, isLoading, logout } = useUser();
@@ -35,7 +36,7 @@ export const ToolbarAction = ({ shouldLogin }: { shouldLogin?: boolean }) => {
     handleCloseUserMenu();
   };
 
-  if (isLoading) return <>Loading...</>;
+  if (isLoading) return <Loader />;
   if (!isLoggedIn) {
     return <Signin shouldLogin={shouldLogin} />;
   }

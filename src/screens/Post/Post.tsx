@@ -1,6 +1,6 @@
 import { Box, ThemeProvider } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
-import { AppWrapper, Error, TopToolbar } from "../../components";
+import { AppWrapper, Error, Loader, TopToolbar } from "../../components";
 import { SEASON } from "../../consts/links.const";
 import { replaceRouteParams } from "../../helpers";
 import { theme } from "../../theme";
@@ -17,7 +17,8 @@ export const Post = () => {
   };
   const { data: post, error } = useRequestPost(postId);
 
-  if (!postId || !post) return <div>Missing post id</div>;
+  if (!postId) return <div>Missing post id</div>;
+  if (!post) return <Loader />;
 
   const season = post?.season;
   const brand = season?.brand;

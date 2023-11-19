@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import { theme } from "../../theme";
-import { AppWrapper, Error, SeasonCard, TopToolbar } from "../../components";
+import { AppWrapper, Error, Loader, SeasonCard, TopToolbar } from "../../components";
 import { useUser } from "../../hooks";
 import { HOME } from "../../consts/links.const";
 import {
@@ -35,7 +35,7 @@ export const Brand = () => {
   const theme2 = useTheme();
   const isMobile = useMediaQuery(theme2.breakpoints.down("sm"));
 
-  if (!brand) return <div>Loading...</div>;
+  if (!brand) return <Loader />;
 
   const isFollowing = follows?.find(
     (follow) => follow.targetId === brandId && follow.targetType === "brand"
