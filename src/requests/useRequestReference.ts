@@ -2,7 +2,10 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Server } from "../config/server";
 import api from "./apis";
 import { Permission, Query, Role } from "appwrite";
-import { IReference, IReferenceCreate } from "../interfaces/reference.interface";
+import {
+  IReference,
+  IReferenceCreate,
+} from "../interfaces/reference.interface";
 
 export const useRequestReferencesByUserId = (userId?: string) => {
   return useQuery<IReference[]>(
@@ -15,9 +18,9 @@ export const useRequestReferencesByUserId = (userId?: string) => {
       );
       if (data.documents?.length > 0) {
         return data.documents as IReference[];
+      } else {
+        return [];
       }
-      // eslint-disable-next-line no-throw-literal
-      throw "references not found";
     },
     {
       enabled: !!userId,
@@ -42,6 +45,7 @@ export const useRequestReference = () => {
       ]
     );
     queryClient.invalidateQueries(["referenceList"]);
+    queryClient.invalidateQueries(["post", reference.post]);
     return data;
   });
 };
@@ -49,13 +53,16 @@ export const useRequestReference = () => {
 export const useRequestDeleteReference = () => {
   const queryClient = useQueryClient();
 
-  return useMutation(["referenceList"], async (referenceId: string) => {
-    const data = await api.deleteDocument(
-      Server.databaseID,
-      Server.referencesCollectionId,
-      referenceId
-    );
-    queryClient.invalidateQueries(["referenceList"]);
-    return data;
-  });
+  return useMutation(
+    ["referenceList"],
+    async (referenceId: string) => {
+      const data = await api.deleteDocument(
+        Server.databaseID,
+        Server.referencesCollectionId,
+        referenceId
+      );
+      queryClient.invalidateQueries(["referenceList"]);
+      return data;
+    }
+  );
 };

@@ -1,7 +1,6 @@
 import { Box, ThemeProvider } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
-import { IPost } from "../../interfaces/post.interface";
-import { AppWrapper, TopToolbar } from "../../components";
+import { AppWrapper, Error, TopToolbar } from "../../components";
 import { SEASON } from "../../consts/links.const";
 import { replaceRouteParams } from "../../helpers";
 import { theme } from "../../theme";
@@ -9,19 +8,21 @@ import { CommentSection } from "./CommentSection";
 import { ReferenceSection } from "./ReferencesSection";
 import { useState } from "react";
 import { StylingSection } from "./Styling/StylingSection";
+import { useRequestPost } from "../../requests/useRequestPost";
 
 export const Post = () => {
   const [shouldShowLogin, setShowLogin] = useState(false);
-  const { post } = useLoaderData() as any as {
-    post?: IPost;
+  const { postId } = useLoaderData() as any as {
+    postId: string;
   };
+  const { data: post, error } = useRequestPost(postId);
+
+  if (!postId || !post) return <div>Missing post id</div>;
 
   const season = post?.season;
   const brand = season?.brand;
   const stylings = post?.stylings || [];
   const references = post?.references || [];
-
-  if (!post || !brand) return <div>Not found</div>;
 
   const modedTheme = theme("light", season.primaryColor, season.secondaryColor);
 
@@ -42,6 +43,7 @@ export const Post = () => {
           logo={brand.logoLink}
           title={season.name}
         />
+        <Error error={error} />
         <Box
           sx={{
             width: "100%",

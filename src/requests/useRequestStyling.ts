@@ -15,9 +15,9 @@ export const useRequestStylingByUserId = (userId?: string) => {
       );
       if (data.documents?.length > 0) {
         return data.documents as IStyling[];
+      } else {
+        return [];
       }
-      // eslint-disable-next-line no-throw-literal
-      throw "styling not found";
     },
     {
       enabled: !!userId,

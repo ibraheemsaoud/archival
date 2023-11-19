@@ -8,8 +8,7 @@ import {
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import { theme } from "../../theme";
-import { IBrand } from "../../interfaces/brand.interface";
-import { AppWrapper, SeasonCard, TopToolbar } from "../../components";
+import { AppWrapper, Error, SeasonCard, TopToolbar } from "../../components";
 import { useUser } from "../../hooks";
 import { HOME } from "../../consts/links.const";
 import {
@@ -18,12 +17,14 @@ import {
   useRequestUnfollow,
 } from "../../requests/useRequestFollow";
 import { Masonry } from "@mui/lab";
+import { useRequestBrand } from "../../requests/useRequestBrand";
 
 export const Brand = () => {
-  const { brand } = useLoaderData() as any as {
-    brand?: IBrand;
+  const { brandId } = useLoaderData() as any as {
+    brandId: string;
   };
 
+  const { data: brand, error } = useRequestBrand(brandId);
   const { data: follows, isLoading } = useRequestFollows("brand");
   const { mutate: followBrand, isLoading: isLoadingFollowAction } =
     useRequestFollow();
@@ -37,7 +38,7 @@ export const Brand = () => {
   if (!brand) return <div>Loading...</div>;
 
   const isFollowing = follows?.find(
-    (follow) => follow.targetId === brand.$id && follow.targetType === "brand"
+    (follow) => follow.targetId === brandId && follow.targetType === "brand"
   );
 
   const onFollow = () => {
@@ -81,6 +82,7 @@ export const Brand = () => {
           title={brand.name}
           secondaryButton={secondaryButton}
         />
+        <Error error={error} />
         {lastSeason && <SeasonCard season={lastSeason} brandView />}
         {restOfSeasons.length > 0 && (
           <Box marginX={1} marginY={2}>

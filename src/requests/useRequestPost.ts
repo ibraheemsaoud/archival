@@ -1,8 +1,31 @@
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Server } from "../config/server";
 import api from "./apis";
 import { Permission, Role } from "appwrite";
-import { IPostCreate } from "../interfaces/post.interface";
+import { IPost, IPostCreate } from "../interfaces/post.interface";
+
+export const useRequestPost = (postId: string) => {
+  return useQuery<IPost>(
+    ["post", postId],
+    async () => {
+      const data = await api.getDocument(
+        Server.databaseID,
+        Server.postsCollectionId,
+        postId
+      );
+      if (data.documents?.length > 0) {
+        return data.documents as IPost;
+      }
+      throw new Error("failed to load post, server might be down");
+    },
+    {
+      enabled: !!postId,
+      refetchOnMount: true,
+      refetchOnWindowFocus: false,
+      initialData: undefined,
+    }
+  );
+};
 
 export const useRequestCreatePost = () => {
   const queryClient = useQueryClient();

@@ -15,9 +15,9 @@ export const useRequestComments = (postId: string) => {
       );
       if (data.documents?.length > 0) {
         return data.documents as IComment[];
+      } else {
+        return [];
       }
-      // eslint-disable-next-line no-throw-literal
-      throw "comments not found";
     },
     {
       enabled: !!postId,
@@ -39,9 +39,9 @@ export const useRequestCommentsByUserId = (userId: string) => {
       );
       if (data.documents?.length > 0) {
         return data.documents as IComment[];
+      } else {
+        return [];
       }
-      // eslint-disable-next-line no-throw-literal
-      throw "comments not found";
     },
     {
       enabled: !!userId,

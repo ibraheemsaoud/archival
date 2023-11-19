@@ -1,9 +1,9 @@
 import { Box, Button, Link, Typography } from "@mui/material";
 import { useUser } from "../../../hooks";
-import { useRequestDeleteReference } from "../../../requests/useRequestReference";
 import { useEffect } from "react";
 import { requestDeleteFile } from "../../../requests/requestUploadFile";
 import { IStyling } from "../../../interfaces/styling.interface";
+import { useRequestDeleteStyling } from "../../../requests/useRequestStyling";
 
 export const StylingDisplay = ({
   styling,
@@ -15,7 +15,7 @@ export const StylingDisplay = ({
   onDone(): void;
 }) => {
   const { user } = useUser();
-  const { mutate: deleteReference, isSuccess } = useRequestDeleteReference();
+  const { mutate: deleteReference, isSuccess } = useRequestDeleteStyling();
   const referenceImageLink = styling?.imageUrl;
 
   useEffect(() => {
