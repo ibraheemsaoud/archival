@@ -42,7 +42,7 @@ export const ReferenceSection = ({
   return (
     <Box
       sx={{
-        borderTop: `1px solid ${season?.secondaryColor}`,
+        borderTop: `1px solid ${season?.primaryColor}`,
       }}
     >
       <Typography

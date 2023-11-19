@@ -4,30 +4,6 @@ import api from "./apis";
 import { Permission, Query, Role } from "appwrite";
 import { IReference, IReferenceCreate } from "../interfaces/reference.interface";
 
-export const useRequestReferences = (postId?: string) => {
-  return useQuery<IReference[]>(
-    ["referenceList", postId],
-    async () => {
-      const data = await api.listDocuments(
-        Server.databaseID,
-        Server.referencesCollectionId,
-        [Query.equal("post", [postId!])]
-      );
-      if (data.documents?.length > 0) {
-        return data.documents as IReference[];
-      }
-      // eslint-disable-next-line no-throw-literal
-      throw "references not found";
-    },
-    {
-      enabled: !!postId,
-      refetchOnMount: true,
-      refetchOnWindowFocus: false,
-      initialData: [],
-    }
-  );
-};
-
 export const useRequestReferencesByUserId = (userId?: string) => {
   return useQuery<IReference[]>(
     ["referenceList"],

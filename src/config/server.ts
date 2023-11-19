@@ -12,6 +12,7 @@ export const Server = {
   referencesCollectionId: "64d757c1c388b559eba1",
   commentsCollectionId: "64dbab02c289fae33a89",
   followsCollectionId: "64e1ef560a7c0b7b2715",
+  stylingCollectionId: "654126ada3cd9dd26da0",
 
   // Functions
   permissionFunctionId: "64a31220b1c2d44e7e51",

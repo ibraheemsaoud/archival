@@ -54,7 +54,7 @@ export const Season = () => {
         primaryColor={season.primaryColor}
         shouldLogin={shouldShowLogin}
       >
-        <Box sx={{ position: "sticky", top: -60, zIndex: 2 }}>
+        <Box sx={{ position: "sticky", top: -70, zIndex: 2 }}>
           <AppBar position="static">
             <Toolbar sx={{ alignItems: "flex-end" }}>
               <Button
@@ -75,6 +75,7 @@ export const Season = () => {
                     width: "100%",
                     maxHeight: "60px",
                     minHeight: "60px",
+                    marginBottom: "10px",
                   }}
                 />
                 <Typography variant="h6" component="div">
@@ -147,7 +148,7 @@ export const Season = () => {
             ))}
           </Grid>
         ) : null}
-        <Box sx={{ marginY: 2, maxHeight: 250, overflow: "hidden" }}>
+        <Box sx={{ marginTop: 2, maxHeight: 250, overflow: "hidden" }}>
           {season.coverImage && (
             <img
               src={season.coverImage}
@@ -182,7 +183,7 @@ export const Season = () => {
             ))}
           </Grid>
         ) : null}
-        <PostUploader seasonId={season.slug} />
+        <PostUploader seasonId={season.$id} />
       </AppWrapper>
     </ThemeProvider>
   );

@@ -15,8 +15,8 @@ import { replaceRouteParams } from "../../helpers";
 import { theme } from "../../theme";
 import { CommentSection } from "./CommentSection";
 import { ReferenceSection } from "./ReferencesSection";
-import { useRequestReferences } from "../../requests/useRequestReference";
 import { useState } from "react";
+import { StylingSection } from "./Styling/StylingSection";
 
 export const Post = () => {
   const [shouldShowLogin, setShowLogin] = useState(false);
@@ -26,10 +26,11 @@ export const Post = () => {
     post?: IPost;
   };
 
-  const { data: references } = useRequestReferences(post?.$id);
-
   const season = post?.season;
   const brand = season?.brand;
+  const stylings = post?.stylings || [];
+  const references = post?.references || [];
+  const comments = post?.comments || [];
 
   if (!post || !brand) return <div>Not found</div>;
 
@@ -48,7 +49,7 @@ export const Post = () => {
   return (
     <ThemeProvider theme={modedTheme}>
       <AppWrapper shouldLogin={shouldShowLogin}>
-        <Box sx={{ position: "sticky", top: -60, zIndex: 2 }}>
+        <Box sx={{ position: "sticky", top: -70, zIndex: 2 }}>
           <AppBar position="static">
             <Toolbar sx={{ alignItems: "flex-end" }}>
               <Button
@@ -69,6 +70,7 @@ export const Post = () => {
                     width: "100%",
                     maxHeight: "60px",
                     minHeight: "60px",
+                    marginBottom: "10px",
                   }}
                 />
                 <Typography variant="h6" component="div">
@@ -110,6 +112,7 @@ export const Post = () => {
             {post.postTitle}
           </Box>
         </Box>
+        <StylingSection post={post} stylings={stylings} showLogin={showLogin} />
         <ReferenceSection
           post={post}
           references={references}
