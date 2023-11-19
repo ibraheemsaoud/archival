@@ -1,16 +1,8 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  ThemeProvider,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { Box, ThemeProvider } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import { IPost } from "../../interfaces/post.interface";
-import { AppWrapper } from "../../components";
+import { AppWrapper, TopToolbar } from "../../components";
 import { SEASON } from "../../consts/links.const";
-import { useNavigation } from "../../hooks";
 import { replaceRouteParams } from "../../helpers";
 import { theme } from "../../theme";
 import { CommentSection } from "./CommentSection";
@@ -20,24 +12,23 @@ import { StylingSection } from "./Styling/StylingSection";
 
 export const Post = () => {
   const [shouldShowLogin, setShowLogin] = useState(false);
-
-  const { onBack } = useNavigation();
   const { post } = useLoaderData() as any as {
     post?: IPost;
   };
 
+  console.log("post", post);
+
   const season = post?.season;
+
+  console.log("season", season);
+
   const brand = season?.brand;
   const stylings = post?.stylings || [];
   const references = post?.references || [];
-  const comments = post?.comments || [];
 
   if (!post || !brand) return <div>Not found</div>;
 
   const modedTheme = theme("light", season.primaryColor, season.secondaryColor);
-  const onBackClicked = () => {
-    onBack(replaceRouteParams(SEASON, { seasonId: season.slug }));
-  };
 
   const showLogin = () => {
     setShowLogin(false);
@@ -46,48 +37,16 @@ export const Post = () => {
     });
   };
 
+  const backAddress = replaceRouteParams(SEASON, { seasonId: season.slug });
+
   return (
     <ThemeProvider theme={modedTheme}>
       <AppWrapper shouldLogin={shouldShowLogin}>
-        <Box sx={{ position: "sticky", top: -70, zIndex: 2 }}>
-          <AppBar position="static">
-            <Toolbar sx={{ alignItems: "flex-end" }}>
-              <Button
-                size="small"
-                variant="outlined"
-                sx={{ marginBottom: 1 }}
-                onClick={onBackClicked}
-              >
-                Back
-              </Button>
-              <Box sx={{ margin: 1, textAlign: "center", flexGrow: 1 }}>
-                <Box
-                  sx={{
-                    backgroundImage: `url(${brand.logoLink})`,
-                    backgroundSize: "contain",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                    width: "100%",
-                    maxHeight: "60px",
-                    minHeight: "60px",
-                    marginBottom: "10px",
-                  }}
-                />
-                <Typography variant="h6" component="div">
-                  {season.name}
-                </Typography>
-              </Box>
-              <Button
-                size="small"
-                variant="outlined"
-                sx={{ marginBottom: 1, visibility: "hidden" }}
-                onClick={() => {}}
-              >
-                Chat
-              </Button>
-            </Toolbar>
-          </AppBar>
-        </Box>
+        <TopToolbar
+          backAddress={backAddress}
+          logo={brand.logoLink}
+          title={season.name}
+        />
         <Box
           sx={{
             width: "100%",

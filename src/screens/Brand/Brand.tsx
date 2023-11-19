@@ -1,9 +1,7 @@
 import {
-  AppBar,
   Box,
   Button,
   ThemeProvider,
-  Toolbar,
   Typography,
   useMediaQuery,
   useTheme,
@@ -11,8 +9,8 @@ import {
 import { useLoaderData } from "react-router-dom";
 import { theme } from "../../theme";
 import { IBrand } from "../../interfaces/brand.interface";
-import { AppWrapper, SeasonCard } from "../../components";
-import { useNavigation, useUser } from "../../hooks";
+import { AppWrapper, SeasonCard, TopToolbar } from "../../components";
+import { useUser } from "../../hooks";
 import { HOME } from "../../consts/links.const";
 import {
   useRequestFollow,
@@ -22,7 +20,6 @@ import {
 import { Masonry } from "@mui/lab";
 
 export const Brand = () => {
-  const { onBack } = useNavigation();
   const { brand } = useLoaderData() as any as {
     brand?: IBrand;
   };
@@ -60,53 +57,30 @@ export const Brand = () => {
   const lastSeason = brand.seasons[0];
   const restOfSeasons = brand.seasons.slice(1);
 
+  const secondaryButton = (
+    <Button
+      size="small"
+      variant={isFollowing ? "contained" : "outlined"}
+      sx={{
+        marginBottom: 1,
+        visibility: user ? "visible" : "hidden",
+      }}
+      onClick={onFollow}
+      disabled={isLoading || isLoadingFollowAction || isLoadingUnfollowAction}
+    >
+      {isFollowing ? "Following" : "Follow"}
+    </Button>
+  );
+
   return (
     <ThemeProvider theme={modedTheme}>
       <AppWrapper primaryColor={brand.primaryColor}>
-        <Box sx={{ position: "sticky", top: -60, zIndex: 2 }}>
-          <AppBar position="static">
-            <Toolbar sx={{ alignItems: "flex-end" }}>
-              <Button
-                size="small"
-                variant="outlined"
-                sx={{ marginBottom: 1 }}
-                onClick={() => onBack(HOME)}
-              >
-                Back
-              </Button>
-              <Box sx={{ margin: 1, textAlign: "center", flexGrow: 1 }}>
-                <Box
-                  sx={{
-                    backgroundImage: `url(${brand.logoLink})`,
-                    backgroundSize: "contain",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                    width: "100%",
-                    maxHeight: "60px",
-                    minHeight: "60px",
-                  }}
-                />
-                <Typography variant="h6" component="div">
-                  {brand.name}
-                </Typography>
-              </Box>
-              <Button
-                size="small"
-                variant={isFollowing ? "contained" : "outlined"}
-                sx={{
-                  marginBottom: 1,
-                  visibility: user ? "visible" : "hidden",
-                }}
-                onClick={onFollow}
-                disabled={
-                  isLoading || isLoadingFollowAction || isLoadingUnfollowAction
-                }
-              >
-                {isFollowing ? "Following" : "Follow"}
-              </Button>
-            </Toolbar>
-          </AppBar>
-        </Box>
+        <TopToolbar
+          backAddress={HOME}
+          logo={brand.logoLink}
+          title={brand.name}
+          secondaryButton={secondaryButton}
+        />
         {lastSeason && <SeasonCard season={lastSeason} brandView />}
         {restOfSeasons.length > 0 && (
           <Box marginX={1} marginY={2}>

@@ -1,20 +1,16 @@
 import {
-  AppBar,
   Box,
   Button,
   ButtonGroup,
   Grid,
   ThemeProvider,
-  Toolbar,
-  Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import { ISeason } from "../../interfaces/season.interface";
 import { theme } from "../../theme";
-import { AppWrapper, PostCard } from "../../components";
-import { useNavigation } from "../../hooks";
+import { AppWrapper, PostCard, TopToolbar } from "../../components";
 import { HOME } from "../../consts/links.const";
 import { PostUploader } from "./PostUploader";
 import { useState } from "react";
@@ -25,7 +21,6 @@ export const Season = () => {
   const [query, setQuery] = useState("");
   const [shouldShowLogin, setShowLogin] = useState(false);
 
-  const { onBack } = useNavigation();
   const { season } = useLoaderData() as any as {
     season?: ISeason;
   };
@@ -54,46 +49,11 @@ export const Season = () => {
         primaryColor={season.primaryColor}
         shouldLogin={shouldShowLogin}
       >
-        <Box sx={{ position: "sticky", top: -70, zIndex: 2 }}>
-          <AppBar position="static">
-            <Toolbar sx={{ alignItems: "flex-end" }}>
-              <Button
-                size="small"
-                variant="outlined"
-                sx={{ marginBottom: 1 }}
-                onClick={() => onBack(HOME)}
-              >
-                Back
-              </Button>
-              <Box sx={{ margin: 1, textAlign: "center", flexGrow: 1 }}>
-                <Box
-                  sx={{
-                    backgroundImage: `url(${brand.logoLink})`,
-                    backgroundSize: "contain",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                    width: "100%",
-                    maxHeight: "60px",
-                    minHeight: "60px",
-                    marginBottom: "10px",
-                  }}
-                />
-                <Typography variant="h6" component="div">
-                  {season.name}
-                </Typography>
-              </Box>
-
-              <Button
-                size="small"
-                variant="outlined"
-                sx={{ marginBottom: 1, visibility: "hidden" }}
-                onClick={() => {}}
-              >
-                Chat
-              </Button>
-            </Toolbar>
-          </AppBar>
-        </Box>
+        <TopToolbar
+          backAddress={HOME}
+          logo={brand.logoLink}
+          title={season.name}
+        />
         <Box
           sx={{ margin: 2, textAlign: "right", marginRight: isMobile ? 2 : 4 }}
         >
