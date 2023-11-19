@@ -16,12 +16,7 @@ export const Post = () => {
     post?: IPost;
   };
 
-  console.log("post", post);
-
   const season = post?.season;
-
-  console.log("season", season);
-
   const brand = season?.brand;
   const stylings = post?.stylings || [];
   const references = post?.references || [];
