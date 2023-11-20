@@ -8,7 +8,7 @@ export const TopToolbar = ({
   secondaryButton,
 }: {
   backAddress: string;
-  logo: string;
+  logo?: string;
   title: string;
   secondaryButton?: React.ReactNode;
 }) => {

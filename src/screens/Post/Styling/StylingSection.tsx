@@ -4,9 +4,11 @@ import { Styling } from "./Styling";
 import { useState } from "react";
 import { IPost } from "../../../interfaces/post.interface";
 import { StylingCreation } from "./StylingCreation";
-import { StylingDisplay } from "./StylingDisplay";
 import { useUser } from "../../../hooks";
 import { ISeason } from "../../../interfaces/season.interface";
+import { replaceRouteParams } from "../../../helpers";
+import { Link } from "react-router-dom";
+import { STYLING } from "../../../consts/links.const";
 
 export const StylingSection = ({
   stylings,
@@ -20,12 +22,7 @@ export const StylingSection = ({
   showLogin: () => void;
 }) => {
   const { user } = useUser();
-  const [selectedStyling, setSelectedStyling] = useState<IStyling>();
   const [StylingCreationOpen, setStylingCreationOpen] = useState(false);
-
-  const onStylingClicked = (Styling: IStyling) => {
-    setSelectedStyling(Styling);
-  };
 
   const onStylingCreationClicked = () => {
     if (!user) {
@@ -62,11 +59,12 @@ export const StylingSection = ({
       >
         {stylings?.map((styling: IStyling) => {
           return (
-            <Styling
-              styling={styling}
+            <Link
+              to={replaceRouteParams(STYLING, { stylingId: styling.$id })}
               key={styling.$id}
-              onStylingClicked={onStylingClicked}
-            />
+            >
+              <Styling styling={styling} />
+            </Link>
           );
         })}
         <Button
@@ -85,22 +83,6 @@ export const StylingSection = ({
           Add
         </Button>
       </Box>
-      <Dialog
-        open={!!selectedStyling}
-        onClose={() => setSelectedStyling(undefined)}
-        fullWidth
-        PaperProps={{
-          sx: {
-            backgroundColor: "#ffffff",
-          },
-        }}
-      >
-        <StylingDisplay
-          styling={selectedStyling}
-          postPictureLink={post?.pictureLink}
-          onDone={() => setSelectedStyling(undefined)}
-        />
-      </Dialog>
       <Dialog
         open={StylingCreationOpen}
         onClose={onDone}

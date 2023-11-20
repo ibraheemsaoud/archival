@@ -5,6 +5,7 @@ import {
   POST,
   PROFILE,
   SEASON,
+  STYLING,
   VERIFICATION,
 } from "../../consts/links.const";
 import { Profile } from "../../screens/Profile";
@@ -14,6 +15,7 @@ import { Home, homeLoader } from "../../screens/Home";
 import { Season, seasonsLoader } from "../../screens/Season";
 import { Post, postLoader } from "../../screens/Post";
 import { Brand, brandLoader } from "../../screens/Brand";
+import { Styling, stylingLoader } from "../../screens/Styling";
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -46,6 +48,11 @@ export const Router = () => {
       path: BRAND,
       element: <Brand />,
       loader: brandLoader(),
+    },
+    {
+      path: STYLING,
+      element: <Styling />,
+      loader: stylingLoader(),
     },
   ]);
 

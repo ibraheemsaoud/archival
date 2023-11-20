@@ -1,13 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { IStyling } from "../../../interfaces/styling.interface";
 
-export const Styling = ({
-  styling,
-  onStylingClicked,
-}: {
-  styling: IStyling;
-  onStylingClicked: (styling: IStyling) => void;
-}) => {
+export const Styling = ({ styling }: { styling: IStyling }) => {
   const commonProps: any = {
     width: "75px",
     height: "100px",
@@ -33,10 +27,9 @@ export const Styling = ({
         maxWidth: 108,
         maxHeight: 144,
         minHeight: 144,
-        marginTop: '12px',
-        marginBottom: '33px',
+        marginTop: "12px",
+        marginBottom: "33px",
       }}
-      onClick={() => onStylingClicked(styling)}
     >
       <Box
         sx={{

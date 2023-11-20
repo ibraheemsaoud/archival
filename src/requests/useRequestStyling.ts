@@ -4,6 +4,29 @@ import api from "./apis";
 import { Permission, Query, Role } from "appwrite";
 import { IStyling, IStylingCreate } from "../interfaces/styling.interface";
 
+export const useRequestStyling = (stylingId?: string) => {
+  return useQuery<IStyling>(
+    ["styling", stylingId],
+    async () => {
+      const data = await api.getDocument(
+        Server.databaseID,
+        Server.stylingCollectionId,
+        stylingId!
+      );
+      if (data) {
+        return data as IStyling;
+      }
+      throw new Error("Styling not found");
+    },
+    {
+      enabled: !!stylingId,
+      refetchOnMount: true,
+      refetchOnWindowFocus: false,
+      initialData: undefined,
+    }
+  );
+};
+
 export const useRequestStylingByUserId = (userId?: string) => {
   return useQuery<IStyling[]>(
     ["stylingsList"],

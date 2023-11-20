@@ -1,4 +1,4 @@
 export interface IUserSimpleProfile {
-  displayName: string;
+  userName: string;
   imageURL: string;
 }

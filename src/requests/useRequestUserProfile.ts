@@ -3,7 +3,7 @@ import { Server } from "../config/server";
 import { Client, Functions } from "appwrite";
 import { IUserSimpleProfile } from "../interfaces/user.interface";
 
-export const useRequestUserProfile = (userId: string) => {
+export const useRequestUserProfile = (userId?: string) => {
   return useQuery<IUserSimpleProfile>(
     ["userProfile", userId],
     async () => {
@@ -27,7 +27,7 @@ export const useRequestUserProfile = (userId: string) => {
       refetchOnWindowFocus: false,
       keepPreviousData: true,
       initialData: {
-        displayName: "",
+        userName: "",
         imageURL: "",
       },
     }
