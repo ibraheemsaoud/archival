@@ -4,14 +4,14 @@ import api from "./apis";
 import { Permission, Role } from "appwrite";
 import { IPost, IPostCreate } from "../interfaces/post.interface";
 
-export const useRequestPost = (postId: string) => {
+export const useRequestPost = (postId?: string) => {
   return useQuery<IPost>(
     ["post", postId],
     async () => {
       const data = await api.getDocument(
         Server.databaseID,
         Server.postsCollectionId,
-        postId
+        postId!
       );
       if (data) {
         return data as IPost;

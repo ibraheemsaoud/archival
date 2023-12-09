@@ -19,6 +19,7 @@ export interface IPost extends IAppWrite {
   commentsCount: number;
   referencesCount: number;
   stylings: IStyling[];
+  secondaryStylings: IStyling[];
   references: IReference[];
   comments: IComment[];
 }

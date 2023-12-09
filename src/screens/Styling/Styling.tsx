@@ -5,8 +5,12 @@ import {
   TopToolbar,
   UserProfile,
 } from "../../components";
-import { Box, Button, Typography } from "@mui/material";
-import { useLoaderData } from "react-router-dom";
+import { Box, Button, Link, Typography } from "@mui/material";
+import {
+  useLoaderData,
+  Link as NavLink,
+  useSearchParams,
+} from "react-router-dom";
 import { useUser } from "../../hooks";
 import { replaceRouteParams } from "../../helpers";
 import { POST } from "../../consts/links.const";
@@ -14,17 +18,21 @@ import {
   useRequestDeleteStyling,
   useRequestStyling,
 } from "../../requests/useRequestStyling";
-import { useRequestSeason } from "../../requests/useRequestSeason";
 import { useRequestUserProfile } from "../../requests/useRequestUserProfile";
+import { useRequestPost } from "../../requests/useRequestPost";
 
 export const Styling = () => {
+  const [searchParams] = useSearchParams();
   const { user } = useUser();
   const { stylingId } = useLoaderData() as any as {
     stylingId: string;
   };
 
   const { data: styling, isLoading, error } = useRequestStyling(stylingId);
-  const { data: season } = useRequestSeason(styling?.post.season.$id);
+
+  const postId = searchParams.get("postIdParam") || styling?.mainPost?.$id;
+
+  const { data: post } = useRequestPost(postId);
   const { data: userProfile } = useRequestUserProfile(styling?.userId);
   const { mutate: onDelete } = useRequestDeleteStyling();
 
@@ -32,42 +40,60 @@ export const Styling = () => {
     onDelete(stylingId);
   };
 
-  if (isLoading || !styling) return <Loader />;
+  if (isLoading || !styling || !post) return <Loader />;
 
-  const backAddress = replaceRouteParams(POST, { postId: styling.post.$id });
+  const isMainPost = styling.mainPost?.$id === postId;
+
+  const backAddress = replaceRouteParams(POST, {
+    postId: post.$id,
+  });
 
   return (
     <AppWrapper>
       <TopToolbar
         backAddress={backAddress}
-        logo={season?.brand.logoLink}
-        title={styling.post.season.name}
+        logo={post.season.brand.logoLink}
+        title={post.season.name}
       />
       <Error error={error} />
       <Box>
-        <Box display="flex">
-          <Box
-            sx={{
-              backgroundImage: `url(${styling.post.pictureLink})`,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              flexGrow: 1,
-              height: "400px",
-              backgroundPositionX: "center",
-              backgroundPositionY: "top",
-            }}
-          />
+        <Box position="relative">
           <Box
             sx={{
               backgroundImage: `url(${styling.imageUrl})`,
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
-              flexGrow: 1,
-              height: "400px",
+              height: "600px",
+              maxWidth: "70%",
+              marginLeft: "auto",
+              marginRight: "auto",
               backgroundPositionX: "center",
               backgroundPositionY: "top",
             }}
           />
+          <Link
+            underline="hover"
+            component={NavLink}
+            to={replaceRouteParams(POST, { postId: post.$id })}
+            sx={{ flex: 1, paddingLeft: 1 }}
+          >
+            <Box
+              sx={{
+                backgroundImage: `url(${post.pictureLink})`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                height: "150px",
+                backgroundPositionX: "center",
+                backgroundPositionY: "top",
+                display: "fixed",
+                position: "absolute",
+                bottom: 8,
+                right: 16,
+                width: 86,
+                borderRadius: 2,
+              }}
+            />
+          </Link>
         </Box>
         <Box marginX={2} marginBottom={4}>
           <Box

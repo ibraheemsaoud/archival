@@ -9,7 +9,8 @@ export interface IStylingCreate {
 }
 
 export interface IStyling extends IAppWrite {
-  post: IPost;
+  mainPost: IPost;
+  posts: IPost[];
   userId: string;
   imageUrl: string;
   description: string;
