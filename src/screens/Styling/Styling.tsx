@@ -5,11 +5,11 @@ import {
   TopToolbar,
   UserProfile,
 } from "../../components";
-import { Box, Button, Link, Typography } from "@mui/material";
+import { Box, Button, Link } from "@mui/material";
 import {
   useLoaderData,
-  Link as NavLink,
   useSearchParams,
+  Link as NavLink,
 } from "react-router-dom";
 import { useUser } from "../../hooks";
 import { replaceRouteParams } from "../../helpers";
@@ -20,6 +20,7 @@ import {
 } from "../../requests/useRequestStyling";
 import { useRequestUserProfile } from "../../requests/useRequestUserProfile";
 import { useRequestPost } from "../../requests/useRequestPost";
+import { PostsSection } from "./PostsSection";
 
 export const Styling = () => {
   const [searchParams] = useSearchParams();
@@ -42,8 +43,6 @@ export const Styling = () => {
 
   if (isLoading || !styling || !post) return <Loader />;
 
-  const isMainPost = styling.mainPost?.$id === postId;
-
   const backAddress = replaceRouteParams(POST, {
     postId: post.$id,
   });
@@ -57,6 +56,21 @@ export const Styling = () => {
       />
       <Error error={error} />
       <Box>
+        <Box
+          sx={{
+            paddingY: 1,
+            borderBottom: `1px solid ${post.season?.secondaryColor}`,
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <UserProfile user={userProfile} />
+          {user?.$id === styling.userId && (
+            <Button color="red" size="small" onClick={deleteStyling(stylingId)}>
+              delete
+            </Button>
+          )}
+        </Box>
         <Box position="relative">
           <Box
             sx={{
@@ -91,37 +105,12 @@ export const Styling = () => {
                 right: 16,
                 width: 86,
                 borderRadius: 2,
+                boxShadow: "black 0 0 10px 0",
               }}
             />
           </Link>
         </Box>
-        <Box marginX={2} marginBottom={4}>
-          <Box
-            sx={{
-              marginY: 1,
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <UserProfile user={userProfile} />
-            <Box>
-              {user?.$id === styling.userId && (
-                <Button
-                  color="red"
-                  size="small"
-                  onClick={deleteStyling(stylingId)}
-                >
-                  delete
-                </Button>
-              )}
-            </Box>
-          </Box>
-          <Box sx={{ margin: 1 }}>
-            <Typography variant="body2" component="div">
-              {styling.description}
-            </Typography>
-          </Box>
-        </Box>
+        <PostsSection styling={styling} post={post} />
       </Box>
     </AppWrapper>
   );

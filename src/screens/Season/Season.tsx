@@ -10,12 +10,11 @@ import {
 import { useLoaderData } from "react-router-dom";
 import { ISeason } from "../../interfaces/season.interface";
 import { theme } from "../../theme";
-import { AppWrapper, Loader, PostCard, TopToolbar } from "../../components";
+import { AppWrapper, Loader, PostCard, ReferenceSection, TopToolbar } from "../../components";
 import { HOME } from "../../consts/links.const";
 import { PostUploader } from "./PostUploader";
 import { useState } from "react";
 import { Query } from "appwrite";
-import { ReferenceSection } from "../Post/ReferencesSection";
 
 export const Season = () => {
   const [query, setQuery] = useState("");

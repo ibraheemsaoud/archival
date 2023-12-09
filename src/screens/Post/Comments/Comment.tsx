@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
-import { IComment } from "../../interfaces/comment.interface";
-import { useUser } from "../../hooks";
-import { useRequestUserProfile } from "../../requests/useRequestUserProfile";
+import { IComment } from "../../../interfaces/comment.interface";
+import { useUser } from "../../../hooks";
+import { useRequestUserProfile } from "../../../requests/useRequestUserProfile";
 
 export const Comment = ({
   comment,

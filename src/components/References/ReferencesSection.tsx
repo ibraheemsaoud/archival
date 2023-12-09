@@ -3,7 +3,7 @@ import { IReference } from "../../interfaces/reference.interface";
 import { Reference } from "./Reference";
 import { useState } from "react";
 import { IPost } from "../../interfaces/post.interface";
-import { ReferenceCreation } from "./RefernceCreation";
+import { ReferenceCreation } from "./ReferenceCreation";
 import { ReferenceDisplay } from "./ReferenceDisplay";
 import { useUser } from "../../hooks";
 import { ISeason } from "../../interfaces/season.interface";

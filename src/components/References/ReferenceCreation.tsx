@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { UploadImage, useUploadImage } from "../../components/UploadImage";
+import { UploadImage, useUploadImage } from "../UploadImage";
 import { useRequestReference } from "../../requests/useRequestReference";
 import { useUser } from "../../hooks";
 import { requestUploadFile } from "../../requests/requestUploadFile";

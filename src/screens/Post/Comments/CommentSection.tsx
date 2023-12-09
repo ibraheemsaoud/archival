@@ -1,15 +1,15 @@
 import { ChevronRight } from "@mui/icons-material";
 import { Box, TextField, Button, Typography } from "@mui/material";
-import { IComment } from "../../interfaces/comment.interface";
+import { IComment } from "../../../interfaces/comment.interface";
 import { useState } from "react";
 import {
   useRequestComments,
   useRequestCreateComment,
   useRequestDeleteComment,
-} from "../../requests/useRequestComment";
-import { useUser } from "../../hooks";
+} from "../../../requests/useRequestComment";
+import { useUser } from "../../../hooks";
 import { Comment } from "./Comment";
-import { IPost } from "../../interfaces/post.interface";
+import { IPost } from "../../../interfaces/post.interface";
 
 export const CommentSection = ({
   post,
