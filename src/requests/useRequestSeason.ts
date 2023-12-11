@@ -2,23 +2,26 @@ import { useMutation, useQuery } from "react-query";
 import { Server } from "../config/server";
 import api from "./apis";
 import { ISeason, ISeasonCreate } from "../interfaces/season.interface";
+import { Query } from "appwrite";
 
-export const useRequestSeason = (seasonId?: string) => {
+export const useRequestSeason = (slug?: string) => {
   return useQuery<ISeason>(
-    ["season", seasonId],
+    ["season", slug],
     async () => {
-      const data = await api.getDocument(
+      const data = await api.listDocuments(
         Server.databaseID,
         Server.seasonsCollectionId,
-        seasonId!
+        [Query.equal("slug", [slug!]), Query.equal("isPublic", [true])]
       );
-      if (data) {
-        return data as ISeason;
+      if (data.documents?.length > 0) {
+        return data.documents[0] as ISeason;
       }
-      throw new Error("Season not found");
+      throw new Error(
+        "failed to load season, server might be down or you loaded the incorrect season"
+      );
     },
     {
-      enabled: !!seasonId,
+      enabled: !!slug,
       refetchOnMount: true,
       refetchOnWindowFocus: false,
       initialData: undefined,

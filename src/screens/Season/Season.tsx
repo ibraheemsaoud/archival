@@ -8,27 +8,36 @@ import {
   useTheme,
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
-import { ISeason } from "../../interfaces/season.interface";
 import { theme } from "../../theme";
-import { AppWrapper, Loader, PostCard, ReferenceSection, TopToolbar } from "../../components";
+import {
+  AppWrapper,
+  Loader,
+  PostCard,
+  ReferenceSection,
+  TopToolbar,
+} from "../../components";
 import { HOME } from "../../consts/links.const";
 import { PostUploader } from "./PostUploader";
 import { useState } from "react";
 import { Query } from "appwrite";
+import { useRequestSeason } from "../../requests/useRequestSeason";
 
 export const Season = () => {
   const [query, setQuery] = useState("");
   const [shouldShowLogin, setShowLogin] = useState(false);
 
-  const { season } = useLoaderData() as any as {
-    season?: ISeason;
+  const { seasonId } = useLoaderData() as any as {
+    seasonId?: string;
   };
-  const { brand, posts } = season || {};
+
+  const { data: season } = useRequestSeason(seasonId);
 
   const theme2 = useTheme();
   const isMobile = useMediaQuery(theme2.breakpoints.down("sm"));
 
-  if (!season || !brand) return <Loader />;
+  if (!season) return <Loader />;
+
+  const { brand, posts } = season;
 
   const modedTheme = theme("light", season.primaryColor, season.secondaryColor);
 
@@ -142,7 +151,7 @@ export const Season = () => {
             ))}
           </Grid>
         ) : null}
-        <PostUploader seasonId={season.$id} />
+        <PostUploader seasonId={season.$id} seasonSlug={season.slug} />
       </AppWrapper>
     </ThemeProvider>
   );

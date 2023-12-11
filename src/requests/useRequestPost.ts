@@ -31,17 +31,18 @@ export const useRequestCreatePost = () => {
   const queryClient = useQueryClient();
 
   return useMutation(["postList"], async (post: IPostCreate) => {
+    const {seasonSlug, ...postData} = post;
     const data = await api.createDocument(
       Server.databaseID,
       Server.postsCollectionId,
-      post,
+      postData,
       [
         Permission.update(Role.user(post.userId)),
         Permission.delete(Role.user(post.userId)),
       ]
     );
     queryClient.invalidateQueries(["postList"]);
-    queryClient.invalidateQueries(["seasonData", post.season]);
+    queryClient.invalidateQueries(["season", seasonSlug]);
     return data;
   });
 };

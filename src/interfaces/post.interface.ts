@@ -6,6 +6,7 @@ import { IStyling } from "./styling.interface";
 
 export interface IPostCreate {
   season: string;
+  seasonSlug: string;
   pictureLink: string;
   postTitle: string;
   userId: string;

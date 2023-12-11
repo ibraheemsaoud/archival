@@ -7,7 +7,13 @@ import { toast } from "react-hot-toast";
 import { requestUploadFile } from "../../requests/requestUploadFile";
 import { Server } from "../../config/server";
 
-export const PostUploader = ({ seasonId }: { seasonId: string }) => {
+export const PostUploader = ({
+  seasonId,
+  seasonSlug,
+}: {
+  seasonId: string;
+  seasonSlug: string;
+}) => {
   const [title, setTitle] = useState("");
   const [outsideLink, setOutsideLink] = useState("");
   const { file, onChangeFile, onReset, pictureUrl, onRemoveFile } =
@@ -26,6 +32,7 @@ export const PostUploader = ({ seasonId }: { seasonId: string }) => {
         postTitle: title,
         pictureLink: pictureLink || outsideLink,
         season: seasonId,
+        seasonSlug: seasonSlug,
         userId: user.$id,
       });
     }
