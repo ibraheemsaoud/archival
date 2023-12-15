@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Server } from "../config/server";
 import api from "./apis";
-import { Permission, Role } from "appwrite";
+import { Permission, Query, Role } from "appwrite";
 import { IPost, IPostCreate } from "../interfaces/post.interface";
 
 export const useRequestPost = (postId?: string) => {
@@ -26,6 +26,31 @@ export const useRequestPost = (postId?: string) => {
     }
   );
 };
+
+
+export const useRequestSearchPosts = (query?: string) => {
+  return useQuery<IPost[]>(
+    ["postList", query],
+    async () => {
+      const data = await api.listDocuments(
+        Server.databaseID,
+        Server.postsCollectionId,
+        [Query.search("search", query!)]
+      );
+      if (data) {
+        return data.documents as IPost[];
+      }
+      throw new Error("failed to load search posts, server might be down");
+    },
+    {
+      enabled: !!query,
+      refetchOnMount: true,
+      refetchOnWindowFocus: false,
+      initialData: [],
+    }
+  );
+};
+
 
 export const useRequestCreatePost = () => {
   const queryClient = useQueryClient();

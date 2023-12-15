@@ -1,4 +1,9 @@
-import { AppWrapper, BrandCard, FashionWeekCard, Loader } from "../../components";
+import {
+  AppWrapper,
+  BrandCard,
+  FashionWeekCard,
+  Loader,
+} from "../../components";
 import { Box } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import { IBrand } from "../../interfaces/brand.interface";
@@ -11,6 +16,10 @@ export const Home = () => {
   };
 
   if (!brands) return <Loader />;
+
+  // const onSelect = (post: IPost | null) => {
+  //   console.log(post);
+  // }
 
   return (
     <AppWrapper>
@@ -28,6 +37,7 @@ export const Home = () => {
           </Box>
         ))}
       </Box>
+      {/* <PostSearch onSelect={onSelect} /> */}
       {fashionWeeks?.map((fashionWeek) => (
         <FashionWeekCard fashionWeek={fashionWeek} key={fashionWeek.$id} />
       ))}
