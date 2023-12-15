@@ -7,19 +7,26 @@ import { useDebounce } from "use-debounce";
 
 export const PostSearch = ({
   onSelect,
+  excludedIds,
+  isDisabled,
 }: {
   onSelect: (post: IPost | null) => void;
+  excludedIds?: string[];
+  isDisabled?: boolean;
 }) => {
   const [query, setQuery] = useState("");
   const [debouncedText] = useDebounce(query, 300);
 
-  const { data, isLoading, error, isFetching } = useRequestSearchPosts(debouncedText);
+  const { data, isLoading, error, isFetching } =
+    useRequestSearchPosts(debouncedText);
 
   if (error) {
     return <Error error={error} />;
   }
 
-  const posts = data || ([] as IPost[]);
+  const posts = (data || ([] as IPost[])).filter(
+    (post) => !excludedIds?.includes(post.$id)
+  );
 
   return (
     <Autocomplete
@@ -36,6 +43,7 @@ export const PostSearch = ({
       groupBy={(post) => post.season.brand.name}
       getOptionLabel={(post) => `${post.postTitle} - ${post.season.name}`}
       sx={{ width: 300 }}
+      disabled={isDisabled}
       onInputChange={(event, newInputValue) => {
         setQuery(newInputValue);
       }}

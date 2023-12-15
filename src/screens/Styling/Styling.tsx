@@ -21,6 +21,7 @@ import {
 import { useRequestUserProfile } from "../../requests/useRequestUserProfile";
 import { useRequestPost } from "../../requests/useRequestPost";
 import { PostsSection } from "./PostsSection";
+import { PostAddition } from "./PostsSection/PostAddition";
 
 export const Styling = () => {
   const [searchParams] = useSearchParams();
@@ -42,6 +43,8 @@ export const Styling = () => {
   };
 
   if (isLoading || !styling || !post) return <Loader />;
+
+  const isUserCreator = user?.$id === styling.userId;
 
   const backAddress = replaceRouteParams(POST, {
     postId: post.$id,
@@ -65,7 +68,7 @@ export const Styling = () => {
           }}
         >
           <UserProfile user={userProfile} />
-          {user?.$id === styling.userId && (
+          {isUserCreator && (
             <Button color="red" size="small" onClick={deleteStyling(stylingId)}>
               delete
             </Button>
@@ -110,7 +113,8 @@ export const Styling = () => {
             />
           </Link>
         </Box>
-        <PostsSection styling={styling} post={post} />
+        <PostsSection styling={styling} post={post} isUserCreator={isUserCreator} />
+        {isUserCreator ? <PostAddition styling={styling} /> : null}
       </Box>
     </AppWrapper>
   );

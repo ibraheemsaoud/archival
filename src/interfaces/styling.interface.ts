@@ -3,6 +3,7 @@ import { IPost } from "./post.interface";
 
 export interface IStylingCreate {
   mainPost?: string;
+  posts?: string[];
   userId: string;
   imageUrl: string;
   description: string;

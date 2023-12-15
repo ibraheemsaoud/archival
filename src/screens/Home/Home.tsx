@@ -17,10 +17,6 @@ export const Home = () => {
 
   if (!brands) return <Loader />;
 
-  // const onSelect = (post: IPost | null) => {
-  //   console.log(post);
-  // }
-
   return (
     <AppWrapper>
       <Box
@@ -37,7 +33,6 @@ export const Home = () => {
           </Box>
         ))}
       </Box>
-      {/* <PostSearch onSelect={onSelect} /> */}
       {fashionWeeks?.map((fashionWeek) => (
         <FashionWeekCard fashionWeek={fashionWeek} key={fashionWeek.$id} />
       ))}

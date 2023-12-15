@@ -70,6 +70,74 @@ export const useRequestCreateStyling = () => {
   });
 };
 
+export const useRequestAddPostToStyling = (styling: IStyling) => {
+  const queryClient = useQueryClient();
+
+  return useMutation(["stylingList"], async (postId: string) => {
+    // don't double add posts
+    if (styling.posts.findIndex((post) => post.$id === postId) !== -1) {
+      return undefined;
+    }
+    if (styling.mainPost.$id === postId) {
+      return undefined;
+    }
+
+    const posts = styling.posts.map(post => post.$id)
+    posts.push(postId);
+
+    const data = await api.updateDocument(
+      Server.databaseID,
+      Server.stylingCollectionId,
+      styling.$id,
+      {
+        userId: styling.userId,
+        description: styling.description,
+        imageUrl: styling.imageUrl,
+        mainPost: styling.mainPost.$id,
+        posts,
+      } as IStylingCreate,
+      [
+        Permission.update(Role.user(styling.userId)),
+        Permission.delete(Role.user(styling.userId)),
+      ]
+    );
+    queryClient.invalidateQueries(["styling", styling.$id]);
+    queryClient.invalidateQueries(["post", postId]);
+    return data;
+  });
+};
+
+
+export const useRequestRemovePostFromStyling = (styling: IStyling) => {
+  const queryClient = useQueryClient();
+
+  return useMutation(["stylingList"], async (postId: string) => {
+    let posts = styling.posts.map(post => post.$id)
+    posts = posts.filter(post => post !== postId)
+
+    const data = await api.updateDocument(
+      Server.databaseID,
+      Server.stylingCollectionId,
+      styling.$id,
+      {
+        userId: styling.userId,
+        description: styling.description,
+        imageUrl: styling.imageUrl,
+        mainPost: styling.mainPost.$id,
+        posts,
+      } as IStylingCreate,
+      [
+        Permission.update(Role.user(styling.userId)),
+        Permission.delete(Role.user(styling.userId)),
+      ]
+    );
+    queryClient.invalidateQueries(["styling", styling.$id]);
+    queryClient.invalidateQueries(["post", postId]);
+    return data;
+  });
+};
+
+
 export const useRequestDeleteStyling = () => {
   const queryClient = useQueryClient();
 

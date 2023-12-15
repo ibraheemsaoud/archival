@@ -6,7 +6,6 @@ export const Styling = ({ styling }: { styling: IStyling }) => {
     width: "75px",
     height: "100px",
     borderRadius: 2,
-    // margin: 1,
     overflow: "hidden",
   };
   const imageProps = styling.imageUrl
