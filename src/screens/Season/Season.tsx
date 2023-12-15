@@ -151,7 +151,7 @@ export const Season = () => {
             ))}
           </Grid>
         ) : null}
-        <PostUploader seasonId={season.$id} seasonSlug={season.slug} />
+        <PostUploader season={season} />
       </AppWrapper>
     </ThemeProvider>
   );

@@ -6,13 +6,12 @@ import { useUser } from "../../hooks";
 import { toast } from "react-hot-toast";
 import { requestUploadFile } from "../../requests/requestUploadFile";
 import { Server } from "../../config/server";
+import { ISeason } from "../../interfaces/season.interface";
 
 export const PostUploader = ({
-  seasonId,
-  seasonSlug,
+  season,
 }: {
-  seasonId: string;
-  seasonSlug: string;
+  season: ISeason
 }) => {
   const [title, setTitle] = useState("");
   const [outsideLink, setOutsideLink] = useState("");
@@ -31,9 +30,10 @@ export const PostUploader = ({
       mutate({
         postTitle: title,
         pictureLink: pictureLink || outsideLink,
-        season: seasonId,
-        seasonSlug: seasonSlug,
+        season: season.$id,
+        seasonSlug: season.slug,
         userId: user.$id,
+        search: `${title} ${season.name} ${season.brand?.name}`,
       });
     }
   };

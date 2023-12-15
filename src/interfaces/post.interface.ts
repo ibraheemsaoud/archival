@@ -10,6 +10,7 @@ export interface IPostCreate {
   pictureLink: string;
   postTitle: string;
   userId: string;
+  search?: string;
 }
 
 export interface IPost extends IAppWrite {
