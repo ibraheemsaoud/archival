@@ -24,7 +24,7 @@ export const ReferenceCreation = ({
   const { user } = useUser();
 
   const onCreate = async () => {
-    if (!user || !pictureUrl) return;
+    if (!user || !(pictureUrl || outsideLink)) return;
     let pictureLink = outsideLink;
     if (outsideLink?.length === 0) {
       pictureLink = (await requestUploadFile(file, user.$id)) || "";

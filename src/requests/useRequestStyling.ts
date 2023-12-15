@@ -65,6 +65,7 @@ export const useRequestCreateStyling = () => {
       ]
     );
     queryClient.invalidateQueries(["stylingList"]);
+    queryClient.invalidateQueries(["post", styling.mainPost]);
     return data;
   });
 };

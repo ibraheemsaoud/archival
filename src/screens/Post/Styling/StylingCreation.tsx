@@ -7,11 +7,9 @@ import { useRequestCreateStyling } from "../../../requests/useRequestStyling";
 
 export const StylingCreation = ({
   postId,
-  seasonId,
   onDone,
 }: {
   postId?: string;
-  seasonId?: string;
   onDone: () => void;
 }) => {
   const [description, setDescription] = useState("");
@@ -22,14 +20,14 @@ export const StylingCreation = ({
   const { user } = useUser();
 
   const onCreate = async () => {
-    if (!user || !pictureUrl) return;
+    if (!user || !(pictureUrl || outsideLink)) return;
     let pictureLink = outsideLink;
     if (outsideLink?.length === 0) {
       pictureLink = (await requestUploadFile(file, user.$id)) || "";
     }
     mutate({
       description,
-      post: postId,
+      mainPost: postId,
       userId: user.$id,
       imageUrl: pictureLink,
     });

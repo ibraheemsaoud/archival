@@ -95,7 +95,6 @@ export const StylingSection = ({
       >
         <StylingCreation
           postId={post?.$id}
-          seasonId={season?.$id}
           onDone={onDone}
         />
       </Dialog>
