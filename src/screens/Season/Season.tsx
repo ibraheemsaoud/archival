@@ -18,26 +18,32 @@ import {
 } from "../../components";
 import { HOME } from "../../consts/links.const";
 import { PostUploader } from "./PostUploader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Query } from "appwrite";
 import { useRequestSeason } from "../../requests/useRequestSeason";
+import { useRequestPosts } from "../../requests/useRequestPost";
 
 export const Season = () => {
   const [query, setQuery] = useState("");
   const [shouldShowLogin, setShowLogin] = useState(false);
 
-  const { seasonId } = useLoaderData() as any as {
+  const { seasonId: seasonSlug } = useLoaderData() as any as {
     seasonId?: string;
   };
 
-  const { data: season } = useRequestSeason(seasonId);
+  const { data: season } = useRequestSeason(seasonSlug);
+  const { data: posts, refetch } = useRequestPosts(season?.$id, query);
+
+  useEffect(() => {
+    refetch();
+  }, [query, refetch]);
 
   const theme2 = useTheme();
   const isMobile = useMediaQuery(theme2.breakpoints.down("sm"));
 
   if (!season) return <Loader />;
 
-  const { brand, posts } = season;
+  const { brand } = season;
 
   const modedTheme = theme("light", season.primaryColor, season.secondaryColor);
 
@@ -72,6 +78,17 @@ export const Season = () => {
               variant={query === "" ? "contained" : "outlined"}
             >
               Normal
+            </Button>
+            <Button
+              onClick={() => setQuery(Query.orderDesc("stylingsCount"))}
+              size="small"
+              variant={
+                query === Query.orderDesc("stylingsCount")
+                  ? "contained"
+                  : "outlined"
+              }
+            >
+              Styled
             </Button>
             <Button
               onClick={() => setQuery(Query.orderDesc("referencesCount"))}

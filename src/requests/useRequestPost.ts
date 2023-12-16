@@ -27,7 +27,6 @@ export const useRequestPost = (postId?: string) => {
   );
 };
 
-
 export const useRequestSearchPosts = (query?: string) => {
   return useQuery<IPost[]>(
     ["postList", query],
@@ -51,12 +50,11 @@ export const useRequestSearchPosts = (query?: string) => {
   );
 };
 
-
 export const useRequestCreatePost = () => {
   const queryClient = useQueryClient();
 
   return useMutation(["postList"], async (post: IPostCreate) => {
-    const {seasonSlug, ...postData} = post;
+    const { seasonSlug, ...postData } = post;
     const data = await api.createDocument(
       Server.databaseID,
       Server.postsCollectionId,
@@ -70,4 +68,32 @@ export const useRequestCreatePost = () => {
     queryClient.invalidateQueries(["season", seasonSlug]);
     return data;
   });
+};
+
+export const useRequestPosts = (seasonId?: string, query?: string) => {
+  const requestQuery = seasonId ? [Query.equal("season", [seasonId])] : [];
+  if (query) {
+    requestQuery.push(query);
+  }
+  console.log(requestQuery);
+  return useQuery<IPost[]>(
+    ["postList", seasonId],
+    async () => {
+      const data = await api.listDocuments(
+        Server.databaseID,
+        Server.postsCollectionId,
+        requestQuery
+      );
+      if (data) {
+        return data.documents as IPost[];
+      }
+      throw new Error("failed to load posts, server might be down");
+    },
+    {
+      enabled: !!seasonId,
+      refetchOnMount: true,
+      refetchOnWindowFocus: false,
+      initialData: [] as IPost[],
+    }
+  );
 };
