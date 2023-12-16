@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { IStyling } from "../../../interfaces/styling.interface";
 
 export const Styling = ({ styling }: { styling: IStyling }) => {
@@ -13,6 +13,7 @@ export const Styling = ({ styling }: { styling: IStyling }) => {
         backgroundImage: `url(${styling.imageUrl})`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
       }
     : {};
 
@@ -24,8 +25,6 @@ export const Styling = ({ styling }: { styling: IStyling }) => {
         backgroundColor: "transparent",
         minWidth: 108,
         maxWidth: 108,
-        maxHeight: 144,
-        minHeight: 144,
         marginTop: "12px",
         marginBottom: "33px",
       }}
@@ -45,7 +44,17 @@ export const Styling = ({ styling }: { styling: IStyling }) => {
             ...imageProps,
           }}
         />
-        {styling.description}
+        <Typography
+          variant="body2"
+          sx={{
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            maxWidth: "100px",
+          }}
+        >
+          {styling.description}
+        </Typography>
       </Box>
     </Button>
   );

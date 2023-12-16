@@ -22,9 +22,10 @@ const t = async ({ req, res, log, error }) => {
 
     const isComment = req.headers["x-appwrite-event"].includes("64dbab02c289fae33a89");
     const isReference = req.headers["x-appwrite-event"].includes("64d757c1c388b559eba1");
+    const isStyling = req.headers["x-appwrite-event"].includes("654126ada3cd9dd26da0");
 
-    const payload = JSON.parse(req.body);
-    const postId = payload.post?.$id;
+    const payload = req.body
+    const postId = payload.post?.$id || payload.mainPost?.$id;
   
     client
       .setEndpoint("https://cloud.appwrite.io/v1")
@@ -54,6 +55,8 @@ const t = async ({ req, res, log, error }) => {
       toUpdate.commentsCount = (post["commentsCount"] || 0) + value;
     } else if (isReference) {
       toUpdate.referencesCount = (post["referencesCount"] || 0) + value;
+    } else if (isStyling) {
+      toUpdate.stylingsCount = (post["stylingsCount"] || 0) + value;
     }
 
     try {

@@ -14,6 +14,7 @@ export const Post = ({ post }: { post: IPost }) => {
         backgroundImage: `url(${post.pictureLink})`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
       }
     : {};
 

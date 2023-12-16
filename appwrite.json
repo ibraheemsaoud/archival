@@ -46,7 +46,8 @@
             "execute": [],
             "events": [
                 "databases.*.collections.64dbab02c289fae33a89",
-                "databases.*.collections.64d757c1c388b559eba1"
+                "databases.*.collections.64d757c1c388b559eba1",
+                "databases.*.collections.654126ada3cd9dd26da0"
             ],
             "schedule": "",
             "timeout": 15,

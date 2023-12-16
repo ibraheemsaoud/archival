@@ -49,6 +49,24 @@ export const ReactionBox = ({
             fontWeight="bold"
             lineHeight="30px"
           >
+            {post.stylingsCount || 0}
+          </Typography>
+        </Box>
+        <Typography
+          color={secondaryColor}
+          fontWeight="bold"
+          sx={{ marginLeft: 1 }}
+        >
+          Stylings
+        </Typography>
+      </Box>
+      <Box display="flex" alignItems="baseline" justifyContent="flex-start">
+        <Box sx={circleStyle}>
+          <Typography
+            color={secondaryColor}
+            fontWeight="bold"
+            lineHeight="30px"
+          >
             {post.commentsCount || 0}
           </Typography>
         </Box>
