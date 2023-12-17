@@ -167,7 +167,13 @@ export const Signin = ({ shouldLogin = false }: { shouldLogin?: boolean }) => {
           <Box sx={{ marginTop: 2 }}>
             <Typography variant="body2" textAlign="center">
               By using our services, you agree to our
-              <Link underline="always" component={NavLink} to={TERMS}>
+              <Link
+                underline="always"
+                component={NavLink}
+                to={TERMS}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
                 Terms
               </Link>
               .
