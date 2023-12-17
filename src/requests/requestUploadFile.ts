@@ -20,7 +20,6 @@ export const requestUploadFile = async (file: File | null, userId: string) => {
     }
   } catch (e) {
     toast.error("Failed to upload file");
-    console.error(e);
     return undefined;
   }
   return undefined;
@@ -35,7 +34,6 @@ export const requestDeleteFile = async (fileLink: string) => {
     }
   } catch (e) {
     toast.error("Failed to upload file");
-    console.error(e);
     return undefined;
   }
   return undefined;

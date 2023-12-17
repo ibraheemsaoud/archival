@@ -75,7 +75,7 @@ export const useRequestPosts = (seasonId?: string, query?: string) => {
   if (query) {
     requestQuery.push(query);
   }
-  console.log(requestQuery);
+
   return useQuery<IPost[]>(
     ["postList", seasonId],
     async () => {
