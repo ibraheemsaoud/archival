@@ -4,11 +4,14 @@ import {
   Dialog,
   DialogTitle,
   Grid,
+  Link,
   TextField,
   Typography,
 } from "@mui/material";
+import { Link as NavLink } from "react-router-dom";
 import { useSignin } from "./useSignin";
 import { useEffect, useState } from "react";
+import { TERMS } from "../../../../consts/links.const";
 
 export const Signin = ({ shouldLogin = false }: { shouldLogin?: boolean }) => {
   const {
@@ -150,6 +153,15 @@ export const Signin = ({ shouldLogin = false }: { shouldLogin?: boolean }) => {
             <Button variant="contained" onClick={handleSignInWithGoogle}>
               Continue With Google
             </Button>
+          </Box>
+          <Box sx={{ marginTop: 2 }}>
+            <Typography variant="body2" textAlign="center">
+              By signing up, you agree to our
+              <Link underline="always" component={NavLink} to={TERMS}>
+                Terms
+              </Link>
+              .
+            </Typography>
           </Box>
         </Box>
       </Dialog>
