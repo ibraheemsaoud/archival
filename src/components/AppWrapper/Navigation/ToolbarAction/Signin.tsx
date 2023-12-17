@@ -1,9 +1,10 @@
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Box,
   Button,
   Dialog,
-  DialogTitle,
-  Grid,
   Link,
   TextField,
   Typography,
@@ -12,6 +13,7 @@ import { Link as NavLink } from "react-router-dom";
 import { useSignin } from "./useSignin";
 import { useEffect, useState } from "react";
 import { TERMS } from "../../../../consts/links.const";
+import { ExpandMoreSharp } from "@mui/icons-material";
 
 export const Signin = ({ shouldLogin = false }: { shouldLogin?: boolean }) => {
   const {
@@ -46,18 +48,22 @@ export const Signin = ({ shouldLogin = false }: { shouldLogin?: boolean }) => {
     <>
       <Dialog onClose={handleClose} open={open} maxWidth="xs">
         <Box sx={{ paddingX: 2, paddingY: 4 }}>
-          <Grid container>
-            <Grid item xs={12} sx={{ minWidth: 300, marginBottom: 4 }}>
-              <DialogTitle variant="h5" textAlign="center">
-                Sing up
-              </DialogTitle>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
+          <Box>
+            <Accordion>
+              <AccordionSummary
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                expandIcon={<ExpandMoreSharp />}
               >
+                <Typography
+                  variant="h5"
+                  textAlign="center"
+                  sx={{ margin: "auto" }}
+                >
+                  Sing up
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
                 <TextField
                   id="name"
                   label="Username"
@@ -96,19 +102,23 @@ export const Signin = ({ shouldLogin = false }: { shouldLogin?: boolean }) => {
                 >
                   Sign up with email
                 </Button>
-              </Box>
-            </Grid>
-            <Grid item xs={12} sx={{ minWidth: 300 }}>
-              <DialogTitle variant="h5" textAlign="center">
-                Sign in
-              </DialogTitle>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
+              </AccordionDetails>
+            </Accordion>
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreSharp />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
               >
+                <Typography
+                  variant="h5"
+                  textAlign="center"
+                  sx={{ margin: "auto" }}
+                >
+                  Sign in
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
                 <TextField
                   id="loginEmail"
                   label="Email"
@@ -137,9 +147,9 @@ export const Signin = ({ shouldLogin = false }: { shouldLogin?: boolean }) => {
                 >
                   Sign in with email
                 </Button>
-              </Box>
-            </Grid>
-          </Grid>
+              </AccordionDetails>
+            </Accordion>
+          </Box>
           <Box
             sx={{
               display: "flex",
@@ -156,7 +166,7 @@ export const Signin = ({ shouldLogin = false }: { shouldLogin?: boolean }) => {
           </Box>
           <Box sx={{ marginTop: 2 }}>
             <Typography variant="body2" textAlign="center">
-              By signing up, you agree to our
+              By using our services, you agree to our
               <Link underline="always" component={NavLink} to={TERMS}>
                 Terms
               </Link>
