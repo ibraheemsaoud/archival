@@ -13,6 +13,7 @@ export const Home = () => {
   const { brands, fashionWeeks } = useLoaderData() as any as {
     brands?: IBrand[];
     fashionWeeks?: IFashionWeek[];
+    moreData?: any;
   };
 
   if (!brands) return <Loader />;
