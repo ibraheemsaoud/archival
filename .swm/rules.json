@@ -1,0 +1,19 @@
+{
+    "rules": {
+        "c7c4f17e-1672-4c41-ac61-2d23ea588055": {
+            "name": "Migrate to AppWrapper V2",
+            "rule": {
+                "type": "regex",
+                "regex": "AppWrapper"
+            },
+            "actions": {
+                "ide": {
+                    "doc_id": "9s4ra4c9"
+                }
+            }
+        }
+    },
+    "view_order": [
+        "c7c4f17e-1672-4c41-ac61-2d23ea588055"
+    ]
+}
