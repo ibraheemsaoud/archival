@@ -98,7 +98,7 @@ const api: Api = {
   verifyEmail: () => {
     return api
       .provider()
-      .account.createVerification(Server.baseURL + "/verification");
+      .account.createVerification(Server.appwriteBaseURL + "/verification");
   },
 
   updateVerification: (userId, secret) => {
