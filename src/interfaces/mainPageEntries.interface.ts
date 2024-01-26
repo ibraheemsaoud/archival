@@ -1,15 +1,16 @@
 import { IFashionWeek } from "./fashionWeek.interface";
 import { ISeason } from "./season.interface";
 
-export type IMainPageEntries =
-  | IFeaturedFashionWeekEntry[]
-  | ICurrentFashionWeekEntry[]
-  | IFeaturedSeasonsEntry[]
-  | ICurrentSeasonEntry[];
+export type IMainPageEntries = (
+  | IFeaturedFashionWeekEntry
+  | ICurrentFashionWeekEntry
+  | IFeaturedSeasonsEntry
+  | ICurrentSeasonEntry
+)[];
 
 type IFeaturedFashionWeekEntry = {
   type: "featured_fashion_week";
-  entry: IFashionWeek[];
+  entry: IFashionWeek;
 };
 
 type ICurrentFashionWeekEntry = {

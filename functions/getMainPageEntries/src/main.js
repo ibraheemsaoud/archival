@@ -1,4 +1,3 @@
-import { Query } from 'appwrite';
 import { Client, Databases } from 'node-appwrite';
 
 const t = async ({ req, res, log, error }) => {
@@ -18,13 +17,26 @@ const t = async ({ req, res, log, error }) => {
       .setKey(apiKey)
       .setSelfSigned(true);
 
-    let fashionWeeks;
+    let featuredFashionWeeks;
 
     try {
-      fashionWeeks = await database.listDocuments(
+      featuredFashionWeeks = await database.getDocument(
         '649bf127bdd26e9850cd',
         '64d75694839749467fef',
-        [Query.equal('isPublic', true)]
+        '6545df80a9bc304be8e1',
+      );
+    } catch (err) {
+      error(err);
+      return;
+    }
+
+    let fashionWeeks
+
+    try {
+      fashionWeeks = await database.getDocument(
+        '649bf127bdd26e9850cd',
+        '64d75694839749467fef',
+        '65b3b7ad30d10d9c36d7',
       );
     } catch (err) {
       error(err);
@@ -34,8 +46,12 @@ const t = async ({ req, res, log, error }) => {
     return res.json([
       {
         type: 'featured_fashion_week',
-        entry: fashionWeeks.documents,
+        entry: featuredFashionWeeks,
       },
+      {
+        type: 'current_fashion_week',
+        entry: fashionWeeks,
+      }
     ]);
   }
 

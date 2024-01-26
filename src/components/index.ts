@@ -2,7 +2,7 @@ export * from "./AppWrapper";
 export * from "./Router";
 export * from "./UserPicture";
 export * from "./BrandCard";
-export * from "./FeaturedFashionWeekCard";
+export * from "./FashionWeekCard";
 export * from "./SeasonCard";
 export * from "./PostCard";
 export * from "./Error";

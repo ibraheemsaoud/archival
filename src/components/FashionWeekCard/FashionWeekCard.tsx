@@ -5,10 +5,12 @@ import { CreateASeason } from "./CreateASeason";
 import { Masonry } from "@mui/lab";
 import { PlaceHolderCard } from "../PlaceHolderCard";
 
-export const FeaturedFashionWeekCard = ({
+export const FashionWeekCard = ({
   fashionWeek,
+  isFeatured = false,
 }: {
   fashionWeek: IFashionWeek;
+  isFeatured?: boolean;
 }) => {
   const { name, seasons, tags } = fashionWeek;
 
@@ -17,7 +19,16 @@ export const FeaturedFashionWeekCard = ({
 
   return (
     <Box marginTop={3} marginRight={2} marginLeft={2}>
-      <Typography variant="h6">{name}</Typography>
+      <Typography variant="h6">
+        {name}
+        {isFeatured ? (
+          <Chip
+            sx={{ marginX: 1, backgroundColor: "#f9d86b7a" }}
+            label={"Featured"}
+            size="small"
+          />
+        ) : null}
+      </Typography>
       <Box display="flex" marginBottom={2}>
         {tags?.map((tag) => (
           <Chip
