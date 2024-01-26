@@ -34,7 +34,7 @@ const t = async ({ req, res, log, error }) => {
     return res.json([
       {
         type: 'featured_fashion_week',
-        entry: fashionWeeks,
+        entry: fashionWeeks.documents,
       },
     ]);
   }

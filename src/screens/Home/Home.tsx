@@ -7,15 +7,20 @@ import {
 import { Box } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import { IBrand } from "../../interfaces/brand.interface";
-import { IFashionWeek } from "../../interfaces/fashionWeek.interface";
+import { useRequestMainPageEntries } from "../../requests/useRequestMainPageEntries";
+import { useEffect } from "react";
 
 export const Home = () => {
-  const { brands, fashionWeeks } = useLoaderData() as any as {
+  const { brands } = useLoaderData() as any as {
     brands?: IBrand[];
-    fashionWeeks?: IFashionWeek[];
   };
 
-  if (!brands) return <Loader />;
+  const { data, isLoading, mutate } = useRequestMainPageEntries();
+  useEffect(() => {
+    mutate();
+  }, []);
+
+  if (!brands || isLoading) return <Loader />;
 
   return (
     <AppWrapper>
@@ -33,9 +38,13 @@ export const Home = () => {
           </Box>
         ))}
       </Box>
-      {fashionWeeks?.map((fashionWeek) => (
-        <FashionWeekCard fashionWeek={fashionWeek} key={fashionWeek.$id} />
-      ))}
+      {data?.map((item) => {
+        if (item.type === "featured_fashion_week") {
+          return item?.entry?.map((fashionWeek, index) => (
+            <FashionWeekCard fashionWeek={fashionWeek} key={`FW_${index}`} />
+          ));
+        }
+      })}
     </AppWrapper>
   );
 };

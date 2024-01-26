@@ -1,6 +1,7 @@
 import { useMutation } from "react-query";
 import { Server } from "../config/server";
-import { Client, Functions, Models } from "appwrite";
+import { Client, Functions } from "appwrite";
+import { IMainPageEntries } from "../interfaces/mainPageEntries.interface";
 
 export const useRequestMainPageEntries = () => {
   return useMutation(async () => {
@@ -9,8 +10,14 @@ export const useRequestMainPageEntries = () => {
       .setProject(Server.project);
     const functions = new Functions(client);
 
-    return JSON.parse(
-      (await functions.createExecution(Server.mainPageEntriesFunctionId)).response
-    ) as Models.User<any>;
+    try {
+      return JSON.parse(
+        (await functions.createExecution(Server.mainPageEntriesFunctionId))
+          .response
+      ) as IMainPageEntries;
+    } catch (error) {
+      console.error(error);
+      return [] as IMainPageEntries;
+    }
   });
 };

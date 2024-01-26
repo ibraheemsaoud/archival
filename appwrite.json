@@ -80,6 +80,26 @@
                 ".npm"
             ],
             "path": "functions/getUserData"
+        },
+        {
+            "$id": "6547dd5f1f7217cbf508",
+            "name": "getMainPageEntries",
+            "runtime": "node-16.0",
+            "execute": [
+                "any"
+            ],
+            "events": [],
+            "schedule": "",
+            "timeout": 15,
+            "enabled": true,
+            "logging": true,
+            "entrypoint": "src/main.js",
+            "commands": "npm install",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "path": "functions/getMainPageEntries"
         }
     ]
 }
