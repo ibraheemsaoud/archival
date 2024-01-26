@@ -3,8 +3,9 @@ import { IFashionWeek } from "../../interfaces/fashionWeek.interface";
 import { SeasonCard } from "../SeasonCard";
 import { CreateASeason } from "./CreateASeason";
 import { Masonry } from "@mui/lab";
+import { PlaceHolderCard } from "../PlaceHolderCard";
 
-export const FashionWeekCard = ({
+export const FeaturedFashionWeekCard = ({
   fashionWeek,
 }: {
   fashionWeek: IFashionWeek;
@@ -28,11 +29,11 @@ export const FashionWeekCard = ({
         ))}
       </Box>
       <Masonry columns={isMobile ? 2 : 3} spacing={2}>
-        {seasons?.map((season) =>
-          season.isPublic ? (
-            <SeasonCard season={season} key={`SEASON_${season.$id}`} />
-          ) : null
-        )}
+        {seasons?.map((season, index) => {
+          if (index > 6) return null;
+          return <SeasonCard season={season} key={`SEASON_${season.$id}`} />;
+        })}
+        {seasons?.length > 6 && <PlaceHolderCard linkTo={"/"} text="More" />}
       </Masonry>
       <CreateASeason fashionWeekId={fashionWeek.$id} />
     </Box>

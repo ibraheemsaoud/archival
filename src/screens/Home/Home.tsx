@@ -1,7 +1,7 @@
 import {
   AppWrapper,
   BrandCard,
-  FashionWeekCard,
+  FeaturedFashionWeekCard,
   Loader,
 } from "../../components";
 import { Box } from "@mui/material";
@@ -41,7 +41,10 @@ export const Home = () => {
       {data?.map((item) => {
         if (item.type === "featured_fashion_week") {
           return item?.entry?.map((fashionWeek, index) => (
-            <FashionWeekCard fashionWeek={fashionWeek} key={`FW_${index}`} />
+            <FeaturedFashionWeekCard
+              fashionWeek={fashionWeek}
+              key={`FW_${index}`}
+            />
           ));
         }
       })}
