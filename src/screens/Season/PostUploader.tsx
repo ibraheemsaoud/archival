@@ -1,4 +1,12 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Button,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { UploadImage, useUploadImage } from "../../components/UploadImage";
 import { useRequestCreatePost } from "../../requests/useRequestPost";
@@ -7,12 +15,9 @@ import { toast } from "react-hot-toast";
 import { requestUploadFile } from "../../requests/requestUploadFile";
 import { Server } from "../../config/server";
 import { ISeason } from "../../interfaces/season.interface";
+import { ExpandMore } from "@mui/icons-material";
 
-export const PostUploader = ({
-  season,
-}: {
-  season: ISeason
-}) => {
+export const PostUploader = ({ season }: { season: ISeason }) => {
   const [title, setTitle] = useState("");
   const [outsideLink, setOutsideLink] = useState("");
   const { file, onChangeFile, onReset, pictureUrl, onRemoveFile } =
@@ -57,64 +62,59 @@ export const PostUploader = ({
   if (user.$id !== Server.adminId) return null;
 
   return (
-    <Box
-      sx={{
-        border: "1px solid",
-        margin: 2,
-        padding: 1,
-        borderRadius: 2,
-        backgroundColor: "#ffffff",
-      }}
-    >
-      <Typography
-        variant="h6"
-        component="div"
-        sx={{
-          textDecoration: "underline",
-          marginBottom: 1,
-        }}
+    <Accordion sx={{ marginTop: 2 }}>
+      <AccordionSummary
+        expandIcon={<ExpandMore />}
+        aria-controls="panel1-content"
+        id="panel1-header"
       >
-        Post Uploader
-      </Typography>
-      <UploadImage
-        onChangeFile={onChangeFile}
-        file={file}
-        onReset={onReset}
-        pictureUrl={pictureUrl}
-        height="350px"
-      />
-      {!file && (
-        <>
-          OR
+        <Typography variant="h6" component="div">
+          Post Uploader
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Box>
+          <UploadImage
+            onChangeFile={onChangeFile}
+            file={file}
+            onReset={onReset}
+            pictureUrl={pictureUrl}
+            height="350px"
+          />
+          {!file && (
+            <>
+              OR
+              <TextField
+                id="filled-multiline-static"
+                label="picture link"
+                variant="filled"
+                sx={{
+                  width: "-webkit-fill-available",
+                  marginBottom: 2,
+                }}
+                color="primary"
+                value={outsideLink}
+                onChange={(e) => setOutsideLink(e.target.value)}
+              />
+            </>
+          )}
           <TextField
             id="filled-multiline-static"
-            label="picture link"
+            label="title"
             variant="filled"
             sx={{
               width: "-webkit-fill-available",
               marginBottom: 2,
             }}
             color="primary"
-            value={outsideLink}
-            onChange={(e) => setOutsideLink(e.target.value)}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
-        </>
-      )}
-      <TextField
-        id="filled-multiline-static"
-        label="title"
-        variant="filled"
-        sx={{
-          width: "-webkit-fill-available",
-          marginBottom: 2,
-        }}
-        color="primary"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <Button variant="contained" onClick={onCreate} fullWidth>
-        Create
-      </Button>
-    </Box>
+          <Button variant="contained" onClick={onCreate} fullWidth>
+            Create
+          </Button>
+        </Box>
+      </AccordionDetails>
+    </Accordion>
   );
 };

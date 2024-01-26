@@ -121,15 +121,7 @@ export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Grid
-          sx={{
-            border: "1px solid",
-            padding: 1,
-            borderRadius: 2,
-            backgroundColor: "#ffffff",
-          }}
-          container
-        >
+        <Grid container>
           <Grid item xs={12}>
             <Error error={generalErrors} />
           </Grid>
