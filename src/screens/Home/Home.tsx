@@ -18,7 +18,7 @@ export const Home = () => {
   const { data, isLoading, mutate } = useRequestMainPageEntries();
   useEffect(() => {
     mutate();
-  }, []);
+  }, [mutate]);
 
   if (!brands || isLoading) return <Loader />;
 
@@ -54,6 +54,8 @@ export const Home = () => {
               key={`CFW_${item.entry.$id}`}
             />
           );
+        } else {
+          return null;
         }
       })}
     </AppWrapper>

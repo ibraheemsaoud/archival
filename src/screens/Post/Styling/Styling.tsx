@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { IStyling } from "../../../interfaces/styling.interface";
 
 export const Styling = ({ styling }: { styling: IStyling }) => {
