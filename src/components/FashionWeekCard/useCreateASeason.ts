@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FashionWeekTags } from "../../interfaces/fashionWeek.interface";
 import { nameToSlug } from "../../helpers";
+import { useRequestBrandList } from "../../requests/useRequestBrand";
 
 export const useCreateASeason = () => {
   const [name, setName] = useState("");

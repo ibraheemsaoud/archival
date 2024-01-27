@@ -28,3 +28,31 @@ export const useRequestBrand = (brandId: string) => {
     }
   );
 };
+
+export const useRequestBrandList = (brandIdQuery?: string) => {
+  return useQuery<IBrand[]>(
+    ["brand-list", brandIdQuery],
+    async () => {
+      const queries = [Query.equal("isPublic", [true])]
+      if (brandIdQuery) {
+        queries.push(Query.search("name", brandIdQuery))
+      }
+      const data = await api.listDocuments(
+        Server.databaseID,
+        Server.brandsCollectionId,
+        queries,
+      );
+      if (data.documents?.length > 0) {
+        return data.documents as IBrand[];
+      }
+      throw new Error(
+        "failed to load brand list, server might be down or you loaded the incorrect brand"
+      );
+    },
+    {
+      refetchOnMount: true,
+      refetchOnWindowFocus: false,
+      initialData: [] as IBrand[],
+    }
+  );
+};

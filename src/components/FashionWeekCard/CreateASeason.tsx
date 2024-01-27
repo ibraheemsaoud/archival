@@ -14,7 +14,7 @@ import {
   AccordionDetails,
 } from "@mui/material";
 import { UploadImage, useUploadImage } from "../UploadImage";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import toast from "react-hot-toast";
 import { useUser } from "../../hooks";
 import { requestUploadFile } from "../../requests/requestUploadFile";
@@ -25,6 +25,7 @@ import { Server } from "../../config/server";
 import { ISeasonCreateErrors } from "../../interfaces/season.interface";
 import { Error } from "../Error";
 import { ExpandMore } from "@mui/icons-material";
+import { BrandSearch } from "../BrandSearch";
 
 export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
   const {
@@ -153,18 +154,7 @@ export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
                 </>
               )}
             </Grid>
-            <TextField
-              id="brand-id"
-              label="brand id"
-              variant="filled"
-              sx={{
-                width: "-webkit-fill-available",
-                marginBottom: 2,
-              }}
-              color="primary"
-              value={brandId}
-              onChange={(e) => setBrandId(e.target.value)}
-            />
+            <BrandSearch onSelect={(brand) => setBrandId(brand?.$id || "")} />
             <Grid item xs={6}>
               <TextField
                 id="name"
