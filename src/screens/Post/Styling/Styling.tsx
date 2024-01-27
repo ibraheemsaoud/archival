@@ -18,17 +18,6 @@ export const Styling = ({ styling }: { styling: IStyling }) => {
     : {};
 
   return (
-    <Button
-      size="small"
-      variant="text"
-      sx={{
-        backgroundColor: "transparent",
-        minWidth: 108,
-        maxWidth: 108,
-        marginTop: "12px",
-        marginBottom: "33px",
-      }}
-    >
       <Box
         sx={{
           display: "flex",
@@ -56,6 +45,5 @@ export const Styling = ({ styling }: { styling: IStyling }) => {
           {styling.description}
         </Typography>
       </Box>
-    </Button>
   );
 };

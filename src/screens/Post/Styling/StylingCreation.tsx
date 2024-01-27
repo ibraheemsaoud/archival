@@ -67,7 +67,7 @@ export const StylingCreation = ({
         <>
           OR
           <TextField
-            id="filled-multiline-static"
+            id="picture-link"
             label="picture link"
             variant="filled"
             sx={{
@@ -81,7 +81,7 @@ export const StylingCreation = ({
         </>
       )}
       <TextField
-        id="filled-multiline-static"
+        id="description"
         label="description"
         variant="filled"
         sx={{

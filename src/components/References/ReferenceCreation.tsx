@@ -78,7 +78,7 @@ export const ReferenceCreation = ({
         <>
           OR
           <TextField
-            id="filled-multiline-static"
+            id="outsideLink"
             label="picture link"
             variant="filled"
             sx={{
@@ -92,7 +92,7 @@ export const ReferenceCreation = ({
         </>
       )}
       <TextField
-        id="filled-multiline-static"
+        id="title"
         label="title"
         variant="filled"
         sx={{
@@ -104,7 +104,7 @@ export const ReferenceCreation = ({
         onChange={(e) => setTitle(e.target.value)}
       />
       <TextField
-        id="filled-multiline-static"
+        id="description"
         label="description"
         variant="filled"
         sx={{
@@ -116,7 +116,7 @@ export const ReferenceCreation = ({
         onChange={(e) => setDescription(e.target.value)}
       />
       <TextField
-        id="filled-multiline-static"
+        id="reference-link"
         label="reference link"
         variant="filled"
         sx={{

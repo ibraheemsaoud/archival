@@ -48,8 +48,7 @@ export const ReferenceSection = ({
       <Typography
         variant="h6"
         component="div"
-        marginX={1}
-        sx={{ textDecoration: "underline" }}
+        marginX={2}
       >
         References
       </Typography>
@@ -75,14 +74,14 @@ export const ReferenceSection = ({
         })}
         <Button
           size="small"
-          variant="text"
+          variant="outlined"
           sx={{
-            backgroundColor: "transparent",
             marginBottom: "33px",
             marginTop: "12px",
             borderRadius: "8px",
             width: "72px",
             height: "72px",
+            borderColor: "transparent",
           }}
           onClick={() => onReferenceCreationClicked()}
         >

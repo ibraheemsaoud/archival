@@ -25,6 +25,7 @@ export const TopToolbar = ({
           <Button
             size="small"
             variant="outlined"
+            color="secondary"
             sx={{ marginBottom: 1 }}
             onClick={onBackClicked}
           >
@@ -53,6 +54,7 @@ export const TopToolbar = ({
             <Button
               size="small"
               variant="outlined"
+              color="secondary"
               sx={{ marginBottom: 1, visibility: "hidden" }}
               onClick={() => {}}
             >

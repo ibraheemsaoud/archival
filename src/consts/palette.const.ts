@@ -10,46 +10,47 @@ export const getDesignTokens = (
   primaryColor?: string,
   secondaryColor?: string
 ): ThemeOptions => {
-  const platinum = createColor("#CCDBDC");
-  const pumpkin = createColor("#4a3215");
-  const lightPumpkin = createColor("#fdfcf9");
-  const lightPumpkin2 = createColor("#f7eee3");
+  const pumpkin = createColor("#1f1307");
+  // const darkPumpkin = createColor("#1f1307");
+  const lightPumpkin = createColor("#f7eee3");
   const red = createColor("#f44336");
-  const primary = primaryColor ? createColor(primaryColor) : pumpkin;
-  const secondary = secondaryColor ? createColor(secondaryColor) : lightPumpkin2;
+  let primary = mode === "light" ? pumpkin : lightPumpkin;
+  let secondary = mode === "light" ? lightPumpkin : pumpkin;
+
+  if (primaryColor) {
+    primary = createColor(primaryColor);
+  }
+  if (secondaryColor) {
+    secondary = createColor(secondaryColor);
+  }
 
   return {
     palette: {
-      platinum,
-      pumpkin,
-      lightPumpkin,
       red,
       mode,
+      primary,
+      secondary,
       ...(mode === "light"
         ? {
-            // palette values for light mode
-            primary: primary,
             divider: primary.dark,
             background: {
-              default: lightPumpkin.light,
-              paper: secondary.light,
+              default: secondary.light,
+              paper: primary.light,
             },
             text: {
-              primary: primary.dark,
-              secondary: secondary.dark,
+              primary: secondary.dark,
+              secondary: secondary.light,
             },
           }
         : {
-            // palette values for dark mode
-            primary: primary,
             divider: primary.light,
             background: {
               default: secondary.dark,
-              paper: secondary.light,
+              paper: primary.dark,
             },
             text: {
-              primary: primary.light,
-              secondary: secondary.light,
+              primary: secondary.light,
+              secondary: secondary.dark,
             },
           }),
     },

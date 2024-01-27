@@ -85,7 +85,7 @@ export const PostUploader = ({ season }: { season: ISeason }) => {
             <>
               OR
               <TextField
-                id="filled-multiline-static"
+                id="outsideLink"
                 label="picture link"
                 variant="filled"
                 sx={{
@@ -99,7 +99,7 @@ export const PostUploader = ({ season }: { season: ISeason }) => {
             </>
           )}
           <TextField
-            id="filled-multiline-static"
+            id="title"
             label="title"
             variant="filled"
             sx={{

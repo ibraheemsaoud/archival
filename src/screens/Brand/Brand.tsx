@@ -8,7 +8,13 @@ import {
 } from "@mui/material";
 import { useLoaderData } from "react-router-dom";
 import { theme } from "../../theme";
-import { AppWrapper, Error, Loader, SeasonCard, TopToolbar } from "../../components";
+import {
+  AppWrapper,
+  Error,
+  Loader,
+  SeasonCard,
+  TopToolbar,
+} from "../../components";
 import { useUser } from "../../hooks";
 import { HOME } from "../../consts/links.const";
 import {
@@ -30,7 +36,7 @@ export const Brand = () => {
     useRequestFollow();
   const { mutate: unfollowBrand, isLoading: isLoadingUnfollowAction } =
     useRequestUnfollow();
-  const { user } = useUser();
+  const { user, colorModeDark } = useUser();
 
   const theme2 = useTheme();
   const isMobile = useMediaQuery(theme2.breakpoints.down("sm"));
@@ -54,7 +60,11 @@ export const Brand = () => {
     }
   };
 
-  const modedTheme = theme("light", brand.primaryColor, brand.secondaryColor);
+  const modedTheme = theme(
+    colorModeDark ? "dark" : "light",
+    brand.primaryColor,
+    brand.secondaryColor
+  );
   const lastSeason = brand.seasons[0];
   const restOfSeasons = brand.seasons.slice(1);
 

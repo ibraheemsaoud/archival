@@ -22,6 +22,7 @@ import { useEffect, useState } from "react";
 import { Query } from "appwrite";
 import { useRequestSeason } from "../../requests/useRequestSeason";
 import { useRequestPosts } from "../../requests/useRequestPost";
+import { useUser } from "../../hooks";
 
 export const Season = () => {
   const [query, setQuery] = useState("");
@@ -30,6 +31,7 @@ export const Season = () => {
   const { seasonId: seasonSlug } = useLoaderData() as any as {
     seasonId?: string;
   };
+  const { colorModeDark } = useUser();
 
   const { data: season } = useRequestSeason(seasonSlug);
   const { data: posts, refetch } = useRequestPosts(season?.$id, query);
@@ -44,8 +46,12 @@ export const Season = () => {
   if (!season) return <Loader />;
 
   const { brand } = season;
-
-  const modedTheme = theme("light", season.primaryColor, season.secondaryColor);
+  
+  const modedTheme = theme(
+    colorModeDark ? "dark" : "light",
+    season.primaryColor,
+    season.secondaryColor
+  );
 
   const featuredPosts = posts?.slice(0, 2);
   const otherPosts = posts?.slice(2);
@@ -75,6 +81,7 @@ export const Season = () => {
             <Button
               onClick={() => setQuery("")}
               size="small"
+              color="secondary"
               variant={query === "" ? "contained" : "outlined"}
             >
               Normal
@@ -82,6 +89,7 @@ export const Season = () => {
             <Button
               onClick={() => setQuery(Query.orderDesc("stylingsCount"))}
               size="small"
+              color="secondary"
               variant={
                 query === Query.orderDesc("stylingsCount")
                   ? "contained"
@@ -93,6 +101,7 @@ export const Season = () => {
             <Button
               onClick={() => setQuery(Query.orderDesc("referencesCount"))}
               size="small"
+              color="secondary"
               variant={
                 query === Query.orderDesc("referencesCount")
                   ? "contained"
@@ -104,6 +113,7 @@ export const Season = () => {
             <Button
               onClick={() => setQuery(Query.orderDesc("commentsCount"))}
               size="small"
+              color="secondary"
               variant={
                 query === Query.orderDesc("commentsCount")
                   ? "contained"

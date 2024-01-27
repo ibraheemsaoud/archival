@@ -16,7 +16,8 @@ import { PROFILE } from "../../../../consts/links.const";
 import { Loader } from "../../../Loader";
 
 export const ToolbarAction = ({ shouldLogin }: { shouldLogin?: boolean }) => {
-  const { user, isLoading, logout } = useUser();
+  const { user, isLoading, logout, setColorModeDark, colorModeDark } =
+    useUser();
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const isLoggedIn = !!user;
@@ -33,6 +34,11 @@ export const ToolbarAction = ({ shouldLogin }: { shouldLogin?: boolean }) => {
   };
 
   const handleProfileClick = () => {
+    handleCloseUserMenu();
+  };
+
+  const switchColorMode = () => {
+    setColorModeDark(!colorModeDark);
     handleCloseUserMenu();
   };
 
@@ -71,6 +77,11 @@ export const ToolbarAction = ({ shouldLogin }: { shouldLogin?: boolean }) => {
             <Typography textAlign="center">Profile</Typography>
           </MenuItem>
         </Link>
+        <MenuItem onClick={switchColorMode}>
+          <Typography textAlign="center">
+            {colorModeDark ? "Switch to light mode" : "Switch to dark mode"}
+          </Typography>
+        </MenuItem>
         <MenuItem onClick={handleLogout}>
           <Typography textAlign="center">Logout</Typography>
         </MenuItem>

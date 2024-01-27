@@ -45,8 +45,7 @@ export const StylingSection = ({
       <Typography
         variant="h6"
         component="div"
-        marginX={1}
-        sx={{ textDecoration: "underline" }}
+        marginX={2}
       >
         Stylings
       </Typography>
@@ -59,24 +58,37 @@ export const StylingSection = ({
       >
         {stylings?.map((styling: IStyling) => {
           return (
-            <Link
-              to={replaceRouteParams(STYLING, { stylingId: styling.$id })}
-              key={styling.$id}
+            <Button
+              size="small"
+              variant="outlined"
+              sx={{
+                borderColor: "transparent",
+                minWidth: 108,
+                maxWidth: 108,
+                margin: 1,
+                marginTop: "12px",
+                marginBottom: "33px",
+              }}
             >
-              <Styling styling={styling} />
-            </Link>
+              <Link
+                to={replaceRouteParams(STYLING, { stylingId: styling.$id })}
+                key={styling.$id}
+              >
+                <Styling styling={styling} />
+              </Link>
+            </Button>
           );
         })}
         <Button
           size="small"
-          variant="text"
+          variant="outlined"
           sx={{
-            backgroundColor: "transparent",
             marginBottom: "33px",
             marginTop: "12px",
             borderRadius: "8px",
             width: "108px",
             height: "144px",
+            borderColor: "transparent",
           }}
           onClick={() => onStylingCreationClicked()}
         >
@@ -93,10 +105,7 @@ export const StylingSection = ({
           },
         }}
       >
-        <StylingCreation
-          postId={post?.$id}
-          onDone={onDone}
-        />
+        <StylingCreation postId={post?.$id} onDone={onDone} />
       </Dialog>
     </Box>
   );

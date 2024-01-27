@@ -110,175 +110,179 @@ export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
   if (user.$id !== Server.adminId) return null;
 
   return (
-    <Accordion>
-      <AccordionSummary
-        expandIcon={<ExpandMore />}
-        aria-controls="panel1-content"
-        id="panel1-header"
-      >
-        <Typography variant="h6" component="div">
-          Create a new Season
-        </Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Grid container>
-          <Grid item xs={12}>
-            <Error error={generalErrors} />
-          </Grid>
-          <Grid item xs={12}>
-            <UploadImage
-              onChangeFile={onChangeFile}
-              file={file}
-              onReset={onReset}
-              pictureUrl={pictureUrl}
-              error={submissionError.coverImage}
-              height="350px"
-            />
-            {!file && (
-              <>
-                OR
-                <TextField
-                  id="filled-multiline-static"
-                  label="cover image link"
-                  variant="filled"
-                  sx={{
-                    width: "-webkit-fill-available",
-                    marginBottom: 2,
-                  }}
-                  color="primary"
-                  value={outsideLink}
-                  onChange={(e) => setOutsideLink(e.target.value)}
-                />
-              </>
-            )}
-          </Grid>
-          <TextField
-            id="filled-multiline-static"
-            label="brand id"
-            variant="filled"
-            sx={{
-              width: "-webkit-fill-available",
-              marginBottom: 2,
-            }}
-            color="primary"
-            value={brandId}
-            onChange={(e) => setBrandId(e.target.value)}
-          />
-          <Grid item xs={6}>
+    <form>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          <Typography variant="h6" component="div">
+            Create a new Season
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Grid container>
+            <Grid item xs={12}>
+              <Error error={generalErrors} />
+            </Grid>
+            <Grid item xs={12}>
+              <UploadImage
+                onChangeFile={onChangeFile}
+                file={file}
+                onReset={onReset}
+                pictureUrl={pictureUrl}
+                error={submissionError.coverImage}
+                height="350px"
+              />
+              {!file && (
+                <>
+                  OR
+                  <TextField
+                    id="outsideLink"
+                    label="cover image link"
+                    variant="filled"
+                    sx={{
+                      width: "-webkit-fill-available",
+                      marginBottom: 2,
+                    }}
+                    color="primary"
+                    value={outsideLink}
+                    onChange={(e) => setOutsideLink(e.target.value)}
+                  />
+                </>
+              )}
+            </Grid>
             <TextField
-              id="filled-multiline-static"
-              label="name"
+              id="brand-id"
+              label="brand id"
               variant="filled"
               sx={{
                 width: "-webkit-fill-available",
                 marginBottom: 2,
               }}
               color="primary"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={brandId}
+              onChange={(e) => setBrandId(e.target.value)}
             />
-            <TextField
-              id="filled-multiline-static"
-              label="slug"
-              variant="filled"
-              sx={{
-                width: "-webkit-fill-available",
-                marginBottom: 2,
-              }}
-              color="primary"
-              value={slug}
-              onChange={(e) => setSlug(e.target.value)}
+            <Grid item xs={6}>
+              <TextField
+                id="name"
+                label="name"
+                variant="filled"
+                sx={{
+                  width: "-webkit-fill-available",
+                  marginBottom: 2,
+                }}
+                color="primary"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <TextField
+                id="slug"
+                label="slug"
+                variant="filled"
+                sx={{
+                  width: "-webkit-fill-available",
+                  marginBottom: 2,
+                }}
+                color="primary"
+                value={slug}
+                onChange={(e) => setSlug(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={1} />
+            <Grid item xs={5}>
+              <TextField
+                id="primary-color"
+                label="primary color"
+                variant="filled"
+                sx={{
+                  width: "-webkit-fill-available",
+                  marginBottom: 2,
+                }}
+                color="primary"
+                type="color"
+                value={primaryColor || "#000000"}
+                onChange={(e) => setPrimaryColor(e.target.value)}
+              />
+              <TextField
+                id="secondary-color"
+                label="secondary color"
+                variant="filled"
+                sx={{
+                  width: "-webkit-fill-available",
+                  marginBottom: 2,
+                }}
+                color="primary"
+                type="color"
+                value={secondaryColor || "#FFFFFF"}
+                onChange={(e) => setSecondaryColor(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <FormControl>
+                <FormLabel>Season</FormLabel>
+                <RadioGroup value={season} onChange={handleChangeSeason}>
+                  <FormControlLabel
+                    value={FashionWeekTags.SS}
+                    control={<Radio />}
+                    label={FashionWeekTags.SS}
+                  />
+                  <FormControlLabel
+                    value={FashionWeekTags.AW}
+                    control={<Radio />}
+                    label={FashionWeekTags.AW}
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+            <Grid item xs={4}>
+              <FormControl>
+                <FormLabel>Wear</FormLabel>
+                <RadioGroup value={wear} onChange={handleChangeWear}>
+                  <FormControlLabel
+                    value={FashionWeekTags.Menswear}
+                    control={<Radio />}
+                    label={FashionWeekTags.Menswear}
+                  />
+                  <FormControlLabel
+                    value={FashionWeekTags.Womenswear}
+                    control={<Radio />}
+                    label={FashionWeekTags.Womenswear}
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+            <Grid item xs={4}>
+              <FormControl>
+                <FormLabel>Type</FormLabel>
+                <RadioGroup value={type} onChange={handleChangeType}>
+                  <FormControlLabel
+                    value={FashionWeekTags.ReadyToWear}
+                    control={<Radio />}
+                    label={FashionWeekTags.ReadyToWear}
+                  />
+                  <FormControlLabel
+                    value={FashionWeekTags.Couture}
+                    control={<Radio />}
+                    label={FashionWeekTags.Couture}
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+            <FormControlLabel
+              control={
+                <Checkbox checked={isPublic} onChange={handleIsPublic} />
+              }
+              label="Is public"
             />
+            <Button variant="contained" onClick={onCreate} fullWidth>
+              Create
+            </Button>
           </Grid>
-          <Grid item xs={1} />
-          <Grid item xs={5}>
-            <TextField
-              id="filled-multiline-static"
-              label="primary color"
-              variant="filled"
-              sx={{
-                width: "-webkit-fill-available",
-                marginBottom: 2,
-              }}
-              color="primary"
-              type="color"
-              value={primaryColor || "#000000"}
-              onChange={(e) => setPrimaryColor(e.target.value)}
-            />
-            <TextField
-              id="filled-multiline-static"
-              label="secondary color"
-              variant="filled"
-              sx={{
-                width: "-webkit-fill-available",
-                marginBottom: 2,
-              }}
-              color="primary"
-              type="color"
-              value={secondaryColor || "#FFFFFF"}
-              onChange={(e) => setSecondaryColor(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <FormControl>
-              <FormLabel>Season</FormLabel>
-              <RadioGroup value={season} onChange={handleChangeSeason}>
-                <FormControlLabel
-                  value={FashionWeekTags.SS}
-                  control={<Radio />}
-                  label={FashionWeekTags.SS}
-                />
-                <FormControlLabel
-                  value={FashionWeekTags.AW}
-                  control={<Radio />}
-                  label={FashionWeekTags.AW}
-                />
-              </RadioGroup>
-            </FormControl>
-          </Grid>
-          <Grid item xs={4}>
-            <FormControl>
-              <FormLabel>Wear</FormLabel>
-              <RadioGroup value={wear} onChange={handleChangeWear}>
-                <FormControlLabel
-                  value={FashionWeekTags.Menswear}
-                  control={<Radio />}
-                  label={FashionWeekTags.Menswear}
-                />
-                <FormControlLabel
-                  value={FashionWeekTags.Womenswear}
-                  control={<Radio />}
-                  label={FashionWeekTags.Womenswear}
-                />
-              </RadioGroup>
-            </FormControl>
-          </Grid>
-          <Grid item xs={4}>
-            <FormControl>
-              <FormLabel>Type</FormLabel>
-              <RadioGroup value={type} onChange={handleChangeType}>
-                <FormControlLabel
-                  value={FashionWeekTags.ReadyToWear}
-                  control={<Radio />}
-                  label={FashionWeekTags.ReadyToWear}
-                />
-                <FormControlLabel
-                  value={FashionWeekTags.Couture}
-                  control={<Radio />}
-                  label={FashionWeekTags.Couture}
-                />
-              </RadioGroup>
-            </FormControl>
-          </Grid>
-          <FormControlLabel
-            control={<Checkbox checked={isPublic} onChange={handleIsPublic} />}
-            label="Is public"
-          />
-          <Button variant="contained" onClick={onCreate} fullWidth>
-            Create
-          </Button>
-        </Grid>
-      </AccordionDetails>
-    </Accordion>
+        </AccordionDetails>
+      </Accordion>
+    </form>
   );
 };

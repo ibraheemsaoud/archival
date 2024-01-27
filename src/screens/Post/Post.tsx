@@ -9,6 +9,7 @@ import { ReferenceSection } from "../../components/References/ReferencesSection"
 import { useState } from "react";
 import { StylingSection } from "./Styling/StylingSection";
 import { useRequestPost } from "../../requests/useRequestPost";
+import { useUser } from "../../hooks";
 
 export const Post = () => {
   const [shouldShowLogin, setShowLogin] = useState(false);
@@ -16,6 +17,7 @@ export const Post = () => {
     postId: string;
   };
   const { data: post, error } = useRequestPost(postId);
+  const { colorModeDark } = useUser();
 
   if (!postId) return <div>Missing post id</div>;
   if (!post) return <Loader />;
@@ -25,7 +27,11 @@ export const Post = () => {
   const stylings = post?.stylings || [];
   const references = post?.references || [];
 
-  const modedTheme = theme("light", season.primaryColor, season.secondaryColor);
+  const modedTheme = theme(
+    colorModeDark ? "dark" : "light",
+    season.primaryColor,
+    season.secondaryColor
+  );
 
   const showLogin = () => {
     setShowLogin(false);

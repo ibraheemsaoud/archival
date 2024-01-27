@@ -49,9 +49,7 @@ export const CommentSection = ({
           <Typography
             variant="h6"
             component="div"
-            marginX={1}
-            marginBottom={2}
-            sx={{ textDecoration: "underline" }}
+            margin={2}
           >
             Discussions
           </Typography>
@@ -66,7 +64,7 @@ export const CommentSection = ({
       </Box>
       <Box position="relative" marginTop={4}>
         <TextField
-          id="filled-multiline-static"
+          id="comment"
           label="Comment"
           multiline
           rows={3}

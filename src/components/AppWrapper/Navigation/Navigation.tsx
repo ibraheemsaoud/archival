@@ -1,10 +1,12 @@
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Link, Typography, useTheme } from "@mui/material";
 import { Link as NavLink } from "react-router-dom";
 import { HOME } from "../../../consts/links.const";
 import { ToolbarAction } from "./ToolbarAction";
 // import { Search } from "@mui/icons-material";
 
 export const Navigation = ({ shouldLogin }: { shouldLogin?: boolean }) => {
+  const { palette } = useTheme();
+
   return (
     <Box
       sx={{
@@ -14,7 +16,7 @@ export const Navigation = ({ shouldLogin }: { shouldLogin?: boolean }) => {
         display: "flex",
         justifyContent: "space-between",
         boxSizing: "border-box",
-        backgroundColor: "#f7eee3",
+        backgroundColor: palette.background.paper,
       }}
     >
       <Link
@@ -27,7 +29,8 @@ export const Navigation = ({ shouldLogin }: { shouldLogin?: boolean }) => {
           maxWidth: 40,
           maxHeight: 40,
           borderRadius: 40,
-          background: "white",
+          background: palette.background.default,
+          color: palette.background.paper,
           textAlign: "center",
         }}
       >
