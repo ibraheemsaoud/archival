@@ -10,13 +10,13 @@ export const getDesignTokens = (
   primaryColor?: string,
   secondaryColor?: string
 ): ThemeOptions => {
-  //#f7eee3
   const platinum = createColor("#CCDBDC");
   const pumpkin = createColor("#4a3215");
   const lightPumpkin = createColor("#fdfcf9");
+  const lightPumpkin2 = createColor("#f7eee3");
   const red = createColor("#f44336");
   const primary = primaryColor ? createColor(primaryColor) : pumpkin;
-  const secondary = secondaryColor ? createColor(secondaryColor) : platinum;
+  const secondary = secondaryColor ? createColor(secondaryColor) : lightPumpkin2;
 
   return {
     palette: {
