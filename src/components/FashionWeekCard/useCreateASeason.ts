@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { FashionWeekTags } from "../../interfaces/fashionWeek.interface";
 import { nameToSlug } from "../../helpers";
-import { useRequestBrandList } from "../../requests/useRequestBrand";
 
 export const useCreateASeason = () => {
   const [name, setName] = useState("");
@@ -10,23 +9,14 @@ export const useCreateASeason = () => {
   const [primaryColor, setPrimaryColor] = useState("");
   const [secondaryColor, setSecondaryColor] = useState("");
 
-  const [season, setSeason] = useState<FashionWeekTags>(FashionWeekTags.SS);
-  const [wear, setWear] = useState<FashionWeekTags>(FashionWeekTags.Menswear);
-  const [type, setType] = useState<FashionWeekTags>(
-    FashionWeekTags.ReadyToWear
-  );
+  const [tags, setTags] = useState<FashionWeekTags[]>([]);
   const [isPublic, setIsPublic] = useState(false);
 
-  const handleChangeSeason = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSeason((event.target as HTMLInputElement).value as FashionWeekTags);
-  };
-
-  const handleChangeWear = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setWear((event.target as HTMLInputElement).value as FashionWeekTags);
-  };
-
-  const handleChangeType = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setType((event.target as HTMLInputElement).value as FashionWeekTags);
+  const handleUpdateTags = (
+    _: SyntheticEvent<Element, Event>,
+    value: { label: string; value: FashionWeekTags }[]
+  ) => {
+    setTags(value.map((tag) => tag.value));
   };
 
   const handleIsPublic = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +26,33 @@ export const useCreateASeason = () => {
   useEffect(() => {
     setSlug(nameToSlug(name));
   }, [name]);
+
+  const tagList = [
+    {
+      label: "Spring-Summer",
+      value: FashionWeekTags.SS,
+    },
+    {
+      label: "Autumn-Winter",
+      value: FashionWeekTags.AW,
+    },
+    {
+      label: "Menswear",
+      value: FashionWeekTags.Menswear,
+    },
+    {
+      label: "Womenswear",
+      value: FashionWeekTags.Womenswear,
+    },
+    {
+      label: "Couture",
+      value: FashionWeekTags.Couture,
+    },
+    {
+      label: "Ready-to-wear",
+      value: FashionWeekTags.ReadyToWear,
+    },
+  ];
 
   return {
     name,
@@ -48,12 +65,9 @@ export const useCreateASeason = () => {
     setPrimaryColor,
     secondaryColor,
     setSecondaryColor,
-    season,
-    handleChangeSeason,
-    wear,
-    handleChangeWear,
-    type,
-    handleChangeType,
+    tags,
+    handleUpdateTags,
+    tagList,
     isPublic,
     handleIsPublic,
   };

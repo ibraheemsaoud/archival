@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import {
   BRAND,
+  FASHION_WEEK,
   HOME,
   POST,
   PROFILE,
@@ -18,6 +19,7 @@ import { Post, postLoader } from "../../screens/Post";
 import { Brand, brandLoader } from "../../screens/Brand";
 import { Styling, stylingLoader } from "../../screens/Styling";
 import { Terms } from "../../screens/Terms";
+import { FashionWeek, fashionWeekLoader } from "../../screens/FashionWeek";
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -40,6 +42,11 @@ export const Router = () => {
       path: SEASON,
       element: <Season />,
       loader: seasonsLoader(),
+    },
+    {
+      path: FASHION_WEEK,
+      element: <FashionWeek />,
+      loader: fashionWeekLoader(),
     },
     {
       path: POST,

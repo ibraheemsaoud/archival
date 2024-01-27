@@ -52,7 +52,7 @@ export const PlaceHolderCard = ({
           </CardContent>
           <CardMedia
             component="img"
-            image={"\\static\\images\\potm2209a.jpg"}
+            image={"\\static\\images\\placeholder.jpeg"}
             sx={{ height: 260 }}
           />
         </CardActionArea>

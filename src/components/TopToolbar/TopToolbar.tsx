@@ -32,18 +32,20 @@ export const TopToolbar = ({
             Back
           </Button>
           <Box sx={{ margin: 1, textAlign: "center", flexGrow: 1 }}>
-            <Box
-              sx={{
-                backgroundImage: `url(${logo})`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-                width: "100%",
-                maxHeight: "60px",
-                minHeight: "60px",
-                marginBottom: "10px",
-              }}
-            />
+            {logo ? (
+              <Box
+                sx={{
+                  backgroundImage: `url(${logo})`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  width: "100%",
+                  maxHeight: "60px",
+                  minHeight: "60px",
+                  marginBottom: "10px",
+                }}
+              />
+            ) : null}
             <Typography variant="h6" component="div">
               {title}
             </Typography>

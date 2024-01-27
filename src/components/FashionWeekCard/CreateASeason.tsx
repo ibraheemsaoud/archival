@@ -12,6 +12,7 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  Autocomplete,
 } from "@mui/material";
 import { UploadImage, useUploadImage } from "../UploadImage";
 import { useState, useEffect, useMemo } from "react";
@@ -19,7 +20,6 @@ import toast from "react-hot-toast";
 import { useUser } from "../../hooks";
 import { requestUploadFile } from "../../requests/requestUploadFile";
 import { useRequestCreateSeason } from "../../requests/useRequestSeason";
-import { FashionWeekTags } from "../../interfaces/fashionWeek.interface";
 import { useCreateASeason } from "./useCreateASeason";
 import { Server } from "../../config/server";
 import { ISeasonCreateErrors } from "../../interfaces/season.interface";
@@ -39,12 +39,9 @@ export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
     setPrimaryColor,
     secondaryColor,
     setSecondaryColor,
-    season,
-    handleChangeSeason,
-    wear,
-    handleChangeWear,
-    type,
-    handleChangeType,
+    tags,
+    handleUpdateTags,
+    tagList,
     isPublic,
     handleIsPublic,
   } = useCreateASeason();
@@ -81,7 +78,7 @@ export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
         secondaryColor,
         fashionWeek: fashionWeekId,
         brand: brandId,
-        tags: [season, wear, type],
+        tags,
         isPublic,
       });
     } else {
@@ -97,6 +94,7 @@ export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
       setPrimaryColor("");
       setSecondaryColor("");
       setBrandId("");
+      handleUpdateTags(undefined as any, []);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
@@ -210,56 +208,25 @@ export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
                 onChange={(e) => setSecondaryColor(e.target.value)}
               />
             </Grid>
-            <Grid item xs={4}>
-              <FormControl>
-                <FormLabel>Season</FormLabel>
-                <RadioGroup value={season} onChange={handleChangeSeason}>
-                  <FormControlLabel
-                    value={FashionWeekTags.SS}
-                    control={<Radio />}
-                    label={FashionWeekTags.SS}
-                  />
-                  <FormControlLabel
-                    value={FashionWeekTags.AW}
-                    control={<Radio />}
-                    label={FashionWeekTags.AW}
-                  />
-                </RadioGroup>
-              </FormControl>
-            </Grid>
-            <Grid item xs={4}>
-              <FormControl>
-                <FormLabel>Wear</FormLabel>
-                <RadioGroup value={wear} onChange={handleChangeWear}>
-                  <FormControlLabel
-                    value={FashionWeekTags.Menswear}
-                    control={<Radio />}
-                    label={FashionWeekTags.Menswear}
-                  />
-                  <FormControlLabel
-                    value={FashionWeekTags.Womenswear}
-                    control={<Radio />}
-                    label={FashionWeekTags.Womenswear}
-                  />
-                </RadioGroup>
-              </FormControl>
-            </Grid>
-            <Grid item xs={4}>
-              <FormControl>
-                <FormLabel>Type</FormLabel>
-                <RadioGroup value={type} onChange={handleChangeType}>
-                  <FormControlLabel
-                    value={FashionWeekTags.ReadyToWear}
-                    control={<Radio />}
-                    label={FashionWeekTags.ReadyToWear}
-                  />
-                  <FormControlLabel
-                    value={FashionWeekTags.Couture}
-                    control={<Radio />}
-                    label={FashionWeekTags.Couture}
-                  />
-                </RadioGroup>
-              </FormControl>
+            <Grid item xs={12}>
+              <Autocomplete
+                disablePortal
+                multiple
+                id="tags"
+                options={tagList}
+                color="primary"
+                sx={{
+                  width: "-webkit-fill-available",
+                  marginBottom: 2,
+                }}
+                isOptionEqualToValue={(option, value) =>
+                  option.value === value.value
+                }
+                onChange={handleUpdateTags}
+                renderInput={(params) => (
+                  <TextField {...params} label="select tags" variant="filled" />
+                )}
+              />
             </Grid>
             <FormControlLabel
               control={

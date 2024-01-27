@@ -33,7 +33,7 @@ export const BrandCard = ({
             sx={{ objectFit: "contain", padding: "8px" }}
             component="img"
             height={cardType === "mini" ? 90 : 140}
-            image={logoLink || "\\static\\images\\potm2209a.jpg"}
+            image={logoLink || "\\static\\images\\placeholder.jpeg"}
           />
         </CardActionArea>
       </Link>

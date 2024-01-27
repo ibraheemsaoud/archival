@@ -69,7 +69,7 @@ export const SeasonCard = ({
           </CardContent>
           <CardMedia
             component="img"
-            image={coverImage || "\\static\\images\\potm2209a.jpg"}
+            image={coverImage || "\\static\\images\\placeholder.jpeg"}
           />
         </CardActionArea>
       </Card>

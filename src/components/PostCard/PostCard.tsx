@@ -44,7 +44,7 @@ export const PostCard = ({
           <CardActionArea>
             <CardMedia
               component="img"
-              image={pictureLink || "\\static\\images\\potm2209a.jpg"}
+              image={pictureLink || "\\static\\images\\placeholder.jpeg"}
               sx={{
                 minHeight: "310px",
                 maxHeight: "310px",
