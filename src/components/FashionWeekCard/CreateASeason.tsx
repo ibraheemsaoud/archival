@@ -4,10 +4,6 @@ import {
   Button,
   FormControlLabel,
   Grid,
-  Radio,
-  RadioGroup,
-  FormControl,
-  FormLabel,
   Checkbox,
   Accordion,
   AccordionSummary,
@@ -15,7 +11,7 @@ import {
   Autocomplete,
 } from "@mui/material";
 import { UploadImage, useUploadImage } from "../UploadImage";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useUser } from "../../hooks";
 import { requestUploadFile } from "../../requests/requestUploadFile";
