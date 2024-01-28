@@ -24,7 +24,7 @@ export const FashionWeekCard = ({
   return (
     <Box marginTop={3} marginRight={2} marginLeft={2}>
       {isOnDedicatedScreen ? null : (
-        <Typography variant="h6">
+        <Typography variant="h6" color="primary">
           {name}
           {isFeatured ? (
             <Chip

@@ -58,10 +58,12 @@ export const SeasonCard = ({
               sx={
                 brandView
                   ? {
-                      fontSize: "22px",
+                      fontSize: "clamp(1rem, 1.5vw + 0.5rem, 1rem)",
                       lineHeight: "21px",
                     }
-                  : {}
+                  : {
+                      fontSize: "clamp(1rem, 1.5vw + 0.5rem, 1rem))",
+                    }
               }
             >
               {brandView ? season.name : name}

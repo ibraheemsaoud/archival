@@ -11,7 +11,6 @@ export const getDesignTokens = (
   secondaryColor?: string
 ): ThemeOptions => {
   const pumpkin = createColor("#1f1307");
-  // const darkPumpkin = createColor("#1f1307");
   const lightPumpkin = createColor("#f7eee3");
   const red = createColor("#f44336");
   let primary = mode === "light" ? pumpkin : lightPumpkin;
@@ -49,8 +48,8 @@ export const getDesignTokens = (
               paper: primary.dark,
             },
             text: {
-              primary: secondary.light,
-              secondary: secondary.dark,
+              primary: secondary.dark,
+              secondary: secondary.light,
             },
           }),
     },

@@ -29,14 +29,14 @@ export const Navigation = ({ shouldLogin }: { shouldLogin?: boolean }) => {
           maxWidth: 40,
           maxHeight: 40,
           borderRadius: 40,
-          background: palette.background.default,
-          color: palette.background.paper,
+          background: palette.secondary.light,
           textAlign: "center",
         }}
       >
         <Typography
           variant="h5"
           sx={{
+            color: palette.secondary.dark,
             lineHeight: "38px",
           }}
         >

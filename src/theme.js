@@ -22,20 +22,6 @@ export const theme = (mode, primaryColor, secondaryColor) => {
           },
         },
       },
-      // MuiButton: {
-      //   styleOverrides: {
-      //     outlinedPrimary: {
-      //       color: palette.palette.text.primary,
-      //       borderColor: palette.palette.text.primary,
-      //       backgroundColor: palette.palette.background.light,
-      //       "&:selected": {
-      //         color: palette.palette.text.primary,
-      //         borderColor: palette.palette.text.primary,
-      //         backgroundColor: palette.palette.background.light,
-      //       },
-      //     },
-      //   },
-      // },
     },
   });
 };
