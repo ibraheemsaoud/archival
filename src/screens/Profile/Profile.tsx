@@ -22,7 +22,7 @@ import { requestUploadFile } from "../../requests/requestUploadFile";
 export const Profile = () => {
   const { isLoading, user, updatePrefs } = useUser();
   const defaultIsDark =
-    user?.prefs?.isDarkMode == undefined
+    user?.prefs?.isDarkMode === undefined
       ? window.matchMedia &&
         window.matchMedia("(prefers-color-scheme: dark)").matches
       : user?.prefs?.isDarkMode;
