@@ -31,7 +31,7 @@ export const Season = () => {
   const { seasonId: seasonSlug } = useLoaderData() as any as {
     seasonId?: string;
   };
-  const { colorModeDark } = useUser();
+  const { user } = useUser();
 
   const { data: season } = useRequestSeason(seasonSlug);
   const { data: posts, refetch } = useRequestPosts(season?.$id, query);
@@ -48,7 +48,7 @@ export const Season = () => {
   const { brand } = season;
 
   const modedTheme = theme(
-    colorModeDark ? "dark" : "light",
+    user?.prefs?.isDarkMode ? "dark" : "light",
     season.primaryColor,
     season.secondaryColor
   );

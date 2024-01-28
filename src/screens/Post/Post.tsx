@@ -17,7 +17,7 @@ export const Post = () => {
     postId: string;
   };
   const { data: post, error } = useRequestPost(postId);
-  const { colorModeDark } = useUser();
+  const { user } = useUser();
 
   if (!postId) return <div>Missing post id</div>;
   if (!post) return <Loader />;
@@ -28,7 +28,7 @@ export const Post = () => {
   const references = post?.references || [];
 
   const modedTheme = theme(
-    colorModeDark ? "dark" : "light",
+    user?.prefs?.isDarkMode ? "dark" : "light",
     season.primaryColor,
     season.secondaryColor
   );

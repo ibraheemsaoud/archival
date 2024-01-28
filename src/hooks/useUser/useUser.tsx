@@ -21,8 +21,6 @@ interface UserContext {
   loginWithGoogle: () => Promise<void>;
   updatePrefs: (prefs: Models.Preferences) => Promise<void>;
   isLoading: boolean;
-  colorModeDark: boolean;
-  setColorModeDark: (dark: boolean) => void;
 }
 
 const userContext = createContext({
@@ -34,8 +32,6 @@ const userContext = createContext({
   loginWithGoogle: async () => {},
   updatePrefs: async (prefs: Models.Preferences) => {},
   isLoading: false,
-  colorModeDark: false,
-  setColorModeDark: (dark: boolean) => {},
 } as UserContext);
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
@@ -44,12 +40,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<Models.User<any> | undefined>(undefined);
   const [error, setError] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [colorModeDark, setColorModeDark] = useState<boolean>(
-    window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? true
-      : false
-  );
+
   const {
     mutate: register,
     error: registrationError,
@@ -141,8 +132,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         loginWithGoogle,
         updatePrefs,
         isLoading,
-        colorModeDark,
-        setColorModeDark,
       }}
     >
       {user?.emailVerification === false &&

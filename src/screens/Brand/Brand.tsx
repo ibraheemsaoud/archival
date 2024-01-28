@@ -36,7 +36,7 @@ export const Brand = () => {
     useRequestFollow();
   const { mutate: unfollowBrand, isLoading: isLoadingUnfollowAction } =
     useRequestUnfollow();
-  const { user, colorModeDark } = useUser();
+  const { user } = useUser();
 
   const theme2 = useTheme();
   const isMobile = useMediaQuery(theme2.breakpoints.down("sm"));
@@ -61,7 +61,7 @@ export const Brand = () => {
   };
 
   const modedTheme = theme(
-    colorModeDark ? "dark" : "light",
+    user?.prefs?.isDarkMode ? "dark" : "light",
     brand.primaryColor,
     brand.secondaryColor
   );

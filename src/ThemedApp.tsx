@@ -7,8 +7,8 @@ import { useUser } from "./hooks";
 import { Toaster } from "react-hot-toast";
 
 export const ThemedApp = () => {
-  const { colorModeDark } = useUser();
-  const modedTheme = theme(colorModeDark ? "dark" : "light");
+  const { user } = useUser();
+  const modedTheme = theme(user?.prefs?.isDarkMode ? "dark" : "light");
 
   return (
     <ThemeProvider theme={modedTheme}>
