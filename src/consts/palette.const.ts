@@ -29,6 +29,10 @@ export const getDesignTokens = (
       mode,
       primary,
       secondary,
+      error: createColor("#F44336"),
+      info: createColor("#1D1F51"),
+      success: createColor("#73954E"),
+      warning: createColor("#F08516"),
       ...(mode === "light"
         ? {
             divider: primary.dark,

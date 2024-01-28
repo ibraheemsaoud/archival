@@ -42,11 +42,7 @@ export const StylingSection = ({
         borderTop: `1px solid ${season?.primaryColor}`,
       }}
     >
-      <Typography
-        variant="h6"
-        component="div"
-        marginX={2}
-      >
+      <Typography variant="h6" marginX={2}>
         Stylings
       </Typography>
       <Box
@@ -69,6 +65,7 @@ export const StylingSection = ({
                 marginTop: "12px",
                 marginBottom: "33px",
               }}
+              key={styling.$id}
             >
               <Link
                 to={replaceRouteParams(STYLING, { stylingId: styling.$id })}

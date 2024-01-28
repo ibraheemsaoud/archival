@@ -11,13 +11,10 @@ export const ProfileComments = ({ comments }: { comments?: IComment[] }) => {
   const deleteComment = (commentId: string) => () => {
     onDelete(commentId);
   };
+
   return (
-    <Grid item xs={12} md={12}>
-      {comments?.length ? (
-        <Typography variant="h6" component="div">
-          Comments
-        </Typography>
-      ) : null}
+    <Grid item xs={12}>
+      {comments?.length ? <Typography variant="h6">Comments</Typography> : null}
       {comments?.map((comment) => (
         <Box
           key={comment.$id}
@@ -27,30 +24,36 @@ export const ProfileComments = ({ comments }: { comments?: IComment[] }) => {
             borderRadius: 1,
             border: "1px solid #c4c4c4",
             overflow: "hidden",
+            marginBottom: 1,
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Box
-              sx={{
-                backgroundImage: `url(${comment.post.pictureLink})`,
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "top",
-                minWidth: "60px",
-                maxWidth: "60px",
-                maxHeight: "60px",
-                minHeight: "60px",
-              }}
-            />
+          <Box
+            sx={(theme) => ({
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: theme.palette.background.paper,
+            })}
+          >
             <Link
               underline="hover"
               component={NavLink}
               to={replaceRouteParams(POST, { postId: comment.post.$id })}
-              sx={{ flex: 1, paddingLeft: 1 }}
+              sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}
             >
-              <Typography variant="h6" component="div">
-                {comment.post.postTitle}
-              </Typography>
+              <Box
+                sx={{
+                  backgroundImage: `url(${comment.post.pictureLink})`,
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "top",
+                  minWidth: "60px",
+                  maxWidth: "60px",
+                  maxHeight: "60px",
+                  minHeight: "60px",
+                  marginRight: 1,
+                }}
+              />
+              <Typography variant="h6">{comment.post.postTitle}</Typography>
             </Link>
             <Button
               size="small"
@@ -61,7 +64,7 @@ export const ProfileComments = ({ comments }: { comments?: IComment[] }) => {
               Delete
             </Button>
           </Box>
-          <Typography variant="body1" component="div" padding={1}>
+          <Typography variant="body1" padding={1}>
             {comment.comment}
           </Typography>
         </Box>

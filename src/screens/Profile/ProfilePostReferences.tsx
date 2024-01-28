@@ -19,9 +19,7 @@ export const ProfilePostReferences = ({
   return (
     <Grid item xs={12} md={12}>
       {references?.length ? (
-        <Typography variant="h6" component="div">
-          Post References
-        </Typography>
+        <Typography variant="h6">Post References</Typography>
       ) : null}
       {references?.map((reference) => (
         <Box
@@ -58,9 +56,7 @@ export const ProfilePostReferences = ({
               to={replaceRouteParams(POST, { postId: reference.post.$id })}
               sx={{ flex: 1, paddingLeft: 1 }}
             >
-              <Typography variant="h6" component="div">
-                {reference.post.postTitle}
-              </Typography>
+              <Typography variant="h6">{reference.post.postTitle}</Typography>
             </Link>
             <Button
               size="small"

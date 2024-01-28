@@ -68,9 +68,7 @@ export const PostUploader = ({ season }: { season: ISeason }) => {
         aria-controls="panel1-content"
         id="panel1-header"
       >
-        <Typography variant="h6" component="div">
-          Post Uploader
-        </Typography>
+        <Typography variant="h6">Post Uploader</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Box>

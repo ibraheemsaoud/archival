@@ -20,6 +20,9 @@ export const theme = (mode, primaryColor, secondaryColor) => {
             textDecoration: "none",
             color: palette.palette.text.primary,
           },
+          h6: {
+            color: palette.palette.primary.main,
+          },
         },
       },
     },

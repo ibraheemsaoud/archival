@@ -18,9 +18,7 @@ export const UserProfile = ({ user }: { user?: IUserSimpleProfile }) => {
           marginRight: 0.5,
         }}
       />
-      <Typography variant="body2" component="div">
-        {user.userName}
-      </Typography>
+      <Typography variant="body2">{user.userName}</Typography>
     </Button>
   );
 };

@@ -19,14 +19,7 @@ export const PostAddition = ({ styling }: { styling: IStyling }) => {
 
   return (
     <Box position="relative" padding="24px 12px">
-      <Typography
-        variant="h6"
-        component="div"
-        sx={{
-          textDecoration: "underline",
-          marginBottom: 1,
-        }}
-      >
+      <Typography variant="h6" sx={{ marginBottom: 1 }}>
         Add Linked Post for the Items and Inspirations
       </Typography>
 

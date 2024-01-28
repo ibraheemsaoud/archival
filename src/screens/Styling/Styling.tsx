@@ -113,7 +113,11 @@ export const Styling = () => {
             />
           </Link>
         </Box>
-        <PostsSection styling={styling} post={post} isUserCreator={isUserCreator} />
+        <PostsSection
+          styling={styling}
+          post={post}
+          isUserCreator={isUserCreator}
+        />
         {isUserCreator ? <PostAddition styling={styling} /> : null}
       </Box>
     </AppWrapper>

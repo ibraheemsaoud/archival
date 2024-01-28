@@ -13,18 +13,14 @@ export const StylingCreation = ({
   onDone: () => void;
 }) => {
   const [description, setDescription] = useState("");
-  const [outsideLink, setOutsideLink] = useState("");
   const { file, onChangeFile, onReset, pictureUrl, onRemoveFile } =
     useUploadImage({});
   const { mutate, isSuccess } = useRequestCreateStyling();
   const { user } = useUser();
 
   const onCreate = async () => {
-    if (!user || !(pictureUrl || outsideLink)) return;
-    let pictureLink = outsideLink;
-    if (outsideLink?.length === 0) {
-      pictureLink = (await requestUploadFile(file, user.$id)) || "";
-    }
+    if (!user || !pictureUrl) return;
+    const pictureLink = (await requestUploadFile(file, user.$id)) || "";
     mutate({
       description,
       mainPost: postId,
@@ -37,7 +33,6 @@ export const StylingCreation = ({
     if (isSuccess) {
       onRemoveFile();
       setDescription("");
-      setOutsideLink("");
       onDone();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,14 +40,7 @@ export const StylingCreation = ({
 
   return (
     <Box position="relative" padding="24px 12px">
-      <Typography
-        variant="h6"
-        component="div"
-        sx={{
-          textDecoration: "underline",
-          marginBottom: 1,
-        }}
-      >
+      <Typography variant="h6" sx={{ marginBottom: 1 }}>
         Add Styling
       </Typography>
       <UploadImage
@@ -61,25 +49,7 @@ export const StylingCreation = ({
         onReset={onReset}
         pictureUrl={pictureUrl}
         height="144px"
-        // width="108px"
       />
-      {!file && (
-        <>
-          OR
-          <TextField
-            id="picture-link"
-            label="picture link"
-            variant="filled"
-            sx={{
-              width: "-webkit-fill-available",
-              marginBottom: 2,
-            }}
-            color="primary"
-            value={outsideLink}
-            onChange={(e) => setOutsideLink(e.target.value)}
-          />
-        </>
-      )}
       <TextField
         id="description"
         label="description"

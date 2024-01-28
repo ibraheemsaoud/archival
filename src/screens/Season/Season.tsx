@@ -46,7 +46,7 @@ export const Season = () => {
   if (!season) return <Loader />;
 
   const { brand } = season;
-  
+
   const modedTheme = theme(
     colorModeDark ? "dark" : "light",
     season.primaryColor,

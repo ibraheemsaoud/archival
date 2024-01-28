@@ -18,9 +18,7 @@ export const SeasonPostReferences = ({
   return (
     <Grid item xs={12} md={12}>
       {references?.length ? (
-        <Typography variant="h6" component="div">
-          Season References
-        </Typography>
+        <Typography variant="h6">Season References</Typography>
       ) : null}
       {references?.map((reference) => (
         <Box
@@ -54,7 +52,7 @@ export const SeasonPostReferences = ({
               })}
               sx={{ flex: 1, paddingLeft: 1 }}
             >
-              <Typography variant="h6" component="div">
+              <Typography variant="h6">
                 {reference.season.brand.name} - {reference.season.name}
               </Typography>
             </Link>

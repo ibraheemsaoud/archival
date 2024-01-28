@@ -46,11 +46,7 @@ export const CommentSection = ({
             borderTop: `1px solid ${post.season.secondaryColor}`,
           }}
         >
-          <Typography
-            variant="h6"
-            component="div"
-            margin={2}
-          >
+          <Typography variant="h6" margin={2}>
             Discussions
           </Typography>
         </Box>

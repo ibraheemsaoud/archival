@@ -96,13 +96,7 @@ export const Brand = () => {
         {lastSeason && <SeasonCard season={lastSeason} brandView />}
         {restOfSeasons.length > 0 && (
           <Box marginX={1} marginY={2}>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ textDecoration: "underline" }}
-            >
-              Seasons
-            </Typography>
+            <Typography variant="h6">Seasons</Typography>
 
             <Masonry columns={isMobile ? 2 : 3} spacing={2}>
               {restOfSeasons?.map((season) =>

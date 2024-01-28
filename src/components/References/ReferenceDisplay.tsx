@@ -72,7 +72,6 @@ export const ReferenceDisplay = ({
         <Link href={reference.imageLink}>
           <Typography
             variant="body1"
-            component="div"
             sx={{
               overflow: "hidden",
               breakAfter: "auto",
@@ -82,10 +81,10 @@ export const ReferenceDisplay = ({
             {removeHTTPWWW(reference.imageLink)}
           </Typography>
         </Link>
-        <Typography variant="h4" component="div" marginTop={3}>
+        <Typography variant="h4" marginTop={3}>
           {reference.referenceTitle}
         </Typography>
-        <Typography variant="body1" component="div">
+        <Typography variant="body1">
           {reference.referenceDescription}
         </Typography>
         <Box sx={{ textAlign: "right" }}>

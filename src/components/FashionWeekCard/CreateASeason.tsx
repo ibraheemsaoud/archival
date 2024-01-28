@@ -112,9 +112,7 @@ export const CreateASeason = ({ fashionWeekId }: { fashionWeekId: string }) => {
           aria-controls="panel1-content"
           id="panel1-header"
         >
-          <Typography variant="h6" component="div">
-            Create a new Season
-          </Typography>
+          <Typography variant="h6">Create a new Season</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Grid container>

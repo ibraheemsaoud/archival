@@ -45,11 +45,7 @@ export const ReferenceSection = ({
         borderTop: `1px solid ${season?.primaryColor}`,
       }}
     >
-      <Typography
-        variant="h6"
-        component="div"
-        marginX={2}
-      >
+      <Typography variant="h6" marginX={2}>
         References
       </Typography>
       <Box
@@ -114,7 +110,11 @@ export const ReferenceSection = ({
           },
         }}
       >
-        <ReferenceCreation postId={post?.$id} seasonId={season?.$id} onDone={onDone} />
+        <ReferenceCreation
+          postId={post?.$id}
+          seasonId={season?.$id}
+          onDone={onDone}
+        />
       </Dialog>
     </Box>
   );

@@ -6,7 +6,6 @@ import { replaceRouteParams } from "../../../helpers";
 import { POST } from "../../../consts/links.const";
 import { Post } from "./Post";
 import { DeleteForeverRounded } from "@mui/icons-material";
-import { DANGER } from "../../../consts/colors.const";
 import { useRequestRemovePostFromStyling } from "../../../requests/useRequestStyling";
 
 export const PostsSection = ({
@@ -31,12 +30,7 @@ export const PostsSection = ({
         borderTop: `1px solid ${post.season?.primaryColor}`,
       }}
     >
-      <Typography
-        variant="h6"
-        component="div"
-        marginX={1}
-        sx={{ textDecoration: "underline" }}
-      >
+      <Typography variant="h6" marginX={1}>
         Items and Inspirations
       </Typography>
       <Box
@@ -62,11 +56,11 @@ export const PostsSection = ({
               </Link>
               {isUserCreator ? (
                 <IconButton
+                  color="error"
                   sx={{
                     position: "absolute",
                     right: 0,
                     top: 2,
-                    color: `${DANGER} !important`,
                   }}
                   onClick={onDelete(post.$id)}
                 >

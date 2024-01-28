@@ -57,14 +57,7 @@ export const ReferenceCreation = ({
 
   return (
     <Box position="relative" padding="24px 12px">
-      <Typography
-        variant="h6"
-        component="div"
-        sx={{
-          textDecoration: "underline",
-          marginBottom: 1,
-        }}
-      >
+      <Typography variant="h6" sx={{ marginBottom: 1 }}>
         Add Reference
       </Typography>
       <UploadImage
