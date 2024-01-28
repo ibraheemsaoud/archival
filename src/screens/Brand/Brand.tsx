@@ -77,6 +77,7 @@ export const Brand = () => {
         visibility: user ? "visible" : "hidden",
       }}
       onClick={onFollow}
+      color="secondary"
       disabled={isLoading || isLoadingFollowAction || isLoadingUnfollowAction}
     >
       {isFollowing ? "Following" : "Follow"}

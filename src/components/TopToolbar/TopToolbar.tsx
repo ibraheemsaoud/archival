@@ -46,7 +46,7 @@ export const TopToolbar = ({
                 }}
               />
             ) : null}
-            <Typography variant="h6">{title}</Typography>
+            <Typography variant="h6" color="secondary">{title}</Typography>
           </Box>
           {secondaryButton ? (
             secondaryButton
